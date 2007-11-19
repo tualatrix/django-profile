@@ -57,8 +57,11 @@ def delete(request, template):
     if request.method == "POST":
         # Remove the profile
         Profile.objects.get(user=user).delete()
-        # Remove the avatar
-        Avatar.objects.get(user=user).delete()
+        # Remove the avatar if exists
+        try:
+            Avatar.objects.get(user=user).delete()
+        except:
+            pass
         # Remove the e-mail of the account too
         acct = User.objects.get(username=user)
         acct.email = ''
