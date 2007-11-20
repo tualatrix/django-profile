@@ -116,7 +116,11 @@ class Profile(models.Model):
     def __unicode__(self):
         return "%s" % self.user
 
+    def yearsold(self):
+        return (datetime.datetime.now().toordinal() - self.birthdate.toordinal()) / 365
+
     def htmlprint(self):
+        gender = { "M": "/site_media/images/male.png", "F": "/site_media/images/female.png" }
         try:
             if Avatar.objects.get(user=self.user).get_photo_filename() and os.path.isfile(Avatar.objects.get(user=self.user).get_photo_filename()):
                 avatar_url = Avatar.objects.get(user=self.user).get_absolute_url()
@@ -129,10 +133,11 @@ class Profile(models.Model):
 <div class="usercard">
 <img style="float: left;" src="%s" />
 <ul style="float: left;">
-  <li style="font-weight: bold;">%s</li>
+  <li class="username">%s</li>
+  %s
   %s
   %s
   %s
 </ul>
 </div>
-""" % (avatar_url, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.gender and "<li>%s</li>" % self.gender, self.blog and "<li><a href=\"%s\">Blog</a></li>" % self.blog)
+""" % (avatar_url, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.blog and "<li><a href=\"%s\">%s</a></li>" % ( self.blog, _("My Blog")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)
