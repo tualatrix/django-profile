@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 import datetime
+import os.path
 
 class Continent(models.Model):
     """
@@ -73,6 +74,21 @@ class Country(models.Model):
         verbose_name_plural = _('Countries')
 
 
+class Avatar(models.Model):
+    photo = models.ImageField(upload_to="avatars/%Y/%b/%d")
+    date = models.DateTimeField(default=datetime.datetime.now)
+    user = models.OneToOneField(User, blank=True, null=True)
+    valid = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return "/site_media/%s" % self.photo
+
+    def __unicode__(self):
+        return "%s-%s" % (self.user, self.photo)
+
+    class Admin:
+        pass
+
 class Profile(models.Model):
     """
     User profile model
@@ -100,17 +116,23 @@ class Profile(models.Model):
     def __unicode__(self):
         return "%s" % self.user
 
-class Avatar(models.Model):
-    photo = models.ImageField(upload_to="avatars/%Y/%b/%d")
-    date = models.DateTimeField(default=datetime.datetime.now)
-    user = models.OneToOneField(User, blank=True, null=True)
-    valid = models.BooleanField(default=False)
+    def htmlprint(self):
+        try:
+            if Avatar.objects.get(user=self.user).get_photo_filename() and os.path.isfile(Avatar.objects.get(user=self.user).get_photo_filename()):
+                avatar_url = Avatar.objects.get(user=self.user).get_absolute_url()
+            else:
+                raise Exception()
+        except:
+            avatar_url = "/site_media/images/default.gif"
 
-    def get_absolute_url(self):
-        return "/site_media/%s" % self.photo
-
-    def __unicode__(self):
-        return "%s-%s" % (self.user, self.photo)
-
-    class Admin:
-        pass
+        return """
+<div class="usercard">
+<img style="float: left;" src="%s" />
+<ul style="float: left;">
+  <li style="font-weight: bold;">%s</li>
+  %s
+  %s
+  %s
+</ul>
+</div>
+""" % (avatar_url, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.gender and "<li>%s</li>" % self.gender, self.blog and "<li><a href=\"%s\">Blog</a></li>" % self.blog)
