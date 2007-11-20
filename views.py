@@ -54,12 +54,16 @@ def private(request, APIKEY, template):
 @login_required
 def delete(request, template):
     user = str(request.user)
+    userobj = User.objects.get(username=user)
     if request.method == "POST":
         # Remove the profile
-        Profile.objects.get(user=user).delete()
+        try:
+            Profile.objects.get(user=userobj).delete()
+        except:
+            pass
         # Remove the avatar if exists
         try:
-            Avatar.objects.get(user=user).delete()
+            Avatar.objects.get(user=userobj).delete()
         except:
             pass
         # Remove the e-mail of the account too
