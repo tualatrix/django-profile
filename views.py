@@ -11,6 +11,10 @@ from account.models import EmailValidate
 import random
 import Image, ImageFilter
 
+def profiles(request, template):
+    profiles = Profile.objects.all()
+    return render_to_response(template, locals())
+
 def public(request, user, template):
     cuser = User.objects.get(username=user)
     try:
