@@ -10,6 +10,17 @@ from profile.models import Avatar, Profile
 from account.models import EmailValidate
 import random
 import Image, ImageFilter
+import urllib
+from xml.dom import minidom
+
+def fecth_geodata(lat, lng):
+    url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % ("39.57182223734374", "-3.33984375")
+    dom = minidom.parse(urllib.urlopen(url))
+    country = dom.getElementsByTagName('countryCode')[0]
+    print dir(country)
+    print country.nodeValue
+    region = dom.getElementsByTagName('adminName1')[0]
+    print country, region
 
 def profiles(request, template):
     profiles = Profile.objects.all()
