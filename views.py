@@ -13,17 +13,24 @@ import Image, ImageFilter
 import urllib
 from xml.dom import minidom
 
-def fecth_geodata(lat, lng):
-    url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % ("39.57182223734374", "-3.33984375")
-    dom = minidom.parse(urllib.urlopen(url))
-    country = dom.getElementsByTagName('countryCode')[0]
-    print dir(country)
-    print country.nodeValue
-    region = dom.getElementsByTagName('adminName1')[0]
-    print country, region
+def fetch_geodata(request, lat, lng):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % (lat, lng)
+        dom = minidom.parse(urllib.urlopen(url))
+        country = dom.getElementsByTagName('countryCode')
+        if len(country) >=1:
+            country = country[0].childNodes[0].data
+        region = dom.getElementsByTagName('adminName1')
+        if len(region) >=1:
+            region = region[0].childNodes[0].data
+
+        return HttpResponse(simplejson.dumps({'success': True, 'country': country, 'region': region}))
+    else:
+        return HttpResponseRedirect("/")
 
 def profiles(request, template):
     profiles = Profile.objects.all()
+
     return render_to_response(template, locals())
 
 def public(request, user, template):

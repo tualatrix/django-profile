@@ -51,7 +51,7 @@ class Country(models.Model):
     def get_absolute_url(self):
         return "/country/%i/" % self.id
 
-    def importdata(self, file="../countries.txt"):
+    def importdata(self, file="../demo/db/countries.txt"):
         Country.objects.all().delete()
         f = open(file)
         for line in f.xreadlines():
@@ -108,7 +108,7 @@ class Profile(models.Model):
     longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-3.703269)
     gender = models.CharField(maxlength=1, choices=GENDER_CHOICES, blank=True)
     country = models.ForeignKey(Country, blank=True, null=True)
-    city = models.CharField(maxlength=255, blank=True)
+    location = models.CharField(maxlength=255, blank=True)
 
     class Admin:
         pass
