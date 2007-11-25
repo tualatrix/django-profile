@@ -7,7 +7,11 @@ import os.path
 
 class Continent(models.Model):
     """
-    Continent class
+    Continent class. Simple class with the information about continents.
+    It can be filled up with calling the "importdata" method:
+
+    >>> Continent().importdata()
+
     """
     slug = models.SlugField(prepopulate_from=('name',), unique=True)
     code = models.CharField(maxlength=2, primary_key=True)
@@ -38,7 +42,10 @@ class Continent(models.Model):
 
 class Country(models.Model):
     """
-    Country class
+    Country class with the countries data needed in the Profile class. Dependent
+    of the Continent class.
+    To fill it with data, he needes the file "countries.txt":
+    >>> Country().importdata()
     """
     name = models.CharField(maxlength=255, unique=True)
     slug = models.SlugField(prepopulate_from=('name',), unique=True)
@@ -51,7 +58,7 @@ class Country(models.Model):
     def get_absolute_url(self):
         return "/country/%i/" % self.id
 
-    def importdata(self, file="../demo/db/countries.txt"):
+    def importdata(self, file="db/countries.txt"):
         Country.objects.all().delete()
         f = open(file)
         for line in f.xreadlines():
@@ -75,6 +82,9 @@ class Country(models.Model):
 
 
 class Avatar(models.Model):
+    """
+    Avatar class. Every user can have one avatar associated.
+    """
     photo = models.ImageField(upload_to="avatars/%Y/%b/%d")
     date = models.DateTimeField(default=datetime.datetime.now)
     user = models.OneToOneField(User, blank=True, null=True)
@@ -102,7 +112,7 @@ class Profile(models.Model):
                              num_in_admin=1,min_num_in_admin=1, max_num_in_admin=1,
                              num_extra_on_change=0)
     birthdate = models.DateTimeField(default=datetime.datetime.now(), blank=True)
-    blog = models.URLField(blank=True, core=True)
+    url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
@@ -130,14 +140,14 @@ class Profile(models.Model):
             avatar_url = "/site_media/images/default.gif"
 
         return """
-<div class="usercard">
-<img style="float: left;" src="%s" />
+<div class="vcard">
+<img class="photo" src="%s" alt="%s"/>
 <ul style="float: left;">
-  <li class="username">%s</li>
+  <li class="fn nickname">%s</li>
   %s
   %s
   %s
   %s
 </ul>
 </div>
-""" % (avatar_url, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.blog and "<li><a href=\"%s\">%s</a></li>" % ( self.blog, _("My Blog")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)
+""" % (avatar_url, self.user, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.url and "<li><a class=\"url\" href=\"%s\">%s</a></li>" % ( self.url, _("My Blog")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)

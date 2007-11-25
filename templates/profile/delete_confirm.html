@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Delete all your personal information" %}{% endblock %}
+{% block content %}
+  <h2>{% trans "Delete all your personal information" %}</h2>
+  <form class="userdata" action="" method="POST">
+		<fieldset>
+			<p>Are you sure?</p>
+    	<input type="submit" value="Yes" />
+		</fieldset>
+  </form>
+	<br />
+  <p><a href="/accounts/profile">No, return to my profile</a></p>
+{% endblock %}
