@@ -21,11 +21,11 @@
 		<div class="right">
 			<div class="box">
     		<p class="title">{% trans "Avatar:" %}</p>
-    		<p class="title"><a class="avatar" href="/avatar/one/">{% trans "Change" %}</a> <a class="delavatar" href="/avatar/delete">{% trans "Delete" %}</a></p>
+    		<p class="title"><a class="avatar" href="/profile/avatar/one/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a></p>
       	{% if avatar %}
-      		<a class="avatar" href="/avatar/one/"><img id="avatar" src="{{ avatar.get_absolute_url }}" /></a>
+      		<a class="avatar" href="/profile/avatar/one/"><img id="avatar" src="{{ avatar.get_absolute_url }}" /></a>
       	{% else %}
-      		<a class="avatar" href="/avatar/one/"><img id="avatar" src="/site_media/images/default.gif" /></a>
+      		<a class="avatar" href="/profile/avatar/one/"><img id="avatar" src="/site_media/images/default.gif" /></a>
       	{% endif %}
 			</div>
 			<br />
@@ -75,7 +75,7 @@
     <br />
 		<div style="margin-top: 5px;">
     <label for="id_passwd">{% trans "Other actions:" %}</label>
-    <p style="line-height: 29px;"><a style="font-size: 16px; font-weight: bold;" href="/accounts/profile/delete">{% trans "Delete all my personal information" %}</a></p>
+    <p style="line-height: 29px;"><a style="font-size: 16px; font-weight: bold;" href="/profile/delete">{% trans "Delete all my personal information" %}</a></p>
 		</div>
     <br />
     <div style="display:none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
