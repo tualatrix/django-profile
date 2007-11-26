@@ -28,12 +28,6 @@ def fetch_geodata(request, lat, lng):
     else:
         return HttpResponseRedirect("/")
 
-def profiles(request, template):
-    profiles = Profile.objects.all()
-    user = request.user
-
-    return render_to_response(template, locals())
-
 def public(request, user, template):
     cuser = User.objects.get(username=user)
     try:
@@ -52,12 +46,14 @@ def private(request, APIKEY, template):
     """
     apikey = APIKEY
     user = request.user
+
     try:
         email = EmailValidate.objects.get(user=str(user)).email
         validated = False
     except:
         email = User.objects.get(username=str(user)).email
         validated = True
+
     form = ProfileForm(request)
 
     try:
@@ -73,6 +69,18 @@ def private(request, APIKEY, template):
     lng = profile.longitude
 
     return render_to_response(template, locals())
+
+@login_required
+def save(request):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        form = ProfileForm(request)
+        if request.method == "POST" and form.is_valid():
+            form.save()
+            return HttpResponse(simplejson.dumps({'success': True}))
+        else:
+            return HttpResponse(simplejson.dumps({'success': False, 'error': form.errors}))
+    else:
+        return HttpResponseRedirect("/")
 
 @login_required
 def delete(request, template):

@@ -1,11 +1,12 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to, direct_to_template
-from profile.views import delete,private,avatar,public,avatarDelete,fetch_geodata
+from profile.views import *
 from settings import APIKEY
 
 urlpatterns = patterns('',
     # Private profile
     (r'^$', private, {'APIKEY': APIKEY, 'template': 'profile/private.html'}),
+    (r'^save/$', save),
     (r'^delete/$', delete, {'template': 'profile/delete_confirm.html'}),
     (r'^delete/done/$', direct_to_template, {'template': 'profile/delete_success.html'}),
     (r'^avatar/delete/$', avatarDelete),
