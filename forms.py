@@ -3,6 +3,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from profile.models import Profile, Avatar
 
 def ProfileForm(request):
+    """
+    Profile Form. Composed by all the Profile model fields.
+    """
     user = request.user
     profile,created = Profile.objects.get_or_create(user=user)
 
@@ -17,4 +20,7 @@ def ProfileForm(request):
     return form
 
 class AvatarForm(forms.Form):
+    """
+    The avatar form requires only one image field.
+    """
     photo = forms.ImageField()

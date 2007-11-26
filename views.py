@@ -30,6 +30,7 @@ def fetch_geodata(request, lat, lng):
 
 def profiles(request, template):
     profiles = Profile.objects.all()
+    user = request.user
 
     return render_to_response(template, locals())
 
