@@ -1,0 +1,71 @@
+<html>
+<head>
+{% load i18n %}
+    <title>{% trans "Change avatar" %}</title>
+    <link rel="stylesheet" href="/site_media/css/common.css" type="text/css" />
+    <script type="text/javascript" src="/site_media/js/jquery-1.2.1.js"></script>
+    <script type="text/javascript" src="/site_media/js/jquery.dimensions.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui/ui.mouse.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui/ui.draggable.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui/ui.draggable.ext.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui/ui.resizable.js"></script>
+    <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
+    <style tyle="text/css">
+			body {min-width: 500px; min-height: 240px;}
+		</style>
+{%if done %}
+    <script type="text/javascript">
+     	window.close();
+			window.opener.document.images.avatar.src = "{{ avatar.get_absolute_url }}";
+    </script>
+{% else %}
+{% if avatar %}
+<script type="text/javascript">
+
+	var width = {{ width }};
+	var height = {{ height }};
+  if (width < 500 ) { width = 500; }
+  window.resizeTo(width + 30, height + 120);
+
+</script>
+{% endif %}
+{% endif %}
+</head>
+<body style="background: #b2e6ad;">
+  {% if avatar.photo %}
+  <form class="avatarform" action="/profile/avatar/two/" method="post" enctype="multipart/form-data">
+		<p class="green">
+    	<input type="submit" class="buttoncancel" value="{% trans 'Cancel' %}" />
+    	<input type="submit" class="buttondone" value="{% trans 'Select portion' %}" />
+    	<input type="submit" class="buttonanother" value="{% trans 'Select anoter image' %}" />
+    	<input type="hidden" name="avatar_id" id="avatar_id" value="{{ avatar.pk }}" />
+    	<input type="hidden" name="top" id="id_top" value="" />
+    	<input type="hidden" name="left" id="id_left" value="" />
+    	<input type="hidden" name="size" id="id_size" value="" />
+		</p>
+  </form>
+  <center style="padding-top: 20px;">
+    <div style="position: relative; background: url({{ blur_url }}) no-repeat; margin: 0px; width: {{width}}px; height: {{height}}px;" class="parent" id="avatarzone">
+      <div id="child" class="child ui-wrapper" style="position: absolute; width: {{cropsize}}px; height: {{cropsize}}px; left: {{cx}}px; top: {{cy}}px; border: 0px; background: url({{ avatar.get_absolute_url }}) no-repeat; background-position: -{{ cx }}px -{{ cy }}px;">
+        <div style="position: absolute; top: 0px; left: 0px; width: 4px; height: 100%; background: red;"></div>
+        <div style="position: absolute; top: 0px; right: 0px; width: 4px; height: 100%; background: red;"></div>
+        <div style="position: absolute; bottom: 0px; left: 0px; width: 100%; height: 4px; font-size: 1px; background: red;"></div>
+        <div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 4px; font-size: 1px; background: red;"></div>
+				<div class='ui-resizable-nw ui-resizable-handle'></div>
+				<div class='ui-resizable-sw ui-resizable-handle'></div>
+				<div class='ui-resizable-ne ui-resizable-handle'></div>
+        <div class="ui-resizable-se ui-resizable-handle"></div>
+      </div>
+    </div>
+  </center>
+	{% else %}
+	<p class="green">{% trans "Select the image file from your computer you want to assign as your avatar in your profile:" %}</p>
+  <form style="padding: 10px;" class="userdata" action="" method="post" enctype="multipart/form-data">
+    <label style="line-height: 16px;" for="id_avatar">{% trans "Avatar:" %}</label>
+    {{ form.photo }}
+    <input type="submit" class="buttoncancel" value="{% trans 'Cancel' %}" />
+  </form>
+	<div id="loading" style="margin: auto; width: 180px; font-weight: bold; overflow: hidden; display: none;"><img style="float: left;" src="/site_media/images/loading2.gif" /><p style="margin-left: 10px; float: left; line-height: 34px;">{% trans "Please wait..." %}</p></div>
+	{% endif %}
+</body>
+</html>

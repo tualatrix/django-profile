@@ -63,10 +63,8 @@ class Country(models.Model):
         f = open(file)
         for line in f.xreadlines():
             line = line.strip()
-            print line
             d, name = line.split('"')[:-1]
             continent, code = d.split(",")[:-1]
-            print continent, code, name
             c = Continent.objects.filter(code=continent)[0]
             p = Country(name=name, slug=slugify(name), code=code, continent=c)
             p.save()
