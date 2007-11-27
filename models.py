@@ -148,4 +148,4 @@ class Profile(models.Model):
   %s
 </ul>
 </div>
-""" % (avatar_url, self.user, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.url and "<li><a class=\"url\" href=\"%s\">%s</a></li>" % ( self.url, _("My Blog")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)
+""" % (avatar_url, self.user, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.url and "<li><a class=\"url\" href=\"%s\">%s</a></li>" % ( self.url, _("My Website")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)
