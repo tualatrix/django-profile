@@ -126,26 +126,3 @@ class Profile(models.Model):
 
     def yearsold(self):
         return (datetime.datetime.now().toordinal() - self.birthdate.toordinal()) / 365
-
-    def htmlprint(self):
-        gender = { "M": "/site_media/images/male.png", "F": "/site_media/images/female.png" }
-        try:
-            if Avatar.objects.get(user=self.user).get_photo_filename() and os.path.isfile(Avatar.objects.get(user=self.user).get_photo_filename()):
-                avatar_url = Avatar.objects.get(user=self.user).get_absolute_url()
-            else:
-                raise Exception()
-        except:
-            avatar_url = "/site_media/images/default.gif"
-
-        return """
-<div class="vcard">
-<img class="photo" src="%s" alt="%s"/>
-<ul style="float: left;">
-  <li class="fn nickname">%s</li>
-  %s
-  %s
-  %s
-  %s
-</ul>
-</div>
-""" % (avatar_url, self.user, self.user, self.country and "<li>%s</li>" % self.country or 'No country', self.birthdate.year < datetime.datetime.now().year and _("%s years old") % self.yearsold() or '', self.url and "<li><a class=\"url\" href=\"%s\">%s</a></li>" % ( self.url, _("My Website")), self.gender and "<li style=\"margin: 10px 0px 0px 110px;\"><img src=\"%s\"></li>" % gender.get(self.gender) or '',)

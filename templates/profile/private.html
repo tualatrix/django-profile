@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div>
-			<p class="savedmsg">{% trans "Profile saved" %}</p>
+			<p class="savedmsg"><img src="/site_media/images/loading2.gif">{% trans "Saving profile..." %}</p>
     	<input style="margin-bottom: 10px;" type="button" class="save" value="{% trans 'Save' %}" />
 		</div>
 		<br />
@@ -84,7 +84,7 @@
     <br />
     <div style="display:none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
 		<div>
-      <p class="savedmsg">{% trans 'Profile saved' %}</p>
+      <p class="savedmsg"><img src="/site_media/images/loading2.gif">{% trans 'Saving profile...' %}</p>
     	<input type="button" class="save" value="{% trans 'Save' %}" />
 		</div>
   </fieldset>
