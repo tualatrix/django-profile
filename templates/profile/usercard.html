@@ -1,6 +1,7 @@
 {% load i18n %}
+{% load profile_tags %}
 <div class="vcard">
-<img class="photo" src="{{ avatar_url }}" alt="{{ user }}"/>
+<img class="photo" src="{{ user|avatar:"96" }}" alt="{{ user }}"/>
 <ul style="float: left;">
   <li class="fn nickname">{{ user }}</li>
 	{% if profile.country %}

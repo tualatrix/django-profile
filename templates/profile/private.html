@@ -24,7 +24,7 @@
     		<p class="title">{% trans "Avatar:" %}</p>
     		<p class="title"><a class="avatar" href="/profile/avatar/one/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a></p>
       	{% if avatar %}
-      		<a class="avatar" href="/profile/avatar/one/"><img id="avatar" src="{{ avatar.get_absolute_url|resized:"96"}}" /></a>
+      		<a class="avatar" href="/profile/avatar/one/"><img id="avatar" src="{{ user|avatar:"96"}}" /></a>
       	{% else %}
       		<a class="avatar" href="/profile/avatar/one/"><img id="avatar" src="/site_media/images/default.gif" /></a>
       	{% endif %}

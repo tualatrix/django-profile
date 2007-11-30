@@ -124,5 +124,8 @@ class Profile(models.Model):
     def __unicode__(self):
         return "%s" % self.user
 
+    def get_absolute_url(self):
+        return "/profile/users/%s" % self.user
+
     def yearsold(self):
         return (datetime.datetime.now().toordinal() - self.birthdate.toordinal()) / 365

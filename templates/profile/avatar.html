@@ -17,7 +17,7 @@
 {%if done %}
     <script type="text/javascript">
      	window.close();
-			window.opener.document.images.avatar.src = "{{ avatar.get_absolute_url|resized:"96" }}";
+			window.opener.document.images.avatar.src = "{{ user|avatar:"96" }}";
     </script>
 {% else %}
 {% if avatar %}

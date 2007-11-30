@@ -14,6 +14,8 @@ import urllib
 from xml.dom import minidom
 import os
 
+IMSIZES = ( 128, 96, 64, 32, 16 )
+
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % (lat, lng)
@@ -112,6 +114,7 @@ def avatar(request, template, step="one"):
     """
     Avatar management
     """
+    user = request.user
     if not request.method == "POST":
         form = AvatarForm()
     else:
@@ -166,14 +169,10 @@ def avatar(request, template, step="one"):
                     box = ( int(left), int(top), int(left) + int(size), int(top) + int(size))
                     im = im.crop(box)
 
-                resized = im.resize((96, 96), Image.ANTIALIAS)
-                resized.save("%s.96%s" % os.path.splitext(avatar.get_photo_filename()))
-                resized = im.resize((64, 64), Image.ANTIALIAS)
-                resized.save("%s.64%s" % os.path.splitext(avatar.get_photo_filename()))
-                resized = im.resize((32, 32), Image.ANTIALIAS)
-                resized.save("%s.32%s" % os.path.splitext(avatar.get_photo_filename()))
-                resized = im.resize((16, 16), Image.ANTIALIAS)
-                resized.save("%s.16%s" % os.path.splitext(avatar.get_photo_filename()))
+                base, ext = os.path.splitext(avatar.get_photo_filename())
+                for size in IMSIZES:
+                    resized = im.resize((size, size), Image.ANTIALIAS)
+                    resized.save("%s.%s%s" % ( base, size, ext ))
 
                 try:
                     os.remove("%s.blur%s" % os.path.splitext(avatar.get_photo_filename()))
@@ -188,12 +187,10 @@ def avatarDelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and not avatar_id:
         try:
             avatar = Avatar.objects.get(user=request.user)
-            name = avatar.get_photo_filename()
+            base, ext = os.path.splitext(avatar.get_photo_filename())
             avatar.delete()
-            os.remove("%s.96%s" % os.path.splitext(name))
-            os.remove("%s.64%s" % os.path.splitext(name))
-            os.remove("%s.32%s" % os.path.splitext(name))
-            os.remove("%s.16%s" % os.path.splitext(name))
+            for size in IMSIZES:
+                os.remove("%s.%s%s" % ( base, size, ext))
         except:
             pass
 
@@ -201,12 +198,10 @@ def avatarDelete(request, avatar_id=False):
     elif avatar_id:
         try:
             avatar = Avatar.objects.get(user=request.user)
-            name = avatar.get_photo_filename()
+            base, ext = os.path.splitext(avatar.get_photo_filename())
             avatar.delete()
-            os.remove("%s.96%s" % os.path.splitext(name))
-            os.remove("%s.64%s" % os.path.splitext(name))
-            os.remove("%s.32%s" % os.path.splitext(name))
-            os.remove("%s.16%s" % os.path.splitext(name))
+            for size in IMSIZES:
+                os.remove("%s.%s%s" % ( base, size, ext))
         except:
             pass
 
