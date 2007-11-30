@@ -1,6 +1,7 @@
 <html>
 <head>
 {% load i18n %}
+{% load profile_tags %}
     <title>{% trans "Change avatar" %}</title>
     <link rel="stylesheet" href="/site_media/css/common.css" type="text/css" />
     <script type="text/javascript" src="/site_media/js/jquery-1.2.1.js"></script>
@@ -16,7 +17,7 @@
 {%if done %}
     <script type="text/javascript">
      	window.close();
-			window.opener.document.images.avatar.src = "{{ avatar.get_absolute_url }}";
+			window.opener.document.images.avatar.src = "{{ avatar.get_absolute_url|resized:"96" }}";
     </script>
 {% else %}
 {% if avatar %}

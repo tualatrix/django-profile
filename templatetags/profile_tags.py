@@ -1,4 +1,5 @@
 from django.template import Library
+from django.template.defaultfilters import stringfilter
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from profile.models import Profile,Avatar
@@ -30,3 +31,8 @@ def get_usercard(profile):
 
     return locals()
 
+@register.filter
+@stringfilter
+def resized(url, width):
+    path, extension = os.path.splitext(url)
+    return  "%s.%s%s" % (path, width, extension)

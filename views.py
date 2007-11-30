@@ -12,6 +12,7 @@ import random
 import Image, ImageFilter
 import urllib
 from xml.dom import minidom
+import os
 
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
@@ -149,8 +150,8 @@ def avatar(request, template, step="one"):
                 # Generate blur and scale image
                 blur = im.filter(ImageFilter.BLUR)
                 blur = blur.convert("L")
-                blur.save("%s_blur.jpg" % avatar.get_photo_filename())
-                blur_url = "%s_blur.jpg" % avatar.get_absolute_url()
+                blur.save("%s.blur%s" % os.path.splitext(avatar.get_photo_filename()))
+                blur_url = "%s.blur%s" % os.path.splitext(avatar.get_absolute_url())
 
 
         elif step=="two":
@@ -164,8 +165,20 @@ def avatar(request, template, step="one"):
                     size = request.POST.get('size')
                     box = ( int(left), int(top), int(left) + int(size), int(top) + int(size))
                     im = im.crop(box)
+
                 resized = im.resize((96, 96), Image.ANTIALIAS)
-                resized.save(avatar.get_photo_filename())
+                resized.save("%s.96%s" % os.path.splitext(avatar.get_photo_filename()))
+                resized = im.resize((64, 64), Image.ANTIALIAS)
+                resized.save("%s.64%s" % os.path.splitext(avatar.get_photo_filename()))
+                resized = im.resize((32, 32), Image.ANTIALIAS)
+                resized.save("%s.32%s" % os.path.splitext(avatar.get_photo_filename()))
+                resized = im.resize((16, 16), Image.ANTIALIAS)
+                resized.save("%s.16%s" % os.path.splitext(avatar.get_photo_filename()))
+
+                try:
+                    os.remove("%s.blur%s" % os.path.splitext(avatar.get_photo_filename()))
+                except:
+                    pass
                 done = True
 
     return render_to_response(template, locals())
@@ -173,10 +186,30 @@ def avatar(request, template, step="one"):
 @login_required
 def avatarDelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and not avatar_id:
-        Avatar.objects.filter(user=request.user).delete()
+        try:
+            avatar = Avatar.objects.get(user=request.user)
+            name = avatar.get_photo_filename()
+            avatar.delete()
+            os.remove("%s.96%s" % os.path.splitext(name))
+            os.remove("%s.64%s" % os.path.splitext(name))
+            os.remove("%s.32%s" % os.path.splitext(name))
+            os.remove("%s.16%s" % os.path.splitext(name))
+        except:
+            pass
+
         return HttpResponse(simplejson.dumps({'success': True}))
     elif avatar_id:
-        Avatar.objects.filter(user=request.user, pk=avatar_id).delete()
+        try:
+            avatar = Avatar.objects.get(user=request.user)
+            name = avatar.get_photo_filename()
+            avatar.delete()
+            os.remove("%s.96%s" % os.path.splitext(name))
+            os.remove("%s.64%s" % os.path.splitext(name))
+            os.remove("%s.32%s" % os.path.splitext(name))
+            os.remove("%s.16%s" % os.path.splitext(name))
+        except:
+            pass
+
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponseRedirect("/")
