@@ -7,6 +7,6 @@
 <img class="photo" src="{{ profile.user|avatar:"32" }}" alt="{{ profile.user }}"/>
 <ul style="float: left;">
   <li class="fn nickname">{{ profile.user }}</li>
-  <li><a href="{{ profile.get_absolute_url }}">Public profile</a></li>
+  <li><a href="{{ profile.get_absolute_url }}">{% trans "Public profile" %}</a></li>
 </ul>
 </div>

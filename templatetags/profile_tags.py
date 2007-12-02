@@ -39,7 +39,6 @@ def get_usercard(profile):
 @stringfilter
 def avatar(user, width):
     user = User.objects.get(username=user)
-    print user
     try:
         if type(user) == type(u"") or type(user) == type(""):
             user = User.objects.get(username=user)
@@ -53,5 +52,4 @@ def avatar(user, width):
         avatar_url = "/site_media/images/default.gif"
 
     path, extension = os.path.splitext(avatar_url)
-    print "%s.%s%s" % (path, width, extension)
     return  "%s.%s%s" % (path, width, extension)
