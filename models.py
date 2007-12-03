@@ -14,8 +14,8 @@ class Continent(models.Model):
 
     """
     slug = models.SlugField(prepopulate_from=('name',), unique=True)
-    code = models.CharField(maxlength=2, primary_key=True)
-    name = models.CharField(maxlength=255, unique=True)
+    code = models.CharField(max_length=2, primary_key=True)
+    name = models.CharField(max_length=255, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -47,9 +47,9 @@ class Country(models.Model):
     To fill it with data, he needes the file "countries.txt":
     >>> Country().importdata()
     """
-    name = models.CharField(maxlength=255, unique=True)
+    name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(prepopulate_from=('name',), unique=True)
-    code = models.CharField(maxlength=2, primary_key=True)
+    code = models.CharField(max_length=2, primary_key=True)
     continent = models.ForeignKey(Continent)
 
     def __unicode__(self):
@@ -104,8 +104,8 @@ class Profile(models.Model):
 
     GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
 
-    firstname = models.CharField(maxlength=255, blank=True)
-    surname = models.CharField(maxlength=255, blank=True)
+    firstname = models.CharField(max_length=255, blank=True)
+    surname = models.CharField(max_length=255, blank=True)
     user = models.ForeignKey(User, unique=True, edit_inline=models.TABULAR,
                              num_in_admin=1,min_num_in_admin=1, max_num_in_admin=1,
                              num_extra_on_change=0)
@@ -114,9 +114,9 @@ class Profile(models.Model):
     about = models.TextField(blank=True)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
-    gender = models.CharField(maxlength=1, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
     country = models.ForeignKey(Country, blank=True, null=True)
-    location = models.CharField(maxlength=255, blank=True)
+    location = models.CharField(max_length=255, blank=True)
 
     class Admin:
         pass
