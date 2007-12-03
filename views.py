@@ -34,7 +34,7 @@ def fetch_geodata(request, lat, lng):
 def public(request, user, template):
     cuser = User.objects.get(username=user)
     try:
-        profile = Profile.objects.get(user=cuser)
+        profile = cuser.get_profile()
         avatar = Avatar.objects.get(user=cuser, valid=True)
     except:
         pass
@@ -48,13 +48,14 @@ def private(request, APIKEY, template):
     Private part of the user profile
     """
     apikey = APIKEY
-    user = request.user
+    user = User.objects.get(username=str(request.user))
+    profile = user.get_profile()
 
     try:
-        email = EmailValidate.objects.get(user=str(user)).email
+        email = EmailValidate.objects.get(user=user).email
         validated = False
     except:
-        email = User.objects.get(username=str(user)).email
+        email = user.email
         validated = True
 
     form = ProfileForm(request)
@@ -67,7 +68,6 @@ def private(request, APIKEY, template):
     if request.method == "POST" and form.is_valid():
         form.save()
 
-    profile = Profile.objects.get(user=user)
     lat = profile.latitude
     lng = profile.longitude
 
