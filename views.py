@@ -49,7 +49,7 @@ def private(request, APIKEY, template):
     """
     apikey = APIKEY
     user = User.objects.get(username=str(request.user))
-    profile = user.get_profile()
+    profile, created = Profile.objects.get_or_create(user = user)
 
     try:
         email = EmailValidate.objects.get(user=user).email
