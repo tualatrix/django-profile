@@ -5,6 +5,9 @@ from django.utils.translation import ugettext as _
 import datetime
 import os.path
 
+AVATARSIZES = ( 128, 96, 64, 32, 16 )
+GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
+
 class Continent(models.Model):
     """
     Continent class. Simple class with the information about continents.
@@ -21,7 +24,7 @@ class Continent(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/continent/%i/" % self.id
+        return "/continent/%s/" % self.slug
 
     def importdata(self):
         Continent.objects.all().delete()
@@ -44,7 +47,7 @@ class Country(models.Model):
     """
     Country class with the countries data needed in the Profile class. Dependent
     of the Continent class.
-    To fill it with data, he needes the file "countries.txt":
+    To fill it with data, the file "countries.txt" is needed:
     >>> Country().importdata()
     """
     name = models.CharField(max_length=255, unique=True)
@@ -56,7 +59,7 @@ class Country(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/country/%i/" % self.id
+        return "/country/%s/" % self.slug
 
     def importdata(self, file="db/countries.txt"):
         Country.objects.all().delete()
@@ -97,12 +100,43 @@ class Avatar(models.Model):
     class Admin:
         pass
 
+    def _save_FIELD_file(self, field, filename, raw_contents, save=False):
+
+        super(Photo, self)._save_FIELD_file(field, filename, raw_contents, save=save)
+
+        if field.name == "photo":
+            base, ext = os.path.splitext(filename)
+
+            for size in AVATARSIZES:
+                getattr(self, "save_photo%s_file" % size)("%s.%s%s" % ( base, size, ext), '', save=False)
+                image = Image.open(self.get_photo_filename())
+                if image.mode not in ('L', 'RGB'):
+                    image = image.convert('RGB')
+                image.thumbnail((size, size), Image.ANTIALIAS)
+                image.save("%s.%s%s" % ( base, size, ext))
+                del image
+
+    def delete(self):
+        filename = self.get_photo_filename()
+        base, ext = os.path.splitext(filename)
+        for size in AVATARSIZES:
+            try:
+                os.remove("%s.%s%s" % ( base, size, ext))
+            except:
+                pass
+
+        try:
+            os.remove(self.get_photo_filename())
+        except:
+            pass
+
+        super(Photo, self).delete()
+
+
 class Profile(models.Model):
     """
     User profile model
     """
-
-    GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
 
     firstname = models.CharField(max_length=255, blank=True)
     surname = models.CharField(max_length=255, blank=True)
@@ -112,8 +146,8 @@ class Profile(models.Model):
     birthdate = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
-    longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-100)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, default=38.272689)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-3.164063)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
     country = models.ForeignKey(Country, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True)
@@ -122,10 +156,10 @@ class Profile(models.Model):
         pass
 
     def __unicode__(self):
-        return "%s" % self.user
+        return _("%s's profile") % self.user
 
     def get_absolute_url(self):
-        return "/profile/users/%s" % self.user
+        return "/profile/user/%s" % self.user
 
     def yearsold(self):
         return (datetime.datetime.now().toordinal() - self.birthdate.toordinal()) / 365

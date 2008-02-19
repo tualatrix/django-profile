@@ -184,27 +184,12 @@ def avatar(request, template, step="one"):
 
 @login_required
 def avatarDelete(request, avatar_id=False):
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and not avatar_id:
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         try:
             avatar = Avatar.objects.get(user=request.user)
-            base, ext = os.path.splitext(avatar.get_photo_filename())
             avatar.delete()
-            for size in IMSIZES:
-                os.remove("%s.%s%s" % ( base, size, ext))
         except:
             pass
-
-        return HttpResponse(simplejson.dumps({'success': True}))
-    elif avatar_id:
-        try:
-            avatar = Avatar.objects.get(user=request.user)
-            base, ext = os.path.splitext(avatar.get_photo_filename())
-            avatar.delete()
-            for size in IMSIZES:
-                os.remove("%s.%s%s" % ( base, size, ext))
-        except:
-            pass
-
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponseRedirect("/")

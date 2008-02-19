@@ -3,24 +3,20 @@
 {% block title %}{{ cuser }}'s public profile{% endblock %}
 
 {% block content %}
-<div class="rightbar">
+<div class="navigation">
+  <form class="vote" style="display: none" action=""></form>
+  <h1>{% trans "Actions" %}</h1>
   <ul>
-		{% if user.is_authenticated %}
-			{% if not contact %}
-    		<li><a href="{{ cuser.get_absolute_url }}add">{% blocktrans %}Add {{ cuser }} to my contact list{% endblocktrans %}</a></li>
-			{% else %}
-    		<li>{% blocktrans %}{{ cuser }} is already in my contact list{% endblocktrans %}</a></li>
-			{% endif %}
-    {% endif %}
-    <li>{% blocktrans %}{{ cuser }}'s POI's{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s links{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s contacts{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s comments{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s favorites{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s sites{% endblocktrans %}</li>
-    <li>{% blocktrans %}{{ cuser }}'s votes{% endblocktrans %}</li>
+	{% if not contact %}
+ 		<li><a href="{{ cuser.get_absolute_url }}add">{% blocktrans %}Add {{ cuser }} to my contact list{% endblocktrans %}</a></li>
+	{% else %}
+ 		<li>{% blocktrans %}{{ cuser }} is already in your contact list{% endblocktrans %}</li>
+  {% endif %}
+ 		<li><a href="{{ cuser.get_absolute_url }}add">{% blocktrans %}Subscribe to the RSS of {{ cuser }}{% endblocktrans %}</a>
+ 		<li><a href="/conversation/new/">{% blocktrans %}Start a conversation with {{ cuser }}{% endblocktrans %}</a></li>
   </ul>
 </div>
+
 {% if profile %}
 {% if avatar %}
 <p style="float: right; padding: 15px; margin-right: 100px;"><img src="{{ avatar.get_absolute_url }}" /></p>
@@ -28,19 +24,16 @@
 <h2>Public profile of {{ cuser }}</h2>
 <ul>
   <li>Username: {{ cuser }}</li>
-  <li>Name: {{ profile.firstname }} {{ profile.surname }}</li>
-  <li>Gender: {{ profile.get_gender_display }}</li>
-  <li>E-mail: {{ cuser.email }}</li>
-  <li>Preferred language: {{ profile.get_lang_display }}</li>
-  <li>Location: {{ profile.city }}, {{ profile.country }}</li>
   <li>Blog: {{ profile.blog }}</li>
   <li>About: {{ profile.about }}</li>
 </ul>
 <div>
+<p>Number of games:</p> 
 <p>Number of links:</p> 
-<p>Number of comment:</p> 
+<p>Number of comments:</p> 
 <p>Number of votes:</p> 
-<p>Number of pois:</p> 
+<p>Number of contacts:</p> 
+<p>People who have {{ user }} as contact:</p> 
 </div>
 {% else %}
 <h2>{% blocktrans %}{{ cuser }} has not inserted his profile yet {% endblocktrans %}</h2>
