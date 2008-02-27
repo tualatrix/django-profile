@@ -88,7 +88,7 @@ class Avatar(models.Model):
     """
     photo = models.ImageField(upload_to="avatars/%Y/%b/%d")
     date = models.DateTimeField(default=datetime.datetime.now)
-    user = models.OneToOneField(User, blank=True, null=True)
+    user = models.OneToOneField(User, blank=True)
     valid = models.BooleanField(default=False)
 
     def get_absolute_url(self):
@@ -146,10 +146,10 @@ class Profile(models.Model):
     birthdate = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, default=38.272689)
-    longitude = models.DecimalField(max_digits=8, decimal_places=6, default=-3.164063)
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, default=38.272689)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, default=-3.164063)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    country = models.ForeignKey(Country, blank=True, null=True)
+    country = models.ForeignKey(Country, blank=True)
     location = models.CharField(max_length=255, blank=True)
 
     class Admin:

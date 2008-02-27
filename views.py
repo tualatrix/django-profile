@@ -58,15 +58,15 @@ def private(request, APIKEY, template):
         email = user.email
         validated = True
 
-    form = ProfileForm(request)
-
     try:
         avatar = Avatar.objects.filter(user=user, valid=True)[0]
     except:
         pass
 
     if request.method == "POST" and form.is_valid():
-        form.save()
+        form = ProfileForm(request.POST, request.FILES)
+    else:
+        form = ProfileForm()
 
     lat = profile.latitude
     lng = profile.longitude
