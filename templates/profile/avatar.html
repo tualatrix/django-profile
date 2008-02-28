@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="/site_media/css/common.css" type="text/css" />
     <script type="text/javascript" src="/site_media/js/jquery-1.2.3.js"></script>
     <script type="text/javascript" src="/site_media/js/jquery.dimensions.js"></script>
-    <script type="text/javascript" src="/site_media/js/ui/ui.mouse.js"></script>
-    <script type="text/javascript" src="/site_media/js/ui/ui.draggable.js"></script>
-    <script type="text/javascript" src="/site_media/js/ui/ui.draggable.ext.js"></script>
-    <script type="text/javascript" src="/site_media/js/ui/ui.resizable.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui.mouse.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui.draggable.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui.draggable.ext.js"></script>
+    <script type="text/javascript" src="/site_media/js/ui.resizable.js"></script>
     <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
     <style tyle="text/css">
 			body {min-width: 500px; min-height: 240px;}
@@ -17,7 +17,7 @@
 {%if done %}
     <script type="text/javascript">
      	window.close();
-			window.opener.document.images.avatar.src = "{{ user|avatar:"96" }}";
+			window.opener.document.images.avatarimg.src = "{{ user|avatar:"96" }}";
     </script>
 {% else %}
 {% if avatar %}

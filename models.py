@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 import datetime
+import Image, ImageFilter
 import os.path
 
 AVATARSIZES = ( 128, 96, 64, 32, 16 )
@@ -102,13 +103,12 @@ class Avatar(models.Model):
 
     def _save_FIELD_file(self, field, filename, raw_contents, save=False):
 
-        super(Photo, self)._save_FIELD_file(field, filename, raw_contents, save=save)
+        super(Avatar, self)._save_FIELD_file(field, filename, raw_contents, save=save)
 
         if field.name == "photo":
             base, ext = os.path.splitext(filename)
 
             for size in AVATARSIZES:
-                getattr(self, "save_photo%s_file" % size)("%s.%s%s" % ( base, size, ext), '', save=False)
                 image = Image.open(self.get_photo_filename())
                 if image.mode not in ('L', 'RGB'):
                     image = image.convert('RGB')
@@ -130,7 +130,7 @@ class Avatar(models.Model):
         except:
             pass
 
-        super(Photo, self).delete()
+        super(Avatar, self).delete()
 
 
 class Profile(models.Model):
@@ -143,13 +143,13 @@ class Profile(models.Model):
     user = models.ForeignKey(User, unique=True, edit_inline=models.TABULAR,
                              num_in_admin=1,min_num_in_admin=1, max_num_in_admin=1,
                              num_extra_on_change=0)
-    birthdate = models.DateTimeField(default=datetime.datetime.now(), blank=True)
+    birthdate = models.DateField(default=datetime.date.today(), blank=True)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=6, default=38.272689)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, default=-3.164063)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    country = models.ForeignKey(Country, blank=True)
+    country = models.ForeignKey(Country, null=True)
     location = models.CharField(max_length=255, blank=True)
 
     class Admin:
@@ -162,4 +162,4 @@ class Profile(models.Model):
         return "/profile/user/%s" % self.user
 
     def yearsold(self):
-        return (datetime.datetime.now().toordinal() - self.birthdate.toordinal()) / 365
+        return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365

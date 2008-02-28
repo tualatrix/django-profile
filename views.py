@@ -3,10 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from forms import ProfileForm, AvatarForm
 from models import Profile
+from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from profile.models import Avatar, Profile
+from profile.models import Avatar, Profile, Continent, Country
 from account.models import EmailValidate
 import random
 import Image, ImageFilter
@@ -29,7 +30,7 @@ def fetch_geodata(request, lat, lng):
 
         return HttpResponse(simplejson.dumps({'success': True, 'country': country, 'region': region}))
     else:
-        return HttpResponseRedirect("/")
+        raise Http404()
 
 def public(request, user, template):
     cuser = User.objects.get(username=user)
@@ -71,6 +72,12 @@ def private(request, APIKEY, template):
     lat = profile.latitude
     lng = profile.longitude
 
+    continents = Continent.objects.all()
+    country_data = dict()
+    for continent in continents:
+        country_data[continent] = Country.objects.filter(continent=continent)
+
+    print country_data
     return render_to_response(template, locals())
 
 @login_required
@@ -83,7 +90,7 @@ def save(request):
         else:
             return HttpResponse(simplejson.dumps({'success': False, 'error': form.errors}))
     else:
-        return HttpResponseRedirect("/")
+        raise Http404()
 
 @login_required
 def delete(request, template):
@@ -192,4 +199,4 @@ def avatarDelete(request, avatar_id=False):
             pass
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
-        return HttpResponseRedirect("/")
+        raise Http404()

@@ -2,16 +2,17 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
-<script type="text/javascript" src="/site_media/js/jquery.bgiframe.js"></script>
-<script type="text/javascript" src="/site_media/js/date.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery.datePicker.js"></script>
-{% ifequal request.LANGUAGE_CODE 'es' %}
-<script type="text/javascript" src="/site_media/js/date_es.js"></script>
-{% endifequal %}
+<script type="text/javascript" src="/site_media/js/ui.datepicker.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi?key={{ apikey }}"></script>
-<script type="text/javascript" src="/site_media/js/jquery.jmaps.1.4.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery.jmaps.js"></script>
 <script type="text/javascript" src="/site_media/js/jquery.profile.js"></script>
-<link rel="stylesheet" href="/site_media/css/datePicker.css" type="text/css" />
+<link rel="stylesheet" href="/site_media/css/ui.datepicker.css" type="text/css" />
+{% ifequal LANGUAGE_CODE 'es' %}
+<script type="text/javascript" src="/site_media/js/ui.datepicker-{{ request.LANGUAGE_CODE }}.js"></script>
+<script type="text/javascript">
+	$.datepicker.setDefaults($.datepicker.regional[ {{ request.LANGUAGE_CODE }}]);
+</script>
+{% endifequal %}
 {% endblock %}
 
 {% block content %}
@@ -21,75 +22,88 @@
   <fieldset>
     <p class="error">{{ form.errors }}</p>
    	<input style="margin-bottom: 10px;" type="button" class="save" value="{% trans 'Save' %}" />
-		<p>
+		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
     	<strong id="id_username">{{ user }}</strong> 
 			<a href="/accounts/password/change">{% trans "(Change password)" %}</a></p>
-		</p>
-		<p>
+		</div>
+		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
     	<strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
 			(<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)</p>
-		</p>
-		<p>
+		</div>
+		<div>
    		<label for="id_avatar">{% trans "Avatar:" %}</label>
-   		<a class="avatar" href="/profile/avatar/one/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a>
-			<a class="avatar" href="/profile/avatar/one/">
-     		{% if avatar %}
-     		<img id="avatar" src="{{ user|avatar:"96"}}" />
-     		{% else %}
-     		<img id="avatar" src="/site_media/images/default.gif" />
-     		{% endif %}
-			</a>
-		</p>
+			<div class="avatar">
+				<a class="newavatar img" href="/profile/avatar/one/">
+     			{% if avatar %}
+     			<img id="avatarimg" src="{{ user|avatar:"96"}}" />
+     			{% else %}
+     			<img src="/site_media/images/default.gif" />
+     			{% endif %}
+				</a>
+   			<a class="newavatar" href="/profile/avatar/one/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a>
+			</div>
+		</div>
 		<hr />
-		<p>
+		<div>
     	<label for="id_firstname">{% trans "First Name:" %}</label>
     	{{ form.firstname }}
-		</p>
-		<p>
+		</div>
+		<div>
     	<label for="id_surname">{% trans "Surname:" %}</label>
     	{{ form.surname }}
-		</p>
-		<p>
+		</div>
+		<div>
     	<label for="id_gender">{% trans "Gender:" %}</label>
 			<a class="male" href="">{% trans "Male" %}</a>
 			<a class="female" href="">{% trans "Female" %}</a>
-		</p>
-		<p>
+		</div>
+		<div>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
 			<span><div class="calendar"></div></span>
-		</p>
+		</div>
 		<hr />
-		<p>
+		<div>
     	<label for="id_url">{% trans "Url:" %}</label>
     	{{ form.url }}
-		</p>
-		<p>
+		</div>
+		<div>
     	<label for="id_about">{% trans "About:" %}</label>
     	{{ form.about }}
-		</p>
+		</div>
 		<hr />
-		<p>
-    	<label for="id_country">{% trans "Country:" %}</label>
-    	{{ form.country }}
-			<img id="country_loading" src="/site_media/images/loading.gif" />
-		</p>
-		<p>
-    	<label for="id_location">{% trans "Location:" %}</label>
+		<div>
+    	<label for="id_country">{% trans "Location:" %}</label>
+			<a class="location" href="">{% trans "Change location information" %}</a>
+		</div>
+		<div>
+   		<label for="id_country">{% trans "Country:" %}</label>
+			<select name="country" id="id_country">
+				<option value="">{% trans "Select your country:" %}</option>
+				{% for continent,countries in country_data.items %}
+					<option value="" disabled="disabled">{{ continent }}</option>
+					{% for country in countries %}
+					<option value="{{ country.code }}">{{ country }}</option>
+					{% endfor %}
+				{% endfor %}
+			</select>
+		</div>
+		<div>
+   		<label for="id_location">{% trans "Location:" %}</label>
 			{{ form.location }} 
 			<input id="clearLocation" type="button" value="Clear" /> 
 			<input id="searchAddress" type="button" value="Lookup" />
-		</p>
-		<p>
-    	<label for="id_position">{% trans "Position:" %}</label>
+		</div>
+		<div>
+   		<label for="id_position">{% trans "Position:" %}</label>
 			<div id="jmap"></div>
-		</p>
+		</div>
 		<hr />
-		<p>
+		<div>
     	<label for="id_other">{% trans "Other actions:" %}</label>
-    	<a href="/profile/delete">{% trans "Delete all my personal information" %}</a>
-		</p>
+    	<strong><a href="/profile/delete">{% trans "Delete all my personal information" %}</a></strong>
+		</div>
     <div>{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
   </fieldset>
 </form>
