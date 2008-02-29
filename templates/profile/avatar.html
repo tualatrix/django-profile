@@ -17,17 +17,15 @@
 {%if done %}
     <script type="text/javascript">
      	window.close();
-			window.opener.document.images.avatarimg.src = "{{ user|avatar:"96" }}";
+			window.opener.document.images.avatarimg.src = "{{ request.user|avatar:"96" }}";
     </script>
 {% else %}
 {% if avatar %}
 <script type="text/javascript">
-
-	var width = {{ width }};
-	var height = {{ height }};
+	var width = {{ avatar.get_photo_width }};
+	var height = {{ avatar.get_photo_height }};
   if (width < 500 ) { width = 500; }
   window.resizeTo(width + 30, height + 120);
-
 </script>
 {% endif %}
 {% endif %}
@@ -46,7 +44,7 @@
 		</p>
   </form>
   <center style="padding-top: 20px;">
-    <div style="position: relative; background: url({{ blur_url }}) no-repeat; margin: 0px; width: {{width}}px; height: {{height}}px;" class="parent" id="avatarzone">
+    <div style="position: relative; background: url({{ avatar.get_blur_url }}) no-repeat; margin: 0px; width: {{ avatar.get_photo_width }}px; height: {{ avatar.get_photo_height }}px;" class="parent" id="avatarzone">
       <div id="child" class="child ui-wrapper" style="position: absolute; width: {{cropsize}}px; height: {{cropsize}}px; left: {{cx}}px; top: {{cy}}px; border: 0px; background: url({{ avatar.get_absolute_url }}) no-repeat; background-position: -{{ cx }}px -{{ cy }}px;">
         <div style="position: absolute; top: 0px; left: 0px; width: 4px; height: 100%; background: red;"></div>
         <div style="position: absolute; top: 0px; right: 0px; width: 4px; height: 100%; background: red;"></div>

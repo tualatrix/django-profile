@@ -90,10 +90,14 @@ class Avatar(models.Model):
     photo = models.ImageField(upload_to="avatars/%Y/%b/%d")
     date = models.DateTimeField(default=datetime.datetime.now)
     user = models.OneToOneField(User, blank=True)
+    box = models.CharField(max_length=255, blank=True)
     valid = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return "/site_media/%s" % self.photo
+
+    def get_blur_url(self):
+        return "%s.blur%s" % os.path.splitext(self.get_absolute_url())
 
     def __unicode__(self):
         return "%s-%s" % (self.user, self.photo)
@@ -101,20 +105,49 @@ class Avatar(models.Model):
     class Admin:
         pass
 
-    def _save_FIELD_file(self, field, filename, raw_contents, save=False):
+    def _save_FIELD_file(self, field, filename, raw_contents, save=True):
 
         super(Avatar, self)._save_FIELD_file(field, filename, raw_contents, save=save)
 
         if field.name == "photo":
-            base, ext = os.path.splitext(filename)
+
+            im = Image.open(self.get_photo_filename())
+            width, height = im.size
+            if width > height and width > 640:
+                im = im.resize((640, 640*height/width), Image.ANTIALIAS)
+                im.save(self.get_photo_filename())
+                width, height = im.size
+            elif height > 480:
+                im = im.resize((480*width/height, 480), Image.ANTIALIAS)
+                im.save(self.get_photo_filename())
+                width, height = im.size
+
+            # Generate blur and scale image
+            blur = im.filter(ImageFilter.BLUR)
+            blur = blur.convert("L")
+            blur.save("%s.blur%s" % os.path.splitext(self.get_photo_filename()))
+
+
+    def save(self):
+
+        super(Avatar, self).save()
+
+        if self.valid:
+            Avatar.objects.filter(user=self.user).exclude(pk=self.pk).delete()
+            base, ext = os.path.splitext(self.get_photo_filename())
+
+            image = Image.open(self.get_photo_filename())
+            box = self.box.split("-")
+            box = [ int(num) for num in box ]
+            image = image.crop(box)
+            if image.mode not in ('L', 'RGB'):
+                image = image.convert('RGB')
 
             for size in AVATARSIZES:
-                image = Image.open(self.get_photo_filename())
-                if image.mode not in ('L', 'RGB'):
-                    image = image.convert('RGB')
                 image.thumbnail((size, size), Image.ANTIALIAS)
                 image.save("%s.%s%s" % ( base, size, ext))
-                del image
+
+            del image
 
     def delete(self):
         filename = self.get_photo_filename()
@@ -127,6 +160,7 @@ class Avatar(models.Model):
 
         try:
             os.remove(self.get_photo_filename())
+            os.remove("%s.blur%s" % (base, ext))
         except:
             pass
 

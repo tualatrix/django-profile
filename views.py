@@ -125,25 +125,14 @@ def avatar(request, template, step="one"):
         if step=="one":
             form = AvatarForm(request.POST, request.FILES)
             if form.is_valid():
-                data = form.cleaned_data
+                data = form.cleaned_data.get('photo')
                 Avatar.objects.filter(user=request.user, valid=False).delete()
                 avatar = Avatar(user=request.user)
-                avatar.save_photo_file(data['photo'].filename, data['photo'].content)
+                avatar.save_photo_file("%s%s" % (request.user.username, data.get('extension')), data['photo'].content)
                 avatar.save()
-                im = Image.open(avatar.get_photo_filename())
 
-                # Resize if needed
                 width = avatar.get_photo_width()
-                height= avatar.get_photo_height()
-                if width > height and width > 640:
-                    im = im.resize((640, 640*height/width), Image.ANTIALIAS)
-                    im.save(avatar.get_photo_filename())
-                    width, height = im.size
-                elif height > 480:
-                    im = im.resize((480*width/height, 480), Image.ANTIALIAS)
-                    im.save(avatar.get_photo_filename())
-                    width, height = im.size
-
+                height = avatar.get_photo_height()
                 if width < 96 or height < 96:
                     cropsize = 32
                 else:
@@ -154,35 +143,17 @@ def avatar(request, template, step="one"):
                 cy = height/2 - 48
                 if cy < 0: cy=0
 
-                # Generate blur and scale image
-                blur = im.filter(ImageFilter.BLUR)
-                blur = blur.convert("L")
-                blur.save("%s.blur%s" % os.path.splitext(avatar.get_photo_filename()))
-                blur_url = "%s.blur%s" % os.path.splitext(avatar.get_absolute_url())
-
-
         elif step=="two":
-                avatar = Avatar.objects.get(user = request.user, pk = request.POST.get('avatar_id'))
-                avatar.valid = True
-                avatar.save()
-                im = Image.open(avatar.get_photo_filename())
-                if request.POST.get('top') and request.POST.get('left') and request.POST.get('size'):
-                    top = request.POST.get('top')
-                    left = request.POST.get('left')
-                    size = request.POST.get('size')
-                    box = ( int(left), int(top), int(left) + int(size), int(top) + int(size))
-                    im = im.crop(box)
+            avatar = Avatar.objects.get(user = request.user, pk = request.POST.get('avatar_id'))
+            avatar.valid = True
+            if request.POST.get('top') and request.POST.get('left') and request.POST.get('size'):
+                top = request.POST.get('top')
+                left = request.POST.get('left')
+                size = request.POST.get('size')
+                avatar.box = "%s-%s-%s-%s" % ( int(left), int(top), int(left) + int(size), int(top) + int(size))
 
-                base, ext = os.path.splitext(avatar.get_photo_filename())
-                for size in IMSIZES:
-                    resized = im.resize((size, size), Image.ANTIALIAS)
-                    resized.save("%s.%s%s" % ( base, size, ext ))
-
-                try:
-                    os.remove("%s.blur%s" % os.path.splitext(avatar.get_photo_filename()))
-                except:
-                    pass
-                done = True
+            avatar.save()
+            done = True
 
     return render_to_response(template, locals())
 

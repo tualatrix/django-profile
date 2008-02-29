@@ -103,7 +103,7 @@
     	<label for="id_other">{% trans "Other actions:" %}</label>
     	<strong><a href="/profile/delete">{% trans "Delete all my personal information" %}</a></strong>
 		</div>
-    <div>{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
+    <div style="display: none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
   </fieldset>
 </form>
 <div style="display: none;" id="apikey">{{ apikey }}</div>
