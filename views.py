@@ -77,7 +77,6 @@ def private(request, APIKEY, template):
     for continent in continents:
         country_data[continent] = Country.objects.filter(continent=continent)
 
-    print country_data
     return render_to_response(template, locals())
 
 @login_required
@@ -94,23 +93,22 @@ def save(request):
 
 @login_required
 def delete(request, template):
-    user = str(request.user)
-    userobj = User.objects.get(username=user)
+    user = User.objects.get(username=str(request.user))
     if request.method == "POST":
         # Remove the profile
         try:
-            Profile.objects.get(user=userobj).delete()
+            Profile.objects.get(user=user).delete()
         except:
             pass
         # Remove the avatar if exists
         try:
-            Avatar.objects.get(user=userobj).delete()
+            Avatar.objects.get(user=user).delete()
         except:
             pass
+
         # Remove the e-mail of the account too
-        acct = User.objects.get(username=user)
-        acct.email = ''
-        acct.save()
+        user.email = ''
+        user.save()
 
         return HttpResponseRedirect('%sdone/' % request.path)
 
@@ -121,7 +119,6 @@ def avatar(request, template, step="one"):
     """
     Avatar management
     """
-    user = request.user
     if not request.method == "POST":
         form = AvatarForm()
     else:
