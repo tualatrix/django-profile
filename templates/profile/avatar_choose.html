@@ -1,0 +1,42 @@
+{% load i18n %}
+<html>
+<head>
+	<title>{% trans "Change avatar" %}</title>
+  <link rel="stylesheet" href="/site_media/css/avatar.css" type="text/css" />
+  <link rel="stylesheet" href="/site_media/css/jquery.crop.css" type="text/css" />
+  <script type="text/javascript" src="/site_media/js/jquery-1.2.3.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.dimensions.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.crop.js"></script>
+  <script type="text/javascript" src="/site_media/js/ui.mouse.js"></script>
+  <script type="text/javascript" src="/site_media/js/ui.draggable.js"></script>
+  <script type="text/javascript" src="/site_media/js/ui.draggable.ext.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
+	{% if avatar %}
+	<script type="text/javascript">
+ 		window.resizeTo(410, 430);
+		$(function() {
+      $("div.hidden-image").crop($("div.hidden-image img"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+		});
+	</script>
+	{% endif %}
+</head>
+<body>
+  {% if avatar.photo %}
+	<p class="title">
+		<a class="another" href="/profile/avatar/delete/{{ avatar.pk }}/">{% trans 'Select anoter image' %}</a>
+		<a class="cancel" href="/profile/avatar/delete/{{ avatar.pk }}/">{% trans 'Cancel' %}</a>
+	</p>
+	<div class="hidden-image"><img src="{{ avatar.get_absolute_url }}" class="crop"/></div>
+	{% else %}
+	<p class="title" style="border: 1px solid;">{% trans "Select the image file from your computer you want to assign as your avatar in your profile:" %}</p>
+  <form class="commonform" action="" method="post" enctype="multipart/form-data">
+    <label for="id_avatar">{% trans "Avatar:" %}</label>
+    {{ form.photo }}
+    <input type="button" class="cancel" value="{% trans 'Cancel' %}" />
+  </form>
+	<div class="loading">
+		<p><img src="/site_media/images/loading2.gif" /> {% trans "Please wait..." %}</p>
+	</div>
+	{% endif %}
+</body>
+</html>

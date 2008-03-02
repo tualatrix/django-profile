@@ -33,3 +33,12 @@ class AvatarForm(forms.Form):
 
         return { 'photo': photo, 'extension': IMAGE_TYPES.get(type.split(",")[0]) }
 
+class AvatarCropForm(forms.Form):
+    """
+    Crop dimensions form
+    """
+    top = forms.IntegerField()
+    bottom = forms.IntegerField()
+    left = forms.IntegerField()
+    right = forms.IntegerField()
+

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ cuser }}'s public profile{% endblock %}
+{% block title %}{{ profile_user }}'s public profile{% endblock %}
+{% block customjs %}
+{% endblock %}
 
 {% block content %}
 <div class="navigation">
@@ -8,12 +10,12 @@
   <h1>{% trans "Actions" %}</h1>
   <ul>
 	{% if not contact %}
- 		<li><a href="{{ cuser.get_absolute_url }}add">{% blocktrans %}Add {{ cuser }} to my contact list{% endblocktrans %}</a></li>
+ 		<li><a href="{{ profile_user.get_absolute_url }}add">{% blocktrans %}Add {{ profile_user }} to my contact list{% endblocktrans %}</a></li>
 	{% else %}
- 		<li>{% blocktrans %}{{ cuser }} is already in your contact list{% endblocktrans %}</li>
+ 		<li>{% blocktrans %}{{ profile_user }} is already in your contact list{% endblocktrans %}</li>
   {% endif %}
- 		<li><a href="{{ cuser.get_absolute_url }}add">{% blocktrans %}Subscribe to the RSS of {{ cuser }}{% endblocktrans %}</a>
- 		<li><a href="/conversation/new/">{% blocktrans %}Start a conversation with {{ cuser }}{% endblocktrans %}</a></li>
+ 		<li><a href="{{ profile_user.get_absolute_url }}add">{% blocktrans %}Subscribe to the RSS of {{ profile_user }}{% endblocktrans %}</a>
+ 		<li><a href="/conversation/new/">{% blocktrans %}Start a conversation with {{ profile_user }}{% endblocktrans %}</a></li>
   </ul>
 </div>
 
@@ -21,9 +23,9 @@
 {% if avatar %}
 <p style="float: right; padding: 15px; margin-right: 100px;"><img src="{{ avatar.get_absolute_url }}" /></p>
 {% endif %}
-<h2>Public profile of {{ cuser }}</h2>
+<h2>Public profile of {{ profile_user }}</h2>
 <ul>
-  <li>Username: {{ cuser }}</li>
+  <li>Username: {{ profile_user }}</li>
   <li>Blog: {{ profile.blog }}</li>
   <li>About: {{ profile.about }}</li>
 </ul>
@@ -36,7 +38,7 @@
 <p>People who have {{ user }} as contact:</p> 
 </div>
 {% else %}
-<h2>{% blocktrans %}{{ cuser }} has not inserted his profile yet {% endblocktrans %}</h2>
+<h2>{% blocktrans %}{{ profile_user }} has not inserted his profile yet {% endblocktrans %}</h2>
 {% endif %}
 {% endblock %}
 

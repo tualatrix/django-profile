@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from forms import ProfileForm, AvatarForm
+from forms import ProfileForm, AvatarForm, AvatarCropForm
 from models import Profile
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
@@ -32,15 +32,15 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, user, template):
-    cuser = User.objects.get(username=user)
+def public(request, profile_user, template):
+    profile_user = User.objects.get(username=profile_user)
     try:
-        profile = cuser.get_profile()
-        avatar = Avatar.objects.get(user=cuser, valid=True)
+        profile = profile_user.get_profile()
+        avatar = Avatar.objects.get(user=profile_user, valid=True)
     except:
         pass
-    user = request.user
 
+    print profile_user
     return render_to_response(template, locals())
 
 @login_required
@@ -115,45 +115,46 @@ def delete(request, template):
     return render_to_response(template, locals())
 
 @login_required
-def avatar(request, template, step="one"):
+def avatarChoose(request, template):
     """
-    Avatar management
+    Avatar choose
     """
     if not request.method == "POST":
         form = AvatarForm()
     else:
-        if step=="one":
-            form = AvatarForm(request.POST, request.FILES)
-            if form.is_valid():
-                data = form.cleaned_data.get('photo')
-                Avatar.objects.filter(user=request.user, valid=False).delete()
-                avatar = Avatar(user=request.user)
-                avatar.save_photo_file("%s%s" % (request.user.username, data.get('extension')), data['photo'].content)
-                avatar.save()
-
-                width = avatar.get_photo_width()
-                height = avatar.get_photo_height()
-                if width < 96 or height < 96:
-                    cropsize = 32
-                else:
-                    cropsize = 96
-
-                cx = width/2 - 48
-                if cx < 0: cx=0
-                cy = height/2 - 48
-                if cy < 0: cy=0
-
-        elif step=="two":
-            avatar = Avatar.objects.get(user = request.user, pk = request.POST.get('avatar_id'))
-            avatar.valid = True
-            if request.POST.get('top') and request.POST.get('left') and request.POST.get('size'):
-                top = request.POST.get('top')
-                left = request.POST.get('left')
-                size = request.POST.get('size')
-                avatar.box = "%s-%s-%s-%s" % ( int(left), int(top), int(left) + int(size), int(top) + int(size))
-
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data.get('photo')
+            Avatar.objects.filter(user=request.user, valid=False).delete()
+            avatar = Avatar(user=request.user)
+            avatar.save_photo_file("%s%s" % (request.user.username, data.get('extension')), data['photo'].content)
             avatar.save()
-            done = True
+
+    return render_to_response(template, locals())
+
+@login_required
+def avatarCrop(request, avatar_id, template):
+    """
+    Avatar management
+    """
+    if not request.method == "POST":
+        raise Http404()
+
+    form = AvatarCropForm(request.POST)
+    if form.is_valid():
+        avatar = Avatar.objects.get(user = request.user, pk = avatar_id)
+        avatar.valid = True
+        top = int(request.POST.get('top'))
+        left = int(request.POST.get('left'))
+        right = int(request.POST.get('right'))
+        bottom = int(request.POST.get('bottom'))
+        if top < 0: top=0
+        if left < 0: left=0
+        if right < 0: right=0
+        if bottom <0: bottom=0
+        avatar.box = "%s-%s-%s-%s" % ( int(left), int(top), int(right), int(bottom))
+        avatar.save()
+        done = True
 
     return render_to_response(template, locals())
 

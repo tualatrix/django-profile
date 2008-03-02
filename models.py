@@ -105,29 +105,6 @@ class Avatar(models.Model):
     class Admin:
         pass
 
-    def _save_FIELD_file(self, field, filename, raw_contents, save=True):
-
-        super(Avatar, self)._save_FIELD_file(field, filename, raw_contents, save=save)
-
-        if field.name == "photo":
-
-            im = Image.open(self.get_photo_filename())
-            width, height = im.size
-            if width > height and width > 640:
-                im = im.resize((640, 640*height/width), Image.ANTIALIAS)
-                im.save(self.get_photo_filename())
-                width, height = im.size
-            elif height > 480:
-                im = im.resize((480*width/height, 480), Image.ANTIALIAS)
-                im.save(self.get_photo_filename())
-                width, height = im.size
-
-            # Generate blur and scale image
-            blur = im.filter(ImageFilter.BLUR)
-            blur = blur.convert("L")
-            blur.save("%s.blur%s" % os.path.splitext(self.get_photo_filename()))
-
-
     def save(self):
 
         super(Avatar, self).save()
@@ -160,7 +137,6 @@ class Avatar(models.Model):
 
         try:
             os.remove(self.get_photo_filename())
-            os.remove("%s.blur%s" % (base, ext))
         except:
             pass
 
