@@ -1,22 +1,20 @@
 {% load i18n %}
 {% load profile_tags %}
 <div class="vcard">
-<img class="photo" src="{{ user|avatar:"96" }}" alt="{{ user }}"/>
-<ul style="float: left;">
-  <li class="fn nickname">{{ user }}</li>
-	{% if profile.country %}
-	<li>{{ profile.country }}</li>
-	{% else %}
-	<li>{% trans "No country" %}</li>
-	{% endif %}
-	{% if yearsold %}
-	<li>{% blocktrans %}{{ yearsold }} years old{% endblocktrans %}</li>
-	{% endif %}
-	{% if profile.url %}
-	<li><a class="url" href="{{ profile.url }}">{% trans "My Website" %}</a></li>
-	{% endif %}
-	{% if gender_img %}
-	<li style="margin: 10px 0px 0px 110px;"><img src="{{ gender_img }}" /></li>
-	{% endif %}
-</ul>
+	<a href="{{ profile.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
+	<ul>
+  	<li class="fn nickname">{{ user }}</li>
+		{% if profile.country %}
+		<li>{{ profile.country }}</li>
+		{% endif %}
+		{% if yearsold %}
+		<li>{% blocktrans %}{{ yearsold }} years old{% endblocktrans %}</li>
+		{% endif %}
+		{% if profile.url %}
+		<li><a class="url" href="{{ profile.url }}">{% trans "My Website" %}</a></li>
+		{% endif %}
+		{% if gender_img %}
+		<li><img src="{{ gender_img }}" /></li>
+		{% endif %}
+	</ul>
 </div>

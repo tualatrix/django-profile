@@ -156,10 +156,10 @@ class Profile(models.Model):
     birthdate = models.DateField(default=datetime.date.today(), blank=True)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
-    latitude = models.DecimalField(max_digits=10, decimal_places=6, default=40.416706)
-    longitude = models.DecimalField(max_digits=10, decimal_places=6, default=-3.703269)
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    country = models.ForeignKey(Country, null=True)
+    country = models.ForeignKey(Country, null=True, blank=True)
     location = models.CharField(max_length=255, blank=True)
 
     class Admin:
@@ -169,7 +169,7 @@ class Profile(models.Model):
         return _("%s's profile") % self.user
 
     def get_absolute_url(self):
-        return "/profile/user/%s" % self.user
+        return "/profile/users/%s" % self.user
 
     def yearsold(self):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365

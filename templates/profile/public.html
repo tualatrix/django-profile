@@ -1,44 +1,42 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load profile_tags %}
 {% block title %}{{ profile_user }}'s public profile{% endblock %}
 {% block customjs %}
+{% if profile.latitude and profile.longitude %}
+<script src="http://maps.google.com/maps?file=api&v=2&key={{ apikey }}" />
+<script type="text/javascript" src="/site_media/js/jquery-1.2.3.pack.js"></script>
+<script type="text/javascript">
+	$(function() {
+  	if (GBrowserIsCompatible()) {
+      var map = new GMap2(document.getElementById("map"));
+    	map.addControl(new GLargeMapControl());
+    	map.addControl(new GOverviewMapControl())
+    	map.addControl(new GMapTypeControl())
+    	map.enableContinuousZoom();
+    	map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
+    	var marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false });
+    	map.addOverlay(marker);
+    }
+	});
+</script>
+{% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="navigation">
-  <form class="vote" style="display: none" action=""></form>
-  <h1>{% trans "Actions" %}</h1>
-  <ul>
-	{% if not contact %}
- 		<li><a href="{{ profile_user.get_absolute_url }}add">{% blocktrans %}Add {{ profile_user }} to my contact list{% endblocktrans %}</a></li>
-	{% else %}
- 		<li>{% blocktrans %}{{ profile_user }} is already in your contact list{% endblocktrans %}</li>
-  {% endif %}
- 		<li><a href="{{ profile_user.get_absolute_url }}add">{% blocktrans %}Subscribe to the RSS of {{ profile_user }}{% endblocktrans %}</a>
- 		<li><a href="/conversation/new/">{% blocktrans %}Start a conversation with {{ profile_user }}{% endblocktrans %}</a></li>
-  </ul>
-</div>
-
-{% if profile %}
-{% if avatar %}
-<p style="float: right; padding: 15px; margin-right: 100px;"><img src="{{ avatar.get_absolute_url }}" /></p>
-{% endif %}
-<h2>Public profile of {{ profile_user }}</h2>
+<h1>Public profile of {{ profile.user }}</h1>
 <ul>
-  <li>Username: {{ profile_user }}</li>
-  <li>Blog: {{ profile.blog }}</li>
-  <li>About: {{ profile.about }}</li>
+	<li><img src="{{ profile.user|avatar:"96" }}" /></li>
+  <li>{% trans "Username" %}: {{ profile_user }}</li>
+	{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
+  {% if profile.url %}<li>{% trans "Blog" %}: {{ profile.blog }}</li>{% endif %}
+  {% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
+	{% if profile.gender %}<li>{% trans "Gender" %}: <img src="{{ gender_img }}" /></li>{% endif %}
+	{% if profile.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
+	{% if profile.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
+	{% if profile.latitude and profile.longitude %}
+	<li><div id="map"></div></li>
+	{% endif %}
 </ul>
-<div>
-<p>Number of games:</p> 
-<p>Number of links:</p> 
-<p>Number of comments:</p> 
-<p>Number of votes:</p> 
-<p>Number of contacts:</p> 
-<p>People who have {{ user }} as contact:</p> 
-</div>
-{% else %}
-<h2>{% blocktrans %}{{ profile_user }} has not inserted his profile yet {% endblocktrans %}</h2>
-{% endif %}
 {% endblock %}
 

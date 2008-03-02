@@ -19,7 +19,7 @@
 <form class="commonform profile" action="" method="post" enctype="multipart/form-data">
   <fieldset>
     <p class="error">{{ form.errors }}</p>
-   	<input style="margin-bottom: 10px;" type="button" class="save" value="{% trans 'Save' %}" />
+   	<input type="button" class="save" value="{% trans 'Save' %}" /><img class="saving" src="/site_media/images/loading.gif" />
 		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
     	<strong id="id_username">{{ user }}</strong> 
@@ -72,17 +72,13 @@
 		</div>
 		<hr />
 		<div>
-    	<label for="id_country">{% trans "Location:" %}</label>
-			<a class="location" href="">{% trans "Change location information" %}</a>
-		</div>
-		<div class="mapinfo">
    		<label for="id_country">{% trans "Country:" %}</label>
 			<select name="country" id="id_country">
 				<option value="">{% trans "Select your country:" %}</option>
 				{% for continent,countries in country_data.items %}
 					<option value="" disabled="disabled">{{ continent }}</option>
 					{% for country in countries %}
-					<option value="{{ country.code }}">{{ country }}</option>
+					<option value="{{ country.code }}" {% ifequal profile.country country%}selected="selected"{% endifequal %}>{{ country }}</option>
 					{% endfor %}
 				{% endfor %}
 			</select>
@@ -90,9 +86,7 @@
 		</div>
 		<div class="mapinfo">
    		<label for="id_location">{% trans "Location:" %}</label>
-			{{ form.location }} 
-			<input id="clearLocation" type="button" value="Clear" /> 
-			<input id="searchAddress" type="button" value="Lookup" />
+			<input style="width: 400px;" id="id_location" type="text" disabled="disabled" name="location" maxlength="255" /> 
 		</div>
 		<div class="mapinfo">
    		<label for="id_position">{% trans "Position:" %}</label>

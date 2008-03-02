@@ -32,15 +32,19 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, profile_user, template):
+def public(request, APIKEY, profile_user, template):
     profile_user = User.objects.get(username=profile_user)
+    gender = { "M": "/site_media/images/male.png", "F": "/site_media/images/female.png" }
+    apikey = APIKEY
     try:
         profile = profile_user.get_profile()
         avatar = Avatar.objects.get(user=profile_user, valid=True)
     except:
         pass
 
-    print profile_user
+    if profile.gender:
+        gender_img = gender.get(profile.gender)
+
     return render_to_response(template, locals())
 
 @login_required
@@ -65,9 +69,9 @@ def private(request, APIKEY, template):
         pass
 
     if request.method == "POST" and form.is_valid():
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, instance=profile)
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=profile)
 
     lat = profile.latitude
     lng = profile.longitude
@@ -81,13 +85,15 @@ def private(request, APIKEY, template):
 
 @login_required
 def save(request):
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        form = ProfileForm(request)
-        if request.method == "POST" and form.is_valid():
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
+        profile = Profile.objects.get(user=request.user)
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
             form.save()
             return HttpResponse(simplejson.dumps({'success': True}))
         else:
-            return HttpResponse(simplejson.dumps({'success': False, 'error': form.errors}))
+            print form.errors
+            return HttpResponse(simplejson.dumps({'success': False }))
     else:
         raise Http404()
 
