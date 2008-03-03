@@ -13,9 +13,9 @@
   <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
 	{% if avatar %}
 	<script type="text/javascript">
- 		window.resizeTo(410, 430);
 		$(function() {
-      $("div.hidden-image").crop($("div.hidden-image img"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+			$("div.hidden-image").crop($("div.hidden-image img"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+ 			window.resizeTo(410, 430);
 		});
 	</script>
 	{% endif %}

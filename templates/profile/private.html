@@ -75,6 +75,8 @@
    		<label for="id_country">{% trans "Country:" %}</label>
 			<select name="country" id="id_country">
 				<option value="">{% trans "Select your country:" %}</option>
+				<option value="" disabled="disabled">{% trans "More common..." %}</option>
+				<option value="ES">{% trans "Spain" %}</option>
 				{% for continent,countries in country_data.items %}
 					<option value="" disabled="disabled">{{ continent }}</option>
 					{% for country in countries %}
@@ -86,7 +88,7 @@
 		</div>
 		<div class="mapinfo">
    		<label for="id_location">{% trans "Location:" %}</label>
-			<input style="width: 400px;" id="id_location" type="text" disabled="disabled" name="location" maxlength="255" /> 
+			<input style="width: 400px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
 		</div>
 		<div class="mapinfo">
    		<label for="id_position">{% trans "Position:" %}</label>

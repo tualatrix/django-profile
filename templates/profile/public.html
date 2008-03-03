@@ -25,18 +25,20 @@
 
 {% block content %}
 <h1>Public profile of {{ profile.user }}</h1>
-<ul>
-	<li><img src="{{ profile.user|avatar:"96" }}" /></li>
-  <li>{% trans "Username" %}: {{ profile_user }}</li>
-	{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
-  {% if profile.url %}<li>{% trans "Blog" %}: {{ profile.blog }}</li>{% endif %}
-  {% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
-	{% if profile.gender %}<li>{% trans "Gender" %}: <img src="{{ gender_img }}" /></li>{% endif %}
-	{% if profile.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
-	{% if profile.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
-	{% if profile.latitude and profile.longitude %}
-	<li><div id="map"></div></li>
-	{% endif %}
-</ul>
+<div class="vcard">
+	<ul>
+		<li><img src="{{ profile.user|avatar:"96" }}" /></li>
+  	<li>{% trans "Username" %}: {{ profile_user }}</li>
+		{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
+  	{% if profile.url %}<li>{% trans "Blog" %}: {{ profile.blog }}</li>{% endif %}
+  	{% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
+		{% if profile.gender %}<li>{% trans "Gender" %}: <img src="{{ gender_img }}" /></li>{% endif %}
+		{% if profile.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
+		{% if profile.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
+		{% if profile.latitude and profile.longitude %}
+		<li><div id="map"></div></li>
+		{% endif %}
+	</ul>
+</div>
 {% endblock %}
 
