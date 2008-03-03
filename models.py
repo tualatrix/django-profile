@@ -154,6 +154,7 @@ class Profile(models.Model):
                              num_in_admin=1,min_num_in_admin=1, max_num_in_admin=1,
                              num_extra_on_change=0)
     birthdate = models.DateField(default=datetime.date.today(), blank=True)
+    date = models.DateTimeField(default=datetime.datetime.now)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=6, default=0)
