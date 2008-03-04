@@ -30,7 +30,7 @@
 		<li><img src="{{ profile.user|avatar:"96" }}" /></li>
   	<li>{% trans "Username" %}: {{ profile_user }}</li>
 		{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
-  	{% if profile.url %}<li>{% trans "Blog" %}: {{ profile.blog }}</li>{% endif %}
+  	{% if profile.url %}<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>{% endif %}
   	{% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
 		{% if profile.gender %}<li>{% trans "Gender" %}: <img src="{{ gender_img }}" /></li>{% endif %}
 		{% if profile.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
