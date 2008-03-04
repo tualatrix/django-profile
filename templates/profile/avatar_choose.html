@@ -13,10 +13,11 @@
   <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
 	{% if avatar %}
 	<script type="text/javascript">
-		$(function() {
-			$("div.hidden-image").crop($("div.hidden-image img"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+		// We can't use jquery.ready() because it doesn't wait to images.
+		window.onload = function() {
  			window.resizeTo(410, 430);
-		});
+			$("div.hidden-image").crop($("div.hidden-image img.crop"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+		}
 	</script>
 	{% endif %}
 </head>
