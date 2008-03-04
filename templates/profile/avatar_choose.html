@@ -14,10 +14,10 @@
 	{% if avatar %}
 	<script type="text/javascript">
 		// We can't use jquery.ready() because it doesn't wait to images.
-		window.onload = function() {
- 			window.resizeTo(410, 430);
+		$(window).bind("load", function() {
+ 			window.resizeTo(410, 450);
 			$("div.hidden-image").crop($("div.hidden-image img.crop"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
-		}
+		});
 	</script>
 	{% endif %}
 </head>

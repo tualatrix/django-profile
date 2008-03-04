@@ -37,7 +37,7 @@
      			{% if avatar %}
      			<img id="avatarimg" src="{{ user|avatar:"96"}}" />
      			{% else %}
-     			<img src="/site_media/images/default.gif" />
+     			<img id="avatarimg" src="/site_media/images/default.gif" />
      			{% endif %}
 				</a>
    			<a class="newavatar" href="/profile/avatar/choose/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a>

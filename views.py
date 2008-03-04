@@ -92,7 +92,6 @@ def save(request):
             form.save()
             return HttpResponse(simplejson.dumps({'success': True}))
         else:
-            print form.errors
             return HttpResponse(simplejson.dumps({'success': False }))
     else:
         raise Http404()
@@ -154,10 +153,6 @@ def avatarCrop(request, avatar_id, template):
         left = int(request.POST.get('left'))
         right = int(request.POST.get('right'))
         bottom = int(request.POST.get('bottom'))
-        if top < 0: top=0
-        if left < 0: left=0
-        if right < 0: right=0
-        if bottom <0: bottom=0
         avatar.box = "%s-%s-%s-%s" % ( int(left), int(top), int(right), int(bottom))
         avatar.save()
         done = True
