@@ -5,7 +5,7 @@
 {% block customjs %}
 {% if profile.latitude and profile.longitude %}
 <script src="http://maps.google.com/maps?file=api&v=2&key={{ apikey }}" />
-<script type="text/javascript" src="/site_media/js/jquery-1.2.3.pack.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.3.pack.js"></script>
 <script type="text/javascript">
 	$(function() {
   	if (GBrowserIsCompatible()) {

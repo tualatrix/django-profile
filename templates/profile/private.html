@@ -2,11 +2,11 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
-<script type="text/javascript" src="/site_media/js/ui.datepicker.js"></script>
-<script type="text/javascript" src="/site_media/js/jquery.profile.js"></script>
-<link rel="stylesheet" href="/site_media/css/ui.datepicker.css" type="text/css" />
+<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
 {% ifequal LANGUAGE_CODE 'es' %}
-<script type="text/javascript" src="/site_media/js/ui.datepicker-{{ request.LANGUAGE_CODE }}.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ request.LANGUAGE_CODE }}.js"></script>
 <script type="text/javascript">
 	$.datepicker.setDefaults($.datepicker.regional[ {{ request.LANGUAGE_CODE }}]);
 </script>
@@ -18,7 +18,10 @@
 <h1>{% trans "Tell others something about you" %}</h1>
 <form class="commonform profile" action="" method="post" enctype="multipart/form-data">
   <fieldset>
-   	<input type="button" class="save" value="{% trans 'Save' %}" /><img class="saving" src="/site_media/images/loading.gif" />
+		<div class="save">
+			<img style="float: right;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
+   		<input type="button" class="save" value="{% trans 'Save' %}" />
+		</div>
 		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
     	<strong id="id_username">{{ user }}</strong> 
@@ -36,7 +39,7 @@
      			{% if avatar %}
      			<img id="avatarimg" src="{{ user|avatar:"96"}}" />
      			{% else %}
-     			<img id="avatarimg" src="/site_media/images/default.gif" />
+     			<img id="avatarimg" src="{{ MEDIA_URL }}images/default.gif" />
      			{% endif %}
 				</a>
    			<a class="newavatar" href="/profile/avatar/choose/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a>
@@ -83,11 +86,11 @@
 					{% endfor %}
 				{% endfor %}
 			</select>
-			<img class="loading" src="/site_media/images/loading.gif" />
+			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
 		</div>
 		<div class="mapinfo">
-   		<label for="id_location">{% trans "Location:" %}</label>
-			<input style="width: 400px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
+   		<label for="id_location">{% trans "Location:{{ profile.location }}" %}</label>
+			<input style="width: 400px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{% if profile.location %}{{ profile.location }}{% else %}{% trans "Drag the marker on the map to establish a more precise location." %}{% endif %}" /> 
 		</div>
 		<div class="mapinfo">
    		<label for="id_position">{% trans "Position:" %}</label>
@@ -99,6 +102,9 @@
     	<strong><a href="/profile/delete">{% trans "Delete all my personal information" %}</a></strong>
 		</div>
     <div style="display: none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
+		<div class="save">
+   		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
+		</div>
   </fieldset>
 </form>
 <div style="display: none;" id="apikey">{{ apikey }}</div>

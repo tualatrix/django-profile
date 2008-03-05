@@ -2,15 +2,15 @@
 <html>
 <head>
 	<title>{% trans "Change avatar" %}</title>
-  <link rel="stylesheet" href="/site_media/css/avatar.css" type="text/css" />
-  <link rel="stylesheet" href="/site_media/css/jquery.crop.css" type="text/css" />
-  <script type="text/javascript" src="/site_media/js/jquery-1.2.3.js"></script>
-  <script type="text/javascript" src="/site_media/js/jquery.dimensions.js"></script>
-  <script type="text/javascript" src="/site_media/js/jquery.crop.js"></script>
-  <script type="text/javascript" src="/site_media/js/ui.mouse.js"></script>
-  <script type="text/javascript" src="/site_media/js/ui.draggable.js"></script>
-  <script type="text/javascript" src="/site_media/js/ui.draggable.ext.js"></script>
-  <script type="text/javascript" src="/site_media/js/jquery.avatar.js"></script>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/avatar.css" type="text/css" />
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.crop.css" type="text/css" />
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.3.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.crop.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}ui.mouse.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.draggable.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.draggable.ext.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.avatar.js"></script>
 	{% if avatar %}
 	<script type="text/javascript">
 		// We can't use jquery.ready() because it doesn't wait to images.
@@ -36,7 +36,7 @@
     <input type="button" class="cancel" value="{% trans 'Cancel' %}" />
   </form>
 	<div class="loading">
-		<p><img src="/site_media/images/loading2.gif" /> {% trans "Please wait..." %}</p>
+		<p><img src="{{ MEDIA_URL }}images/loading2.gif" /> {% trans "Please wait..." %}</p>
 	</div>
 	{% endif %}
 </body>

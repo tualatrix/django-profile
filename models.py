@@ -94,7 +94,7 @@ class Avatar(models.Model):
     valid = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return "/site_media/%s" % self.photo
+        return self.get_photo_url()
 
     def get_blur_url(self):
         return "%s.blur%s" % os.path.splitext(self.get_absolute_url())
