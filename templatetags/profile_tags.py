@@ -11,7 +11,7 @@ register = Library()
 
 @register.inclusion_tag('profile/usercard.html')
 def get_usercard(profile):
-    gender = { "M": "{{ MEDIA_URL }}images/male.png", "F": "{{ MEDIA_URL }}images/female.png" }
+    gender = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
     profile = profile
     user = profile.user
 
@@ -37,7 +37,7 @@ def avatar(user, width):
         else:
             raise Exception()
     except:
-        avatar_url = "{{ MEDIA_URL }}images/default.gif"
+        avatar_url = "%simages/default.gif" % MEDIA_URL
 
     path, extension = os.path.splitext(avatar_url)
     return  "%s.%s%s" % (path, width, extension)

@@ -89,8 +89,8 @@
 			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
 		</div>
 		<div class="mapinfo">
-   		<label for="id_location">{% trans "Location:{{ profile.location }}" %}</label>
-			<input style="width: 400px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{% if profile.location %}{{ profile.location }}{% else %}{% trans "Drag the marker on the map to establish a more precise location." %}{% endif %}" /> 
+   		<label for="id_location">{% trans "Location:" %}</label>
+			<input style="width: 600px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
 		</div>
 		<div class="mapinfo">
    		<label for="id_position">{% trans "Position:" %}</label>
