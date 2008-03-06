@@ -10,16 +10,11 @@ import os.path
 register = Library()
 
 @register.inclusion_tag('profile/usercard.html')
-def get_usercard(profile):
-    gender = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
-    profile = profile
-    user = profile.user
-
-    if profile.gender:
-        gender_img = gender.get(profile.gender)
-
-    if profile.birthdate.year < datetime.datetime.now().year:
-        yearsold = profile.yearsold()
+def get_usercard(user):
+    try:
+        profile = user.get_profile()
+    except:
+        pass
 
     return locals()
 

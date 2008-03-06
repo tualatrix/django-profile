@@ -34,19 +34,10 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, APIKEY, profile_user, template):
+def public(request, APIKEY, user, template):
     context = RequestContext(request)
-    profile_user = User.objects.get(username=profile_user)
-    gender = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
     apikey = APIKEY
-    try:
-        profile = profile_user.get_profile()
-        avatar = Avatar.objects.get(user=profile_user, valid=True)
-    except:
-        pass
-
-    if profile.gender:
-        gender_img = gender.get(profile.gender)
+    profile = User.objects.get(username=user).get_profile()
 
     return render_to_response(template, locals(), context_instance=context)
 

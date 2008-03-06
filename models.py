@@ -169,6 +169,10 @@ class Profile(models.Model):
     def __unicode__(self):
         return _("%s's profile") % self.user
 
+    def get_genderimage_url(self):
+        gender = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
+        return gender[self.gender]
+
     def get_absolute_url(self):
         return "/profile/users/%s" % self.user
 
