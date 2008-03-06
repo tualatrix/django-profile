@@ -8,7 +8,9 @@
 {% ifequal LANGUAGE_CODE 'es' %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ request.LANGUAGE_CODE }}.js"></script>
 <script type="text/javascript">
-	$.datepicker.setDefaults($.datepicker.regional[ {{ request.LANGUAGE_CODE }}]);
+	$(function() {
+		$.datepicker.setDefaults($.datepicker.regional["{{ request.LANGUAGE_CODE }}"]);
+	});
 </script>
 {% endifequal %}
 {% endblock %}
