@@ -109,6 +109,8 @@ def delete(request, template):
 
         # Remove the e-mail of the account too
         user.email = ''
+        user.first_name = ''
+        user.last_name = ''
         user.save()
 
         return HttpResponseRedirect('%sdone/' % request.path)
