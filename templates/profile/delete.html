@@ -2,7 +2,8 @@
 {% load i18n %}
 {% block title %}{% trans "Delete all your personal information" %}{% endblock %}
 {% block content %}
-  <h1>{% trans "Delete all your personal information" %}</h1>
+<h1>{% trans "Delete all your personal information" %}</h1>
+<div class="center">
   <form class="commonform" action="" method="POST">
 		<fieldset>
 			<p>{% trans "Are you sure?" %}</p>
@@ -10,4 +11,5 @@
 		</fieldset>
   </form>
   <p><a href="/profile">No, return to my profile</a></p>
+</div>
 {% endblock %}
