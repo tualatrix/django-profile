@@ -37,7 +37,10 @@ def fetch_geodata(request, lat, lng):
 def public(request, APIKEY, user, template):
     context = RequestContext(request)
     apikey = APIKEY
-    profile = User.objects.get(username=user).get_profile()
+    try:
+        profile = User.objects.get(username=user).get_profile()
+    except:
+        pass
 
     return render_to_response(template, locals(), context_instance=context)
 
