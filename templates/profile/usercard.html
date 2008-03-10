@@ -3,9 +3,9 @@
 <div class="vcard usercard">
 	{% if profile.gender %}<img class="gender" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	{% if profile %}
-		<a href="{{ profile.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
+		<a href="{{ user.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
 	{% else %}
-		<img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/>
+		<a href="{{ user.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
 	{% endif %}
 	<ul>
   	<li class="fn nickname"><strong>{% trans "Username" %}:</strong>{{ user }}</li>

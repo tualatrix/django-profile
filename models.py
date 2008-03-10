@@ -175,7 +175,7 @@ class Profile(models.Model):
         return gender[self.gender]
 
     def get_absolute_url(self):
-        return "/profile/users/%s" % self.user
+        return self.user.get_absolute_url()
 
     def yearsold(self):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365
