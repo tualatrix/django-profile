@@ -9,6 +9,7 @@ import os.path
 
 AVATARSIZES = ( 128, 96, 64, 32, 16 )
 GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
+GENDER_IMAGES = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
 
 class Continent(models.Model):
     """
@@ -97,9 +98,6 @@ class Avatar(models.Model):
     def get_absolute_url(self):
         return self.get_photo_url()
 
-    def get_blur_url(self):
-        return "%s.blur%s" % os.path.splitext(self.get_absolute_url())
-
     def __unicode__(self):
         return "%s-%s" % (self.user, self.photo)
 
@@ -171,11 +169,10 @@ class Profile(models.Model):
         return _("%s's profile") % self.user
 
     def get_genderimage_url(self):
-        gender = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
-        return gender[self.gender]
+        return GENDER_IMAGES[self.gender]
 
     def get_absolute_url(self):
-        return self.user.get_absolute_url()
+        return "/profile/users/%s/" % self.user
 
     def yearsold(self):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365
