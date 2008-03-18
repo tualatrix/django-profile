@@ -8,9 +8,9 @@
 		<a href="{{ user.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
 	{% endif %}
 	<ul>
-  	<li class="fn nickname"><strong>{% trans "Username" %}:</strong>{{ user }}</li>
-		{% if profile.country %}<li><strong>{% trans "Country" %}:</strong>{{ profile.country }}</li>{% endif %}
+  	<li class="fn nickname"><strong>{% trans "Username" %}:</strong> {{ user }}</li>
+		{% if profile.country %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}
 		{% if profile.yearsold %}<li><strong>{% trans "Age" %}:</strong> {{ profile.yearsold }}</li>{% endif %}
-		{% if profile.url %}<li><a class="url" href="{{ profile.url }}">{% trans "My Website" %}</a></li>{% endif %}
+		{% if profile.url %}<li><a class="url" href="{{ profile.url }}"> {% trans "My Website" %}</a></li>{% endif %}
 	</ul>
 </div>
