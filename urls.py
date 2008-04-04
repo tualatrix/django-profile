@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     (r'^getcountry_info/(?P<lat>[0-9\.\-]+)/(?P<lng>[0-9\.\-]+)/$', fetch_geodata),
 
     # Public profile
-    (r'^users/(?P<user>[a-z0-9\-_]*)/$', public, {'APIKEY': APIKEY, 'template': 'profile/public.html'}),
+    (r'^users/(?P<user>[a-zA-Z0-9\-_]*)/$', public, {'APIKEY': APIKEY, 'template': 'profile/public.html'}),
 
     # Vcard
     #(r'^users/(?P<user>[^/]*)/card/$', 'django.views.generic.list_detail.object_detail', dict(queryset=Foo.objects.all(), slug_field='slug', template_name="microformats/vcard.html",mimetype="text/x-vcard") ),

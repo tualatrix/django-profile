@@ -27,12 +27,12 @@
 		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
     	<strong id="id_username">{{ user }}</strong> 
-			<a href="/accounts/password/change">{% trans "(Change password)" %}</a></p>
+			<a href="/accounts/password/change">{% trans "(Change password)" %}</a>
 		</div>
 		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
     	<strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
-			(<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)</p>
+			(<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
 		</div>
 		<div>
    		<label for="id_avatar">{% trans "Avatar:" %}</label>
@@ -58,12 +58,12 @@
 		</div>
 		<div>
     	<label for="id_gender">{% trans "Gender:" %}</label>
-			<a class="male" href="">{% trans "Male" %}</a>
-			<a class="female" href="">{% trans "Female" %}</a>
+			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
+			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
 		</div>
 		<div>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
-			<span><div class="calendar"></div></span>
+			<div class="calendar"></div>
 		</div>
 		<hr />
 		<div>
@@ -103,7 +103,7 @@
     	<label for="id_other">{% trans "Other actions:" %}</label>
     	<strong><a href="/profile/delete">{% trans "Delete all my personal information" %}</a></strong>
 		</div>
-    <div style="display: none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
+    <div>{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
 		<div class="save">
    		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
 		</div>
