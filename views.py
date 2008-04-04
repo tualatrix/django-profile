@@ -17,7 +17,7 @@ import urllib
 from xml.dom import minidom
 import os
 
-IMSIZES = ( 128, 96, 64, 32, 16 )
+IMSIZES = ( 128, 96, 64, 32, 24, 16 )
 
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
