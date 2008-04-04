@@ -103,7 +103,7 @@
     	<label for="id_other">{% trans "Other actions:" %}</label>
     	<strong><a href="/profile/delete">{% trans "Delete all my personal information" %}</a></strong>
 		</div>
-    <div>{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
+    <div style="display: none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
 		<div class="save">
    		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
 		</div>
