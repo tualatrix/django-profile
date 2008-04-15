@@ -1,13 +1,12 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from forms import ProfileForm, AvatarForm, AvatarCropForm
-from models import Profile
+from userprofile.forms import ProfileForm, AvatarForm, AvatarCropForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from profile.models import Avatar, Profile, Continent, Country
+from userprofile.models import Avatar, Profile, Continent, Country
 from account.models import EmailValidate
 from django.template import RequestContext
 from django.conf import settings
@@ -35,7 +34,6 @@ def fetch_geodata(request, lat, lng):
         raise Http404()
 
 def public(request, APIKEY, user, template):
-    apikey = APIKEY
     try:
         profile = User.objects.get(username=user).get_profile()
     except:

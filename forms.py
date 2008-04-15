@@ -1,8 +1,8 @@
 from django import newforms as forms
 from django.core.exceptions import ObjectDoesNotExist
-from profile.models import Profile, Avatar, GENDER_CHOICES
+from userprofile.models import Profile, Avatar, GENDER_CHOICES
 from django.utils.translation import ugettext as _
-from profile.models import Country
+from userprofile.models import Country
 import magic
 
 IMAGE_TYPES = { 'JPEG image data': '.jpg', 'PNG image data': '.png', 'GIF image data': '.gif' }

@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to, direct_to_template
+from django.views.generic.simple import direct_to_template
 from userprofile.views import *
 from django.conf import settings
 
@@ -18,6 +18,4 @@ urlpatterns = patterns('',
     # Public profile
     (r'^users/(?P<user>[a-zA-Z0-9\-_]*)/$', public, {'APIKEY': settings.APIKEY, 'template': 'profile/public.html'}),
 
-    # Vcard
-    #(r'^users/(?P<user>[^/]*)/card/$', 'django.views.generic.list_detail.object_detail', dict(queryset=Foo.objects.all(), slug_field='slug', template_name="microformats/vcard.html",mimetype="text/x-vcard") ),
 )
