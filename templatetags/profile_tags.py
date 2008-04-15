@@ -9,7 +9,7 @@ import os.path
 
 register = Library()
 
-@register.inclusion_tag('profile/usercard.html')
+@register.inclusion_tag('userprofile/usercard.html')
 def get_usercard(user):
     try:
         profile = user.get_profile()
