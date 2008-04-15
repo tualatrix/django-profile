@@ -1,11 +1,11 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to, direct_to_template
-from profile.views import *
-from settings import APIKEY
+from userprofile.views import *
+from django.conf import settings
 
 urlpatterns = patterns('',
     # Private profile
-    (r'^$', private, {'APIKEY': APIKEY, 'template': 'profile/private.html'}),
+    (r'^$', private, {'APIKEY': settings.APIKEY, 'template': 'profile/private.html'}),
     (r'^save/$', save),
     (r'^delete/$', delete, {'template': 'profile/delete.html'}),
     (r'^delete/done/$', direct_to_template, {'template': 'profile/delete_done.html'}),
@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     (r'^getcountry_info/(?P<lat>[0-9\.\-]+)/(?P<lng>[0-9\.\-]+)/$', fetch_geodata),
 
     # Public profile
-    (r'^users/(?P<user>[a-zA-Z0-9\-_]*)/$', public, {'APIKEY': APIKEY, 'template': 'profile/public.html'}),
+    (r'^users/(?P<user>[a-zA-Z0-9\-_]*)/$', public, {'APIKEY': settings.APIKEY, 'template': 'profile/public.html'}),
 
     # Vcard
     #(r'^users/(?P<user>[^/]*)/card/$', 'django.views.generic.list_detail.object_detail', dict(queryset=Foo.objects.all(), slug_field='slug', template_name="microformats/vcard.html",mimetype="text/x-vcard") ),

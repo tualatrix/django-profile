@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from profile.models import Avatar, Profile, Continent, Country
 from account.models import EmailValidate
 from django.template import RequestContext
-from settings import MEDIA_URL
+from django.conf import settings
 import random
 import Image, ImageFilter
 import urllib
@@ -35,21 +35,19 @@ def fetch_geodata(request, lat, lng):
         raise Http404()
 
 def public(request, APIKEY, user, template):
-    context = RequestContext(request)
     apikey = APIKEY
     try:
         profile = User.objects.get(username=user).get_profile()
     except:
         pass
 
-    return render_to_response(template, locals(), context_instance=context)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def private(request, APIKEY, template):
     """
     Private part of the user profile
     """
-    context = RequestContext(request)
     apikey = APIKEY
     user = User.objects.get(username=str(request.user))
     profile, created = Profile.objects.get_or_create(user = user)
@@ -79,7 +77,7 @@ def private(request, APIKEY, template):
     for continent in continents:
         country_data[continent] = Country.objects.filter(continent=continent)
 
-    return render_to_response(template, locals(), context_instance=context)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def save(request):
@@ -97,7 +95,6 @@ def save(request):
 
 @login_required
 def delete(request, template):
-    context = RequestContext(request)
     user = User.objects.get(username=str(request.user))
     if request.method == "POST":
         # Remove the profile
@@ -119,14 +116,13 @@ def delete(request, template):
 
         return HttpResponseRedirect('%sdone/' % request.path)
 
-    return render_to_response(template, locals(), context_instance=context)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def avatarChoose(request, template):
     """
     Avatar choose
     """
-    context = RequestContext(request)
     if not request.method == "POST":
         form = AvatarForm()
     else:
@@ -138,14 +134,13 @@ def avatarChoose(request, template):
             avatar.save_photo_file("%s%s" % (request.user.username, data.get('extension')), data['photo'].content)
             avatar.save()
 
-    return render_to_response(template, locals(), context_instance=context)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def avatarCrop(request, avatar_id, template):
     """
     Avatar management
     """
-    context = RequestContext(request)
     if not request.method == "POST":
         raise Http404()
 
@@ -163,7 +158,7 @@ def avatarCrop(request, avatar_id, template):
         avatar.save()
         done = True
 
-    return render_to_response(template, locals(), context_instance=context)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def avatarDelete(request, avatar_id=False):

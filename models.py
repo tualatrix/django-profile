@@ -2,14 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from settings import MEDIA_URL
+from django.conf import settings
 import datetime
 import Image, ImageFilter
 import os.path
 
 AVATARSIZES = ( 128, 96, 64, 32, 16 )
 GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
-GENDER_IMAGES = { "M": "%simages/male.png" % MEDIA_URL, "F": "%simages/female.png" % MEDIA_URL }
+GENDER_IMAGES = { "M": "%simages/male.png" % settings.MEDIA_URL, "F": "%simages/female.png" % settings.MEDIA_URL }
 
 class Continent(models.Model):
     """

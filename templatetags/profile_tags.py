@@ -2,8 +2,8 @@ from django.template import Library
 from django.template.defaultfilters import stringfilter
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
-from profile.models import Profile,Avatar
-from settings import MEDIA_URL
+from userprofile.models import Profile,Avatar
+from django.conf import settings
 import datetime
 import os.path
 
@@ -32,7 +32,7 @@ def avatar(user, width):
         else:
             raise Exception()
     except:
-        avatar_url = "%simages/default.gif" % MEDIA_URL
+        avatar_url = "%simages/default.gif" % settings.MEDIA_URL
 
     path, extension = os.path.splitext(avatar_url)
     return  "%s.%s%s" % (path, width, extension)
