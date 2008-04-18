@@ -14,7 +14,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user', 'date')
+        exclude = ('user', 'slug', 'date')
 
 class AvatarForm(forms.Form):
     """

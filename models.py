@@ -147,6 +147,7 @@ class Profile(models.Model):
     User profile model
     """
 
+    slug = models.SlugField(unique=True,max_length=150)
     firstname = models.CharField(max_length=255, blank=True)
     surname = models.CharField(max_length=255, blank=True)
     user = models.ForeignKey(User, unique=True, edit_inline=models.TABULAR,
@@ -176,3 +177,8 @@ class Profile(models.Model):
 
     def yearsold(self):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365
+
+    def save(self):
+        if not self.slug:
+            self.slug = slugify("%s" % self.user)
+        super(Profile, self).save()

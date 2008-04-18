@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from userprofile.models import Avatar, Profile, Continent, Country
-from account.models import EmailValidate
+from account.models import Validate
 from django.template import RequestContext
 from django.conf import settings
 import random
@@ -46,12 +46,11 @@ def private(request, APIKEY, template):
     """
     Private part of the user profile
     """
-    apikey = APIKEY
     user = User.objects.get(username=str(request.user))
     profile, created = Profile.objects.get_or_create(user = user)
 
     try:
-        email = EmailValidate.objects.get(user=user).email
+        email = Validate.objects.get(user=user).email
         validated = False
     except:
         email = user.email
@@ -86,7 +85,6 @@ def save(request):
             form.save()
             return HttpResponse(simplejson.dumps({'success': True}))
         else:
-            print form.errors
             return HttpResponse(simplejson.dumps({'success': False }))
     else:
         raise Http404()
