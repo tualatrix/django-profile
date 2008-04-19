@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load userprofile_tags %}
-{% block title %}{{ user }}'s public profile{% endblock %}
+{% block title %}{{ profile.user }}'s public profile{% endblock %}
 {% block customjs %}
 {% if profile.latitude and profile.longitude %}
 <script src="http://maps.google.com/maps?file=api&v=2&key={{ apikey }}" />
@@ -24,11 +24,11 @@
 {% endblock %}
 
 {% block content %}
-<h1>Public profile of {{ user }}</h1>
+<h1>Public profile of {{ profile.user }}</h1>
 <div class="vcard">
 	<ul>
-		<li><img src="{{ current_user|avatar:"96" }}" /></li>
-  	<li>{% trans "Username" %}: {{ user }}</li>
+		<li><img src="{{ profile.user|avatar:"96" }}" /></li>
+  	<li>{% trans "Username" %}: {{ profile.user }}</li>
 		{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
   	{% if profile.url %}<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>{% endif %}
   	{% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
