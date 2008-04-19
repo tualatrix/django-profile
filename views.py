@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from userprofile.models import Avatar, Profile, Continent, Country
-from account.models import Validate
+from account.models import Validation
 from django.template import RequestContext
 from django.conf import settings
 import random
@@ -46,20 +46,14 @@ def private(request, APIKEY, template):
     """
     Private part of the user profile
     """
-    user = User.objects.get(username=str(request.user))
-    profile, created = Profile.objects.get_or_create(user = user)
+    profile, created = Profile.objects.get_or_create(user = request.user)
 
     try:
-        email = Validate.objects.get(user=user).email
+        email = Validation.objects.get(user=user).email
         validated = False
     except:
-        email = user.email
+        email = request.user.email
         validated = True
-
-    try:
-        avatar = Avatar.objects.filter(user=user, valid=True)[0]
-    except:
-        pass
 
     if request.method == "POST" and form.is_valid():
         form = ProfileForm(request.POST, instance=profile)

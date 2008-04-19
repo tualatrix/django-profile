@@ -11,11 +11,7 @@ register = Library()
 
 @register.inclusion_tag('userprofile/usercard.html')
 def get_usercard(user):
-    try:
-        profile = user.get_profile()
-    except:
-        pass
-
+    profile, created = Profile.objects.get_or_create(user=user)
     return locals()
 
 @register.filter

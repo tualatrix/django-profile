@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load profile_tags %}
+{% load userprofile_tags %}
 <div class="vcard usercard">
 	{% if profile.gender %}<img class="gender" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	{% if profile %}

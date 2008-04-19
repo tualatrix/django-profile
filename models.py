@@ -150,9 +150,7 @@ class Profile(models.Model):
     slug = models.SlugField(unique=True,max_length=150)
     firstname = models.CharField(max_length=255, blank=True)
     surname = models.CharField(max_length=255, blank=True)
-    user = models.ForeignKey(User, unique=True, edit_inline=models.TABULAR,
-                             num_in_admin=1,min_num_in_admin=1, max_num_in_admin=1,
-                             num_extra_on_change=0)
+    user = models.OneToOneField(User)
     birthdate = models.DateField(default=datetime.date.today(), blank=True)
     date = models.DateTimeField(default=datetime.datetime.now)
     url = models.URLField(blank=True, core=True)
