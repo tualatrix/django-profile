@@ -35,7 +35,7 @@ def fetch_geodata(request, lat, lng):
 
 def public(request, APIKEY, current_user, template):
     try:
-        profile = User.objects.get(username=current_user).get_profile()
+        profile = User.objects.get(username=current_user, is_active=True).get_profile()
     except:
         raise Http404
 
