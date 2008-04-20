@@ -33,9 +33,9 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, APIKEY, user_slug, template):
+def public(request, APIKEY, current_user, template):
     try:
-        profile = Profile.objects.get(slug=user_slug)
+        profile = User.objects.get(username=current_user).get_profile()
     except:
         raise Http404
 

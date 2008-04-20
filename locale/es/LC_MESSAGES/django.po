@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-01 16:55+0200\n"
+"POT-Creation-Date: 2008-04-20 08:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "The file type is invalid: %s"
 msgstr "El tipo de archivo es incorrecto: %s"
 
-#: models.py:11 templates/profile/private.html:62
+#: models.py:11 templates/userprofile/private.html:62
 msgid "Female"
 msgstr "Mujer"
 
-#: models.py:11 templates/profile/private.html:61
+#: models.py:11 templates/userprofile/private.html:61
 msgid "Male"
 msgstr "Hombre"
 
@@ -37,8 +37,8 @@ msgstr "Continente"
 msgid "Continents"
 msgstr "Continentes"
 
-#: models.py:84 templates/profile/public.html:36
-#: templates/profile/usercard.html:12
+#: models.py:84 templates/userprofile/public.html:36
+#: templates/userprofile/usercard.html:12
 msgid "Country"
 msgstr "País"
 
@@ -46,25 +46,25 @@ msgstr "País"
 msgid "Countries"
 msgstr "Paises"
 
-#: models.py:169
+#: models.py:167
 #, python-format
 msgid "%s's profile"
 msgstr "Perfil de %s"
 
-#: templates/profile/avatar_choose.html:4
+#: templates/userprofile/avatar_choose.html:5
 msgid "Change avatar"
 msgstr "Cambiar avatar"
 
-#: templates/profile/avatar_choose.html:27
+#: templates/userprofile/avatar_choose.html:28
 msgid "Select anoter image"
 msgstr "Selecciona otra imagen"
 
-#: templates/profile/avatar_choose.html:28
-#: templates/profile/avatar_choose.html:36
+#: templates/userprofile/avatar_choose.html:29
+#: templates/userprofile/avatar_choose.html:37
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/profile/avatar_choose.html:32
+#: templates/userprofile/avatar_choose.html:33
 msgid ""
 "Select the image file from your computer you want to assign as your avatar "
 "in your profile:"
@@ -72,156 +72,159 @@ msgstr ""
 "Selecciona el archivo de imagen de tu ordenador que quieres asignar como "
 "avatar en tu perfil:"
 
-#: templates/profile/avatar_choose.html:34 templates/profile/private.html:38
+#: templates/userprofile/avatar_choose.html:35
+#: templates/userprofile/private.html:38
 msgid "Avatar:"
 msgstr "Avatar:"
 
-#: templates/profile/avatar_choose.html:39
+#: templates/userprofile/avatar_choose.html:40
 msgid "Please wait..."
 msgstr "Por favor, espera..."
 
-#: templates/profile/delete.html:3 templates/profile/delete.html.py:5
+#: templates/userprofile/delete.html:3 templates/userprofile/delete.html:5
 msgid "Delete all your personal information"
 msgstr "Borrar toda la información de tu perfil"
 
-#: templates/profile/delete.html:9
+#: templates/userprofile/delete.html:9
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: templates/profile/delete_done.html:4 templates/profile/delete_done.html:7
-#: templates/profile/private.html:104
+#: templates/userprofile/delete_done.html:4
+#: templates/userprofile/delete_done.html:7
+#: templates/userprofile/private.html:104
 msgid "Delete all my personal information"
 msgstr "Borrar toda mi información personal"
 
-#: templates/profile/delete_done.html:8
+#: templates/userprofile/delete_done.html:8
 msgid "Profile information deleted successfully"
 msgstr "Información de perfil borrada satisfactoriamente"
 
-#: templates/profile/private.html:3
+#: templates/userprofile/private.html:3
 #, python-format
 msgid "%(user)s's Dashboard"
 msgstr "Escritorio de %(user)s"
 
-#: templates/profile/private.html:20
+#: templates/userprofile/private.html:20
 msgid "Tell others something about you"
 msgstr "Cuenta algo sobre tí"
 
-#: templates/profile/private.html:25 templates/profile/private.html.py:108
+#: templates/userprofile/private.html:25
+#: templates/userprofile/private.html:108
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/profile/private.html:28
+#: templates/userprofile/private.html:28
 msgid "Username:"
 msgstr "Usuario:"
 
-#: templates/profile/private.html:30
+#: templates/userprofile/private.html:30
 msgid "(Change password)"
 msgstr "(Cambiar contraseña)"
 
-#: templates/profile/private.html:33
+#: templates/userprofile/private.html:33
 msgid "E-mail:"
 msgstr "Dirección de correo:"
 
-#: templates/profile/private.html:34
+#: templates/userprofile/private.html:34
 msgid "Not set yet"
 msgstr "No establecida"
 
-#: templates/profile/private.html:35
+#: templates/userprofile/private.html:35
 msgid "Change your e-mail address"
 msgstr "Cambiar tu dirección de correo"
 
-#: templates/profile/private.html:35
+#: templates/userprofile/private.html:35
 msgid "Add your e-mail address"
 msgstr "Añadir dirección de correo"
 
-#: templates/profile/private.html:47
+#: templates/userprofile/private.html:47
 msgid "Change"
 msgstr "Cambiar"
 
-#: templates/profile/private.html:47
+#: templates/userprofile/private.html:47
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/profile/private.html:52
+#: templates/userprofile/private.html:52
 msgid "First Name:"
 msgstr "Nombre:"
 
-#: templates/profile/private.html:56
+#: templates/userprofile/private.html:56
 msgid "Surname:"
 msgstr "Apellidos:"
 
-#: templates/profile/private.html:60
+#: templates/userprofile/private.html:60
 msgid "Gender:"
 msgstr "Sexo:"
 
-#: templates/profile/private.html:65
+#: templates/userprofile/private.html:65
 msgid "Birth date:"
 msgstr "Fecha de nacimiento:"
 
-#: templates/profile/private.html:70
+#: templates/userprofile/private.html:70
 msgid "Url:"
 msgstr "Web:"
 
-#: templates/profile/private.html:74
+#: templates/userprofile/private.html:74
 msgid "About:"
 msgstr "Acerca de tí:"
 
-#: templates/profile/private.html:79
+#: templates/userprofile/private.html:79
 msgid "Country:"
 msgstr "País:"
 
-#: templates/profile/private.html:81
+#: templates/userprofile/private.html:81
 msgid "Not set"
 msgstr "No establecido"
 
-#: templates/profile/private.html:82
+#: templates/userprofile/private.html:82
 msgid "More common..."
 msgstr "Más comunes..."
 
-#: templates/profile/private.html:83
+#: templates/userprofile/private.html:83
 msgid "Spain"
 msgstr "España"
 
-#: templates/profile/private.html:94
+#: templates/userprofile/private.html:94
 msgid "Location:"
 msgstr "Localización:"
 
-#: templates/profile/private.html:98
+#: templates/userprofile/private.html:98
 msgid "Position:"
 msgstr "Posición:"
 
-#: templates/profile/private.html:103
+#: templates/userprofile/private.html:103
 msgid "Other actions:"
 msgstr "Otras acciones:"
 
-#: templates/profile/public.html:31 templates/profile/usercard.html:11
+#: templates/userprofile/public.html:31 templates/userprofile/usercard.html:11
 msgid "Username"
 msgstr "Usuario"
 
-#: templates/profile/public.html:32
+#: templates/userprofile/public.html:32
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/profile/public.html:33
+#: templates/userprofile/public.html:33
 msgid "Url"
 msgstr "Web"
 
-#: templates/profile/public.html:34
+#: templates/userprofile/public.html:34
 msgid "About"
 msgstr "Acerca de tí"
 
-#: templates/profile/public.html:35
+#: templates/userprofile/public.html:35
 msgid "Gender"
 msgstr "Sexo"
 
-#: templates/profile/public.html:37
+#: templates/userprofile/public.html:37
 msgid "Location"
 msgstr "Localización"
 
-#: templates/profile/usercard.html:13
+#: templates/userprofile/usercard.html:13
 msgid "Age"
 msgstr "Edad"
 
-#: templates/profile/usercard.html:14
+#: templates/userprofile/usercard.html:14
 msgid "My Website"
 msgstr "Mi sitio web"
