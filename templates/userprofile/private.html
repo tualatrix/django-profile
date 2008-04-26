@@ -38,7 +38,7 @@
    		<label for="id_avatar">{% trans "Avatar:" %}</label>
 			<div class="avatar">
 				<a class="newavatar img" href="/profile/avatar/choose/">
-     			{% if avatar %}
+     			{% if user.avatar %}
      			<img id="avatarimg" src="{{ user|avatar:"96"}}" />
      			{% else %}
      			<img id="avatarimg" src="{{ MEDIA_URL }}images/default.gif" />
