@@ -1,0 +1,231 @@
+# Italian translation of PACKAGE.
+# Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Alberto Paro <alberto@ingparo.it>, 2008.
+# , fuzzy
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-05-25 19:29+0200\n"
+"PO-Revision-Date: 2008-05-25 22:50+0200\n"
+"Last-Translator: Alberto Paro <alberto.paro@thenetplanet.com>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: forms.py:32
+#, python-format
+msgid "The file type is invalid: %s"
+msgstr "Il tipo file non è valido: %s"
+
+#: models.py:11 templates/userprofile/private.html:62
+msgid "Female"
+msgstr "Femmina"
+
+#: models.py:11 templates/userprofile/private.html:61
+msgid "Male"
+msgstr "Maschio"
+
+#: models.py:46
+msgid "Continent"
+msgstr "Continente"
+
+#: models.py:47
+msgid "Continents"
+msgstr "Continenti"
+
+#: models.py:84 templates/userprofile/public.html:36
+#: templates/userprofile/usercard.html:12
+msgid "Country"
+msgstr "Stato"
+
+#: models.py:85
+msgid "Countries"
+msgstr "Stati"
+
+#: models.py:167
+#, python-format
+msgid "%s's profile"
+msgstr "profilo di %s"
+
+#: templates/userprofile/avatar_choose.html:5
+msgid "Change avatar"
+msgstr "Cambia avatar"
+
+#: templates/userprofile/avatar_choose.html:28
+msgid "Select anoter image"
+msgstr "Seleziona un'altra immagine"
+
+#: templates/userprofile/avatar_choose.html:29
+#: templates/userprofile/avatar_choose.html:37
+msgid "Cancel"
+msgstr "Annulla"
+
+#: templates/userprofile/avatar_choose.html:33
+msgid ""
+"Select the image file from your computer you want to assign as your avatar "
+"in your profile:"
+msgstr ""
+"Seleziona un file immagine da tuo computer che vuoi assegnare come tuo avatar nel tuo profilo:"
+
+#: templates/userprofile/avatar_choose.html:35
+#: templates/userprofile/private.html:38
+msgid "Avatar:"
+msgstr "Avatar:"
+
+#: templates/userprofile/avatar_choose.html:40
+msgid "Please wait..."
+msgstr "Per favore attendi..."
+
+#: templates/userprofile/delete.html:3 templates/userprofile/delete.html:5
+msgid "Delete all your personal information"
+msgstr "Cancella tutte le tue informazioni personali"
+
+#: templates/userprofile/delete.html:9
+msgid "Are you sure?"
+msgstr "Sei sicuro?"
+
+#: templates/userprofile/delete_done.html:4
+#: templates/userprofile/delete_done.html:7
+#: templates/userprofile/private.html:104
+msgid "Delete all my personal information"
+msgstr "Cancella tutte le mie informazioni personali"
+
+#: templates/userprofile/delete_done.html:8
+msgid "Profile information deleted successfully"
+msgstr "Informazioni del profilo cancellate."
+
+#: templates/userprofile/private.html:3
+#, python-format
+msgid "%(user)s's Dashboard"
+msgstr "Dashboard di %(user)s"
+
+#: templates/userprofile/private.html:20
+msgid "Tell others something about you"
+msgstr "Dimmi altre cose su di te"
+
+#: templates/userprofile/private.html:25
+#: templates/userprofile/private.html:108
+msgid "Save"
+msgstr "Salva"
+
+#: templates/userprofile/private.html:28
+msgid "Username:"
+msgstr "Nome utente:"
+
+#: templates/userprofile/private.html:30
+msgid "(Change password)"
+msgstr "(Cambia password)"
+
+#: templates/userprofile/private.html:33
+msgid "E-mail:"
+msgstr "E-mail:"
+
+#: templates/userprofile/private.html:34
+msgid "Not set yet"
+msgstr "Non ancora impostata"
+
+#: templates/userprofile/private.html:35
+msgid "Change your e-mail address"
+msgstr "Cambia il tuo indirizzo email"
+
+#: templates/userprofile/private.html:35
+msgid "Add your e-mail address"
+msgstr "Aggiungi il tuo indirizzo email"
+
+#: templates/userprofile/private.html:47
+msgid "Change"
+msgstr "Cambia"
+
+#: templates/userprofile/private.html:47
+msgid "Delete"
+msgstr "Cancella"
+
+#: templates/userprofile/private.html:52
+msgid "First Name:"
+msgstr "Primo Nome:"
+
+#: templates/userprofile/private.html:56
+msgid "Surname:"
+msgstr "Cognome:"
+
+#: templates/userprofile/private.html:60
+msgid "Gender:"
+msgstr "Sesso:"
+
+#: templates/userprofile/private.html:65
+msgid "Birth date:"
+msgstr "Compleanno:"
+
+#: templates/userprofile/private.html:70
+msgid "Url:"
+msgstr "Url:"
+
+#: templates/userprofile/private.html:74
+msgid "About:"
+msgstr "A proposito:"
+
+#: templates/userprofile/private.html:79
+msgid "Country:"
+msgstr "Stato:"
+
+#: templates/userprofile/private.html:81
+msgid "Not set"
+msgstr "Non impostato"
+
+#: templates/userprofile/private.html:82
+msgid "More common..."
+msgstr "Più comuni..."
+
+#: templates/userprofile/private.html:83
+msgid "Spain"
+msgstr "Spagna"
+
+#: templates/userprofile/private.html:94
+msgid "Location:"
+msgstr "Luogo:"
+
+#: templates/userprofile/private.html:98
+msgid "Position:"
+msgstr "Posizione:"
+
+#: templates/userprofile/private.html:103
+msgid "Other actions:"
+msgstr "Altre azioni:"
+
+#: templates/userprofile/public.html:31 templates/userprofile/usercard.html:11
+msgid "Username"
+msgstr "Nome utente"
+
+#: templates/userprofile/public.html:32
+msgid "Name"
+msgstr "Nome"
+
+#: templates/userprofile/public.html:33
+msgid "Url"
+msgstr "Url"
+
+#: templates/userprofile/public.html:34
+msgid "About"
+msgstr "A proposito"
+
+#: templates/userprofile/public.html:35
+msgid "Gender"
+msgstr "Sesso"
+
+#: templates/userprofile/public.html:37
+msgid "Location"
+msgstr "Luogo"
+
+#: templates/userprofile/usercard.html:13
+msgid "Age"
+msgstr "Età"
+
+#: templates/userprofile/usercard.html:14
+msgid "My Website"
+msgstr "Il mio sito web"
+
