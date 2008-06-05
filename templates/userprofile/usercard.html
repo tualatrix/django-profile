@@ -1,16 +1,16 @@
 {% load i18n %}
-{% load userprofile_tags %}
-<div class="vcard usercard">
-	{% if profile.gender %}<img class="gender" src="{{ profile.get_genderimage_url }}" />{% endif %}
-	{% if profile %}
-		<a href="{{ profile.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
-	{% else %}
-		<a href="{{ profile.get_absolute_url }}"><img class="photo" src="{{ user|avatar:"64" }}" alt="{{ user }}"/></a>
-	{% endif %}
+<div class="vcard usercard" style="height: 180px;">
+	{% if profile.visible.nickname %}<a style="float: right;" href="{{ profile.get_absolute_url }}">{% trans "Public profile" %}</a>{% endif %}
+	{% if profile.gender and profile.visible.gender %}<img class="gender" style="clear: right;" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	<ul>
-  	<li class="fn nickname"><strong>{% trans "Username" %}:</strong> {{ user }}</li>
-		{% if profile.country %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}
-		{% if profile.yearsold %}<li><strong>{% trans "Age" %}:</strong> {{ profile.yearsold }}</li>{% endif %}
-		{% if profile.url %}<li><a class="url" href="{{ profile.url }}"> {% trans "My Website" %}</a></li>{% endif %}
+		{% if profile.visible.avatar %}
+		<li><img class="photo" src="{{ profile.get_avatar_url }}" alt="{{ profile.user }}"/></li>
+		{% else %}
+		<li><img class="photo" src="{{ MEDIA_URL }}images/default.96.png" alt="{% trans "No avatar" %}"/></li>
+		{% endif %}
+  	<li class="fn nickname"><strong>{% trans "Username" %}:</strong> {% if profile.visible.nickname %}{{ profile.user }}{% else %}{% trans "Not public" %}{% endif %}</li>
+		{% if profile.country and profile.visible.country %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}
+		{% if profile.yearsold and profile.visible.birthdate %}<li><strong>{% trans "Age" %}:</strong> {{ profile.yearsold }}</li>{% endif %}
+		{% if profile.url and profile.visible.url %}<li><a class="url" href="{{ profile.url }}"> {% trans "My Website" %}</a></li>{% endif %}
 	</ul>
 </div>

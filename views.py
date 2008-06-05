@@ -6,17 +6,23 @@ from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from userprofile.models import Avatar, Profile, Continent, Country
+from userprofile.models import Profile, Continent, Country
 from account.models import Validation
 from django.template import RequestContext
 from django.conf import settings
+import urllib2
 import random
+import gdata.service
+import gdata.photos.service
 import Image, ImageFilter
 import urllib
 from xml.dom import minidom
 import os
 
 IMSIZES = ( 128, 96, 64, 32, 24, 16 )
+
+def valid_users():
+    return User.objects.filter(is_active=True).order_by("-date_joined")
 
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
@@ -40,6 +46,21 @@ def public(request, APIKEY, current_user, template):
         raise Http404
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
+
+@login_required
+def searchimages(request, template):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST" and request.POST.get('search'):
+        photos = list()
+        urls = list()
+        gd_client = gdata.photos.service.PhotosService()
+        feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % request.POST.get('search').split(" ")[0], limit='35')
+        for entry in feed.entry:
+            photos.append(entry.media.thumbnail[0].url)
+            urls.append(entry.content.src)
+        return HttpResponse(simplejson.dumps({'success': True, 'photos': photos, 'urls': urls }))
+    else:
+        return render_to_response(template, locals(), context_instance=RequestContext(request))
+
 
 @login_required
 def private(request, APIKEY, template):
@@ -92,11 +113,6 @@ def delete(request, template):
             Profile.objects.get(user=user).delete()
         except:
             pass
-        # Remove the avatar if exists
-        try:
-            Avatar.objects.get(user=user).delete()
-        except:
-            pass
 
         # Remove the e-mail of the account too
         user.email = ''
@@ -118,11 +134,13 @@ def avatarChoose(request, template):
     else:
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            data = form.cleaned_data.get('photo')
-            Avatar.objects.filter(user=request.user, valid=False).delete()
-            avatar = Avatar(user=request.user)
-            avatar.save_photo_file("%s%s" % (request.user.username, data.get('extension')), data['photo'].content)
-            avatar.save()
+            profile = Profile.objects.get(user = request.user)
+            photo = form.cleaned_data.get('photo')
+            url = form.cleaned_data.get('url')
+            if url:
+                photo = urllib2.urlopen(url).read()
+            profile.save_avatartemp_file(request.user.username, photo)
+            profile.save()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -136,16 +154,15 @@ def avatarCrop(request, avatar_id, template):
 
     form = AvatarCropForm(request.POST)
     if form.is_valid():
-        avatar = Avatar.objects.get(user = request.user, pk = avatar_id)
-        avatar.valid = True
+        profile = Profile.objects.get(user = request.user)
         top = int(request.POST.get('top'))
         left = int(request.POST.get('left'))
         right = int(request.POST.get('right'))
         bottom = int(request.POST.get('bottom'))
         if top < 0: top = 0
         if left < 0: left = 0
-        avatar.box = "%s-%s-%s-%s" % ( int(left), int(top), int(right), int(bottom))
-        avatar.save()
+        profile.box = "%s-%s-%s-%s" % ( int(left), int(top), int(right), int(bottom))
+        profile.save()
         done = True
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
@@ -153,11 +170,9 @@ def avatarCrop(request, avatar_id, template):
 @login_required
 def avatarDelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        try:
-            avatar = Avatar.objects.get(user=request.user)
-            avatar.delete()
-        except:
-            pass
+        profile = Profile.objects.get(user = request.user)
+        for key in [ '', 'temp', '16', '32', '64', '96' ]:
+            setattr(profile, "avatar%s" % key, None)
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         raise Http404()

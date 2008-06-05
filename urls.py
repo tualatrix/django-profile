@@ -10,9 +10,10 @@ urlpatterns = patterns('',
     (r'^delete/$', delete, {'template': 'userprofile/delete.html'}),
     (r'^delete/done/$', direct_to_template, {'template': 'userprofile/delete_done.html'}),
     (r'^avatar/delete/$', avatarDelete),
-    (r'^avatar/delete/(?P<avatar_id>[0-9]+)/$', avatarDelete),
+    (r'^avatartemp/delete/$', avatarDelete, { 'temp': True }),
     (r'^avatar/choose/$', avatarChoose, {'template': 'userprofile/avatar_choose.html'}),
-    (r'^avatar/crop/(?P<avatar_id>[0-9]+)/$', avatarCrop, {'template': 'userprofile/avatar_crop.html'}),
+    (r'^avatar/searchimages/$', searchimages, {'template': 'userprofile/searchimages.html'}),
+    (r'^avatar/crop/$', avatarCrop, {'template': 'userprofile/avatar_crop.html'}),
     (r'^getcountry_info/(?P<lat>[0-9\.\-]+)/(?P<lng>[0-9\.\-]+)/$', fetch_geodata),
 
     # Public profile

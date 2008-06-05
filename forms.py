@@ -1,6 +1,6 @@
 from django import newforms as forms
 from django.core.exceptions import ObjectDoesNotExist
-from userprofile.models import Profile, Avatar, GENDER_CHOICES
+from userprofile.models import Profile, GENDER_CHOICES
 from django.utils.translation import ugettext as _
 from userprofile.models import Country
 
@@ -13,13 +13,20 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user', 'slug', 'date')
+        exclude = ('user', 'slug', 'date', 'avatartemp', 'avatar', 'avatar16', 'avatar32', 'avatar64', 'avatar96')
 
 class AvatarForm(forms.Form):
     """
     The avatar form requires only one image field.
     """
-    photo = forms.ImageField()
+    avatar = forms.ImageField(required=False)
+    url = forms.URLField(required=False)
+
+    def clean(self):
+        if not (self.cleaned_data.get('avatar') or self.cleaned_data.get('url')):
+            raise forms.ValidationError(_('You must enter one of the options'))
+        else:
+            return self.cleaned_data
 
 class AvatarCropForm(forms.Form):
     """

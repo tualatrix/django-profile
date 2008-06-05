@@ -1,0 +1,47 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>{% trans "Change avatar" %}</title>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/avatar.css" type="text/css" />
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.6.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+			$("input[type='text']").focus();
+			$("form#images").submit(function() {
+				$("img#loading").show();
+				$("div.photos").html('');
+				if ($("input[type='text']").val()) {
+					$.post("{{ request.path }}", { 'search': $("input[type='text']").val() }, function(data) {
+						if (data.success) {
+							for (var photo in data.photos) {
+								$("div.photos").append('<a href="' + data.urls[photo] + '"><img src="' + data.photos[photo] + '" /></a>');
+							}
+							$("div.photos a").click(function() {
+								$("form#avatar input[name='url']").val($(this).attr("href"));
+								$("form#avatar").submit();
+								return false;	
+							});
+						}
+						$("img#loading").hide();
+					}, "json");
+				}
+				return false;
+			});
+			$("input[name='cancel']").click(function() {
+				window.location="/profile/avatar/choose/";
+			});
+		});
+	</script>
+</head>
+<body>
+	<form action="" id="images">
+		<p class="title" style="border-bottom: 2px solid;">{% trans "Search on Picasa Web:" %} <input type="text" value="" /> <input type="submit" value="{% trans "Search" %}"/> <input type="button" name="cancel" value="{% trans "Cancel" %}" /> <img id="loading" style="display: none;" src="{{ MEDIA_URL }}images/loading.gif" /></p>
+	</form>
+	<div class="photos">
+	</div>
+	<form id="avatar" action="/profile/avatar/choose/" method="POST">
+		<input type="hidden" name="url" value="" />
+	</form>
+</body>
+</html>

@@ -4,41 +4,117 @@
 <head>
 	<title>{% trans "Change avatar" %}</title>
   <link rel="stylesheet" href="{{ MEDIA_URL }}css/avatar.css" type="text/css" />
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.crop.css" type="text/css" />
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.3.pack.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.crop.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.mouse.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.draggable.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.draggable.ext.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.avatar.js"></script>
-	{% if avatar %}
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.6.min.js"></script>
+	{% if profile.avatartemp %}
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.pack.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.imgareaselect-0.4.2.min.js"></script>
 	<script type="text/javascript">
-		// We can't use jquery.ready() because it doesn't wait to images.
-		$(window).bind("load", function() {
- 			window.resizeTo(410, 450);
-			$("div.hidden-image").crop($("div.hidden-image img.crop"), { 'action': '/profile/avatar/crop/{{ avatar.pk }}/', 'warningThreshold': { x: 1, y: 1 } });
+	$(function() {
+		function updateValues(img, selection) {
+			$("input[name='left']").val(selection.x1);	
+			$("input[name='top']").val(selection.y1);	
+			$("input[name='right']").val(selection.x2);	
+			$("input[name='bottom']").val(selection.y2);	
+		}
+
+		$(window).load(function() {
+
+			if ($("#cropimage").height() > $("#cropimage").width()) {
+				if ($("#cropimage").height() > 300) {
+					$("#cropimage").css("height", "300px");
+				}
+			} else {
+				if ($("#cropimage").width() > 400) {
+					$("#cropimage").css("width", "400px");
+				}
+			}
+
+			$("input[name='width']").val($("#cropimage").width());
+			$("input[name='height']").val($("#cropimage").height());
+			$("a.done").click(function() {
+				$("form").submit();
+				return false;
+			});
+
+			if ($("#cropimage").width() < 200 || $("#cropimage").height() < 200) {
+				window.resizeTo(300, 300);
+			} else {
+				window.resizeTo($("#cropimage").width() + 10, $("#cropimage").height() + 90);
+			}
+			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues });
+		});
+
+    $("a.cancel").click(function() {
+      $.post($(this).attr("href"), function(data) {
+      	window.close();
+      });
+      return false;
+    });
+
+  	$("a.another").click(function() {
+   		$.post($(this).attr("href"), function(data) {
+      	window.resizeTo(500, 420);
+        window.location = "/profile/avatar/choose/";
+   		});
+      return false;
+		});
+
+		$("input[@type=submit].buttondone").click(function() {
+     	var a = $("#child").position();
+       $("#id_top").val(a.top);
+       $("#id_left").val(a.left);
+       $("#id_size").val($("#child").height());
+ 		});
+	});
+	</script>
+	{% else %}
+	<script type="text/javascript">
+		$(function() {
+     	$("#id_photo").change(function() {
+       	$("form").submit();
+     	});
 		});
 	</script>
 	{% endif %}
 </head>
 <body>
-  {% if avatar.photo %}
+  {% if profile.avatartemp %}
 	<p class="title">
-		<a class="another" href="/profile/avatar/delete/{{ avatar.pk }}/">{% trans 'Select anoter image' %}</a>
-		<a class="cancel" href="/profile/avatar/delete/{{ avatar.pk }}/">{% trans 'Cancel' %}</a>
+		<a class="done" style="margin-right: 20px;" href="{{ request.path }}">{% trans 'Done' %}</a>
+		<a class="another" style="margin-right: 20px;" href="/profile/avatartemp/delete/">{% trans 'Select anoter image' %}</a>
+		<a class="cancel" href="/profile/avatartemp/delete/">{% trans 'Cancel' %}</a>
 	</p>
-	<div class="hidden-image"><img src="{{ avatar.get_absolute_url }}" class="crop"/></div>
-	{% else %}
-	<p class="title" style="border: 1px solid;">{% trans "Select the image file from your computer you want to assign as your avatar in your profile:" %}</p>
-  <form class="commonform" action="" method="post" enctype="multipart/form-data">
-    <label for="id_avatar">{% trans "Avatar:" %}</label>
-    {{ form.photo }}
-    <input type="button" class="cancel" value="{% trans 'Cancel' %}" />
+  <form method="post" action="/profile/avatar/crop/">
+    <input type="hidden" name="width" value="0"/>
+    <input type="hidden" name="height" value="0"/>
+    <input type="hidden" name="top" value="0"/>
+    <input type="hidden" name="top" value="0"/>
+    <input type="hidden" name="bottom" value="0"/>
+    <input type="hidden" name="left" value="0"/>
+    <input type="hidden" name="right" value="0"/>
   </form>
-	<div class="loading">
-		<p><img src="{{ MEDIA_URL }}images/loading2.gif" /> {% trans "Please wait..." %}</p>
-	</div>
+	<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
+	{% else %}
+	<p class="title" style="border-bottom: 2px solid;">{% trans "You have 3 options to select the image file you want as avatar in your profile:" %}</p>
+  <form class="commonform" action="" method="post" enctype="multipart/form-data">
+		<ol>
+			<li>
+    		<label for="id_url">{% trans "Select an image from a remote URL:" %}</label>
+    		{{ form.url }}
+				<input type="submit" value="{% trans "Done" %}" />
+			</li>
+			<li>
+    		<label for="id_photo">{% trans "Select an image from disk:" %}</label>
+    		{{ form.photo }}
+			</li>
+			<li>
+				<a href="/profile/avatar/searchimages/">{% trans "Search for an image on Picasa Web" %}</a>
+			</li>
+		</ol>
+  </form>
+	{% if form.errors %}
+	{{ form.errors }}
+	{% endif %}
 	{% endif %}
 </body>
 </html>
