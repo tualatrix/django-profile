@@ -96,6 +96,7 @@ def save(request):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
         profile = Profile.objects.get(user=request.user)
         form = ProfileForm(request.POST, instance=profile)
+        print form.errors
         if form.is_valid():
             form.save()
             return HttpResponse(simplejson.dumps({'success': True}))
@@ -145,7 +146,7 @@ def avatarChoose(request, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarCrop(request, avatar_id, template):
+def avatarCrop(request, template):
     """
     Avatar management
     """
@@ -161,7 +162,19 @@ def avatarCrop(request, avatar_id, template):
         bottom = int(request.POST.get('bottom'))
         if top < 0: top = 0
         if left < 0: left = 0
-        profile.box = "%s-%s-%s-%s" % ( int(left), int(top), int(right), int(bottom))
+
+        image = Image.open(profile.get_avatartemp_filename())
+        box = [ left, top, right, bottom ]
+        image = image.crop(box)
+        if image.mode not in ('L', 'RGB'):
+            image = image.convert('RGB')
+
+        for size in [ '', '96', '64', '32', '16' ]:
+            image.thumbnail((size, size), Image.ANTIALIAS)
+            getattr(profile, "save_avatar%s_file" % size)("%s" % request.user, image)
+
+        del image
+
         profile.save()
         done = True
 

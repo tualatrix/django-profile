@@ -6,7 +6,7 @@
 		{% if profile.visible.avatar %}
 		<li><img class="photo" src="{{ profile.get_avatar_url }}" alt="{{ profile.user }}"/></li>
 		{% else %}
-		<li><img class="photo" src="{{ MEDIA_URL }}images/default.96.png" alt="{% trans "No avatar" %}"/></li>
+		<li><img class="photo" src="/site_media/images/default.96.png" alt="{% trans "No avatar" %}"/></li>
 		{% endif %}
   	<li class="fn nickname"><strong>{% trans "Username" %}:</strong> {% if profile.visible.nickname %}{{ profile.user }}{% else %}{% trans "Not public" %}{% endif %}</li>
 		{% if profile.country and profile.visible.country %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}

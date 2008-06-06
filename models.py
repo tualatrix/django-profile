@@ -28,16 +28,6 @@ class Continent(models.Model):
     def get_absolute_url(self):
         return "/continent/%s/" % self.slug
 
-    def importdata(self):
-        Continent.objects.all().delete()
-        Continent(name="Asia", slug=slugify("Asia"), code="AS").save()
-        Continent(name="Africa", slug=slugify("Africa"), code="AF").save()
-        Continent(name="Europe", slug=slugify("Europe"), code="EU").save()
-        Continent(name="North America", slug=slugify("North America"), code="NA").save()
-        Continent(name="South America", slug=slugify("South America"), code="SA").save()
-        Continent(name="Oceania", slug=slugify("Oceania"), code="OC").save()
-        Continent(name="Antarctica", slug=slugify("Antarctica"), code="AN").save()
-
     class Admin:
         pass
 
@@ -62,17 +52,6 @@ class Country(models.Model):
 
     def get_absolute_url(self):
         return "/country/%s/" % self.slug
-
-    def importdata(self, file="db/countries.txt"):
-        Country.objects.all().delete()
-        f = open(file)
-        for line in f.xreadlines():
-            line = line.strip()
-            d, name = line.split('"')[:-1]
-            continent, code = d.split(",")[:-1]
-            c = Continent.objects.filter(code=continent)[0]
-            p = Country(name=name, slug=slugify(name), code=code, continent=c)
-            p.save()
 
     class Admin:
         list_display = ('name', 'continent')

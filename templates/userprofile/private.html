@@ -4,16 +4,24 @@
 {% block customjs %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal-1.1.1.pack.js"></script>
+<!--<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal-1.1.1.pack.js"></script>-->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.checkbox.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.checkboxes.pack.js"></script>
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
 {% ifequal LANGUAGE_CODE 'es' %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ request.LANGUAGE_CODE }}.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ LANGUAGE_CODE }}.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$.datepicker.setDefaults($.datepicker.regional["{{ request.LANGUAGE_CODE }}"]);
+		$.datepicker.setDefaults($.datepicker.regional["{{ LANGUAGE_CODE }}"]);
 	});
 </script>
 {% endifequal %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.checkbox.css" type="text/css" />
+<script type="text/javascript">
+	$(function() {
+		$("input[type=checkbox]").checkbox();
+	});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -22,80 +30,90 @@
 <form class="commonform profile" action="" method="post" enctype="multipart/form-data">
   <fieldset>
 		<div class="save">
-			<img style="float: right;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
+			<img style="float: right;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
    		<input type="button" class="save" value="{% trans 'Save' %}" />
 		</div>
+		<div style="float: left; width: 100px;">{%  trans "Make it public" %}</div>
 		<div>
-    	<label for="id_username">{% trans "Username:" %}</label>
-    	<strong id="id_username">{{ user }}</strong> 
-			<a href="/accounts/password/change">{% trans "(Change password)" %}</a>
+			<div style="float: left;"><input type="checkbox" name="nickname_public" {% if profile.visible.nickname or not profile.visible %}checked="on"{% endif %}/></div>
+    	<label for="id_username">{% trans "Nickname:" %}</label>
+    	<strong id="id_username">{{ profile.user }}</strong> 
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="email_public" {% if profile.visible.email %}checked="on"{% endif %}/></div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
-    	<strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
-			(<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
+    	<strong id="id_email">{{ profile.email }}</strong> 
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="avatar_public" {% if profile.visible.avatar or not profile.visible %}checked="on"{% endif %} /></div>
    		<label for="id_avatar">{% trans "Avatar:" %}</label>
 			<div class="avatar">
 				<a class="newavatar img" href="/profile/avatar/choose/">
-     			{% if user.avatar %}
-     			<img id="avatarimg" src="{{ user|avatar:"96"}}" />
-     			{% else %}
-     			<img id="avatarimg" src="{{ MEDIA_URL }}images/default.gif" />
-     			{% endif %}
+     			<img id="avatarimg" src="{% if profile.avatar %}{{ profile.get_avatar96_url}}{% else %}{{ MEDIA_URL}}images/default.96.png{% endif %}" />
 				</a>
    			<a class="newavatar" href="/profile/avatar/choose/">{% trans "Change" %}</a> <a class="delavatar" href="/profile/avatar/delete">{% trans "Delete" %}</a>
 			</div>
 		</div>
 		<hr />
+		<div style="float: left; width: 100px;">{%  trans "Make it public" %}</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/></div>
     	<label for="id_firstname">{% trans "First Name:" %}</label>
     	{{ form.firstname }}
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="surname_public" {% if profile.visible.surname %}checked="on"{% endif %}/></div>
     	<label for="id_surname">{% trans "Surname:" %}</label>
     	{{ form.surname }}
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %}/></div>
     	<label for="id_gender">{% trans "Gender:" %}</label>
 			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
 			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/></div>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
 			<div class="calendar"></div>
 		</div>
 		<hr />
+		<div style="float: left; width: 100px;">{%  trans "Make it public" %}</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} /></div>
     	<label for="id_url">{% trans "Url:" %}</label>
     	{{ form.url }}
 		</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %} /></div>
     	<label for="id_about">{% trans "About:" %}</label>
     	{{ form.about }}
 		</div>
 		<hr />
+		<div style="float: left; width: 100px;">{%  trans "Make it public" %}</div>
 		<div>
+			<div style="float: left;"><input type="checkbox" name="country_public" {% if profile.visible.country %}checked="on"{% endif %} /></div>
    		<label for="id_country">{% trans "Country:" %}</label>
 			<select name="country" id="id_country">
 				<option value="">{% trans "Not set" %}</option>
 				<option value="" disabled="disabled">{% trans "More common..." %}</option>
-				<option value="ES">{% trans "Spain" %}</option>
+				<option value="{{ spain.key }}">{% trans "Spain" %}</option>
 				{% for continent,countries in country_data.items %}
 					<option value="" disabled="disabled">{{ continent }}</option>
 					{% for country in countries %}
-					<option value="{{ country.code }}" {% ifequal profile.country country%}selected="selected"{% endifequal %}>{{ country }}</option>
+					<option value="{{ country.key }}" {% ifequal profile.country.name country.name %}selected="selected"{% endifequal %}>{{ country }}</option>
 					{% endfor %}
 				{% endfor %}
 			</select>
 			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
 		</div>
 		<div class="mapinfo">
+			<div style="float: left;"><input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %} /></div>
    		<label for="id_location">{% trans "Location:" %}</label>
 			<input style="width: 600px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
 		</div>
 		<div class="mapinfo">
+			<div style="float: left;"><input type="checkbox" name="geopoint_public" {% if profile.visible.geopoint %}checked="on"{% endif %} /></div>
    		<label for="id_position">{% trans "Position:" %}</label>
 			<div id="map"></div>
 		</div>
@@ -106,7 +124,7 @@
 		</div>
     <div style="display: none;">{{ form.birthdate }}{{ form.latitude }}{{ form.longitude }}{{ form.gender }}</div>
 		<div class="save">
-   		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading3.gif" />
+   		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
 		</div>
   </fieldset>
 </form>
