@@ -100,7 +100,10 @@ class Profile(models.Model):
         return GENDER_IMAGES[self.gender]
 
     def visible(self):
-        return pickle.load(open(self.get_public_filename(), "rb"))
+        try:
+            return pickle.load(open(self.get_public_filename(), "rb"))
+        except:
+            return dict()
 
     def get_absolute_url(self):
         return "/profile/users/%s/" % self.user
@@ -111,8 +114,14 @@ class Profile(models.Model):
     def delete(self):
         for key in [ '', '96', '64', '32', '16' ]:
             if getattr(self, "get_avatar%s_filename" % key)():
-                os.remove(getattr(self, "get_avatar%s_filename" % key)())
-        
+                try:
+                    os.remove(getattr(self, "get_avatar%s_filename" % key)())
+                except:
+                    pass
+        try:
+            os.remove(self.public)
+        except:
+            pass 
         super(Profile, self).delete()
 
     def save(self):
@@ -120,7 +129,7 @@ class Profile(models.Model):
             public = dict()
             for item in self.__dict__.keys():
                 public[item] = False
-            public["username"] = True
+            public["user_id"] = True
             public["avatar"] = True
             self.save_public_file("%s.public" % self.user, pickle.dumps(public))
         super(Profile, self).save()

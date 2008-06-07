@@ -146,7 +146,10 @@ def avatarChoose(request, template):
             url = form.cleaned_data.get('url')
             if url:
                 photo = urllib2.urlopen(url).read()
-            profile.save_avatartemp_file(request.user.username, photo)
+            profile.save_avatartemp_file("%s.jpg" % request.user.username, photo)
+            #image = Image.open(profile.get_avatartemp_filename())
+            #image.thumbnail((500, 500), Image.ANTIALIAS)
+            #image.save(profile.get_avatartemp_filename(), "JPEG")
             profile.save()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))

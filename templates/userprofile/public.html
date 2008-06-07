@@ -37,7 +37,7 @@
   	{% if profile.url and profile.visible.url %}<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>{% endif %}
   	{% if profile.about and profile.visible.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
 		{% if profile.gender and profile.visible.gender %}<li>{% trans "Gender" %}: <img src="{{ profile.get_genderimage_url }}" /></li>{% endif %}
-		{% if profile.country and profile.visible.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
+		{% if profile.country and profile.visible.country_id %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
 		{% if profile.location and profile.visible.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
 	</ul>
 </div>
