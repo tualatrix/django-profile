@@ -19,16 +19,6 @@
 
 		$(window).load(function() {
 
-			if ($("#cropimage").height() > $("#cropimage").width()) {
-				if ($("#cropimage").height() > 300) {
-					$("#cropimage").css("height", "300px");
-				}
-			} else {
-				if ($("#cropimage").width() > 400) {
-					$("#cropimage").css("width", "400px");
-				}
-			}
-
 			$("input[name='width']").val($("#cropimage").width());
 			$("input[name='height']").val($("#cropimage").height());
 			$("a.done").click(function() {

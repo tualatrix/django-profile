@@ -14,6 +14,7 @@ import urllib2
 import random
 import pickle
 import gdata.service
+import os.path
 import gdata.photos.service
 import Image, ImageFilter
 import urllib
@@ -146,10 +147,10 @@ def avatarChoose(request, template):
             url = form.cleaned_data.get('url')
             if url:
                 photo = urllib2.urlopen(url).read()
-            profile.save_avatartemp_file("%s.jpg" % request.user.username, photo)
-            #image = Image.open(profile.get_avatartemp_filename())
-            #image.thumbnail((500, 500), Image.ANTIALIAS)
-            #image.save(profile.get_avatartemp_filename(), "JPEG")
+            profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
+            image = Image.open(profile.get_avatartemp_filename())
+            image.thumbnail((500, 500), Image.ANTIALIAS)
+            image.save(profile.get_avatartemp_filename(), "JPEG")
             profile.save()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
@@ -169,8 +170,6 @@ def avatarCrop(request, template):
         left = int(request.POST.get('left'))
         right = int(request.POST.get('right'))
         bottom = int(request.POST.get('bottom'))
-        if top < 0: top = 0
-        if left < 0: left = 0
 
         image = Image.open(profile.get_avatartemp_filename())
         box = [ left, top, right, bottom ]
@@ -178,16 +177,13 @@ def avatarCrop(request, template):
         if image.mode not in ('L', 'RGB'):
             image = image.convert('RGB')
 
-        filename = profile.get_avatartemp_filename()
-        os.remove(filename)
-        profile.avatartemp = ''
-        image.save("%s.jpg" % filename, "JPEG")
-        profile.avatar = filename
-        for size in [ '96', '64', '32', '16' ]:
+        base, temp = os.path.split(profile.get_avatartemp_filename())
+        image.save(os.path.join(base, "%s.jpg" % profile.user.username))
+        profile.avatar = os.path.join(os.path.split(profile.avatartemp)[0], "%s.jpg" % profile.user.username)
+        for size in [ 96, 64, 32, 16 ]:
             image.thumbnail((size, size), Image.ANTIALIAS)
-            image.save("%s.%s.jpg" % (filename, size), "JPEG")
-            setattr(profile, "avatar%s" % size, "%s.%s.jpg" % (filename, size))
-        del image
+            image.save(os.path.join(base, "%s.%s.jpg" % (size, profile.user.username)))
+            setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (size, profile.user.username)))
         profile.save()
         done = True
 

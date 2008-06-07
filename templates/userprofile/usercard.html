@@ -4,7 +4,7 @@
 	{% if profile.gender and profile.visible.gender %}<img class="gender" style="clear: right;" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	<ul>
 		{% if profile.visible.avatar and profile.avatar %}
-		<li><img class="photo" src="{{ profile.get_avatar_url }}" alt="{{ profile.user }}"/></li>
+		<li><img class="photo" src="{{ profile.get_avatar96_url }}" alt="{{ profile.user }}"/></li>
 		{% else %}
 		<li><img class="photo" src="/site_media/images/default.96.png" alt="{% trans "No avatar" %}"/></li>
 		{% endif %}

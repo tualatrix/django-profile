@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{{ profile.user }}'s public profile{% endblock %}
 {% block customjs %}
-{% if profile.geopoint and profile.visible.geopoint %}
+{% if profile.latitude and profile.visible.latitude %}
 <script type="text/javascript" src="http://www.google.com/jsapi?key={{ APIKEY }}"></script>
 <script type="text/javascript">google.load("maps", "2");</script>
 <script type="text/javascript">
@@ -13,8 +13,8 @@
     	map.addControl(new google.maps.OverviewMapControl())
     	map.addControl(new google.maps.MapTypeControl())
     	map.enableContinuousZoom();
-    	map.setCenter(new google.maps.LatLng({{ profile.geopoint.lat }}, {{ profile.geopoint.lon }}), 4);
-    	var marker = new google.maps.Marker(new google.maps.LatLng({{ profile.geopoint.lat }}, {{ profile.geopoint.lon }}), {clickable: false });
+    	map.setCenter(new google.maps.LatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
+    	var marker = new google.maps.Marker(new google.maps.LatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false });
     	map.addOverlay(marker);
     }
 	});
@@ -41,7 +41,7 @@
 		{% if profile.location and profile.visible.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
 	</ul>
 </div>
-{% if profile.geopoint and profile.visible.geopoint %}
+{% if profile.latitude and profile.visible.latitude %}
 <div id="map"></div>
 {% endif %}
 {% endblock %}

@@ -99,11 +99,11 @@
 			<select name="country" id="id_country">
 				<option value="">{% trans "Not set" %}</option>
 				<option value="" disabled="disabled">{% trans "More common..." %}</option>
-				<option value="{{ spain.key }}">{% trans "Spain" %}</option>
+				<option value="ES">{% trans "Spain" %}</option>
 				{% for continent,countries in country_data.items %}
 					<option value="" disabled="disabled">{{ continent }}</option>
 					{% for country in countries %}
-					<option value="{{ country.key }}" {% ifequal profile.country.name country.name %}selected="selected"{% endifequal %}>{{ country }}</option>
+					<option value="{{ country.code }}" {% ifequal profile.country.name country.name %}selected="selected"{% endifequal %}>{{ country }}</option>
 					{% endfor %}
 				{% endfor %}
 			</select>
@@ -115,8 +115,8 @@
 			<input style="width: 600px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
 		</div>
 		<div class="mapinfo">
-			<div style="float: left;"><input type="checkbox" name="geopoint_public" {% if profile.visible.geopoint %}checked="on"{% endif %} /></div>
-   		<label for="id_position">{% trans "Position:" %}</label>
+			<div style="float: left;"><input type="checkbox" name="latitude_public" {% if profile.visible.latitude %}checked="on"{% endif %} /></div>
+   		<label for="map">{% trans "Position:" %}</label>
 			<div id="map"></div>
 		</div>
 		<hr />
