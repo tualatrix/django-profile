@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.conf import settings
 import urllib2
 import random
+import pickle
 import gdata.service
 import gdata.photos.service
 import Image, ImageFilter
@@ -96,9 +97,14 @@ def save(request):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
         profile = Profile.objects.get(user=request.user)
         form = ProfileForm(request.POST, instance=profile)
-        print form.errors
         if form.is_valid():
-            form.save()
+            profile = form.save()
+
+            public = dict()
+            for item in profile.__dict__.keys():
+                if request.POST.has_key("%s_public" % item):
+                    public[item] = request.POST.get("%s_public" % item)
+            profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
             return HttpResponse(simplejson.dumps({'success': True}))
         else:
             return HttpResponse(simplejson.dumps({'success': False }))
@@ -169,12 +175,16 @@ def avatarCrop(request, template):
         if image.mode not in ('L', 'RGB'):
             image = image.convert('RGB')
 
-        for size in [ '', '96', '64', '32', '16' ]:
+        filename = profile.get_avatartemp_filename()
+        os.remove(filename)
+        profile.avatartemp = ''
+        image.save("%s.jpg" % filename, "JPEG")
+        profile.avatar = filename
+        for size in [ '96', '64', '32', '16' ]:
             image.thumbnail((size, size), Image.ANTIALIAS)
-            getattr(profile, "save_avatar%s_file" % size)("%s" % request.user, image)
-
+            image.save("%s.%s.jpg" % (filename, size), "JPEG")
+            setattr(profile, "avatar%s" % size, "%s.%s.jpg" % (filename, size))
         del image
-
         profile.save()
         done = True
 
@@ -185,7 +195,12 @@ def avatarDelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         profile = Profile.objects.get(user = request.user)
         for key in [ '', 'temp', '16', '32', '64', '96' ]:
-            setattr(profile, "avatar%s" % key, None)
+            try:
+                os.remove("%s" % getattr(profile, "get_avatar%s_filename" % key)())
+            except:
+                pass
+            setattr(profile, "avatar%s" % key, '')
+        profile.save()
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         raise Http404()

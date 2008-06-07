@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.conf import settings
 import datetime
+import pickle
 import Image, ImageFilter
 import os.path
 
@@ -79,6 +80,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
     country = models.ForeignKey(Country, null=True, blank=True)
     location = models.CharField(max_length=255, blank=True)
+    public = models.FileField(upload_to="avatars/%Y/%b/%d")
 
     # avatar
     avatar = models.ImageField(upload_to="avatars/%Y/%b/%d")
@@ -97,6 +99,9 @@ class Profile(models.Model):
     def get_genderimage_url(self):
         return GENDER_IMAGES[self.gender]
 
+    def visible(self):
+        return pickle.load(open(self.get_public_filename(), "rb"))
+
     def get_absolute_url(self):
         return "/profile/users/%s/" % self.user
 
@@ -104,5 +109,18 @@ class Profile(models.Model):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365
 
     def delete(self):
-        os.remove(self.get_avatar_filename())
+        for key in [ '', '96', '64', '32', '16' ]:
+            if getattr(self, "get_avatar%s_filename" % key)():
+                os.remove(getattr(self, "get_avatar%s_filename" % key)())
+        
         super(Profile, self).delete()
+
+    def save(self):
+        if not self.public:
+            public = dict()
+            for item in self.__dict__.keys():
+                public[item] = False
+            public["username"] = True
+            public["avatar"] = True
+            self.save_public_file("%s.public" % self.user, pickle.dumps(public))
+        super(Profile, self).save()

@@ -35,7 +35,7 @@
 		</div>
 		<div style="float: left; width: 100px;">{%  trans "Make it public" %}</div>
 		<div>
-			<div style="float: left;"><input type="checkbox" name="nickname_public" {% if profile.visible.nickname or not profile.visible %}checked="on"{% endif %}/></div>
+			<div style="float: left;"><input type="checkbox" name="username_public" {% if profile.visible.username %}checked="on"{% endif %}/></div>
     	<label for="id_username">{% trans "Nickname:" %}</label>
     	<strong id="id_username">{{ profile.user }}</strong> 
 		</div>
@@ -45,7 +45,7 @@
     	<strong id="id_email">{{ profile.email }}</strong> 
 		</div>
 		<div>
-			<div style="float: left;"><input type="checkbox" name="avatar_public" {% if profile.visible.avatar or not profile.visible %}checked="on"{% endif %} /></div>
+			<div style="float: left;"><input type="checkbox" name="avatar_public" {% if profile.visible.avatar %}checked="on"{% endif %} /></div>
    		<label for="id_avatar">{% trans "Avatar:" %}</label>
 			<div class="avatar">
 				<a class="newavatar img" href="/profile/avatar/choose/">

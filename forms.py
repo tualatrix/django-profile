@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user', 'slug', 'date', 'avatartemp', 'avatar', 'avatar16', 'avatar32', 'avatar64', 'avatar96')
+        exclude = ('user', 'slug', 'public', 'date', 'avatartemp', 'avatar', 'avatar16', 'avatar32', 'avatar64', 'avatar96')
 
 class AvatarForm(forms.Form):
     """

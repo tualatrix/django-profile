@@ -1,21 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load userprofile_tags %}
 {% block title %}{{ profile.user }}'s public profile{% endblock %}
 {% block customjs %}
-{% if profile.latitude and profile.longitude %}
-<script src="http://maps.google.com/maps?file=api&v=2&key={{ APIKEY }}" />
-<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.3.pack.js"></script>
+{% if profile.geopoint and profile.visible.geopoint %}
+<script type="text/javascript" src="http://www.google.com/jsapi?key={{ APIKEY }}"></script>
+<script type="text/javascript">google.load("maps", "2");</script>
 <script type="text/javascript">
 	$(function() {
-  	if (GBrowserIsCompatible()) {
-      var map = new GMap2(document.getElementById("map"));
-    	map.addControl(new GLargeMapControl());
-    	map.addControl(new GOverviewMapControl())
-    	map.addControl(new GMapTypeControl())
+  	if (google.maps.BrowserIsCompatible()) {
+      var map = new google.maps.Map2(document.getElementById("map"));
+    	map.addControl(new google.maps.LargeMapControl());
+    	map.addControl(new google.maps.OverviewMapControl())
+    	map.addControl(new google.maps.MapTypeControl())
     	map.enableContinuousZoom();
-    	map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
-    	var marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false });
+    	map.setCenter(new google.maps.LatLng({{ profile.geopoint.lat }}, {{ profile.geopoint.lon }}), 4);
+    	var marker = new google.maps.Marker(new google.maps.LatLng({{ profile.geopoint.lat }}, {{ profile.geopoint.lon }}), {clickable: false });
     	map.addOverlay(marker);
     }
 	});
@@ -27,18 +26,23 @@
 <h1>Public profile of {{ profile.user }}</h1>
 <div class="vcard">
 	<ul>
-		<li><img src="{{ profile.user|avatar:"96" }}" /></li>
-  	<li>{% trans "Username" %}: {{ profile.user }}</li>
-		{% if profile.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
-  	{% if profile.url %}<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>{% endif %}
-  	{% if profile.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
-		{% if profile.gender %}<li>{% trans "Gender" %}: <img src="{{ profile.get_genderimage_url }}" /></li>{% endif %}
-		{% if profile.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
-		{% if profile.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
-		{% if profile.latitude and profile.longitude %}
-		<li><div id="map"></div></li>
+		{% if profile.visible.avatar and profile.avatar %}
+		<li><img class="photo" src="{{ profile.get_avatar96_url }}" /></li>
+		{% else %}
+		<li><img class="photo" src="{{ MEDIA_URL }}images/default.96.png" /></li>
 		{% endif %}
+  	<li>{% trans "Username" %}: {{ profile.user }}</li>
+  	{% if profile.user.email and profile.visible.email %}<li>{% trans "E-mail" %}: {{ profile.user.email }}</li>{% endif %}
+		{% if profile.firstname and profile.visible.firstname %}<li>{% trans "Name" %}: {{ profile.firstname }} {% if profile.visible.surname %}{{ profile.surname }}{% endif %}</li>{% endif %}
+  	{% if profile.url and profile.visible.url %}<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>{% endif %}
+  	{% if profile.about and profile.visible.about %}<li>{% trans "About" %}: {{ profile.about }}</li>{% endif %}
+		{% if profile.gender and profile.visible.gender %}<li>{% trans "Gender" %}: <img src="{{ profile.get_genderimage_url }}" /></li>{% endif %}
+		{% if profile.country and profile.visible.country %}<li>{% trans "Country" %}: {{ profile.country }}</li>{% endif %}
+		{% if profile.location and profile.visible.location %}<li>{% trans "Location" %}: {{ profile.location }}</li>{% endif %}
 	</ul>
 </div>
+{% if profile.geopoint and profile.visible.geopoint %}
+<div id="map"></div>
+{% endif %}
 {% endblock %}
 
