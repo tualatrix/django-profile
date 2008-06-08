@@ -97,9 +97,11 @@
     		<label for="id_photo">{% trans "Select an image from disk:" %}</label>
     		{{ form.photo }}
 			</li>
+			{% if websearch %}
 			<li>
 				<a href="/profile/avatar/searchimages/">{% trans "Search for an image on Picasa Web" %}</a>
 			</li>
+			{% endif %}
 		</ol>
   </form>
 	{% if form.errors %}

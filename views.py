@@ -15,13 +15,13 @@ import random
 import pickle
 import gdata.service
 import os.path
-import gdata.photos.service
 import Image, ImageFilter
 import urllib
 from xml.dom import minidom
 import os
 
-IMSIZES = ( 128, 96, 64, 32, 24, 16 )
+if settings.WEBSEARCH:
+    import gdata.photos.service
 
 def valid_users():
     return User.objects.filter(is_active=True).order_by("-date_joined")
@@ -133,7 +133,7 @@ def delete(request, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarChoose(request, template):
+def avatarChoose(request, template, websearch=False):
     """
     Avatar choose
     """
