@@ -26,6 +26,7 @@
 
 {% block content %}
 {% load userprofile_tags %}
+{% include "userprofile/menu.html" %}
 <h1>{% trans "Tell others something about you" %}</h1>
 <form class="commonform profile" action="" method="post" enctype="multipart/form-data">
   <fieldset>

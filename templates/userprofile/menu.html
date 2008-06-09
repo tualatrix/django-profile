@@ -1,0 +1,9 @@
+{% load i18n %}
+<ul class="profilemenu">
+	<li><a href="{{ profile.get_absolute_url }}">{% trans "Public profile" %}</a></li>
+	<li><a href="/profile/public">{% trans "Edit common information" %}</a></li>
+	<li><a href="/profile/public">{% trans "Edit avatar" %}</a></li>
+	<li><a href="/profile/public">{% trans "Edit location" %}</a></li>
+	<li><a href="/profile/public">{% trans "Define public info" %}</a></li>
+	<li><a href="/profile/public">{% trans "Remove my profile" %}</a></li>
+</ul>
