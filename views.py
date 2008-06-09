@@ -65,7 +65,7 @@ def searchimages(request, template):
 
 
 @login_required
-def private(request, APIKEY, template):
+def private(request, template, APIKEY=None):
     """
     Private part of the user profile
     """

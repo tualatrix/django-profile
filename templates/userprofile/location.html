@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block customjs %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
+{% endblock %}
+{% block content %}
+{% load userprofile_tags %}
+{% include "userprofile/menu.html" %}
+<form class="commonform profile" action="" method="post" enctype="multipart/form-data">
+  <fieldset>
+    <div class="save">
+      <img style="float: right;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+      <input type="button" class="save" value="{% trans 'Save' %}" />
+    </div>
+		<div>
+   		<label for="id_country">{% trans "Country:" %}</label>
+			<select name="country" id="id_country">
+				<option value="">{% trans "Not set" %}</option>
+				<option value="" disabled="disabled">{% trans "More common..." %}</option>
+				<option value="ES">{% trans "Spain" %}</option>
+				{% for continent,countries in country_data.items %}
+					<option value="" disabled="disabled">{{ continent }}</option>
+					{% for country in countries %}
+					<option value="{{ country.code }}" {% ifequal profile.country.name country.name %}selected="selected"{% endifequal %}>{{ country }}</option>
+					{% endfor %}
+				{% endfor %}
+			</select>
+			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
+		</div>
+		<div class="mapinfo">
+   		<label for="id_location">{% trans "Location:" %}</label>
+			<input style="width: 600px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
+		</div>
+		<div class="mapinfo">
+   		<label for="map">{% trans "Position:" %}</label>
+			<div id="map"></div>
+		</div>
+    <div style="display: none;">{{ form.latitude }}{{ form.longitude }}</div>
+		<div class="save">
+   		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+		</div>
+  </fieldset>
+</form>
+<div style="display: none;" id="apikey">{{ APIKEY }}</div>
+{% endblock %}
