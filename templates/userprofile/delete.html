@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Delete all your personal information" %}{% endblock %}
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block content %}
-<h1>{% trans "Delete all your personal information" %}</h1>
-<div class="center">
-  <form class="commonform" action="" method="POST">
-		<fieldset>
-			<p>{% trans "Are you sure?" %} <input type="submit" value="Yes" /></p>
-  		<p><a href="/profile">No, return to my profile</a></p>
-		</fieldset>
-  </form>
-</div>
+{% load userprofile_tags %}
+{% include "userprofile/menu.html" %}
+<form class="commonform profile" action="" method="post" enctype="multipart/form-data">
+	<h1>{% trans "Delete all your personal information" %}</h1>
+  <fieldset>
+		<p>{% trans "Are you sure?" %} <input type="submit" value="Yes" /></p>
+  	<p><a href="/profile">No, return to my profile</a></p>
+  </fieldset>
+</form>
 {% endblock %}

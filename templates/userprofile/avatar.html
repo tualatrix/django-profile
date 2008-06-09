@@ -1,10 +1,7 @@
+{% extends "base.html" %}
 {% load i18n %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>{% trans "Change avatar" %}</title>
-  <link rel="stylesheet" href="{{ MEDIA_URL }}css/avatar.css" type="text/css" />
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.2.6.min.js"></script>
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block customjs %}
 	{% if profile.avatartemp %}
   <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.pack.js"></script>
   <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.imgareaselect-0.4.2.min.js"></script>
@@ -25,12 +22,6 @@
 				$("form").submit();
 				return false;
 			});
-
-			if ($("#cropimage").width() < 200 || $("#cropimage").height() < 200) {
-				window.resizeTo(300, 300);
-			} else {
-				window.resizeTo($("#cropimage").width() + 10, $("#cropimage").height() + 90);
-			}
 			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues });
 		});
 
@@ -66,15 +57,17 @@
 		});
 	</script>
 	{% endif %}
-</head>
-<body>
+{% endblock %}
+{% block content %}
+	{% include "userprofile/menu.html" %}
   {% if profile.avatartemp %}
-	<p class="title">
-		<a class="done" style="margin-right: 20px;" href="{{ request.path }}">{% trans 'Done' %}</a>
-		<a class="another" style="margin-right: 20px;" href="/profile/avatartemp/delete/">{% trans 'Select anoter image' %}</a>
-		<a class="cancel" href="/profile/avatartemp/delete/">{% trans 'Cancel' %}</a>
-	</p>
-  <form method="post" action="/profile/avatar/crop/">
+  <form class="commonform" method="post" action="/profile/avatar/crop/">
+		<h1>{% trans "Crop&resize the area you want" %}</h1>
+		<p class="title">
+			<a class="done" style="margin-right: 20px;" href="{{ request.path }}">{% trans 'Done' %}</a>
+			<a class="another" style="margin-right: 20px;" href="/profile/avatartemp/delete/">{% trans 'Select anoter image' %}</a>
+			<a class="cancel" href="/profile/avatartemp/delete/">{% trans 'Cancel' %}</a>
+		</p>
     <input type="hidden" name="width" value="0"/>
     <input type="hidden" name="height" value="0"/>
     <input type="hidden" name="top" value="0"/>
@@ -85,8 +78,9 @@
   </form>
 	<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
 	{% else %}
-	<p class="title" style="border-bottom: 2px solid;">{% trans "You have 3 options to select the image file you want as avatar in your profile:" %}</p>
   <form class="commonform" action="" method="post" enctype="multipart/form-data">
+		<h1>{% trans "Choose the source of your avatar" %}</h1>
+		<p class="title">{% trans "You have 3 options to select the image file you want as avatar in your profile:" %}</p>
 		<ol>
 			<li>
     		<label for="id_url">{% trans "Select an image from a remote URL:" %}</label>
@@ -99,7 +93,7 @@
 			</li>
 			{% if websearch %}
 			<li>
-				<a href="/profile/avatar/searchimages/">{% trans "Search for an image on Picasa Web" %}</a>
+				<a href="/profile/avatar/search/">{% trans "Search for an image on Picasa Web" %}</a>
 			</li>
 			{% endif %}
 		</ol>
@@ -108,5 +102,4 @@
 	{{ form.errors }}
 	{% endif %}
 	{% endif %}
-</body>
-</html>
+{% endblock %}

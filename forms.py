@@ -6,6 +6,15 @@ from userprofile.models import Country
 
 IMAGE_TYPES = { 'JPEG image data': '.jpg', 'PNG image data': '.png', 'GIF image data': '.gif' }
 
+class LocationForm(forms.ModelForm):
+    """
+    Profile Form. Composed by all the Profile model fields.
+    """
+
+    class Meta:
+        model = Profile
+        fields = ('location', 'latitude', 'longitude', 'country')
+
 class ProfileForm(forms.ModelForm):
     """
     Profile Form. Composed by all the Profile model fields.
@@ -13,17 +22,17 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('user', 'slug', 'public', 'date', 'avatartemp', 'avatar', 'avatar16', 'avatar32', 'avatar64', 'avatar96')
+        fields = ('firstname', 'surname', 'birthdate', 'gender', 'url', 'about')
 
 class AvatarForm(forms.Form):
     """
     The avatar form requires only one image field.
     """
-    avatar = forms.ImageField(required=False)
+    photo = forms.ImageField(required=False)
     url = forms.URLField(required=False)
 
     def clean(self):
-        if not (self.cleaned_data.get('avatar') or self.cleaned_data.get('url')):
+        if not (self.cleaned_data.get('photo') or self.cleaned_data.get('url')):
             raise forms.ValidationError(_('You must enter one of the options'))
         else:
             return self.cleaned_data

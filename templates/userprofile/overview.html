@@ -4,13 +4,9 @@
 {% block content %}
 {% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<h1>{% trans "Tell others something about you" %}</h1>
 <form class="commonform profile" action="" method="post" enctype="multipart/form-data">
+	<h1>{% trans "Overview about your public profile" %}</h1>
   <fieldset>
-		<div class="save">
-			<img style="float: right;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
-   		<input type="button" class="save" value="{% trans 'Save' %}" />
-		</div>
 		<div>
     	<label for="id_user">{% trans "Username:" %}</label>
     	<strong id="id_user">{{ profile.user }}</strong> 
@@ -19,11 +15,10 @@
     	<label for="id_email">{% trans "E-mail:" %}</label>
        <strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
                        (<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
-
-		</div>
-		<div class="save">
-   		<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
 		</div>
   </fieldset>
 </form>
+<div class="save">
+	<input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from userprofile.forms import ProfileForm, AvatarForm, AvatarCropForm
+from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
@@ -20,7 +20,9 @@ import urllib
 from xml.dom import minidom
 import os
 
+forms = { 'location': LocationForm, 'personal': ProfileForm }
 if settings.WEBSEARCH:
+    import gdata.media
     import gdata.photos.service
 
 def valid_users():
@@ -55,17 +57,23 @@ def searchimages(request, template):
         photos = list()
         urls = list()
         gd_client = gdata.photos.service.PhotosService()
+        print request.POST.get('search')
         feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % request.POST.get('search').split(" ")[0], limit='35')
         for entry in feed.entry:
             photos.append(entry.media.thumbnail[0].url)
             urls.append(entry.content.src)
+
         return HttpResponse(simplejson.dumps({'success': True, 'photos': photos, 'urls': urls }))
     else:
         return render_to_response(template, locals(), context_instance=RequestContext(request))
 
+@login_required
+def overview(request, template, APIKEY):
+    profile, created = Profile.objects.get_or_create(user = request.user)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def private(request, template, APIKEY=None):
+def private(request, template, type, APIKEY=None):
     """
     Private part of the user profile
     """
@@ -79,9 +87,9 @@ def private(request, template, APIKEY=None):
         validated = True
 
     if request.method == "POST" and form.is_valid():
-        form = ProfileForm(request.POST, instance=profile)
+        form = forms[type](request.POST, instance=profile)
     else:
-        form = ProfileForm(instance=profile)
+        form = forms[type](instance=profile)
 
     lat = profile.latitude
     lng = profile.longitude
@@ -94,10 +102,10 @@ def private(request, template, APIKEY=None):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def save(request):
+def save(request, type):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
         profile = Profile.objects.get(user=request.user)
-        form = ProfileForm(request.POST, instance=profile)
+        form = forms[type](request.POST, instance=profile)
         if form.is_valid():
             profile = form.save()
 
@@ -142,11 +150,13 @@ def avatarChoose(request, template, websearch=False):
     else:
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            profile = Profile.objects.get(user = request.user)
+            profile, created = Profile.objects.get_or_create(user = request.user)
             photo = form.cleaned_data.get('photo')
             url = form.cleaned_data.get('url')
             if url:
                 photo = urllib2.urlopen(url).read()
+            else:
+                photo = photo.content
             profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
             image = Image.open(profile.get_avatartemp_filename())
             image.thumbnail((500, 500), Image.ANTIALIAS)

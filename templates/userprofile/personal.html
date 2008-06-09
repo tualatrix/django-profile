@@ -38,7 +38,7 @@
 {% block content %}
 {% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="" method="post" enctype="multipart/form-data">
+<form class="commonform profile" action="/profile/personal/save/" method="post" enctype="multipart/form-data">
 	<h1>{% trans "Edit your personal information" %}</h1>
   <fieldset>
 		<div>
@@ -67,9 +67,9 @@
     	{{ form.about }}
 		</div>
     <div style="display: none;">{{ form.birthdate }}{{ form.gender }}</div>
-    <div class="save">
-      <input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
-    </div>
   </fieldset>
 </form>
+<div class="save">
+  <input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+</div>
 {% endblock %}

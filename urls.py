@@ -5,16 +5,16 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     # Private profile
-    (r'^$', private, {'APIKEY': settings.APIKEY, 'template': 'userprofile/private.html'}),
-    (r'^edit/location/$', private, {'APIKEY': settings.APIKEY, 'template': 'userprofile/location.html'}),
-    (r'^edit/personal/$', private, {'template': 'userprofile/personal.html'}),
-    (r'^save/$', save),
+    (r'^$', overview, {'APIKEY': settings.APIKEY, 'template': 'userprofile/overview.html'}),
+    (r'^edit/(?P<type>location)/$', private, {'APIKEY': settings.APIKEY, 'template': 'userprofile/location.html'}),
+    (r'^edit/(?P<type>personal)/$', private, {'template': 'userprofile/personal.html'}),
+    (r'^(?P<type>personal|location)/save/$', save),
     (r'^delete/$', delete, {'template': 'userprofile/delete.html'}),
     (r'^delete/done/$', direct_to_template, {'template': 'userprofile/delete_done.html'}),
     (r'^avatar/delete/$', avatarDelete),
     (r'^avatartemp/delete/$', avatarDelete, { 'temp': True }),
-    (r'^avatar/choose/$', avatarChoose, {'websearch': settings.WEBSEARCH, 'template': 'userprofile/avatar_choose.html'}),
-    (r'^avatar/searchimages/$', searchimages, {'template': 'userprofile/searchimages.html'}),
+    (r'^edit/avatar/$', avatarChoose, {'websearch': settings.WEBSEARCH, 'template': 'userprofile/avatar.html'}),
+    (r'^avatar/search/$', searchimages, {'template': 'userprofile/avatarsearch.html'}),
     (r'^avatar/crop/$', avatarCrop, {'template': 'userprofile/avatar_crop.html'}),
     (r'^getcountry_info/(?P<lat>[0-9\.\-]+)/(?P<lng>[0-9\.\-]+)/$', fetch_geodata),
 
