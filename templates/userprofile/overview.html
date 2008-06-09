@@ -6,9 +6,11 @@
 {% include "userprofile/menu.html" %}
 <form class="commonform profile" action="" method="post">
 	<h1>{% trans "Overview of your public profile" %}</h1>
+	{% if profile.avatar %}
 	<div class="avatar">
 		<img src="{{ profile.get_avatar96_url }}" />
 	</div>
+	{% endif %}
   <fieldset>
 		<div>
     	<label for="id_user">{% trans "Username:" %}</label>

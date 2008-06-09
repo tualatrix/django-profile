@@ -52,6 +52,11 @@ def public(request, APIKEY, current_user, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
+def makepublic(request, template):
+    profile, created = Profile.objects.get_or_create(user = request.user)
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
+
+@login_required
 def searchimages(request, template):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST" and request.POST.get('search'):
         photos = list()
@@ -141,16 +146,16 @@ def delete(request, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarChoose(request, template, websearch=False):
+def avatarchoose(request, template, websearch=False):
     """
     Avatar choose
     """
+    profile, created = Profile.objects.get_or_create(user = request.user)
     if not request.method == "POST":
         form = AvatarForm()
     else:
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            profile, created = Profile.objects.get_or_create(user = request.user)
             photo = form.cleaned_data.get('photo')
             url = form.cleaned_data.get('url')
             if url:
@@ -159,48 +164,49 @@ def avatarChoose(request, template, websearch=False):
                 photo = photo.content
             profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
             image = Image.open(profile.get_avatartemp_filename())
-            image.thumbnail((500, 500), Image.ANTIALIAS)
+            image.thumbnail((800, 800), Image.ANTIALIAS)
             image.save(profile.get_avatartemp_filename(), "JPEG")
             profile.save()
+            return HttpResponseRedirect('%scrop/' % request.path)
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarCrop(request, template):
+def avatarcrop(request, template):
     """
     Avatar management
     """
+    profile = Profile.objects.get(user = request.user)
     if not request.method == "POST":
-        raise Http404()
+        form = AvatarCropForm()
+    else:
+        form = AvatarCropForm(request.POST)
+        if form.is_valid():
+            top = int(request.POST.get('top'))
+            left = int(request.POST.get('left'))
+            right = int(request.POST.get('right'))
+            bottom = int(request.POST.get('bottom'))
 
-    form = AvatarCropForm(request.POST)
-    if form.is_valid():
-        profile = Profile.objects.get(user = request.user)
-        top = int(request.POST.get('top'))
-        left = int(request.POST.get('left'))
-        right = int(request.POST.get('right'))
-        bottom = int(request.POST.get('bottom'))
+            image = Image.open(profile.get_avatartemp_filename())
+            box = [ left, top, right, bottom ]
+            image = image.crop(box)
+            if image.mode not in ('L', 'RGB'):
+                image = image.convert('RGB')
 
-        image = Image.open(profile.get_avatartemp_filename())
-        box = [ left, top, right, bottom ]
-        image = image.crop(box)
-        if image.mode not in ('L', 'RGB'):
-            image = image.convert('RGB')
-
-        base, temp = os.path.split(profile.get_avatartemp_filename())
-        image.save(os.path.join(base, "%s.jpg" % profile.user.username))
-        profile.avatar = os.path.join(os.path.split(profile.avatartemp)[0], "%s.jpg" % profile.user.username)
-        for size in [ 96, 64, 32, 16 ]:
-            image.thumbnail((size, size), Image.ANTIALIAS)
-            image.save(os.path.join(base, "%s.%s.jpg" % (size, profile.user.username)))
-            setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (size, profile.user.username)))
-        profile.save()
-        done = True
+            base, temp = os.path.split(profile.get_avatartemp_filename())
+            image.save(os.path.join(base, "%s.jpg" % profile.user.username))
+            profile.avatar = os.path.join(os.path.split(profile.avatartemp)[0], "%s.jpg" % profile.user.username)
+            for size in [ 96, 64, 32, 16 ]:
+                image.thumbnail((size, size), Image.ANTIALIAS)
+                image.save(os.path.join(base, "%s.%s.jpg" % (size, profile.user.username)))
+                setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (size, profile.user.username)))
+            profile.save()
+            return HttpResponseRedirect("%sdone/" % request.path)
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarDelete(request, avatar_id=False):
+def avatardelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         profile = Profile.objects.get(user = request.user)
         for key in [ '', 'temp', '16', '32', '64', '96' ]:

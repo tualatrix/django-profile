@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block customjs %}
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.pack.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.imgareaselect-0.4.2.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		function updateValues(img, selection) {
+			$("input[name='left']").val(selection.x1);	
+			$("input[name='top']").val(selection.y1);	
+			$("input[name='right']").val(selection.x2);	
+			$("input[name='bottom']").val(selection.y2);	
+		}
+
+		$(window).load(function() {
+			$("input[name='width']").val($("#cropimage").width());
+			$("input[name='height']").val($("#cropimage").height());
+			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues });
+		});
+
+		$("input[@type=submit].another").submit(function() {
+		});
+	});
+	</script>
+{% endblock %}
+{% block content %}
+	{% include "userprofile/menu.html" %}
+  <form class="commonform" method="post" action="/profile/edit/avatar/crop/">
+		<h1>{% trans "Crop&resize the area you want" %}</h1>
+		<p class="title">
+			<input type="submit" class="done" value="{% trans 'Done' %}" />
+			<input type="submit" class="another" value="{% trans 'Select anoter image' %}" />
+		</p>
+    <input type="hidden" name="width" value="0"/>
+    <input type="hidden" name="height" value="0"/>
+    <input type="hidden" name="top" value="0"/>
+    <input type="hidden" name="bottom" value="0"/>
+    <input type="hidden" name="left" value="0"/>
+    <input type="hidden" name="right" value="0"/>
+  </form>
+	<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
+{% endblock %}

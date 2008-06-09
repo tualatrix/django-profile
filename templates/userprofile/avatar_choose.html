@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block customjs %}
+	<script type="text/javascript">
+		$(function() {
+  		//avatar
+  		$("a.delavatar").click(function() {
+    		$.getJSON($(this).attr("href"), function(data) {
+      		if (data.success) {
+        		$("img#avatarimg").attr("src", "/site_media/images/default.png");
+      		}
+    		});
+    		return false;
+  		});
+     	$("#id_photo").change(function() {
+       	$("form").submit();
+     	});
+		});
+	</script>
+{% endblock %}
+{% block content %}
+	{% include "userprofile/menu.html" %}
+  <form class="commonform" action="" method="post" enctype="multipart/form-data">
+		<h1>{% trans "Choose the source of your avatar" %}</h1>
+		{% if profile.avatar %}
+  	<div class="avatar" style="text-align: center;">
+    	<img id="avatarimg" src="{{ profile.get_avatar96_url }}" /><br />
+			<a href="/profile/edit/avatar/delete/" class="delavatar">{% trans "Delete" %}</a>
+  	</div>
+		{% endif %}
+		<div style="float: left; padding-left: 25px;">
+			<p style="margin: 0px;">{% trans "You have 3 options to select the image file you want as avatar in your profile:" %}</p>
+			<ol>
+				<li>
+    			<label for="id_url">{% trans "Select an image from a remote URL:" %}</label>
+    			{{ form.url }}
+					<input type="submit" value="{% trans "Done" %}" />
+				</li>
+				<li>
+    			<label for="id_photo">{% trans "Select an image from disk:" %}</label>
+    			{{ form.photo }}
+				</li>
+				{% if websearch %}
+				<li>
+					<a href="/profile/edit/avatar/search/">{% trans "Search for an image on Picasa Web" %}</a>
+				</li>
+				{% endif %}
+			</ol>
+		</div>	
+  </form>
+	{% if form.errors %}
+	{{ form.errors }}
+	{% endif %}
+{% endblock %}

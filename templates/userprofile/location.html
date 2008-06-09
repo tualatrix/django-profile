@@ -3,6 +3,22 @@
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
+<script type="text/javascript">
+	$(function() {
+     // Click on the save button
+     $("input[@type=button].save").click(function() {
+       $("img.saving").attr("src", "/site_media/images/loading2.gif");
+       $("img.saving").show();
+       $.post($("form").attr("action"), $("form").serialize(), function(data) {
+	       if (data.success) {
+  		     $("img.saving").attr("src", "/site_media/images/good.png");
+         } else {
+     		   $("img.saving").attr("src", "/site_media/images/error.png");
+         }
+       }, "json");
+     });
+	});
+</script>
 {% endblock %}
 {% block content %}
 {% load userprofile_tags %}
