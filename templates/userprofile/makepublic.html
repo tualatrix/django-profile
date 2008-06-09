@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block customjs %}
+<script type="text/javascript">
+	$(function() {
+  });
+</script>
+{% endblock %}
+{% block content %}
+{% load userprofile_tags %}
+{% include "userprofile/menu.html" %}
+<form class="commonform profile" action="/profile/personal/save/" method="post">
+	<h1>{% trans "Click on the information you want to make public" %}</h1>
+  <fieldset>
+		<div>
+    	<label for="id_username">{% trans "Username:" %}</label>
+    	{{ profile.user }}
+		</div>
+		{% if profile.user.email %}
+		<div>
+    	<label for="id_email">{% trans "E-mail:" %}</label>
+    	{{ profile.user.email }}
+		</div>
+		{% endif %}
+		{% if profile.firstname %}
+		<div>
+    	<label for="id_firstname">{% trans "First Name:" %}</label>
+    	{{ profile.firstname }}
+		</div>
+		{% endif %}
+		{% if profile.surname %}
+		<div>
+    	<label for="id_surname">{% trans "Surname:" %}</label>
+    	{{ profile.surname }}
+		</div>
+		{% endif %}
+		{% if profile.gender %}
+		<div>
+    	<label for="id_gender">{% trans "Gender:" %}</label>
+			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
+			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
+		</div>
+		{% endif %}
+		{% if profile.birthdate %}
+		<div>
+   		<label for="id_birthdate">{% trans "Birth date:" %}</label>
+			{{ profile.yearsold }} {% trans "years old." %}
+		</div>
+		{% endif %}
+		{% if profile.url %}
+		<div>
+    	<label for="id_url">{% trans "Url:" %}</label>
+    	{{ profile.url }}
+		</div>
+		{% endif %}
+		{% if profile.about %}
+		<div>
+    	<label for="id_about">{% trans "About:" %}</label>
+    	{{ profile.about }}
+		</div>
+		{% endif %}
+		{% if profile.country %}
+		<div>
+    	<label for="id_country">{% trans "Country:" %}</label>
+    	{{ profile.country }}
+		</div>
+		{% endif %}
+		{% if profile.location %}
+		<div>
+    	<label for="id_location">{% trans "Location:" %}</label>
+    	{{ profile.location }}
+		</div>
+		{% endif %}
+  </fieldset>
+</form>
+<div class="save">
+  <input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+</div>
+{% endblock %}
