@@ -6,9 +6,9 @@ from django.conf import settings
 urlpatterns = patterns('',
     # Private profile
     (r'^$', overview, {'APIKEY': settings.APIKEY, 'template': 'userprofile/overview.html'}),
-    (r'^edit/(?P<type>location)/$', private, {'APIKEY': settings.APIKEY, 'template': 'userprofile/location.html'}),
-    (r'^edit/(?P<type>personal)/$', private, {'template': 'userprofile/personal.html'}),
-    (r'^(?P<type>personal|location)/save/$', save),
+    (r'^edit/(?P<type>location)/$', profile, {'APIKEY': settings.APIKEY, 'template': 'userprofile/location.html'}),
+    (r'^edit/(?P<type>personal)/$', profile, {'template': 'userprofile/personal.html'}),
+    (r'^edit/(?P<type>personal|location)/done/$', direct_to_template, {'template': 'userprofile/profile_done.html'}),
     (r'^delete/$', delete, {'template': 'userprofile/delete.html'}),
     (r'^delete/done/$', direct_to_template, {'template': 'userprofile/delete_done.html'}),
     (r'^public/$', makepublic, {'template': 'userprofile/makepublic.html'}),

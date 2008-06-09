@@ -20,9 +20,7 @@ import urllib
 from xml.dom import minidom
 import os
 
-forms = { 'location': LocationForm, 'personal': ProfileForm }
 if settings.WEBSEARCH:
-    import gdata.media
     import gdata.photos.service
 
 def valid_users():
@@ -78,10 +76,11 @@ def overview(request, template, APIKEY):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def private(request, template, type, APIKEY=None):
+def profile(request, template, type, APIKEY=None):
     """
     Private part of the user profile
     """
+    forms = { 'location': LocationForm, 'personal': ProfileForm }
     profile, created = Profile.objects.get_or_create(user = request.user)
 
     try:
@@ -91,8 +90,11 @@ def private(request, template, type, APIKEY=None):
         email = request.user.email
         validated = True
 
-    if request.method == "POST" and form.is_valid():
+    if request.method == "POST":
         form = forms[type](request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("%sdone/" % request.path)
     else:
         form = forms[type](instance=profile)
 

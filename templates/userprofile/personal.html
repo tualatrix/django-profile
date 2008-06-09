@@ -14,19 +14,6 @@
 		{% ifequal LANGUAGE_CODE 'es' %}
 		$.datepicker.setDefaults($.datepicker.regional["{{ LANGUAGE_CODE }}"]);
 		{% endifequal %}
-
-    // Click on the save button
-    $("input[@type=button].save").click(function() { 
-      $("img.saving").attr("src", "/site_media/images/loading2.gif");
-      $("img.saving").show();
-      $.post($("form").attr("action"), $("form").serialize(), function(data) {
-        if (data.success) {
-          $("img.saving").attr("src", "/site_media/images/good.png");
-        } else {
-          $("img.saving").attr("src", "/site_media/images/error.png");
-        }
-      }, "json");
-    });
   });
 </script>
 {% endblock %}
@@ -34,7 +21,7 @@
 {% block content %}
 {% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="/profile/personal/save/" method="post" enctype="multipart/form-data">
+<form class="commonform profile" action="/profile/edit/personal/" method="post" enctype="multipart/form-data">
 	<h1>{% trans "Edit your personal information" %}</h1>
   <fieldset>
 		<div>
@@ -62,10 +49,10 @@
     	<label for="id_about">{% trans "About:" %}</label>
     	{{ form.about }}
 		</div>
+		<div class="save">
+  		<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
+		</div>
     <div style="display: none;">{{ form.birthdate }}{{ form.gender }}</div>
   </fieldset>
 </form>
-<div class="save">
-  <input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
-</div>
 {% endblock %}
