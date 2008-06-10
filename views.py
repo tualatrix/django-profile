@@ -50,12 +50,12 @@ def public(request, APIKEY, current_user, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def makepublic(request, template):
+def makepublic(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user = request.user)
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def searchimages(request, template):
+def searchimages(request, template, section):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST" and request.POST.get('search'):
         photos = list()
         urls = list()
@@ -71,12 +71,12 @@ def searchimages(request, template):
         return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def overview(request, template, APIKEY):
+def overview(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user = request.user)
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def profile(request, template, type, APIKEY=None):
+def profile(request, template, section, APIKEY=None):
     """
     Private part of the user profile
     """
@@ -91,12 +91,12 @@ def profile(request, template, type, APIKEY=None):
         validated = True
 
     if request.method == "POST":
-        form = forms[type](request.POST, instance=profile)
+        form = forms[section](request.POST, instance=profile)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("%sdone/" % request.path)
     else:
-        form = forms[type](instance=profile)
+        form = forms[section](instance=profile)
 
     lat = profile.latitude
     lng = profile.longitude
@@ -109,10 +109,10 @@ def profile(request, template, type, APIKEY=None):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def save(request, type):
+def save(request, section):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
         profile = Profile.objects.get(user=request.user)
-        form = forms[type](request.POST, instance=profile)
+        form = forms[section](request.POST, instance=profile)
         if form.is_valid():
             profile = form.save()
 
@@ -128,7 +128,7 @@ def save(request, type):
         raise Http404()
 
 @login_required
-def delete(request, template):
+def delete(request, template, section):
     user = User.objects.get(username=str(request.user))
     if request.method == "POST":
         # Remove the profile
@@ -148,7 +148,7 @@ def delete(request, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarchoose(request, template, websearch=False):
+def avatarchoose(request, template, section, websearch=False):
     """
     Avatar choose
     """
@@ -174,7 +174,7 @@ def avatarchoose(request, template, websearch=False):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def avatarcrop(request, template):
+def avatarcrop(request, template, section):
     """
     Avatar management
     """

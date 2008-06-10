@@ -26,14 +26,14 @@
 			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
 		</div>
 		<div class="mapinfo">
-   		<label for="id_location">{% trans "Location:" %}</label>
-			<input style="width: 600px;" id="id_location" type="text" readonly="readonly" name="location" maxlength="255" value="{{ profile.location }}" /> 
+   		<label>{% trans "Location:" %}</label>
+			<p id="location_info" style="float: left; line-height: 28px; margin: 0px;">{{ profile.location }}</p>
 		</div>
 		<div class="mapinfo">
    		<label for="map">{% trans "Position:" %}</label>
 			<div id="map"></div>
 		</div>
-    <div style="display: none;">{{ form.latitude }}{{ form.longitude }}</div>
+    <div style="display: none;">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
 		<div class="save">
 			<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" />
 		</div>

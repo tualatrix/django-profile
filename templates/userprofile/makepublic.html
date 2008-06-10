@@ -2,10 +2,23 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
+{% if profile.latitude %}
+<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
 <script type="text/javascript">
 	$(function() {
+  	if (GBrowserIsCompatible()) {
+    	this.map = new GMap2(document.getElementById("map"));
+    	this.map.addControl(new GLargeMapControl());
+    	this.map.addControl(new GOverviewMapControl())
+    	this.map.addControl(new GMapTypeControl())
+    	this.map.enableContinuousZoom();
+    	this.map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
+    	this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, bouncy: true, draggable: false});
+    	this.map.addOverlay(this.marker);
+		}
   });
 </script>
+{% endif %}
 {% endblock %}
 {% block content %}
 {% load userprofile_tags %}
@@ -15,62 +28,71 @@
   <fieldset>
 		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
-    	{{ profile.user }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.user }}</strong>
 		</div>
 		{% if profile.user.email %}
 		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
-    	{{ profile.user.email }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.user.email }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.firstname %}
 		<div>
     	<label for="id_firstname">{% trans "First Name:" %}</label>
-    	{{ profile.firstname }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.firstname }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.surname %}
 		<div>
     	<label for="id_surname">{% trans "Surname:" %}</label>
-    	{{ profile.surname }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.surname }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.gender %}
 		<div>
     	<label for="id_gender">{% trans "Gender:" %}</label>
-			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
-			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
+			{% ifequal profile.gender "M" %}
+			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;"><img src="{{ MEDIA_URL }}images/male.png" /> {% trans "Male" %}</strong>
+			{% else %}
+			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;"><img src="{{ MEDIA_URL }}images/female.png" /> {% trans "Female" %}</strong>
+			{% endifequal %}
 		</div>
 		{% endif %}
-		{% if profile.birthdate %}
+		{% if profile.yearsold %}
 		<div>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
-			{{ profile.yearsold }} {% trans "years old." %}
+			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.yearsold }} {% trans "years old." %}</strong>
 		</div>
 		{% endif %}
 		{% if profile.url %}
 		<div>
     	<label for="id_url">{% trans "Url:" %}</label>
-    	{{ profile.url }}
+    	<a href="{{ profile.url }}"><strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.url }}</strong></a>
 		</div>
 		{% endif %}
 		{% if profile.about %}
 		<div>
     	<label for="id_about">{% trans "About:" %}</label>
-    	{{ profile.about }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.about }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.country %}
 		<div>
     	<label for="id_country">{% trans "Country:" %}</label>
-    	{{ profile.country }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.country }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.location %}
 		<div>
     	<label for="id_location">{% trans "Location:" %}</label>
-    	{{ profile.location }}
+    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.location }}</strong>
 		</div>
+		{% endif %}
+		{% if profile.latitude %}
+    <div>
+      <label for="map">{% trans "Position:" %}</label>
+      <div id="map"></div>
+    </div>
 		{% endif %}
   </fieldset>
 </form>
