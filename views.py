@@ -52,6 +52,14 @@ def public(request, APIKEY, current_user, template):
 @login_required
 def makepublic(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user = request.user)
+    if request.method == "POST":
+        public = dict()
+        for item in profile.__dict__.keys():
+            if request.POST.has_key("%s_public" % item):
+                public[item] = request.POST.get("%s_public" % item)
+        profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
+        return HttpResponseRedirect("%sdone/" % request.path)
+
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
@@ -73,6 +81,14 @@ def searchimages(request, template, section):
 @login_required
 def overview(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user = request.user)
+
+    try:
+        email = Validation.objects.get(user=user).email
+        validated = False
+    except:
+        email = request.user.email
+        validated = True
+
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
@@ -82,13 +98,6 @@ def profile(request, template, section, APIKEY=None):
     """
     forms = { 'location': LocationForm, 'personal': ProfileForm }
     profile, created = Profile.objects.get_or_create(user = request.user)
-
-    try:
-        email = Validation.objects.get(user=user).email
-        validated = False
-    except:
-        email = request.user.email
-        validated = True
 
     if request.method == "POST":
         form = forms[section](request.POST, instance=profile)
@@ -200,8 +209,8 @@ def avatarcrop(request, template, section):
             profile.avatar = os.path.join(os.path.split(profile.avatartemp)[0], "%s.jpg" % profile.user.username)
             for size in [ 96, 64, 32, 16 ]:
                 image.thumbnail((size, size), Image.ANTIALIAS)
-                image.save(os.path.join(base, "%s.%s.jpg" % (size, profile.user.username)))
-                setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (size, profile.user.username)))
+                image.save(os.path.join(base, "%s.%s.jpg" % (profile.user.username, size)))
+                setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (profile.user.username, size)))
             profile.save()
             return HttpResponseRedirect("%sdone/" % request.path)
 

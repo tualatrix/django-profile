@@ -23,34 +23,46 @@
 {% block content %}
 {% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="/profile/personal/save/" method="post">
+<form class="commonform profile" action="" method="post">
 	<h1>{% trans "Click on the information you want to make public" %}</h1>
   <fieldset>
 		<div>
     	<label for="id_username">{% trans "Username:" %}</label>
+			<input style="float: left;" type="checkbox" name="user_id_public" {% if profile.visible.user_id %}checked="on"{% endif %} />
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.user }}</strong>
 		</div>
 		{% if profile.user.email %}
 		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
+			<input style="float: left;" type="checkbox" name="email_public" {% if profile.visible.email %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.user.email }}</strong>
+		</div>
+		{% endif %}
+		{% if profile.avatar %}
+		<div style="overflow: hidden;">
+    	<label for="id_avatar">{% trans "Avatar:" %}</label>
+			<input style="float: left;" type="checkbox" name="user_id_public" {% if profile.visible.avatar %}checked="on"{% endif %} />
+			<img style="float: left;" src="{{ profile.get_avatar96_url }}" />
 		</div>
 		{% endif %}
 		{% if profile.firstname %}
 		<div>
     	<label for="id_firstname">{% trans "First Name:" %}</label>
+			<input style="float: left;" type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.firstname }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.surname %}
 		<div>
     	<label for="id_surname">{% trans "Surname:" %}</label>
+			<input style="float: left;" type="checkbox" name="surname_public" {% if profile.visible.surname %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.surname }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.gender %}
 		<div>
     	<label for="id_gender">{% trans "Gender:" %}</label>
+			<input style="float: left;" type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
 			{% ifequal profile.gender "M" %}
 			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;"><img src="{{ MEDIA_URL }}images/male.png" /> {% trans "Male" %}</strong>
 			{% else %}
@@ -61,42 +73,48 @@
 		{% if profile.yearsold %}
 		<div>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
+			<input style="float: left;" type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/>
 			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.yearsold }} {% trans "years old." %}</strong>
 		</div>
 		{% endif %}
 		{% if profile.url %}
 		<div>
     	<label for="id_url">{% trans "Url:" %}</label>
+			<input style="float: left;" type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
     	<a href="{{ profile.url }}"><strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.url }}</strong></a>
 		</div>
 		{% endif %}
 		{% if profile.about %}
 		<div>
     	<label for="id_about">{% trans "About:" %}</label>
+			<input style="float: left;" type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.about }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.country %}
 		<div>
     	<label for="id_country">{% trans "Country:" %}</label>
+			<input style="float: left;" type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.country }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.location %}
 		<div>
     	<label for="id_location">{% trans "Location:" %}</label>
+			<input style="float: left;" type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
     	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.location }}</strong>
 		</div>
 		{% endif %}
 		{% if profile.latitude %}
     <div>
       <label for="map">{% trans "Position:" %}</label>
+			<input style="float: left;" type="checkbox" name="latitude_public" {% if profile.visible.latitude %}checked="on"{% endif %}/>
       <div id="map"></div>
     </div>
 		{% endif %}
+		<div class="save">
+  		<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" />
+		</div>
   </fieldset>
 </form>
-<div class="save">
-  <input type="button" style="float: right;" class="save" value="{% trans 'Save' %}" /><img style="float: left;" class="saving" src="{{ MEDIA_URL }}images/loading2.gif" />
-</div>
 {% endblock %}
