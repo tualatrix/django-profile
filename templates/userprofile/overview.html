@@ -19,7 +19,7 @@
 		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
        <strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
-                       (<a href="/accounts/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
+                       (<a href="/account/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
 		</div>
   </fieldset>
 </form>
