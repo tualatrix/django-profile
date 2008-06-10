@@ -103,7 +103,7 @@ class Profile(models.Model):
         try:
             return pickle.load(open(self.get_public_filename(), "rb"))
         except:
-            return dict()
+            return { 'user_id': True, 'avatar': True }
 
     def get_absolute_url(self):
         return "/profile/users/%s/" % self.user
