@@ -24,7 +24,7 @@ if settings.WEBSEARCH:
     import gdata.photos.service
 
 def valid_users():
-    return User.objects.filter(is_active=True).order_by("-date_joined")
+    return Profile.objects.order_by("-date")
 
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
