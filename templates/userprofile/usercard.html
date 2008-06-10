@@ -1,12 +1,12 @@
 {% load i18n %}
-<div class="vcard usercard" style="height: 180px;">
+<div class="vcard usercard" style="height: 120px;">
 	{% if profile.visible.user_id %}<a style="float: right;" href="{{ profile.get_absolute_url }}">{% trans "Public profile" %}</a>{% endif %}
 	{% if profile.gender and profile.visible.gender %}<img class="gender" style="clear: right;" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	<ul>
 		{% if profile.visible.avatar and profile.avatar %}
-		<li><img class="photo" src="{{ profile.get_avatar96_url }}" alt="{{ profile.user }}"/></li>
+		<li><img class="photo" src="{{ profile.get_avatar64_url }}" alt="{{ profile.user }}"/></li>
 		{% else %}
-		<li><img class="photo" src="/site_media/images/default.96.png" alt="{% trans "No avatar" %}"/></li>
+		<li><img class="photo" src="/site_media/images/default.64.png" alt="{% trans "No avatar" %}"/></li>
 		{% endif %}
   	<li class="fn username"><strong>{% trans "Username" %}:</strong> {% if profile.visible.user_id %}{{ profile.user }}{% else %}{% trans "Not public" %}{% endif %}</li>
 		{% if profile.country and profile.visible.country_id %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}

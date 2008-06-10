@@ -41,7 +41,7 @@
 		{% if profile.avatar %}
 		<div style="overflow: hidden;">
     	<label for="id_avatar">{% trans "Avatar:" %}</label>
-			<input style="float: left;" type="checkbox" name="user_id_public" {% if profile.visible.avatar %}checked="on"{% endif %} />
+			<input style="float: left;" type="checkbox" name="avatar_public" {% if profile.visible.avatar %}checked="on"{% endif %} />
 			<img style="float: left;" src="{{ profile.get_avatar96_url }}" />
 		</div>
 		{% endif %}
