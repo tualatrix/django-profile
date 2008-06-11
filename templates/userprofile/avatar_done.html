@@ -2,9 +2,7 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block content %}
-{% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<h1 style="border-bottom: 2px solid black;">{% trans "Avatar selection finished" %}</h1>
+<h1>{% trans "Avatar selection finished" %}</h1>
 <p>{% trans "Your avatar has been saved successfully." %}</p>
-<p><a href="/profile/manage/">Return to my profile</a></p>
 {% endblock %}

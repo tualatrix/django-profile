@@ -26,7 +26,7 @@
 				return false;
 			});
 			$("input[name='cancel']").click(function() {
-				window.location="/profile/edit/avatar/";
+				window.location="/accounts/profile/edit/avatar/";
 			});
 		});
 	</script>
@@ -39,7 +39,7 @@
 	</form>
 	<div class="photos">
 	</div>
-	<form id="avatar" action="/profile/edit/avatar/" method="POST">
+	<form id="avatar" action="/accounts/profile/edit/avatar/" method="POST">
 		<input type="hidden" name="url" value="" />
 	</form>
 {% endblock %}

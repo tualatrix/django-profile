@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Resend validation" %}{% endblock %}
+{% block customjs %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.validation.js"></script>
+{% endblock %}
+
+{% block content %}
+{% include "userprofile/menu.html" %}
+<form class="commonform lostpw" action="" method="post">
+	<h1>{% trans "Resend validation" %}</h1>
+	<p class="intro">{% trans "Enter your e-mail address below and we'll resend the user activation e-mail to you." %}</p>
+ 	<fieldset>
+ 		{% if form.errors %}
+ 		<p style="margin-left: 250px; font-size: .8em; color: red;">{{form.email.errors|join:","}}</p>
+ 		{% endif %}
+   	<div>
+     	<label for="id_email" style="width: 240px;">{% trans 'E-mail address:' %}</label>
+     	{{ form.email }}
+			<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
+   	</div>
+   	<input type="submit" style="margin-left: 245px;" value="{% trans 'Resend the activation e-mail' %}" />
+ 	</fieldset>
+</form>
+{% endblock %}

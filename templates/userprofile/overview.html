@@ -2,7 +2,6 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block content %}
-{% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
 <form class="commonform profile" action="" method="post">
 	<h1>{% trans "Overview of your profile" %}</h1>
@@ -15,11 +14,17 @@
 		<div>
     	<label for="id_user">{% trans "Username:" %}</label>
     	<strong id="id_user">{{ profile.user }}</strong> 
+			 (<a href="/accounts/password/change/">{% trans "Change password" %}</a>)
 		</div>
 		<div>
     	<label for="id_email">{% trans "E-mail:" %}</label>
-       <strong id="id_email">{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
-                       (<a href="/account/email/change">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>)
+       <strong id="id_email">
+				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
+				({% if not validated %}{% trans "Not validated" %}{% else %}{% trans "Validated" %}{% endif %})
+        <p style="margin: 0px;">
+					<a href="/accounts/email/change/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
+					{% if not validated %} - <a href="/accounts/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+				</p>
 		</div>
   </fieldset>
 </form>

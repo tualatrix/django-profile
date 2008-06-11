@@ -26,7 +26,7 @@
 {% endblock %}
 {% block content %}
 	{% include "userprofile/menu.html" %}
-  <form class="commonform" method="post" action="/profile/edit/avatar/crop/">
+  <form class="commonform" method="post" action="{{ request.path }}">
 		<h1>{% trans "Crop&resize the area you want" %}</h1>
 		<p class="title">
 			<input type="submit" class="done" value="{% trans 'Done' %}" />

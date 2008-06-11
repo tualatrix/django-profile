@@ -19,9 +19,8 @@
 {% endblock %}
 
 {% block content %}
-{% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="/profile/edit/personal/" method="post" enctype="multipart/form-data">
+<form class="commonform profile" action="{{ request.path }}" method="post" enctype="multipart/form-data">
 	<h1>{% trans "Edit your personal information" %}</h1>
   <fieldset>
 		<div>

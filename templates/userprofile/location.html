@@ -5,9 +5,8 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
 {% endblock %}
 {% block content %}
-{% load userprofile_tags %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="/profile/edit/location/" method="post" enctype="multipart/form-data">
+<form class="commonform profile" action="{{ request.path }}" method="post" enctype="multipart/form-data">
 	<h1>{% trans "Define your location" %}</h1>
   <fieldset>
 		<div>
