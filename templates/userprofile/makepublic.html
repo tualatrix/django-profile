@@ -26,15 +26,6 @@
 	<h1>{% trans "Click on the information you want to make public" %}</h1>
   <fieldset>
 		<div>
-    	<label for="id_email">{% trans "E-mail:" %}</label>
-			{% if profile.user.email %}
-			<input style="float: left;" type="checkbox" name="email_public" {% if profile.visible.email %}checked="on"{% endif %}/>
-    	<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.user.email }}</strong>
-			{% else %}
-			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{% trans "Not set" %}</strong>
-			{% endif %}
-		</div>
-		<div>
     	<label for="id_firstname">{% trans "First Name:" %}</label>
 			{% if profile.firstname %}
 			<input style="float: left;" type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>

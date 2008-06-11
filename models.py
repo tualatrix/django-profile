@@ -104,9 +104,9 @@ class Profile(models.Model):
 
     def visible(self):
         try:
-            return { 'user_id': True, 'avatar': True } + pickle.load(open(self.get_public_filename(), "rb"))
+            return pickle.load(open(self.get_public_filename(), "rb"))
         except:
-            return { 'user_id': True, 'avatar': True }
+            return dict()
 
     def get_absolute_url(self):
         return "%s%s/" % (settings.LOGIN_REDIRECT_URL, self.user)
