@@ -81,7 +81,6 @@ def searchimages(request, template, section):
 @login_required
 def overview(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user=request.user)
-    print "hola"
     validated = False
     try:
         email = Validation.objects.get(user=request.user).email
