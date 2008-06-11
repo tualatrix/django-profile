@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans 'E-mail change processed' %}{% endblock %}
+{% block content %}
+{% include "userprofile/menu.html" %}
+<h1>{% trans 'E-mail change processed' %}</h1>
+<p>{% trans "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body." %}</p>
+{% endblock %}
