@@ -69,7 +69,6 @@ def searchimages(request, template, section):
         photos = list()
         urls = list()
         gd_client = gdata.photos.service.PhotosService()
-        print request.POST.get('search')
         feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % request.POST.get('search').split(" ")[0], limit='35')
         for entry in feed.entry:
             photos.append(entry.media.thumbnail[0].url)
@@ -83,12 +82,12 @@ def searchimages(request, template, section):
 def overview(request, template, APIKEY, section):
     profile, created = Profile.objects.get_or_create(user = request.user)
 
+    validated = False
     try:
         email = Validation.objects.get(user=request.user).email
-        validated = False
-    except:
+    except Validation.DoesNotExist:
         email = request.user.email
-        validated = True
+        if email: validated = True
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -143,6 +142,8 @@ def delete(request, template, section):
     if request.method == "POST":
         # Remove the profile
         Profile.objects.get(user=user).delete()
+
+        Validation.objects.filter(user=user).delete()
 
         # Remove the e-mail of the account too
         user.email = ''
@@ -284,7 +285,7 @@ def register(request, template):
 
             if form.cleaned_data.get('email'):
                 newuser.email = form.cleaned_data.get('email')
-                Validation.objects.add(user=newuser, email=newuser.email, type="user")
+                Validation.objects.add(user=newuser, email=newuser.email, type="email")
 
             newuser.save()
             return HttpResponseRedirect('%scomplete/' % request.path)
@@ -309,19 +310,23 @@ def reset_password(request, template):
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
-def resend_validation(request, template):
+def validation_reset(request, template):
+    if request.user.is_authenticated():
+        try:
+            resend = Validation.objects.get(user=request.user).resend()
+        except Validation.DoesNotExist:
+            resend = False
+        return HttpResponseRedirect('%sdone/%s' % (request.path, resend and 'success' or 'failed'))
+
     if request.method == 'POST':
-        form = ValidationForm(request.POST)
+        form = ValidationResetForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
             resend = Validation.objects.get(email=email).resend()
             return HttpResponseRedirect('%sdone/%s' % (request.path, resend and 'success' or 'failed'))
 
     else:
-        try:
-            form = ValidationForm({ 'email': Validation.objects.get(user=request.user).email })
-        except:
-            form = ValidationForm()
+        form = ValidationForm()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -338,7 +343,7 @@ def change_password_with_key(request, key, template):
         form = changePasswordKeyForm(request.POST)
         if form.is_valid():
             form.save(key)
-            return HttpResponseRedirect('%sdone/' % request.path)
+            return HttpResponseRedirect('/accounts/password/change/done/')
     else:
         form = changePasswordKeyForm()
 
@@ -379,7 +384,7 @@ def check_email_unused(request, email):
         if not email_re.search(email):
             return json_error_response(_("Invalid e-mail"))
 
-        if not User.objects.filter(email=email):
+        if not User.objects.filter(email=email) and not Validation.objects.filter(email=email):
             return HttpResponse(simplejson.dumps({'success': True}))
         else:
             return json_error_response(_("E-mail not registered"))
@@ -391,10 +396,21 @@ def check_email(request, email):
     Check if a username exists. Only HTTPXMLRequest. Returns JSON
     """
     try:
+        User.objects.get(email=email)
+        return HttpResponse(simplejson.dumps({'success': True}))
+    except User.DoesNotExist:
+        return json_error_response(_("E-mail not registered"))
+
+def check_validating_email(request, email):
+    """
+    Check if a username exists. Only HTTPXMLRequest. Returns JSON
+    """
+    try:
         Validation.objects.get(email=email)
         return HttpResponse(simplejson.dumps({'success': True}))
-    except Validation.NotExists:
+    except Validation.DoesNotExist:
         return json_error_response(_("E-mail not registered"))
+
 
 def logout(request, template):
     from django.contrib.auth import logout

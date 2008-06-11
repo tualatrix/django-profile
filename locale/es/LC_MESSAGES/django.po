@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-11 12:40+0000\n"
+"POT-Creation-Date: 2008-06-11 16:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,15 +37,19 @@ msgstr ""
 msgid "The username is already registered."
 msgstr "Ese nombre de usuario ya está registrado."
 
-#: forms.py:77 forms.py:135 forms.py:157 forms.py:176
+#: forms.py:77 forms.py:137 forms.py:159 forms.py:178
 msgid "The passwords inserted are different."
 msgstr "Las contraseñas introducidas no coinciden."
 
-#: forms.py:89 forms.py:106
+#: forms.py:89 forms.py:108
 msgid "That e-mail is already used."
 msgstr "Ese e-mail ya está utilizado."
 
-#: forms.py:119
+#: forms.py:93
+msgid "That e-mail is already being confirmed."
+msgstr "Ese e-mail ya está siendo confirmado."
+
+#: forms.py:121
 msgid "There's no user with that e-mail"
 msgstr "No existe ningún usuario con ese e-mail"
 
@@ -81,26 +85,26 @@ msgstr "Paises"
 msgid "%s's profile"
 msgstr "Perfil de %s"
 
-#: models.py:184
+#: models.py:184 models.py:227
 #, python-format
 msgid "Email change confirmation on %s"
 msgstr "Confirmación de cambio de e-mail en %s"
 
-#: models.py:187
+#: models.py:187 models.py:230
 #, python-format
 msgid "Password reset on %s"
 msgstr "Reseteo de contraseña en %s"
 
-#: models.py:210
+#: models.py:213
 #, python-format
 msgid "Email validation process for %(user)s of type %(type)s"
 msgstr "Proceso de validación por e-mail para %(user)s del tipo %(type)s"
 
-#: views.py:241
+#: views.py:244
 msgid "E-mail changed successfully."
 msgstr "La dirección de correo ha sido cambiada correctamente."
 
-#: views.py:244
+#: views.py:247
 msgid ""
 "The key you received via e-mail is no longer valid. Please try the e-mail "
 "change process again."
@@ -108,7 +112,7 @@ msgstr ""
 "La clave que recibiste por e-mail ya no es válida. Por favor, inicia el "
 "proceso de cambio de e-mail de nuevo."
 
-#: views.py:254
+#: views.py:257
 msgid ""
 "Account validated successfully. Now you can access to the login page with "
 "your username and password and start using this site."
@@ -116,7 +120,7 @@ msgstr ""
 "Tu cuenta ha sido validada correctamente. Ya puedes acceder a la página de "
 "login con tu usuario y contraseña y empezar a utilizar este sitio."
 
-#: views.py:257
+#: views.py:260
 msgid ""
 "The key you received via e-mail is no longer valid. Please try the e-mail "
 "validation process again."
@@ -124,11 +128,11 @@ msgstr ""
 "La clave que recibiste por e-mail ya no es válida. Por favor, inicia el "
 "proceso de validación de cuenta de nuevo."
 
-#: views.py:382
+#: views.py:386
 msgid "Invalid e-mail"
 msgstr "Dirección de correo incorrecta"
 
-#: views.py:387 views.py:399
+#: views.py:391 views.py:403 views.py:413
 msgid "E-mail not registered"
 msgstr "E-mail no registrado"
 
@@ -155,27 +159,27 @@ msgstr "Elige la fuente de tu avatar"
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/userprofile/avatar_choose.html:33
+#: templates/userprofile/avatar_choose.html:34
 msgid ""
 "You have 3 options to select the image you want as avatar in your profile:"
 msgstr ""
 "Tienes 3 opciones para seleccionar la imagen que quieres utilizar como "
 "avatar en tu perfil:"
 
-#: templates/userprofile/avatar_choose.html:36
+#: templates/userprofile/avatar_choose.html:37
 msgid "Select an image from a remote URL:"
 msgstr "Selecciona una imagen de una URL remota:"
 
-#: templates/userprofile/avatar_choose.html:38
+#: templates/userprofile/avatar_choose.html:39
 #: templates/userprofile/avatar_crop.html:32
 msgid "Done"
 msgstr "Hecho"
 
-#: templates/userprofile/avatar_choose.html:41
+#: templates/userprofile/avatar_choose.html:42
 msgid "Select an image from disk:"
 msgstr "Selecciona una imagen del disco duro:"
 
-#: templates/userprofile/avatar_choose.html:46
+#: templates/userprofile/avatar_choose.html:47
 msgid "Search for an image on Picasa Web"
 msgstr "Busca una imagen en Picasa Web"
 
@@ -187,11 +191,11 @@ msgstr "Recorta y redimensiona el area que quieres"
 msgid "Select anoter image"
 msgstr "Selecciona otra imagen"
 
-#: templates/userprofile/avatar_done.html:7
+#: templates/userprofile/avatar_done.html:6
 msgid "Avatar selection finished"
 msgstr "Selección de avatar terminada"
 
-#: templates/userprofile/avatar_done.html:8
+#: templates/userprofile/avatar_done.html:7
 msgid "Your avatar has been saved successfully."
 msgstr "Tu avatar ha sido guardado satisfactoriamente."
 
@@ -208,7 +212,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: templates/userprofile/delete.html:7
-#: templates/userprofile/delete_done.html:7
+#: templates/userprofile/delete_done.html:6
 msgid "Delete all your personal information"
 msgstr "Borrar toda la información de tu perfil"
 
@@ -216,7 +220,7 @@ msgstr "Borrar toda la información de tu perfil"
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: templates/userprofile/delete_done.html:8
+#: templates/userprofile/delete_done.html:7
 msgid "Your profile information has been removed successfully."
 msgstr "La información de tu perfil ha sido borrada satisfactoriamente"
 
@@ -244,6 +248,65 @@ msgstr "Nueva dirección de correo:"
 #: templates/userprofile/email_change.html:25
 msgid "Send confirmation"
 msgstr "Enviar confirmación"
+
+#: templates/userprofile/email_change_done.html:3
+#: templates/userprofile/email_change_done.html:7
+msgid "E-mail change successful"
+msgstr "Cambio de dirección de correo satisfactorio"
+
+#: templates/userprofile/email_change_done.html:9
+msgid "E-mail change unsuccessful"
+msgstr "Fallo en el cambio de dirección de correo"
+
+#: templates/userprofile/email_change_processed.html:3
+#: templates/userprofile/email_change_processed.html:6
+msgid "E-mail change processed"
+msgstr "Cambio de dirección de correo procesado"
+
+#: templates/userprofile/email_change_processed.html:7
+msgid ""
+"An e-mail has been sent to the new e-mail address to verify and activate it. "
+"Please access to your e-mail and complete this process following the "
+"instructions specified in the e-mail body."
+msgstr ""
+"Se te ha enviado un e-mail a la nueva dirección de correo para verificar y "
+"activarla. Por favor, accede a tu correo y completa este proceso siguiendo "
+"las instrucciones descritas en él."
+
+#: templates/userprofile/email_email.html:2
+msgid "You're receiving this e-mail because you requested an e-mail change"
+msgstr ""
+"Has recibido este mensaje porque has solicitado un cambio de dirección de "
+"correo"
+
+#: templates/userprofile/email_email.html:3
+#: templates/userprofile/passwd_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr "para tu cuenta de usuario en %(site_name)s"
+
+#: templates/userprofile/email_email.html:5
+msgid "If you want to proceed with this change, follow this link:"
+msgstr "Si quieres proceder con este cambio, accede a este enlace:"
+
+#: templates/userprofile/email_email.html:9
+#: templates/userprofile/passwd_email.html:9
+#: templates/userprofile/user_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr "Tu usuario, en caso de que lo hayas olvidado:"
+
+#: templates/userprofile/email_email.html:11
+#: templates/userprofile/passwd_email.html:11
+#: templates/userprofile/user_email.html:11
+msgid "Thanks for using our site!"
+msgstr "¡Gracias por utilizar nuestro sitio!"
+
+#: templates/userprofile/email_email.html:13
+#: templates/userprofile/passwd_email.html:13
+#: templates/userprofile/user_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "El equipo de %(site_name)s"
 
 #: templates/userprofile/location.html:10
 msgid "Define your location"
@@ -365,27 +428,27 @@ msgstr "Web:"
 msgid "About:"
 msgstr "Acerca de tí:"
 
-#: templates/userprofile/menu.html:3
+#: templates/userprofile/menu.html:4
 msgid "Overview"
 msgstr "Resumen"
 
-#: templates/userprofile/menu.html:4
+#: templates/userprofile/menu.html:5
 msgid "Edit personal information"
 msgstr "Editar información personal"
 
-#: templates/userprofile/menu.html:5
+#: templates/userprofile/menu.html:6
 msgid "Edit avatar"
 msgstr "Editar avatar"
 
-#: templates/userprofile/menu.html:6
+#: templates/userprofile/menu.html:7
 msgid "Edit location"
 msgstr "Editar localización"
 
-#: templates/userprofile/menu.html:7
+#: templates/userprofile/menu.html:8
 msgid "Define public info"
 msgstr "Definir información pública"
 
-#: templates/userprofile/menu.html:8
+#: templates/userprofile/menu.html:9
 msgid "Remove profile"
 msgstr "Borrar perfil"
 
@@ -397,51 +460,45 @@ msgstr "Resumen de tu perfil"
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: templates/userprofile/overview.html:21
+#: templates/userprofile/overview.html:22
 msgid "Not set yet"
 msgstr "No establecida"
 
-#: templates/userprofile/overview.html:22
+#: templates/userprofile/overview.html:23
+msgid "Not validated"
+msgstr "No validada"
+
+#: templates/userprofile/overview.html:23
+msgid "Validated"
+msgstr "Validada"
+
+#: templates/userprofile/overview.html:25
 msgid "Change your e-mail address"
 msgstr "Cambiar tu dirección de correo"
 
-#: templates/userprofile/overview.html:22
+#: templates/userprofile/overview.html:25
 msgid "Add your e-mail address"
 msgstr "Añadir dirección de correo"
+
+#: templates/userprofile/overview.html:26
+msgid "Resend validation e-mail"
+msgstr "Reenviar e-mail de validación"
 
 #: templates/userprofile/passwd_email.html:2
 msgid "You're receiving this e-mail because you requested a password reset"
 msgstr ""
 "Has recibido este e-mail porque has solicitado un resetedo de contraseña"
 
-#: templates/userprofile/passwd_email.html:3
-#, python-format
-msgid "for your user account at %(site_name)s"
-msgstr "para tu cuenta de usuario en %(site_name)s"
-
 #: templates/userprofile/passwd_email.html:5
 msgid "Feel free to change this password going to this page:"
 msgstr "Puedes cambiar tu contraseña accediendo al siguiente enlace:"
 
-#: templates/userprofile/passwd_email.html:9
-msgid "Your username, in case you've forgotten:"
-msgstr "Tu usuario, en caso de que lo hayas olvidado:"
-
-#: templates/userprofile/passwd_email.html:11
-msgid "Thanks for using our site!"
-msgstr "¡Gracias por utilizar nuestro sitio!"
-
-#: templates/userprofile/passwd_email.html:13
-#, python-format
-msgid "The %(site_name)s team"
-msgstr "El equipo de %(site_name)s"
-
 #: templates/userprofile/password_change.html:4
-#: templates/userprofile/password_change.html:14
+#: templates/userprofile/password_change.html:12
 msgid "Password change for"
 msgstr "Cambio de contraseña de"
 
-#: templates/userprofile/password_change.html:15
+#: templates/userprofile/password_change.html:13
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -449,15 +506,15 @@ msgstr ""
 "Por favor introduce tu nueva contraseña dos veces para que podamos verificar "
 "que la has tecleado correctamente."
 
-#: templates/userprofile/password_change.html:18
+#: templates/userprofile/password_change.html:16
 msgid "New password:"
 msgstr "Nueva contraseña:"
 
-#: templates/userprofile/password_change.html:22
+#: templates/userprofile/password_change.html:20
 msgid "Confirm password:"
 msgstr "Confirmar contraseña:"
 
-#: templates/userprofile/password_change.html:26
+#: templates/userprofile/password_change.html:24
 msgid "Change my password"
 msgstr "Cambiar mi contraseña"
 
@@ -521,11 +578,11 @@ msgstr ""
 msgid "Edit your personal information"
 msgstr "Editar tu información personal"
 
-#: templates/userprofile/profile_done.html:7
+#: templates/userprofile/profile_done.html:6
 msgid "Profile information updated"
 msgstr "Información de perfil actualizada"
 
-#: templates/userprofile/profile_done.html:8
+#: templates/userprofile/profile_done.html:7
 msgid "Your profile information has been updated successfully."
 msgstr "La información de tu perfil ha sido actualizada satisfactoriamente."
 
@@ -576,7 +633,7 @@ msgstr "Contraseña de nuevo:"
 
 #: templates/userprofile/registration.html:29
 msgid "E-mail (optional):"
-msgstr ""
+msgstr "E-mail (opcional):"
 
 #: templates/userprofile/registration.html:33
 msgid "Register"
@@ -600,19 +657,8 @@ msgid "Registration complete"
 msgstr "Registro de usuario completado"
 
 #: templates/userprofile/registration_done.html:7
-msgid "You have successfully registered a new account. Access"
-msgstr "Has registrado una nueva cuenta satisfactoriamente. Accede a"
-
-#: templates/userprofile/registration_done.html:7
-msgid "your profile"
-msgstr "tu perfil"
-
-#: templates/userprofile/registration_done.html:7
-msgid ""
-"to add more information about you (your e-mail for example), or go to the"
-msgstr ""
-"para añadir más información acerca de ti (por ejemplo tu dirección de "
-"correo), o ves a la"
+msgid "You have successfully registered a new account. Go to the"
+msgstr "Has registrado una nueva cuenta satisfactoriamente. Accede al"
 
 #: templates/userprofile/registration_done.html:7
 msgid "login page"
@@ -621,6 +667,19 @@ msgstr "página de entrada de usuario"
 #: templates/userprofile/registration_done.html:7
 msgid "to authenticate and start using this site."
 msgstr "para autenticarte y empezar a utilizar este sitio."
+
+#: templates/userprofile/user_email.html:2
+msgid "You're receiving this e-mail because you requested an account "
+msgstr "Has recibido este e-mail porque has solicitado una cuenta "
+
+#: templates/userprofile/user_email.html:3
+#, python-format
+msgid "at %(site_name)s"
+msgstr "en %(site_name)s"
+
+#: templates/userprofile/user_email.html:5
+msgid "Following this link, you will validate your e-mail address:"
+msgstr "Accediendo a este enlace, validarás tu dirección de correo:"
 
 #: templates/userprofile/usercard.html:3
 msgid "Public profile"
@@ -660,29 +719,38 @@ msgid "Resend the activation e-mail"
 msgstr "Reenviar el e-mail de activación de cuenta"
 
 #: templates/userprofile/validation_reset_done.html:4
-#: templates/userprofile/validation_reset_done.html:8
+#: templates/userprofile/validation_reset_done.html:9
 msgid "Validation e-mail sent"
 msgstr "E-mail de validación enviado"
 
-#: templates/userprofile/validation_reset_done.html:9
+#: templates/userprofile/validation_reset_done.html:10
 msgid ""
-"We've e-mailed you the new account validation e-mail. You are going to "
-"receive it shortly."
+"We've e-mailed you the e-mail validation link. You are going to receive it "
+"shortly."
 msgstr ""
-"Te hemos enviado un e-mail para la validación de tu nueva cuenta a la "
-"dirección de correo que introdujiste. La recibirás en breve."
+"Te hemos enviado un e-mail con un enlace para la validación de tu dirección de correo." 
+"La recibirás en breve."
 
-#: templates/userprofile/validation_reset_done.html:11
+#: templates/userprofile/validation_reset_done.html:12
 msgid "Your user account was already active"
 msgstr "Tu cuenta de usuario ya estaba activa"
 
-#: templates/userprofile/validation_reset_done.html:12
+#: templates/userprofile/validation_reset_done.html:13
 msgid "If you have lost your password you can change it with this utility"
 msgstr "Si has perdido tu contraseña, puedes cambiarla con esta utilidad"
 
-#: templates/userprofile/validation_reset_done.html:13
+#: templates/userprofile/validation_reset_done.html:14
 msgid "Lost password utility"
 msgstr "Utilidad de recuperación de contraseña"
+
+#~ msgid "your profile"
+#~ msgstr "tu perfil"
+
+#~ msgid ""
+#~ "to add more information about you (your e-mail for example), or go to the"
+#~ msgstr ""
+#~ "para añadir más información acerca de ti (por ejemplo tu dirección de "
+#~ "correo), o ves a la"
 
 #~ msgid "The file type is invalid: %s"
 #~ msgstr "El tipo de archivo es incorrecto: %s"
@@ -704,32 +772,6 @@ msgstr "Utilidad de recuperación de contraseña"
 
 #~ msgid "Activate your account on %s"
 #~ msgstr "Activa tu cuenta en %s"
-
-#~ msgid "E-mail change successful"
-#~ msgstr "Cambio de dirección de correo satisfactorio"
-
-#~ msgid "E-mail change unsuccessful"
-#~ msgstr "Fallo en el cambio de dirección de correo"
-
-#~ msgid "E-mail change processed"
-#~ msgstr "Cambio de dirección de correo procesado"
-
-#~ msgid ""
-#~ "An e-mail has been sent to the new e-mail address to verify and activate "
-#~ "it. Please access to your e-mail and complete this process following the "
-#~ "instructions specified in the e-mail body."
-#~ msgstr ""
-#~ "Se te ha enviado un e-mail a la nueva dirección de correo para verificar "
-#~ "y activarla. Por favor, accede a tu correo y completa este proceso "
-#~ "siguiendo las instrucciones descritas en él."
-
-#~ msgid "You're receiving this e-mail because you requested an e-mail change"
-#~ msgstr ""
-#~ "Has recibido este mensaje porque has solicitado un cambio de dirección de "
-#~ "correo"
-
-#~ msgid "If you want to proceed with this change, follow this link:"
-#~ msgstr "Si quieres proceder con este cambio, accede a este enlace:"
 
 #~ msgid "E-mail validation successful"
 #~ msgstr "Validación de e-mail satisfactorio"
@@ -754,15 +796,6 @@ msgstr "Utilidad de recuperación de contraseña"
 
 #~ msgid "Overview of your public profile"
 #~ msgstr "Resumen de tu perfil público"
-
-#~ msgid "You're receiving this e-mail because you requested an account "
-#~ msgstr "Has recibido este e-mail porque has solicitado una cuenta "
-
-#~ msgid "at %(site_name)s"
-#~ msgstr "en %(site_name)s"
-
-#~ msgid "Following this link, you will validate your e-mail address:"
-#~ msgstr "Accediendo a este enlace, validarás tu dirección de correo:"
 
 #~ msgid ""
 #~ "Your user has been created successfully, but you must validate your e-"

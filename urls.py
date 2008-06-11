@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     # Account utilities
     (r'^manage/$', overview, { 'section': 'overview', 'template' : 'userprofile/overview.html'}),
     (r'^password/reset/$', reset_password, {'template' : 'userprofile/password_reset.html'}),
-    (r'^validation/reset/$', resend_validation, {'template' : 'userprofile/validation_reset.html'}),
+    (r'^validation/reset/$', validation_reset, {'template' : 'userprofile/validation_reset.html'}),
     (r'^validation/reset/done/(?P<action>success|failed)/$', direct_to_template, {'template' : 'userprofile/validation_reset_done.html'}),
     (r'^password/reset/done/$', direct_to_template, {'template': 'userprofile/password_reset_done.html'}),
     (r'^password/change/$', change_password_authenticated, { 'section': 'overview', 'template': 'userprofile/password_change.html'}),

@@ -87,8 +87,12 @@ class UserForm(forms.Form):
         try:
             User.objects.get(email=email)
             raise forms.ValidationError(_("That e-mail is already used."))
-        except:
-            return email
+        except User.DoesNotExist:
+            try:
+                Validation.objects.get(email=email)
+                raise forms.ValidationError(_("That e-mail is already being confirmed."))
+            except Validation.DoesNotExist:
+                return email
 
 class EmailChangeForm(forms.Form):
     email = forms.EmailField()
@@ -98,9 +102,7 @@ class EmailChangeForm(forms.Form):
         Verify that the email exists
         """
         email = self.cleaned_data.get("email")
-        try:
-            User.objects.get(email=email)
-        except:
+        if not (User.objects.filter(email=email) or Validation.objects.filter(email=email)):
             return email
 
         raise forms.ValidationError(_("That e-mail is already used."))
@@ -114,7 +116,7 @@ class ValidationForm(forms.Form):
         """
         email = self.cleaned_data.get("email")
         try:
-            Validation.objects.get(email=email)
+            User.objects.get(email=email)
         except:
             raise forms.ValidationError(_("There's no user with that e-mail"))
 

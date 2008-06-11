@@ -105,7 +105,7 @@ class Profile(models.Model):
 
     def visible(self):
         try:
-            return pickle.load(open(self.get_public_filename(), "rb"))
+            return { 'user_id': True, 'avatar': True } + pickle.load(open(self.get_public_filename(), "rb"))
         except:
             return { 'user_id': True, 'avatar': True }
 
@@ -116,7 +116,7 @@ class Profile(models.Model):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365
 
     def delete(self):
-        for key in [ '', '96', '64', '32', '16' ]:
+        for key in [ '', 'temp', '96', '64', '32', '16' ]:
             if getattr(self, "get_avatar%s_filename" % key)():
                 try:
                     os.remove(getattr(self, "get_avatar%s_filename" % key)())
@@ -202,6 +202,9 @@ class Validation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     objects = ValidationManager()
 
+    class Meta:
+        unique_together = ('type', 'user')
+
     class Admin:
         list_display = ('__unicode__',)
         search_fields = ('user__username', 'user__first_name')
@@ -211,9 +214,6 @@ class Validation(models.Model):
 
     def is_expired(self):
         return (datetime.datetime.today() - self.created).days > 0
-
-    def save(self):
-        super(Validation, self).save()
 
     def resend(self):
         """
@@ -232,5 +232,7 @@ class Validation(models.Model):
         t = loader.get_template(template)
         site_name = site.name
         send_mail(title, t.render(Context(locals())), None, [self.email])
+        self.created = datetime.datetime.now()
+        self.save()
         return True
 
