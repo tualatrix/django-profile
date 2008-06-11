@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-18 11:43+0100\n"
+"POT-Creation-Date: 2008-06-11 19:18+0200\n"
 "PO-Revision-Date: 2008-03-31 18:12+0300\n"
 "Last-Translator: Pedro Valente <pedro.valente@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,211 +16,724 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:32
-#, python-format
-msgid "The file type is invalid: %s"
-msgstr "O tipo de arquivo é incorreto: %s"
+#: forms.py:37
+msgid "You must enter one of the options"
+msgstr ""
 
-#: models.py:11 templates/profile/private.html:62
+#: forms.py:63
+msgid ""
+"That username has invalid characters. The valid values are letters, numbers "
+"and underscore."
+msgstr ""
+
+#: forms.py:68
+msgid "The username is already registered."
+msgstr ""
+
+#: forms.py:77 forms.py:137 forms.py:159 forms.py:178
+msgid "The passwords inserted are different."
+msgstr ""
+
+#: forms.py:89 forms.py:108
+msgid "That e-mail is already used."
+msgstr ""
+
+#: forms.py:93
+msgid "That e-mail is already being confirmed."
+msgstr ""
+
+#: forms.py:121
+msgid "There's no user with that e-mail"
+msgstr ""
+
+#: models.py:14 templates/userprofile/makepublic.html:62
+#: templates/userprofile/personal.html:37
 msgid "Female"
 msgstr "Feminino"
 
-#: models.py:11 templates/profile/private.html:61
+#: models.py:14 templates/userprofile/makepublic.html:60
+#: templates/userprofile/personal.html:36
 msgid "Male"
 msgstr "Masculino"
 
-#: models.py:46
+#: models.py:39
 msgid "Continent"
 msgstr "Continente"
 
-#: models.py:47
+#: models.py:40
 msgid "Continents"
 msgstr "Continentes"
 
-#: models.py:84 templates/profile/public.html:36
-#: templates/profile/usercard.html:12
+#: models.py:66 templates/userprofile/public.html:40
+#: templates/userprofile/usercard.html:12
 msgid "Country"
 msgstr "País"
 
-#: models.py:85
+#: models.py:67
 msgid "Countries"
 msgstr "Países"
 
-#: models.py:169
+#: models.py:101
 #, python-format
 msgid "%s's profile"
 msgstr "Perfil de %s"
 
-#: templates/profile/avatar_choose.html:4
-msgid "Change avatar"
-msgstr "Alterar avatar"
-
-#: templates/profile/avatar_choose.html:27
-msgid "Select anoter image"
-msgstr "Selecionar outra imagem"
-
-#: templates/profile/avatar_choose.html:28
-#: templates/profile/avatar_choose.html:36
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: templates/profile/avatar_choose.html:32
-msgid ""
-"Select the image file from your computer you want to assign as your avatar "
-"in your profile:"
+#: models.py:184 models.py:227
+#, python-format
+msgid "Email change confirmation on %s"
 msgstr ""
-"Selecione o arquivo de imagem do seu computador que deseja incluir como avatar no seu perfil:"
 
-#: templates/profile/avatar_choose.html:34 templates/profile/private.html:38
-msgid "Avatar:"
-msgstr "Avatar:"
+#: models.py:187 models.py:230
+#, python-format
+msgid "Password reset on %s"
+msgstr ""
 
-#: templates/profile/avatar_choose.html:39
-msgid "Please wait..."
-msgstr "Por favor, aguarde..."
+#: models.py:213
+#, python-format
+msgid "Email validation process for %(user)s of type %(type)s"
+msgstr ""
 
-#: templates/profile/delete.html:3 templates/profile/delete.html.py:5
-msgid "Delete all your personal information"
-msgstr "Apagar toda a informação do seu perfil"
+#: views.py:243
+msgid "E-mail changed successfully."
+msgstr ""
 
-#: templates/profile/delete.html:9
-msgid "Are you sure?"
-msgstr "Tem certeza?"
+#: views.py:246
+msgid ""
+"The key you received via e-mail is no longer valid. Please try the e-mail "
+"change process again."
+msgstr ""
 
-#: templates/profile/delete_done.html:4 templates/profile/delete_done.html:7
-#: templates/profile/private.html:104
-msgid "Delete all my personal information"
-msgstr "Apagar toda minha informação pessoal"
+#: views.py:256
+msgid ""
+"Account validated successfully. Now you can access to the login page with "
+"your username and password and start using this site."
+msgstr ""
 
-#: templates/profile/delete_done.html:8
-msgid "Profile information deleted successfully"
-msgstr "Informação de perfil apagada com sucesso"
+#: views.py:259
+msgid ""
+"The key you received via e-mail is no longer valid. Please try the e-mail "
+"validation process again."
+msgstr ""
 
-#: templates/profile/private.html:3
+#: views.py:385
+msgid "Invalid e-mail"
+msgstr ""
+
+#: views.py:390 views.py:402 views.py:412
+msgid "E-mail not registered"
+msgstr ""
+
+#: templates/userprofile/avatar_choose.html:3
+#: templates/userprofile/avatar_crop.html:3
+#: templates/userprofile/avatar_done.html:3
+#: templates/userprofile/avatar_search.html:3
+#: templates/userprofile/delete.html:3
+#: templates/userprofile/delete_done.html:3
+#: templates/userprofile/location.html:3
+#: templates/userprofile/makepublic.html:3
+#: templates/userprofile/overview.html:3 templates/userprofile/personal.html:3
+#: templates/userprofile/profile_done.html:3
 #, python-format
 msgid "%(user)s's Dashboard"
 msgstr "Painel de controle de %(user)s"
 
-#: templates/profile/private.html:20
-msgid "Tell others something about you"
-msgstr "Conte algo sobre você"
+#: templates/userprofile/avatar_choose.html:25
+#: templates/userprofile/avatar_search.html:37
+msgid "Choose the source of your avatar"
+msgstr ""
 
-#: templates/profile/private.html:25 templates/profile/private.html.py:108
-msgid "Save"
-msgstr "Salvar"
-
-#: templates/profile/private.html:28
-msgid "Username:"
-msgstr "Usuário:"
-
-#: templates/profile/private.html:30
-msgid "(Change password)"
-msgstr "(Alterar senha)"
-
-#: templates/profile/private.html:33
-msgid "E-mail:"
-msgstr "E-mail:"
-
-#: templates/profile/private.html:34
-msgid "Not set yet"
-msgstr "Não preenchida"
-
-#: templates/profile/private.html:35
-msgid "Change your e-mail address"
-msgstr "Alterar seu e-mail"
-
-#: templates/profile/private.html:35
-msgid "Add your e-mail address"
-msgstr "Incluir seu e-mail"
-
-#: templates/profile/private.html:47
-msgid "Change"
-msgstr "Alterar"
-
-#: templates/profile/private.html:47
+#: templates/userprofile/avatar_choose.html:29
 msgid "Delete"
 msgstr "Apagar"
 
-#: templates/profile/private.html:52
-msgid "First Name:"
-msgstr "Nome:"
+#: templates/userprofile/avatar_choose.html:34
+#, fuzzy
+msgid ""
+"You have 3 options to select the image you want as avatar in your profile:"
+msgstr ""
+"Selecione o arquivo de imagem do seu computador que deseja incluir como "
+"avatar no seu perfil:"
 
-#: templates/profile/private.html:56
-msgid "Surname:"
-msgstr "Sobrenome:"
+#: templates/userprofile/avatar_choose.html:37
+msgid "Select an image from a remote URL:"
+msgstr ""
 
-#: templates/profile/private.html:60
-msgid "Gender:"
-msgstr "Sexo:"
+#: templates/userprofile/avatar_choose.html:39
+#: templates/userprofile/avatar_crop.html:32
+msgid "Done"
+msgstr ""
 
-#: templates/profile/private.html:65
-msgid "Birth date:"
-msgstr "Data de nascimento:"
+#: templates/userprofile/avatar_choose.html:42
+#, fuzzy
+msgid "Select an image from disk:"
+msgstr "Selecionar outra imagem"
 
-#: templates/profile/private.html:70
-msgid "Url:"
-msgstr "Url:"
+#: templates/userprofile/avatar_choose.html:47
+msgid "Search for an image on Picasa Web"
+msgstr ""
 
-#: templates/profile/private.html:74
-msgid "About:"
-msgstr "Sobre você:"
+#: templates/userprofile/avatar_crop.html:30
+msgid "Crop&resize the area you want"
+msgstr ""
 
-#: templates/profile/private.html:79
+#: templates/userprofile/avatar_crop.html:33
+msgid "Select anoter image"
+msgstr "Selecionar outra imagem"
+
+#: templates/userprofile/avatar_done.html:6
+msgid "Avatar selection finished"
+msgstr ""
+
+#: templates/userprofile/avatar_done.html:7
+msgid "Your avatar has been saved successfully."
+msgstr ""
+
+#: templates/userprofile/avatar_search.html:38
+msgid "Search on Picasa Web:"
+msgstr ""
+
+#: templates/userprofile/avatar_search.html:38
+msgid "Search"
+msgstr ""
+
+#: templates/userprofile/avatar_search.html:38
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/userprofile/delete.html:7
+#: templates/userprofile/delete_done.html:6
+msgid "Delete all your personal information"
+msgstr "Apagar toda a informação do seu perfil"
+
+#: templates/userprofile/delete.html:9
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+#: templates/userprofile/delete_done.html:7
+#, fuzzy
+msgid "Your profile information has been removed successfully."
+msgstr "Informação de perfil apagada com sucesso"
+
+#: templates/userprofile/email_change.html:4
+#: templates/userprofile/email_change.html:14
+msgid "E-mail change"
+msgstr ""
+
+#: templates/userprofile/email_change.html:16
+#, fuzzy
+msgid "Add e-mail"
+msgstr "Incluir seu e-mail"
+
+#: templates/userprofile/email_change.html:18
+msgid ""
+"Insert the new e-mail address. An e-mail will be send to it for testing and "
+"confirmation."
+msgstr ""
+
+#: templates/userprofile/email_change.html:21
+msgid "New e-mail address:"
+msgstr ""
+
+#: templates/userprofile/email_change.html:25
+msgid "Send confirmation"
+msgstr ""
+
+#: templates/userprofile/email_change_done.html:3
+#: templates/userprofile/email_change_done.html:7
+msgid "E-mail change successful"
+msgstr ""
+
+#: templates/userprofile/email_change_done.html:9
+msgid "E-mail change unsuccessful"
+msgstr ""
+
+#: templates/userprofile/email_change_processed.html:3
+#: templates/userprofile/email_change_processed.html:6
+msgid "E-mail change processed"
+msgstr ""
+
+#: templates/userprofile/email_change_processed.html:7
+msgid ""
+"An e-mail has been sent to the new e-mail address to verify and activate it. "
+"Please access to your e-mail and complete this process following the "
+"instructions specified in the e-mail body."
+msgstr ""
+
+#: templates/userprofile/email_email.html:2
+msgid "You're receiving this e-mail because you requested an e-mail change"
+msgstr ""
+
+#: templates/userprofile/email_email.html:3
+#: templates/userprofile/passwd_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr ""
+
+#: templates/userprofile/email_email.html:5
+msgid "If you want to proceed with this change, follow this link:"
+msgstr ""
+
+#: templates/userprofile/email_email.html:9
+#: templates/userprofile/passwd_email.html:9
+#: templates/userprofile/user_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/userprofile/email_email.html:11
+#: templates/userprofile/passwd_email.html:11
+#: templates/userprofile/user_email.html:11
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/userprofile/email_email.html:13
+#: templates/userprofile/passwd_email.html:13
+#: templates/userprofile/user_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/userprofile/location.html:10
+msgid "Define your location"
+msgstr ""
+
+#: templates/userprofile/location.html:13
+#: templates/userprofile/makepublic.html:96
 msgid "Country:"
 msgstr "País:"
 
-#: templates/profile/private.html:81
+#: templates/userprofile/location.html:15
+#: templates/userprofile/makepublic.html:34
+#: templates/userprofile/makepublic.html:43
+#: templates/userprofile/makepublic.html:52
+#: templates/userprofile/makepublic.html:65
+#: templates/userprofile/makepublic.html:74
+#: templates/userprofile/makepublic.html:83
+#: templates/userprofile/makepublic.html:92
+#: templates/userprofile/makepublic.html:101
+#: templates/userprofile/makepublic.html:110
+#: templates/userprofile/makepublic.html:119
 msgid "Not set"
 msgstr "Não preenchido"
 
-#: templates/profile/private.html:82
+#: templates/userprofile/location.html:16
 msgid "More common..."
 msgstr "Mais comuns..."
 
-#: templates/profile/private.html:83
+#: templates/userprofile/location.html:17
 msgid "Spain"
 msgstr "Espanha"
 
-#: templates/profile/private.html:94
+#: templates/userprofile/location.html:28
+#: templates/userprofile/makepublic.html:105
 msgid "Location:"
 msgstr "Localização:"
 
-#: templates/profile/private.html:98
+#: templates/userprofile/location.html:32
+#: templates/userprofile/makepublic.html:114
 msgid "Position:"
 msgstr "Posição:"
 
-#: templates/profile/private.html:103
-msgid "Other actions:"
-msgstr "Outras ações:"
+#: templates/userprofile/location.html:37
+#: templates/userprofile/makepublic.html:123
+#: templates/userprofile/personal.html:52
+msgid "Save"
+msgstr "Salvar"
 
-#: templates/profile/public.html:31 templates/profile/usercard.html:11
+#: templates/userprofile/login.html:3 templates/userprofile/login.html:10
+msgid "User login"
+msgstr ""
+
+#: templates/userprofile/login.html:15 templates/userprofile/overview.html:15
+#: templates/userprofile/registration.html:15
+msgid "Username:"
+msgstr "Usuário:"
+
+#: templates/userprofile/login.html:19
+#: templates/userprofile/registration.html:20
+msgid "Password:"
+msgstr ""
+
+#: templates/userprofile/login.html:22
+msgid "Have you lost your password?"
+msgstr ""
+
+#: templates/userprofile/login.html:23
+msgid "Login"
+msgstr ""
+
+#: templates/userprofile/login.html:26
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: templates/userprofile/logout.html:4 templates/userprofile/logout.html:7
+msgid "Logged out"
+msgstr ""
+
+#: templates/userprofile/logout.html:8
+msgid "You've been logged out."
+msgstr ""
+
+#: templates/userprofile/makepublic.html:26
+msgid "Click on the information you want to make public"
+msgstr ""
+
+#: templates/userprofile/makepublic.html:29
+#: templates/userprofile/overview.html:20
+msgid "E-mail:"
+msgstr "E-mail:"
+
+#: templates/userprofile/makepublic.html:38
+#: templates/userprofile/personal.html:27
+msgid "First Name:"
+msgstr "Nome:"
+
+#: templates/userprofile/makepublic.html:47
+#: templates/userprofile/personal.html:31
+msgid "Surname:"
+msgstr "Sobrenome:"
+
+#: templates/userprofile/makepublic.html:56
+#: templates/userprofile/personal.html:35
+msgid "Gender:"
+msgstr "Sexo:"
+
+#: templates/userprofile/makepublic.html:69
+#: templates/userprofile/personal.html:40
+msgid "Birth date:"
+msgstr "Data de nascimento:"
+
+#: templates/userprofile/makepublic.html:72
+msgid "years old."
+msgstr ""
+
+#: templates/userprofile/makepublic.html:78
+#: templates/userprofile/personal.html:44
+msgid "Url:"
+msgstr "Url:"
+
+#: templates/userprofile/makepublic.html:87
+#: templates/userprofile/personal.html:48
+msgid "About:"
+msgstr "Sobre você:"
+
+#: templates/userprofile/menu.html:4
+msgid "Overview"
+msgstr ""
+
+#: templates/userprofile/menu.html:5
+#, fuzzy
+msgid "Edit personal information"
+msgstr "Apagar toda minha informação pessoal"
+
+#: templates/userprofile/menu.html:6
+msgid "Edit avatar"
+msgstr ""
+
+#: templates/userprofile/menu.html:7
+#, fuzzy
+msgid "Edit location"
+msgstr "Localização"
+
+#: templates/userprofile/menu.html:8
+msgid "Define public info"
+msgstr ""
+
+#: templates/userprofile/menu.html:9
+#, fuzzy
+msgid "Remove profile"
+msgstr "Perfil de %s"
+
+#: templates/userprofile/overview.html:7
+msgid "Overview of your profile"
+msgstr ""
+
+#: templates/userprofile/overview.html:17
+#, fuzzy
+msgid "Change password"
+msgstr "(Alterar senha)"
+
+#: templates/userprofile/overview.html:22
+msgid "Not set yet"
+msgstr "Não preenchida"
+
+#: templates/userprofile/overview.html:23
+msgid "Not validated"
+msgstr ""
+
+#: templates/userprofile/overview.html:23
+msgid "Validated"
+msgstr ""
+
+#: templates/userprofile/overview.html:25
+msgid "Change your e-mail address"
+msgstr "Alterar seu e-mail"
+
+#: templates/userprofile/overview.html:25
+msgid "Add your e-mail address"
+msgstr "Incluir seu e-mail"
+
+#: templates/userprofile/overview.html:26
+msgid "Resend validation e-mail"
+msgstr ""
+
+#: templates/userprofile/passwd_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr ""
+
+#: templates/userprofile/passwd_email.html:5
+msgid "Feel free to change this password going to this page:"
+msgstr ""
+
+#: templates/userprofile/password_change.html:4
+#: templates/userprofile/password_change.html:12
+msgid "Password change for"
+msgstr ""
+
+#: templates/userprofile/password_change.html:13
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/userprofile/password_change.html:16
+msgid "New password:"
+msgstr ""
+
+#: templates/userprofile/password_change.html:20
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/userprofile/password_change.html:24
+msgid "Change my password"
+msgstr ""
+
+#: templates/userprofile/password_change_done.html:4
+#: templates/userprofile/password_change_done.html:8
+msgid "Password change successful"
+msgstr ""
+
+#: templates/userprofile/password_change_done.html:9
+msgid "The password has been changed successfully."
+msgstr ""
+
+#: templates/userprofile/password_expired.html:4
+#: templates/userprofile/password_expired.html:7
+msgid "Password key expired"
+msgstr ""
+
+#: templates/userprofile/password_expired.html:8
+msgid ""
+"The password key you're trying to use is expired. Please, request a new one."
+msgstr ""
+
+#: templates/userprofile/password_reset.html:4
+#: templates/userprofile/password_reset.html:12
+msgid "Password reset"
+msgstr ""
+
+#: templates/userprofile/password_reset.html:13
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll reset "
+"your password and e-mail the new one to you."
+msgstr ""
+
+#: templates/userprofile/password_reset.html:16
+#: templates/userprofile/validation_reset.html:19
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/userprofile/password_reset.html:20
+msgid "Reset my password"
+msgstr ""
+
+#: templates/userprofile/password_reset_done.html:4
+#: templates/userprofile/password_reset_done.html:7
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/userprofile/password_reset_done.html:8
+msgid ""
+"We've e-mailed you the instructions to obtain a new password. You should be "
+"receiving it shortly."
+msgstr ""
+
+#: templates/userprofile/personal.html:24
+#, fuzzy
+msgid "Edit your personal information"
+msgstr "Apagar toda a informação do seu perfil"
+
+#: templates/userprofile/profile_done.html:6
+#, fuzzy
+msgid "Profile information updated"
+msgstr "Informação de perfil apagada com sucesso"
+
+#: templates/userprofile/profile_done.html:7
+#, fuzzy
+msgid "Your profile information has been updated successfully."
+msgstr "Informação de perfil apagada com sucesso"
+
+#: templates/userprofile/public.html:34 templates/userprofile/usercard.html:11
 msgid "Username"
 msgstr "Usuário"
 
-#: templates/profile/public.html:32
+#: templates/userprofile/public.html:35
+#, fuzzy
+msgid "E-mail"
+msgstr "E-mail:"
+
+#: templates/userprofile/public.html:36
 msgid "Name"
 msgstr "Nome"
 
-#: templates/profile/public.html:33
+#: templates/userprofile/public.html:37
 msgid "Url"
 msgstr "Url"
 
-#: templates/profile/public.html:34
+#: templates/userprofile/public.html:38
 msgid "About"
 msgstr "Sobre você"
 
-#: templates/profile/public.html:35
+#: templates/userprofile/public.html:39
 msgid "Gender"
 msgstr "Sexo"
 
-#: templates/profile/public.html:37
+#: templates/userprofile/public.html:41
 msgid "Location"
 msgstr "Localização"
 
-#: templates/profile/usercard.html:13
+#: templates/userprofile/registration.html:3
+#: templates/userprofile/registration.html:11
+msgid "User registration"
+msgstr ""
+
+#: templates/userprofile/registration.html:12
+msgid ""
+"Joining this community is quick and easy. You only need to fill the "
+"following information to get access to the all the private content."
+msgstr ""
+
+#: templates/userprofile/registration.html:24
+msgid "Password again:"
+msgstr ""
+
+#: templates/userprofile/registration.html:29
+msgid "E-mail (optional):"
+msgstr ""
+
+#: templates/userprofile/registration.html:33
+msgid "Register"
+msgstr ""
+
+#: templates/userprofile/registration.html:41
+msgid ""
+"If you already registered an account, but have not received the validation e-"
+"mail, please, click"
+msgstr ""
+
+#: templates/userprofile/registration.html:41
+msgid "here"
+msgstr ""
+
+#: templates/userprofile/registration_done.html:4
+#: templates/userprofile/registration_done.html:6
+msgid "Registration complete"
+msgstr ""
+
+#: templates/userprofile/registration_done.html:7
+msgid "You have successfully registered a new account. Go to the"
+msgstr ""
+
+#: templates/userprofile/registration_done.html:7
+msgid "login page"
+msgstr ""
+
+#: templates/userprofile/registration_done.html:7
+msgid "to authenticate and start using this site."
+msgstr ""
+
+#: templates/userprofile/user_email.html:2
+msgid "You're receiving this e-mail because you requested an account "
+msgstr ""
+
+#: templates/userprofile/user_email.html:3
+#, python-format
+msgid "at %(site_name)s"
+msgstr ""
+
+#: templates/userprofile/user_email.html:5
+msgid "Following this link, you will validate your e-mail address:"
+msgstr ""
+
+#: templates/userprofile/usercard.html:3
+#, fuzzy
+msgid "Public profile"
+msgstr "Perfil de %s"
+
+#: templates/userprofile/usercard.html:9
+#, fuzzy
+msgid "No avatar"
+msgstr "Alterar avatar"
+
+#: templates/userprofile/usercard.html:13
 msgid "Age"
 msgstr "Idade"
 
-#: templates/profile/usercard.html:14
+#: templates/userprofile/usercard.html:14
 msgid "My Website"
 msgstr "Meu site"
+
+#: templates/userprofile/validation_reset.html:4
+#: templates/userprofile/validation_reset.html:12
+msgid "Resend validation"
+msgstr ""
+
+#: templates/userprofile/validation_reset.html:13
+msgid ""
+"Enter your e-mail address below and we'll resend the user activation e-mail "
+"to you."
+msgstr ""
+
+#: templates/userprofile/validation_reset.html:23
+msgid "Resend the activation e-mail"
+msgstr ""
+
+#: templates/userprofile/validation_reset_done.html:4
+#: templates/userprofile/validation_reset_done.html:9
+msgid "Validation e-mail sent"
+msgstr ""
+
+#: templates/userprofile/validation_reset_done.html:10
+msgid ""
+"We've e-mailed you the e-mail validation link. You are going to receive it "
+"shortly."
+msgstr ""
+
+#: templates/userprofile/validation_reset_done.html:12
+msgid "Your user account was already active"
+msgstr ""
+
+#: templates/userprofile/validation_reset_done.html:13
+msgid "If you have lost your password you can change it with this utility"
+msgstr ""
+
+#: templates/userprofile/validation_reset_done.html:14
+msgid "Lost password utility"
+msgstr ""
+
+#~ msgid "The file type is invalid: %s"
+#~ msgstr "O tipo de arquivo é incorreto: %s"
+
+#~ msgid "Avatar:"
+#~ msgstr "Avatar:"
+
+#~ msgid "Please wait..."
+#~ msgstr "Por favor, aguarde..."
+
+#~ msgid "Tell others something about you"
+#~ msgstr "Conte algo sobre você"
+
+#~ msgid "Change"
+#~ msgstr "Alterar"
+
+#~ msgid "Other actions:"
+#~ msgstr "Outras ações:"
