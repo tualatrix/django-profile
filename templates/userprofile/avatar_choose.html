@@ -26,19 +26,20 @@
 		{% if profile.avatar %}
   	<div class="avatar" style="text-align: center;">
     	<img id="avatarimg" src="{{ profile.get_avatar96_url }}" /><br />
-			<a href="/profile/edit/avatar/delete/" class="delavatar">{% trans "Delete" %}</a>
+			<a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a>
   	</div>
 		{% endif %}
+		<fieldset>
 		<div style="float: left; padding-left: 25px;">
 			<p style="margin: 0px;">{% trans "You have 3 options to select the image you want as avatar in your profile:" %}</p>
 			<ol>
 				<li>
-    			<label for="id_url">{% trans "Select an image from a remote URL:" %}</label>
+    			<label for="id_url" style="width: 320px; float: left;">{% trans "Select an image from a remote URL:" %}</label>
     			{{ form.url }}
 					<input type="submit" value="{% trans "Done" %}" />
 				</li>
 				<li>
-    			<label for="id_photo">{% trans "Select an image from disk:" %}</label>
+    			<label for="id_photo" style="width: 320px; float: left;">{% trans "Select an image from disk:" %}</label>
     			{{ form.photo }}
 				</li>
 				{% if websearch %}
@@ -46,8 +47,9 @@
 					<a href="{{ request.path }}search/">{% trans "Search for an image on Picasa Web" %}</a>
 				</li>
 				{% endif %}
-			</ol>
-		</div>	
+				</ol>
+			</div>	
+		</fieldset>
   </form>
 	{% if form.errors %}
 	{{ form.errors }}

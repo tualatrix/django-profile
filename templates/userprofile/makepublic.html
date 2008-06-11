@@ -80,7 +80,7 @@
 		<div>
     	<label for="id_url">{% trans "Url:" %}</label>
 			<input style="float: left;" type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
-    	<a href="{{ profile.url }}"><strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.url }}</strong></a>
+    	<a style="font-size:.8em;" href="{{ profile.url }}"><strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{{ profile.url }}</strong></a>
 		</div>
 		{% endif %}
 		{% if profile.about %}
