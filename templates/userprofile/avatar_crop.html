@@ -28,10 +28,11 @@
 	{% include "userprofile/menu.html" %}
   <form class="commonform" method="post" action="{{ request.path }}">
 		<h1>{% trans "Crop&resize the area you want" %}</h1>
-		<p class="title">
+		<p>
 			<input type="submit" class="done" value="{% trans 'Done' %}" />
 			<input type="submit" class="another" value="{% trans 'Select anoter image' %}" />
 		</p>
+		<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
     <input type="hidden" name="width" value="0"/>
     <input type="hidden" name="height" value="0"/>
     <input type="hidden" name="top" value="0"/>
@@ -39,5 +40,4 @@
     <input type="hidden" name="left" value="0"/>
     <input type="hidden" name="right" value="0"/>
   </form>
-	<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
 {% endblock %}

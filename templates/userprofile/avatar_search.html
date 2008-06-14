@@ -8,8 +8,8 @@
 			$("form#images").submit(function() {
 				$("img#loading").show();
 				$("div.photos").html('');
-				if ($("input[type='text']").val()) {
-					$.post("{{ request.path }}", { 'search': $("input[type='text']").val() }, function(data) {
+        if ($("form#images input[type='text']").val()) {
+					$.post("{{ request.path }}", { 'search': $("form#images input[type='text']").val() }, function(data) {
 						if (data.success) {
 							for (var photo in data.photos) {
 								$("div.photos").append('<a href="' + data.urls[photo] + '"><img src="' + data.photos[photo] + '" /></a>');
@@ -35,7 +35,7 @@
 	{% include "userprofile/menu.html" %}
 	<form class="commonform" action="" id="images">
 		<h1>{% trans "Choose the source of your avatar" %}</h1>
-		<p class="title">{% trans "Search on Picasa Web:" %} <input type="text" value="" /> <input type="submit" value="{% trans "Search" %}"/> <input type="button" name="cancel" value="{% trans "Cancel" %}" /> <img id="loading" style="display: none;" src="{{ MEDIA_URL }}images/loading.gif" /></p>
+		<p>{% trans "Search on Picasa Web:" %} <input type="text" value="" /> <input type="submit" value="{% trans "Search" %}"/> <input type="button" name="cancel" value="{% trans "Cancel" %}" /> <img id="loading" style="display: none;" src="{{ MEDIA_URL }}images/loading.gif" /></p>
 	</form>
 	<div class="photos">
 	</div>
