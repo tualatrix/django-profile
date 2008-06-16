@@ -8,24 +8,22 @@
 
 {% block content %}
 <h1>{% trans "User login" %}</h1>
-<div class="center">
-	<form class="login commonform" method="post" action="{% if next %}?next={{ next }}{% endif %}">
-		<fieldset>
-			<div>
-    		<label for="id_username">{% trans "Username:" %}</label>
-    		{{ form.username }}
-			</div>
-			<div>
-    		<label for="id_password">{% trans "Password:" %}</label>
-    		{{ form.password }}
-			</div>
-    	<p class="lostpw"><a href="/accounts/password/reset/">{% trans "Have you lost your password?" %}</a></p>
-    	<input type="submit" value="{% trans 'Login' %}" />
-  	</fieldset>
-  	{% if form.has_errors %}
-  	<p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
-		{% endif %}
-	</form>
-</div>
+<form class="login commonform" method="post" action="{% if next %}?next={{ next }}{% endif %}">
+	<fieldset>
+		<div>
+   		<label for="id_username">{% trans "Username:" %}</label>
+   		{{ form.username }}
+		</div>
+		<div>
+   		<label for="id_password">{% trans "Password:" %}</label>
+   		{{ form.password }}
+		</div>
+   	<p class="lostpw"><a href="/accounts/password/reset/">{% trans "Have you lost your password?" %}</a></p>
+   	<input type="submit" value="{% trans 'Login' %}" />
+ 	</fieldset>
+ 	{% if form.has_errors %}
+ 	<p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
+	{% endif %}
+</form>
 {% endblock %}
 

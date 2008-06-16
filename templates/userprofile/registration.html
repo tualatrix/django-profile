@@ -6,38 +6,36 @@
 {% endblock %}
 
 {% block content %}
-<div class="center">
-	<form class="commonform registration" method="post" action="">
-		<h1>{% trans "User registration" %}</h1>
-		<p class="intro">{% trans "Joining this community is quick and easy. You only need to fill the following information to get access to all the private content." %}</p>
-		<fieldset>
-			<div>
-   			<label for="id_username">{% trans "Username:" %}</label>
-   			{{ form.username }}
-				<img id="username_img" src="{{ MEDIA_URL }}images/loading.gif" />
-			</div>
-			<div>
-   			<label for="id_password1">{% trans "Password:" %}</label>
-   			{{ form.password1 }}
-			</div>
-			<div>
-   			<label for="id_password2">{% trans "Password again:" %}</label>
-   			{{ form.password2 }}
-				<img id="password_img" src="{{ MEDIA_URL }}images/loading.gif" />
-			</div>
-			<div>
-   			<label for="id_email">{% trans "E-mail (optional):" %}</label>
-   			{{ form.email }}
-				<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
-			</div>
-   		<input type="submit" value="{% trans 'Register' %}" />
-		</fieldset>
-  	{% if form.errors %}
-			{% for error,desc in form.errors.items %}
-  			<p class="error">{{ error }}: {{desc|join:","}}</p>
-			{% endfor %}
-  	{% endif %}
-	</form> 
-	<p class="intro" style="font-size: .9em;">{% trans "If you already registered an account, but have not received the validation e-mail, please, click" %} <a href="/accounts/validation/reset/">{% trans "here" %}</a></p>
-</div>
+<form class="commonform registration" method="post" action="">
+	<h1>{% trans "User registration" %}</h1>
+	<p class="intro">{% trans "Joining this community is quick and easy. You only need to fill the following information to get access to all the private content." %}</p>
+	<fieldset>
+		<div>
+ 			<label for="id_username">{% trans "Username:" %}</label>
+ 			{{ form.username }}
+			<img id="username_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		</div>
+		<div>
+ 			<label for="id_password1">{% trans "Password:" %}</label>
+ 			{{ form.password1 }}
+		</div>
+		<div>
+ 			<label for="id_password2">{% trans "Password again:" %}</label>
+ 			{{ form.password2 }}
+			<img id="password_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		</div>
+		<div>
+ 			<label for="id_email">{% trans "E-mail (optional):" %}</label>
+ 			{{ form.email }}
+			<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		</div>
+ 		<input type="submit" value="{% trans 'Register' %}" />
+	</fieldset>
+ 	{% if form.errors %}
+		{% for error,desc in form.errors.items %}
+ 			<p class="error">{{ error }}: {{desc|join:","}}</p>
+		{% endfor %}
+ 	{% endif %}
+</form> 
+<p class="intro" style="font-size: .9em;">{% trans "If you already registered an account, but have not received the validation e-mail, please, click" %} <a href="/accounts/validation/reset/">{% trans "here" %}</a></p>
 {% endblock %}

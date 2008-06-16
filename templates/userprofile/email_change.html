@@ -8,27 +8,25 @@
 
 {% block content %}
 {% include "userprofile/menu.html" %}
-<div class="center">
-	<form class="commonform emailchg" action="" method="post">
-		{% if request.user.email %}
-		<h1>{% trans "E-mail change" %}</h1>
-		{% else %}
-		<h1>{% trans "Add e-mail" %}</h1>
-		{% endif %}
-		<p class="intro">{% trans "Insert the new e-mail address. An e-mail will be send to it for testing and confirmation." %}
-  	<fieldset>
-    	<div>
-    		<label for="id_email" style="width: 240px;">{% trans 'New e-mail address:' %}</label>
-    		{{ form.email }}
-      	<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
-			</div>
-   		<input style="margin-left: 245px;" type="submit" value="{% trans 'Send confirmation' %}" />
-  	</fieldset>
-    {% if form.errors %}
-      {% for error,desc in form.errors.items %}
-        <p class="error">{{ error }}: {{desc|join:","}}</p>
-      {% endfor %}
-    {% endif %}
-	</form>
-</div>
+<form class="commonform emailchg" action="" method="post">
+	{% if request.user.email %}
+	<h1>{% trans "E-mail change" %}</h1>
+	{% else %}
+	<h1>{% trans "Add e-mail" %}</h1>
+	{% endif %}
+	<p class="intro">{% trans "Insert the new e-mail address. An e-mail will be send to it for testing and confirmation." %}
+ 	<fieldset>
+   	<div>
+   		<label for="id_email" style="width: 240px;">{% trans 'New e-mail address:' %}</label>
+   		{{ form.email }}
+     	<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		</div>
+ 		<input style="margin-left: 245px;" type="submit" value="{% trans 'Send confirmation' %}" />
+ 	</fieldset>
+  {% if form.errors %}
+    {% for error,desc in form.errors.items %}
+      <p class="error">{{ error }}: {{desc|join:","}}</p>
+    {% endfor %}
+  {% endif %}
+</form>
 {% endblock %}
