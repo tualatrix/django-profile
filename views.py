@@ -14,7 +14,6 @@ from django.conf import settings
 import urllib2
 import random
 import pickle
-import gdata.service
 import os.path
 import Image, ImageFilter
 import urllib
@@ -22,6 +21,7 @@ from xml.dom import minidom
 import os
 
 if settings.WEBSEARCH:
+    import gdata.service
     import gdata.photos.service
 
 def get_profiles():
