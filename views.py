@@ -20,7 +20,7 @@ import urllib
 from xml.dom import minidom
 import os
 
-if settings.WEBSEARCH:
+if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
     import gdata.service
     import gdata.photos.service
 
