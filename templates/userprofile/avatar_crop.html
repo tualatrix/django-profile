@@ -2,7 +2,6 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.dimensions.pack.js"></script>
   <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.imgareaselect-0.4.2.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
@@ -14,8 +13,6 @@
 		}
 
 		$(window).load(function() {
-			$("input[name='width']").val($("#cropimage").width());
-			$("input[name='height']").val($("#cropimage").height());
 			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues });
 		});
 	});

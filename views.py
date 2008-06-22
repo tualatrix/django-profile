@@ -191,10 +191,10 @@ def avatarcrop(request, template, section):
     else:
         form = AvatarCropForm(request.POST)
         if form.is_valid():
-            top = int(request.POST.get('top'))
-            left = int(request.POST.get('left'))
-            right = int(request.POST.get('right'))
-            bottom = int(request.POST.get('bottom'))
+            top = int(self.cleaned_data.get('top'))
+            left = int(self.cleaned_data.get('left'))
+            right = int(self.cleaned_data.get('right'))
+            bottom = int(self.cleaned_data.get('bottom'))
 
             image = Image.open(profile.get_avatartemp_filename())
             box = [ left, top, right, bottom ]
