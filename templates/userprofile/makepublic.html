@@ -92,6 +92,7 @@
 			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{% trans "Not set" %}</strong>
 			{% endif %}
 		</div>
+		{% if APIKEY %}
 		<div>
     	<label for="id_location">{% trans "Location:" %}</label>
 			{% if profile.location %}
@@ -110,6 +111,7 @@
 			<strong style="float: left; line-height: 28px; margin: 0px; font-size: 1.1em;">{% trans "Not set" %}</strong>
 			{% endif %}
     </div>
+		{% endif %}
 		<div class="save">
   		<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" />
 		</div>

@@ -2,7 +2,9 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block customjs %}
+{% if APIKEY %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
+{% endif %}
 {% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}

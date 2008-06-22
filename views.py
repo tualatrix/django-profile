@@ -42,7 +42,7 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, APIKEY, current_user, template):
+def public(request, current_user, template, APIKEY=None):
     try:
         profile = User.objects.get(username=current_user).get_profile()
     except:
@@ -51,7 +51,7 @@ def public(request, APIKEY, current_user, template):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def makepublic(request, template, APIKEY, section):
+def makepublic(request, template, section, APIKEY=None):
     profile, created = Profile.objects.get_or_create(user = request.user)
     if request.method == "POST":
         public = dict()
@@ -79,7 +79,7 @@ def searchimages(request, template, section):
         return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def overview(request, template, APIKEY, section):
+def overview(request, template, section, APIKEY=None):
     profile, created = Profile.objects.get_or_create(user=request.user)
     validated = False
     try:

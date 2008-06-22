@@ -18,9 +18,6 @@
 			$("input[name='height']").val($("#cropimage").height());
 			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues });
 		});
-
-		$("input[@type=submit].another").submit(function() {
-		});
 	});
 	</script>
 {% endblock %}
@@ -28,13 +25,13 @@
 	{% include "userprofile/menu.html" %}
   <form class="commonform" method="post" action="{{ request.path }}">
 		<h1>{% trans "Crop&resize the area you want" %}</h1>
-		<p>
-			<input type="submit" class="done" value="{% trans 'Done' %}" />
-			<input type="submit" class="another" value="{% trans 'Select anoter image' %}" />
-		</p>
+		<p><input type="submit" class="done" value="{% trans 'Done' %}" /></p>
+  	{% if form.errors %}
+    {% for error,desc in form.errors.items %}
+      <p class="error" style="width: 99%; margin: 5px 0px;">{{desc|join:","}}</p>
+    {% endfor %}
+  	{% endif %}
 		<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
-    <input type="hidden" name="width" value="0"/>
-    <input type="hidden" name="height" value="0"/>
     <input type="hidden" name="top" value="0"/>
     <input type="hidden" name="bottom" value="0"/>
     <input type="hidden" name="left" value="0"/>
