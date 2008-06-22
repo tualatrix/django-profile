@@ -50,6 +50,8 @@ class AvatarCropForm(forms.Form):
     def clean(self):
         if int(self.cleaned_data.get('right')) - int(self.cleaned_data.get('left')) < 96:
             raise forms.ValidationError(_("You must select a portion of the image with a minimum of 96x96 pixels."))
+        else:
+            return self.cleaned_data
 
 class UserForm(forms.Form):
 
