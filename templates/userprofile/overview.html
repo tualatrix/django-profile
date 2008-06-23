@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Overview of your profile" %}{% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
 <form class="commonform profile" action="" method="post">

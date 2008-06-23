@@ -11,7 +11,7 @@
 <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
   <fieldset>
 		<legend>{% trans "Define your location" %}</legend>
-  	<label for="id_country">{% trans "Country:" %}<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+  	<label for="id_country">{% trans "Country:" %}<img class="hide" src="{{ MEDIA_URL }}images/loading.gif" /></label>
 		<p>
 			<select name="country" id="id_country">
 				<option value="">{% trans "Not set" %}</option>
@@ -29,7 +29,7 @@
    		<label>{% trans "Location:" %}</label>
 			<p id="location_info">{{ profile.location }}</p>
    		<label for="map">{% trans "Position:" %}</label>
-			<div id="map" style="overflow: hidden;"></div>
+			<div id="map"></div>
 		</div>
     <div class="hide">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
 		<p><input type="submit" value="{% trans 'Save' %}" /></p>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Search for an image on Picasa Web" %}{% endblock %}
 {% block customjs %}
   <script type="text/javascript">
     $(function() {
@@ -32,14 +32,15 @@
 	</script>
 {% endblock %}
 {% block content %}
-	{% include "userprofile/menu.html" %}
-	<form class="commonform" action="" id="images">
-		<h1>{% trans "Choose the source of your avatar" %}</h1>
+{% include "userprofile/menu.html" %}
+<form action="" id="images">
+	<fieldset>
+		<legend>{% trans "Search for an image on Picasa Web" %}</legend>
 		<p>{% trans "Search on Picasa Web:" %} <input type="text" value="" /> <input type="submit" value="{% trans "Search" %}"/> <input type="button" name="cancel" value="{% trans "Cancel" %}" /> <img id="loading" style="display: none;" src="{{ MEDIA_URL }}images/loading.gif" /></p>
-	</form>
-	<div class="photos">
-	</div>
-	<form id="avatar" action="/accounts/profile/edit/avatar/" method="POST">
-		<input type="hidden" name="url" value="" />
-	</form>
+		<div class="photos"></div>
+	</fieldset>
+</form>
+<form class="hide" id="avatar" action="/accounts/profile/edit/avatar/" method="POST">
+	<input type="hidden" name="url" value="" />
+</form>
 {% endblock %}

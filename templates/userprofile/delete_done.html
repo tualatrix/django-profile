@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Delete all your personal information" %}{% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
-<h1>{% trans "Delete all your personal information" %}</h1>
-<p>{% trans "Your profile information has been removed successfully." %}</p>
+<h2>{% trans "Your profile information has been removed successfully." %}</h2>
 {% endblock %}

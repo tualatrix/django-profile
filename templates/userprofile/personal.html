@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Edit your personal information" %}{% endblock %}
 {% block customjs %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>

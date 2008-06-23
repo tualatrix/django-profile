@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Avatar selection finished" %}<{% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
-<h1>{% trans "Avatar selection finished" %}</h1>
-<p>{% trans "Your avatar has been saved successfully." %}</p>
+<h2>{% trans "Your new avatar has been saved successfully." %}</h2>
 {% endblock %}

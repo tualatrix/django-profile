@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Crop&resize the area you want" %}{% endblock %}
 {% block customjs %}
   <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.imgareaselect-0.4.2.min.js"></script>
 	<script type="text/javascript">
@@ -19,19 +19,21 @@
 	</script>
 {% endblock %}
 {% block content %}
-	{% include "userprofile/menu.html" %}
-  <form class="commonform" method="post" action="{{ request.path }}">
-		<h1>{% trans "Crop&resize the area you want" %}</h1>
+{% include "userprofile/menu.html" %}
+<form method="post" action="{{ request.path }}">
+	<fieldset>
+		<legend>{% trans "Crop&resize the area you want" %}</legend>
 		<p><input type="submit" class="done" value="{% trans 'Done' %}" /></p>
-  	{% if form.errors %}
-    {% for error,desc in form.errors.items %}
-      <p class="error" style="width: 99%; margin: 5px 0px;">{{desc|join:","}}</p>
-    {% endfor %}
-  	{% endif %}
+ 		{% if form.errors %}
+  	{% for error,desc in form.errors.items %}
+    	<p class="error">{{desc|join:","}}</p>
+  	{% endfor %}
+ 		{% endif %}
 		<img src="{{ profile.get_avatartemp_url }}" id="cropimage" />
-    <input type="hidden" name="top" value="0"/>
-    <input type="hidden" name="bottom" value="0"/>
-    <input type="hidden" name="left" value="0"/>
-    <input type="hidden" name="right" value="0"/>
-  </form>
+  	<input type="hidden" name="top" value="0"/>
+  	<input type="hidden" name="bottom" value="0"/>
+  	<input type="hidden" name="left" value="0"/>
+  	<input type="hidden" name="right" value="0"/>
+	</fieldset>
+</form>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
+{% block title %}{% trans "Choose the source location of your avatar" %}{% endblock %}
 {% block customjs %}
 	<script type="text/javascript">
 		$(function() {
@@ -20,38 +20,41 @@
 	</script>
 {% endblock %}
 {% block content %}
-	{% include "userprofile/menu.html" %}
+{% include "userprofile/menu.html" %}
+<div class="span-3">
+{% if profile.avatar %}
+	<img id="avatarimg" src="{{ profile.get_avatar96_url }}" /><br />
+	<a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a>
+{% else %}
+	<img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
+{% endif %}
+</div>
+<div class="span-18">
   <form class="commonform" action="" method="post" enctype="multipart/form-data">
-		<h1>{% trans "Choose the source of your avatar" %}</h1>
-		{% if profile.avatar %}
-  	<div class="avatar" style="text-align: center;">
-    	<img id="avatarimg" src="{{ profile.get_avatar96_url }}" /><br />
-			<a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a>
-  	</div>
-		{% endif %}
 		<fieldset>
-		<div style="float: left; padding-left: 25px;">
-			<p style="margin: 0px;">{% trans "You have 3 options to select the image you want as avatar in your profile:" %}</p>
+			<legend>{% trans "Choose the source location of your avatar" %}</legend>
+			<h4>{% trans "You have 3 options to select the image you want as avatar in your profile:" %}</h4>
 			<ol>
 				<li>
-    			<label for="id_url" style="width: 320px; float: left;">{% trans "Select an image from a remote URL:" %}</label>
-    			{{ form.url }}
-					<input type="submit" value="{% trans "Done" %}" />
+   				<label for="id_url">{% trans "Select an image from a remote URL. Put the URL on the input below and we'll retrieve the image for you:" %}</label>
+					<p>{{ form.url }}<input type="submit" value="{% trans "Done" %}" /></p>
 				</li>
 				<li>
-    			<label for="id_photo" style="width: 320px; float: left;">{% trans "Select an image from disk:" %}</label>
-    			{{ form.photo }}
+    			<label for="id_photo">{% trans "Select an image from disk:" %}</label>
+    			<p>{{ form.photo }}</p>
 				</li>
 				{% if websearch %}
 				<li>
-					<a href="{{ request.path }}search/">{% trans "Search for an image on Picasa Web" %}</a>
+					<a class="large" href="{{ request.path }}search/">{% trans "Search for an image on Picasa Web" %}</a>
 				</li>
 				{% endif %}
-				</ol>
-			</div>	
+			</ol>
 		</fieldset>
   </form>
-	{% if form.errors %}
-	{{ form.errors }}
-	{% endif %}
+  {% if form.errors %}
+  {% for error,desc in form.errors.items %}
+    <p class="error">{{desc|join:","}}</p>
+  {% endfor %}
+  {% endif %}
+</div>
 {% endblock %}
