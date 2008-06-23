@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
-from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, UserForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailChangeForm
+from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailChangeForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
@@ -276,7 +276,7 @@ def email_change(request, template, section):
 
 def register(request, template):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
@@ -289,7 +289,7 @@ def register(request, template):
             newuser.save()
             return HttpResponseRedirect('%scomplete/' % request.path)
     else:
-        form = UserForm()
+        form = RegistrationForm()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 

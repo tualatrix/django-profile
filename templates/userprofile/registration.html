@@ -3,31 +3,33 @@
 	{% block title %}{% trans "User registration" %}{% endblock %}
 {% block customjs %}
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.registration.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("input[type='text'], input[type='password']").addClass("text");
+		});
+	</script>
 {% endblock %}
 
 {% block content %}
+<h4>{% trans "Joining this community is quick and easy. You only need to fill the following information to get access to all the private content." %}</h4>
 <form class="commonform registration" method="post" action="">
-	<h1>{% trans "User registration" %}</h1>
-	<p class="intro">{% trans "Joining this community is quick and easy. You only need to fill the following information to get access to all the private content." %}</p>
 	<fieldset>
-		<div>
- 			<label for="id_username">{% trans "Username:" %}</label>
- 			{{ form.username }}
-			<img id="username_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		<legend>{% trans "User registration" %}</legend>
+		<div class="span-11">
+ 			<label for="id_username">{% trans "Username:" %}<img class="hide" id="username_img" src="{{ MEDIA_URL }}images/loading.gif" /></p></label>
+ 			<p>{{ form.username }}</p>
 		</div>
-		<div>
+		<div class="span-11 last">
+ 			<label for="id_email">{% trans "E-mail (optional):" %}<img class="hide" id="email_img" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+ 			<p>{{ form.email }}</p>
+		</div>
+		<div class="span-11">
  			<label for="id_password1">{% trans "Password:" %}</label>
- 			{{ form.password1 }}
+ 			<p>{{ form.password1 }}</p>
 		</div>
-		<div>
- 			<label for="id_password2">{% trans "Password again:" %}</label>
- 			{{ form.password2 }}
-			<img id="password_img" src="{{ MEDIA_URL }}images/loading.gif" />
-		</div>
-		<div>
- 			<label for="id_email">{% trans "E-mail (optional):" %}</label>
- 			{{ form.email }}
-			<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
+		<div class="span-11 last">
+ 			<label for="id_password2">{% trans "Password again:" %}<img class="hide" id="password_img" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+ 			<p>{{ form.password2 }}</p>
 		</div>
  		<input type="submit" value="{% trans 'Register' %}" />
 	</fieldset>
@@ -37,5 +39,5 @@
 		{% endfor %}
  	{% endif %}
 </form> 
-<p class="intro" style="font-size: .9em;">{% trans "If you already registered an account, but have not received the validation e-mail, please, click" %} <a href="/accounts/validation/reset/">{% trans "here" %}</a></p>
+<p>{% trans "If you already registered an account, but have not received the validation e-mail, please, click" %} <a href="/accounts/validation/reset/">{% trans "here" %}</a></p>
 {% endblock %}

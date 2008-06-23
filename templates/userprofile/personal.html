@@ -4,13 +4,14 @@
 {% block customjs %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
-<!--<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.simplemodal-1.1.1.pack.js"></script>-->
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
 {% ifequal LANGUAGE_CODE 'es' %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ LANGUAGE_CODE }}.js"></script>
 {% endifequal %}
 <script type="text/javascript">
 	$(function() {
+		$("input[type='text']").addClass("text");
+  	$("#id_firstname").focus();
 		{% ifequal LANGUAGE_CODE 'es' %}
 		$.datepicker.setDefaults($.datepicker.regional["{{ LANGUAGE_CODE }}"]);
 		{% endifequal %}
@@ -20,38 +21,26 @@
 
 {% block content %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="{{ request.path }}" method="post" enctype="multipart/form-data">
-	<h1>{% trans "Edit your personal information" %}</h1>
+<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
   <fieldset>
-		<div>
-    	<label for="id_firstname">{% trans "First Name:" %}</label>
-    	{{ form.firstname }}
-		</div>
-		<div>
-    	<label for="id_surname">{% trans "Surname:" %}</label>
-    	{{ form.surname }}
-		</div>
-		<div>
-    	<label for="id_gender">{% trans "Gender:" %}</label>
+		<legend>{% trans "Edit your personal information" %}</legend>
+   	<label for="id_firstname">{% trans "First Name:" %}</label>
+   	<p>{{ form.firstname }}</p>
+   	<label for="id_surname">{% trans "Surname:" %}</label>
+   	<p>{{ form.surname }}</p>
+   	<label for="id_gender">{% trans "Gender:" %}</label>
+		<p style="overflow: hidden;">
 			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
 			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
-		</div>
-		<div>
-   		<label for="id_birthdate">{% trans "Birth date:" %}</label>
-			<div class="calendar"></div>
-		</div>
-		<div>
-    	<label for="id_url">{% trans "Url:" %}</label>
-    	{{ form.url }}
-		</div>
-		<div>
-    	<label for="id_about">{% trans "About:" %}</label>
-    	{{ form.about }}
-		</div>
-		<div class="save">
-  		<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" />
-		</div>
-    <div style="display: none;">{{ form.birthdate }}{{ form.gender }}</div>
+		</p>
+   	<label for="id_birthdate">{% trans "Birth date:" %}</label>
+		<div class="calendar" style="clear: both; overflow: hidden;"></div>
+   	<label for="id_url">{% trans "Url:" %}</label>
+   	<p>{{ form.url }}</p>
+   	<label for="id_about">{% trans "About:" %}</label>
+   	<p>{{ form.about }}</p>
+  	<p><input type="submit" value="{% trans 'Save' %}" /></p>
+    <div class="hide">{{ form.birthdate }}{{ form.gender }}</div>
   </fieldset>
 </form>
 {% endblock %}

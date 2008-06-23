@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="vcard usercard" style="height: 120px;">
+<div class="vcard">
 	<a style="float: right;" href="{{ profile.get_absolute_url }}">{% trans "Public profile" %}</a>
 	{% if profile.gender and profile.visible.gender %}<img class="gender" style="clear: right;" src="{{ profile.get_genderimage_url }}" />{% endif %}
 	<ul>

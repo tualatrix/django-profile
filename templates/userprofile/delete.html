@@ -3,10 +3,12 @@
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="" method="post" enctype="multipart/form-data">
-	<h1>{% trans "Delete all your personal information" %}</h1>
+<h4>{% trans "Deleting all your personal information will erase all your private data, except your username. You can refill the information later if you want to." %}</h4>
+<form action="" method="post" enctype="multipart/form-data">
   <fieldset>
-		<p>{% trans "Are you sure?" %} <input type="submit" value="Yes" /></p>
+		<legend>{% trans "Delete all your personal information" %}</legend>
+		<label for="remove">{% trans "Are you sure?" %}</legend>
+		<p><input id="remove" type="submit" value="Yes" /></p>
   </fieldset>
 </form>
 {% endblock %}

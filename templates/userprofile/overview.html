@@ -4,27 +4,29 @@
 {% block content %}
 {% include "userprofile/menu.html" %}
 <form class="commonform profile" action="" method="post">
-	<h1>{% trans "Overview of your profile" %}</h1>
-	{% if profile.avatar %}
-	<div class="avatar">
-		<img src="{{ profile.get_avatar96_url }}" />
-	</div>
-	{% endif %}
   <fieldset>
-		<div>
-    	<label for="id_user">{% trans "Username:" %}</label>
-    	<strong id="id_user">{{ profile.user }}</strong> 
-			 <span style="font-size: .8em;">(<a href="/accounts/password/change/">{% trans "Change password" %}</a>)</span>
+		<legend>{% trans "Overview of your profile" %}</legend>
+		<div class="span-3">
+			{% if profile.avatar %}
+			<img src="{{ profile.get_avatar96_url }}" />
+			{% else %}
+			<img src="{{ MEDIA_URL }}images/default.96.png" />
+			{% endif %}
 		</div>
-		<div>
-    	<label for="id_email">{% trans "E-mail:" %}</label>
-       <strong id="id_email">
-				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}</strong> 
-				{% if not validated and email %}({% trans "Not validated" %}){% endif %}{% if validated and email %}({% trans "Validated" %}){% endif %}
-        <p style="margin: 0px; font-size: .8em;">
+		<div class="span-17 last">
+			<div>
+    		<label for="id_user">{% trans "Username:" %}</label>
+    		<p>{{ profile.user }} <a class="small" href="/accounts/password/change/">{% trans "Change password" %}</a></p>
+			</div>
+			<div>
+    		<label for="id_email">{% trans "E-mail:" %}</label>
+				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}
+				{% if not validated and email %}<span class="small">({% trans "Not validated" %})</span>{% endif %}{% if validated and email %}<span class="small">({% trans "Validated" %})</span>{% endif %}
+       	<p style="margin: 0px; font-size: .8em;">
 					<a href="/accounts/email/change/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
 					{% if not validated and email %} - <a href="/accounts/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
-				</p>
+					</p>
+			</div>
 		</div>
   </fieldset>
 </form>

@@ -8,11 +8,11 @@
 {% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
-<form class="commonform profile" action="{{ request.path }}" method="post" enctype="multipart/form-data">
-	<h1>{% trans "Define your location" %}</h1>
+<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
   <fieldset>
-		<div>
-   		<label for="id_country">{% trans "Country:" %}</label>
+		<legend>{% trans "Define your location" %}</legend>
+  	<label for="id_country">{% trans "Country:" %}<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+		<p>
 			<select name="country" id="id_country">
 				<option value="">{% trans "Not set" %}</option>
 				<option value="" disabled="disabled">{% trans "More common..." %}</option>
@@ -24,20 +24,15 @@
 					{% endfor %}
 				{% endfor %}
 			</select>
-			<img class="loading" src="{{ MEDIA_URL }}images/loading.gif" />
-		</div>
+		</p>
 		<div class="mapinfo">
    		<label>{% trans "Location:" %}</label>
-			<p id="location_info" style="float: left; line-height: 28px; margin: 0px;">{{ profile.location }}</p>
-		</div>
-		<div class="mapinfo">
+			<p id="location_info">{{ profile.location }}</p>
    		<label for="map">{% trans "Position:" %}</label>
-			<div id="map"></div>
+			<div id="map" style="overflow: hidden;"></div>
 		</div>
-    <div style="display: none;">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
-		<div class="save">
-			<input type="submit" style="float: right;" class="save" value="{% trans 'Save' %}" />
-		</div>
+    <div class="hide">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
+		<p><input type="submit" value="{% trans 'Save' %}" /></p>
 		<div style="display: none;" id="apikey">{{ APIKEY }}</div>
 	</fieldset>
 </form>

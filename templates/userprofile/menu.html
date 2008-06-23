@@ -1,11 +1,12 @@
 {% load i18n %}
 {% if user.is_authenticated %}
-<ul class="profilemenu">
-	<li {% ifequal section "overview" %}class="active"{% endifequal %}><a href="/accounts/profile/">{% trans "Overview" %}</a></li>
-	<li {% ifequal section "personal" %}class="active"{% endifequal %}><a href="/accounts/profile/edit/personal/">{% trans "Edit personal information" %}</a></li>
-	<li {% ifequal section "avatar" %}class="active"{% endifequal %}><a href="/accounts/profile/edit/avatar/">{% trans "Edit avatar" %}</a></li>
-	<li {% ifequal section "location" %}class="active"{% endifequal %}><a href="/accounts/profile/edit/location/">{% trans "Edit location" %}</a></li>
-	<li {% ifequal section "makepublic" %}class="active"{% endifequal %}><a href="/accounts/profile/edit/public/">{% trans "Define public info" %}</a></li>
-	<li {% ifequal section "delete" %}class="active"{% endifequal %}><a href="/accounts/profile/delete/">{% trans "Remove profile" %}</a></li>
+<ul class="hmenu large">
+	<li{% ifequal section "overview" %} class="active"{% endifequal %}><a href="/accounts/profile/">{% trans "Overview" %}</a></li>
+	<li{% ifequal section "personal" %} class="active"{% endifequal %}><a href="/accounts/profile/edit/personal/">{% trans "Personal information" %}</a></li>
+	<li{% ifequal section "avatar" %} class="active"{% endifequal %}><a href="/accounts/profile/edit/avatar/">{% trans "Avatar" %}</a></li>
+	<li{% ifequal section "location" %} class="active"{% endifequal %}><a href="/accounts/profile/edit/location/">{% trans "Location" %}</a></li>
+	<li{% ifequal section "makepublic" %} class="active"{% endifequal %}><a href="/accounts/profile/edit/public/">{% trans "Public info" %}</a></li>
+	<li{% ifequal section "delete" %} class="active"{% endifequal %}><a href="/accounts/profile/delete/">{% trans "Remove profile" %}</a></li>
 </ul>
+<hr />
 {% endif %}

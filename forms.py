@@ -53,7 +53,7 @@ class AvatarCropForm(forms.Form):
         else:
             return self.cleaned_data
 
-class UserForm(forms.Form):
+class RegistrationForm(forms.Form):
 
     username = forms.CharField(max_length=255, min_length = 3)
     email = forms.EmailField(required=False)
