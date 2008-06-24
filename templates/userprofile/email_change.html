@@ -8,7 +8,7 @@
 
 {% block content %}
 {% include "userprofile/menu.html" %}
-<form class="commonform emailchg" action="" method="post">
+<form action="" method="post">
 	{% if request.user.email %}
 	<h1>{% trans "E-mail change" %}</h1>
 	{% else %}
