@@ -3,7 +3,6 @@
 
 {% block title %}{% trans "Resend the activation e-mail" %}{% endblock %}
 {% block customjs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.validation.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#id_email").focus();
@@ -18,7 +17,7 @@
 	<form action="" method="post">
   	<fieldset>
   		<legend>{% trans "Resend the activation e-mail" %}</legend>
-      <label for="id_email" style="width: 240px;">{% trans 'E-mail address:' %}<img class="hide" id="email_img" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+      <label for="id_email" style="width: 240px;">{% trans 'E-mail address:' %}</label>
       <p>{{ form.email }}</p>
     	<p><input type="submit" value="{% trans 'Resend validation' %}" /></p>
   	</fieldset>

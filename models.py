@@ -96,6 +96,9 @@ class Profile(models.Model):
     class Admin:
         pass
 
+    def get_genderimage_url(self):
+        return GENDER_IMAGES[self.gender]
+
     def __unicode__(self):
         return _("%s's profile") % self.user
 

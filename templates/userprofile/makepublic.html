@@ -25,7 +25,7 @@
 <form action="" method="post">
   <fieldset>
 		<legend>{% trans "Click on the information you want to make public" %}</legend>
-		<div class="span-11">
+		<div class="span-11 prepend-1">
    		<label for="id_firstname">{% trans "First Name:" %}</label>
 			<p>
 				{% if profile.firstname %}
@@ -39,11 +39,7 @@
 			<p style="overflow: hidden;">
 				{% if profile.gender %}
 				<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
-				{% ifequal profile.gender "M" %}
-				<span class="large">{% trans "Male" %}</span>
-				{% else %}
-				<span class="large"><img src="{{ MEDIA_URL }}images/female.png" /> {% trans "Female" %}</span>
-				{% endifequal %}
+				<span class="large"><img src="{{ profile.get_genderimage_url }}" /> {{ profile.get_gender_display }}</span>
 				{% else %}
 				<span class="large">{% trans "Not set" %}</span>
 				{% endif %}

@@ -1,27 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "E-mail change" %}{% endblock %}
+{% block title %}{% if request.user.email %}{% trans "E-mail change" %}{% else %}{% trans "Add e-mail" %}{% endif %}{% endblock %}
 {% block customjs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.emailchg.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("input[type='text'], input[type='text']").addClass("text");
+    });
+  </script>
 {% endblock %}
 
 {% block content %}
 {% include "userprofile/menu.html" %}
+<h4>{% trans "Insert the new e-mail address. An e-mail will be send to it for testing and confirmation." %}</h4>
 <form action="" method="post">
-	{% if request.user.email %}
-	<h1>{% trans "E-mail change" %}</h1>
-	{% else %}
-	<h1>{% trans "Add e-mail" %}</h1>
-	{% endif %}
-	<p class="intro">{% trans "Insert the new e-mail address. An e-mail will be send to it for testing and confirmation." %}
  	<fieldset>
-   	<div>
-   		<label for="id_email" style="width: 240px;">{% trans 'New e-mail address:' %}</label>
-   		{{ form.email }}
-     	<img id="email_img" src="{{ MEDIA_URL }}images/loading.gif" />
-		</div>
- 		<input style="margin-left: 245px;" type="submit" value="{% trans 'Send confirmation' %}" />
+		<legend>{% if request.user.email %}{% trans "E-mail change" %}{% else %}{% trans "Add e-mail" %}{% endif %}</legend>
+ 		<label for="id_email">{% trans 'New e-mail address:' %}</label>
+   	<p>{{ form.email }}</p>
+ 		<p><input type="submit" value="{% trans 'Send confirmation' %}" /></p>
  	</fieldset>
   {% if form.errors %}
     {% for error,desc in form.errors.items %}

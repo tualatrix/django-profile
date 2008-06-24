@@ -16,11 +16,11 @@
 	<fieldset>
 		<legend>{% trans "User registration" %}</legend>
 		<div class="span-11">
- 			<label for="id_username">{% trans "Username:" %}<img class="hide" id="username_img" src="{{ MEDIA_URL }}images/loading.gif" /></p></label>
+ 			<label for="id_username">{% trans "Username:" %}</label>
  			<p>{{ form.username }}</p>
 		</div>
 		<div class="span-11 last">
- 			<label for="id_email">{% trans "E-mail (optional):" %}<img class="hide" id="email_img" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+ 			<label for="id_email">{% trans "E-mail (optional):" %}</label>
  			<p>{{ form.email }}</p>
 		</div>
 		<div class="span-11">
@@ -28,7 +28,7 @@
  			<p>{{ form.password1 }}</p>
 		</div>
 		<div class="span-11 last">
- 			<label for="id_password2">{% trans "Password again:" %}<img class="hide" id="password_img" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+ 			<label for="id_password2">{% trans "Password again:" %}</label>
  			<p>{{ form.password2 }}</p>
 		</div>
  		<input type="submit" value="{% trans 'Register' %}" />
