@@ -7,7 +7,7 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-{% include "userprofile/profile/menu.html" %}
+{% include "userprofile/menu.html" %}
 <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
   <fieldset>
 		<legend>{% trans "Define your location" %}</legend>

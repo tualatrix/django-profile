@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
 from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailChangeForm
@@ -64,19 +65,18 @@ def makepublic(request, template, section, APIKEY=None):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def searchimages(request, template, section):
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST" and request.POST.get('search'):
-        photos = list()
-        urls = list()
+def searchimages(request, template, section, keyword=''):
+    if request.method=="POST" and request.POST.get('keyword'): keyword = request.POST.get('keyword')
+    if keyword:
+        print keyword
         gd_client = gdata.photos.service.PhotosService()
-        feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % request.POST.get('search').split(" ")[0], limit='35')
+        feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
+        data = dict()
         for entry in feed.entry:
-            photos.append(entry.media.thumbnail[0].url)
-            urls.append(entry.content.src)
+            data[entry.media.thumbnail[0].url] = entry.content.src
 
-        return HttpResponse(simplejson.dumps({'success': True, 'photos': photos, 'urls': urls }))
-    else:
-        return render_to_response(template, locals(), context_instance=RequestContext(request))
+
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
 def overview(request, template, section, APIKEY=None):
@@ -363,56 +363,7 @@ def change_password_authenticated(request, template, section):
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
-def check_user(request, user):
-    """
-    Check if a username exists. Only HTTPXMLRequest. Returns JSON
-    """
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        if len(user) < 3 or not set(user).issubset("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_") or User.objects.filter(username__iexact=user).count() > 0:
-            return json_error_response(simplejson.dumps({'success': False}))
-        else:
-            return HttpResponse(simplejson.dumps({'success': True}))
-    else:
-        raise Http404
-
-def check_email_unused(request, email):
-    """
-    Check if an e-mail exists. Only HTTPXMLRequest. Returns JSON
-    """
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        if not email_re.search(email):
-            return json_error_response(_("Invalid e-mail"))
-
-        if not User.objects.filter(email=email) and not Validation.objects.filter(email=email):
-            return HttpResponse(simplejson.dumps({'success': True}))
-        else:
-            return json_error_response(_("E-mail not registered"))
-    else:
-        raise Http404
-
-def check_email(request, email):
-    """
-    Check if a username exists. Only HTTPXMLRequest. Returns JSON
-    """
-    try:
-        User.objects.get(email=email)
-        return HttpResponse(simplejson.dumps({'success': True}))
-    except User.DoesNotExist:
-        return json_error_response(_("E-mail not registered"))
-
-def check_validating_email(request, email):
-    """
-    Check if a username exists. Only HTTPXMLRequest. Returns JSON
-    """
-    try:
-        Validation.objects.get(email=email)
-        return HttpResponse(simplejson.dumps({'success': True}))
-    except Validation.DoesNotExist:
-        return json_error_response(_("E-mail not registered"))
-
-
 def logout(request, template):
-    from django.contrib.auth import logout
     logout(request)
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 

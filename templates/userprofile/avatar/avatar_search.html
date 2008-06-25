@@ -5,39 +5,25 @@
   <script type="text/javascript">
     $(function() {
 			$("input[type='text']").focus();
-			$("form#images").submit(function() {
-				$("img#loading").show();
-				$("div.photos").html('');
-        if ($("form#images input[type='text']").val()) {
-					$.post("{{ request.path }}", { 'search': $("form#images input[type='text']").val() }, function(data) {
-						if (data.success) {
-							for (var photo in data.photos) {
-								$("div.photos").append('<a href="' + data.urls[photo] + '"><img src="' + data.photos[photo] + '" /></a>');
-							}
-							$("div.photos a").click(function() {
-								$("form#avatar input[name='url']").val($(this).attr("href"));
-								$("form#avatar").submit();
-								return false;	
-							});
-						}
-						$("img#loading").hide();
-					}, "json");
-				}
-				return false;
-			});
-			$("input[name='cancel']").click(function() {
-				window.location="/accounts/profile/edit/avatar/";
+      $("div.photos a").click(function() {
+        $("form#avatar input[name='url']").val($(this).attr("href"));
+        $("form#avatar").submit();
+        return false;   
 			});
 		});
 	</script>
 {% endblock %}
 {% block content %}
 {% include "userprofile/menu.html" %}
-<form action="" id="images">
+<form action="" method="post">
 	<fieldset>
 		<legend>{% trans "Search for an image on Picasa Web" %}</legend>
-		<p>{% trans "Search on Picasa Web:" %} <input type="text" value="" /> <input type="submit" value="{% trans "Search" %}"/> <input type="button" name="cancel" value="{% trans "Cancel" %}" /> <img id="loading" style="display: none;" src="{{ MEDIA_URL }}images/loading.gif" /></p>
-		<div class="photos"></div>
+		<p>{% trans "Search on Picasa Web:" %} <input type="text" name="keyword" value="{{ keyword }}" /> <input type="submit" value="{% trans "Search" %}"/></p>
+		<div class="photos">
+			{% for thumb,url in data.items %}
+				<a href="{{ url }}"><img src="{{ thumb }}" /></a>
+			{% endfor %}
+		</div>
 	</fieldset>
 </form>
 <form class="hide" id="avatar" action="/accounts/profile/edit/avatar/" method="POST">

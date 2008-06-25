@@ -179,25 +179,18 @@ class ValidationManager(models.Manager):
                 self.key = key
                 break
 
-        site = Site.objects.get_current()
-        template = "userprofile/%s_email.html" % type
-        if type == "email":
-            message = 'http://%s/accounts/email/change/%s/' % (site.domain, key)
-            title = _("Email change confirmation on %s") % site.name
-        elif type == "passwd":
-            message = 'http://%s/accounts/password/change/%s/' % (site.domain, key)
-            title = _("Password reset on %s") % site.name
-
+        template = "userprofile/email/%s.txt" % type
+        template_subject = "userprofile/email/%s_subject.txt" % type
         t = loader.get_template(template)
-        site_name = site.name
-        send_mail(title, t.render(Context(locals())), None, [email])
+        ts = loader.get_template(template_subject)
+        send_mail(ts.render(Context(locals())), t.render(Context(locals())), None, [email])
         user = User.objects.get(username=str(user))
-        type_choices = { "email": 1, "passwd": 2, "user": 3}
+        type_choices = { "email": 1, "password": 2, "user": 3}
         self.filter(user=user, type=type_choices[type]).delete()
         return self.create(user=user, key=key, type=type_choices[type], email=email)
 
 class Validation(models.Model):
-    type = models.PositiveSmallIntegerField(choices=( (1, 'email'), (2, 'passwd'),))
+    type = models.PositiveSmallIntegerField(choices=( (1, 'email'), (2, 'password'),))
     user = models.ForeignKey(User)
     email = models.EmailField(blank=True)
     key = models.CharField(max_length=70, unique=True, db_index=True)
@@ -227,7 +220,7 @@ class Validation(models.Model):
         if type == "email":
             message = 'http://%s/accounts/email/change/%s/' % (site.domain, self.key)
             title = _("Email change confirmation on %s") % site.name
-        elif type == "passwd":
+        elif type == "password":
             message = 'http://%s/accounts/password/change/%s/' % (site.domain, self.key)
             title = _("Password reset on %s") % site.name
 

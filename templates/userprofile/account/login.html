@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="span-12 colborder">
+<div class="span-10 colborder">
 	<form method="post" action="{% if next %}?next={{ next }}{% endif %}">
 		<fieldset>
 			<legend>{% trans "User login" %}</legend>
@@ -20,7 +20,6 @@
    		<p>{{ form.username }}</p>
    		<label for="id_password">{% trans "Password:" %}</label>
    		<p>{{ form.password }}</p>
-   		<p class="small"><a href="/accounts/password/reset/">{% trans "Have you lost your password?" %}</a></p>
    		<p><input type="submit" value="{% trans 'Login' %}" /></p>
  		</fieldset>
  		{% if form.has_errors %}
@@ -28,8 +27,11 @@
 		{% endif %}
 	</form>
 </div>
-<div class="span-11 last">
-	<p class="large">{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>.{% endblocktrans %}</p>
+<div class="span-13 last">
+	<ul class="large cleanul">
+  	<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="/accounts/password/reset/">click here</a>.{% endblocktrans %}</li>
+		<li>{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>.{% endblocktrans %}</li>
+	</ul>
 </div>
 {% endblock %}
 

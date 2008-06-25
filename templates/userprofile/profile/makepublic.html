@@ -21,7 +21,7 @@
 {% endif %}
 {% endblock %}
 {% block content %}
-{% include "userprofile/profile/menu.html" %}
+{% include "userprofile/menu.html" %}
 <form action="" method="post">
   <fieldset>
 		<legend>{% trans "Click on the information you want to make public" %}</legend>
@@ -39,7 +39,7 @@
 			<p style="overflow: hidden;">
 				{% if profile.gender %}
 				<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
-				<span class="large"><img src="{{ profile.get_genderimage_url }}" /> {{ profile.get_gender_display }}</span>
+				<span class="large">{{ profile.get_gender_display }}</span>
 				{% else %}
 				<span class="large">{% trans "Not set" %}</span>
 				{% endif %}
