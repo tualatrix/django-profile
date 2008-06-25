@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>{% blocktrans %}Public profile of {{ profile.user }}{% endblocktrans %}</h1>
+<h1>{% blocktrans with profile.user as user %}Public profile of {{ user }}{% endblocktrans %}</h1>
 <div class="vcard">
 	<ul>
 		{% if profile.avatar %}

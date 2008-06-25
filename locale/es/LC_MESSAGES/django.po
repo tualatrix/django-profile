@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-25 21:45+0200\n"
+"POT-Creation-Date: 2008-06-25 22:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,8 @@ msgstr "Debes introducir una de las opciones"
 
 #: forms.py:52
 msgid "You must select a portion of the image with a minimum of 96x96 pixels."
-msgstr "Debes seleccionar una porción de la imagen con un mínimo de 96x96 píxels."
+msgstr ""
+"Debes seleccionar una porción de la imagen con un mínimo de 96x96 píxels."
 
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -259,14 +260,16 @@ msgstr "Tu usuario y contraseña no coinciden. Por favor, vuelve a intentarlo."
 msgid ""
 "If you already have an account, but have lost your password, <a href=\"/"
 "accounts/password/reset/\">click here</a>."
-msgstr "Si ya tienes una cuenta, pero has perdido tu contraseña, <a href=\"/"
-"accounts/password/reset/\">pincha aquí</a>."
+msgstr ""
+"Si ya tienes una cuenta, pero has perdido tu contraseña, <a href=\"/accounts/"
+"password/reset/\">pincha aquí</a>."
 
 #: templates/userprofile/account/login.html:33
 msgid ""
 "If you don't have an account, you can <a href=\"/accounts/register/\">sign "
 "up</a>."
-msgstr "Si no tienes cuenta, puedes <a href=\"/accounts/register/\">registrarte</a>."
+msgstr ""
+"Si no tienes cuenta, puedes <a href=\"/accounts/register/\">registrarte</a>."
 
 #: templates/userprofile/account/logout.html:4
 #: templates/userprofile/account/logout.html:7
@@ -398,7 +401,8 @@ msgid ""
 "</h4>"
 msgstr ""
 "Has registrado satisfactoriamente una nueva cuenta. Ves a la <a href=\"/"
-"accounts/profile/\">página de entrada</a> para autenticarte y empezar a utilizar este sitio."
+"accounts/profile/\">página de entrada</a> para autenticarte y empezar a "
+"utilizar este sitio."
 
 #: templates/userprofile/avatar/avatar_choose.html:3
 #: templates/userprofile/avatar/avatar_choose.html:35
@@ -421,8 +425,8 @@ msgid ""
 "Select an image from a remote URL. Put the URL on the input below and we'll "
 "retrieve the image for you:"
 msgstr ""
-"Selecciona una imagen de una URL remota. Pon la dirección remota en el campo de abajo y "
-"obtendremos la imagen para ti:"
+"Selecciona una imagen de una URL remota. Pon la dirección remota en el campo "
+"de abajo y obtendremos la imagen para ti:"
 
 #: templates/userprofile/avatar/avatar_choose.html:40
 #: templates/userprofile/avatar/avatar_crop.html:26
@@ -470,9 +474,10 @@ msgstr "Borrar toda la información de tu perfil"
 msgid ""
 "Deleting all your personal information will erase all your private data, "
 "except your username. You can refill the information later if you want to."
-msgstr "Borrar toda tu información privada eliminará todos tus datos personales, "
-"excepto tu nombre de usuario. Puedes volver a rellenar toda la información porteriormente "
-"si quieres."
+msgstr ""
+"Borrar toda tu información privada eliminará todos tus datos personales, "
+"excepto tu nombre de usuario. Puedes volver a rellenar toda la información "
+"porteriormente si quieres."
 
 #: templates/userprofile/profile/delete.html:10
 msgid "Are you sure?"
@@ -624,6 +629,10 @@ msgstr "Apellidos:"
 msgid "Your profile information has been updated successfully."
 msgstr "La información de tu perfil ha sido actualizada satisfactoriamente."
 
+#: templates/userprofile/profile/public.html:26
+msgid "Public profile of %(user)s"
+msgstr "Perfil público de %(user)s"
+
 #: templates/userprofile/profile/public.html:34
 #: templates/userprofile/profile/usercard.html:8
 msgid "Username"
@@ -751,9 +760,6 @@ msgstr "Información pública del perfil"
 
 #~ msgid "Following this link, you will validate your e-mail address:"
 #~ msgstr "Accediendo a este enlace, validarás tu dirección de correo:"
-
-#~ msgid "Public profile"
-#~ msgstr "Perfil público"
 
 #~ msgid "No avatar"
 #~ msgstr "No hay avatar"
