@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+{% if successfull %}
+{% trans 'E-mail validation successful' %}
+{% else %}
+{% trans 'E-mail change unsuccessful' %}
+{% endif %}
+{% endblock %}
+{% block content %}
+{% include "userprofile/menu.html" %}
+<h4>{{ message }}</h4>
+{% endblock %}

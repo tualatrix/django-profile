@@ -1,3 +1,0 @@
-{% load i18n %}
-{% blocktrans "Email change confirmation on {{ SITE_NAME }}.{% endblocktrans %}
-

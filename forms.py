@@ -100,7 +100,7 @@ class RegistrationForm(forms.Form):
             except Validation.DoesNotExist:
                 return email
 
-class EmailChangeForm(forms.Form):
+class EmailValidationForm(forms.Form):
     email = forms.EmailField()
 
     def clean_email(self):
@@ -149,25 +149,6 @@ class changePasswordKeyForm(forms.Form):
         user.set_password(self.cleaned_data.get('newpass1'))
         user.save()
         lostpassword.delete()
-
-class changePasswordAuthForm(forms.Form):
-    newpass1 = forms.CharField( min_length = 6, widget = forms.PasswordInput )
-    newpass2 = forms.CharField( min_length = 6, widget = forms.PasswordInput )
-
-    def clean(self):
-        """
-        Verify the equality of the two passwords
-        """
-
-        if self.cleaned_data.get("newpass1") and self.cleaned_data.get("newpass1") == self.cleaned_data.get("newpass2"):
-            return self.cleaned_data
-        else:
-            raise forms.ValidationError(_("The passwords inserted are different."))
-
-    def save(self, user):
-        "Saves the new password."
-        user.set_password(self.cleaned_data.get('newpass1'))
-        user.save()
 
 class changePasswordAuthForm(forms.Form):
     newpass1 = forms.CharField( min_length = 6, widget = forms.PasswordInput )

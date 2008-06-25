@@ -5,16 +5,15 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
-{% ifequal LANGUAGE_CODE 'es' %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker-{{ LANGUAGE_CODE }}.js"></script>
-{% endifequal %}
 <script type="text/javascript">
+	function updateInline(dateStr) {
+  	var arrdate = dateStr.split("/");
+  	$("#id_birthdate").val(arrdate[2] + "-" + arrdate[0] + "-" + arrdate[1]);
+	}
+
 	$(function() {
 		$("input[type='text']").addClass("text");
   	$("#id_firstname").focus();
-		{% ifequal LANGUAGE_CODE 'es' %}
-		$.datepicker.setDefaults($.datepicker.regional["{{ LANGUAGE_CODE }}"]);
-		{% endifequal %}
   });
 </script>
 {% endblock %}
@@ -34,7 +33,7 @@
 			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
 		</p>
    	<label for="id_birthdate">{% trans "Birth date:" %}</label>
-		<div class="calendar" style="clear: both; overflow: hidden;"></div>
+		<div class="calendar"></div>
    	<label for="id_url">{% trans "Url:" %}</label>
    	<p>{{ form.url }}</p>
    	<label for="id_about">{% trans "About:" %}</label>

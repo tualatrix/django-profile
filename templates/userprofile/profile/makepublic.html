@@ -26,11 +26,11 @@
   <fieldset>
 		<legend>{% trans "Click on the information you want to make public" %}</legend>
 		<div class="span-11 prepend-1">
-   		<label for="id_firstname">{% trans "First Name:" %}</label>
+   		<label for="id_name">{% trans "Name:" %}</label>
 			<p>
 				{% if profile.firstname %}
 				<input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.firstname }}</span>
+    		<span class="large">{{ profile.firstname }} {{ profile.surname }}</span>
 				{% else %}
 				<span class="large">{% trans "Not set" %}</span>
 				{% endif %}
@@ -64,15 +64,6 @@
 			</p>
 		</div>
 		<div class="span-11 last">
-   		<label for="id_surname">{% trans "Surname:" %}</label>
-			<p>
-				{% if profile.surname %}
-				<input type="checkbox" name="surname_public" {% if profile.visible.surname %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.surname }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</strong>
-				{% endif %}
-			</p>
    		<label for="id_birthdate">{% trans "Birth date:" %}</label>
 			<p>
 				{% if profile.yearsold %}

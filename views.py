@@ -1,9 +1,8 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
-from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailChangeForm
+from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailValidationForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import simplejson
@@ -65,10 +64,9 @@ def makepublic(request, template, section, APIKEY=None):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def searchimages(request, template, section, keyword=''):
-    if request.method=="POST" and request.POST.get('keyword'): keyword = request.POST.get('keyword')
-    if keyword:
-        print keyword
+def searchimages(request, template, section):
+    if request.method=="POST" and request.POST.get('keyword'): 
+        keyword = request.POST.get('keyword')
         gd_client = gdata.photos.service.PhotosService()
         feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
         data = dict()
@@ -234,15 +232,15 @@ def json_error_response(error_message, *args, **kwargs):
                                               error_message=error_message), ensure_ascii=False))
 
 @login_required
-def change_email_with_key(request, key, template, section):
+def email_validation_process(request, key, template, section):
     """
     Verify key and change email
     """
     if Validation.objects.verify(key=key):
-        message = _('E-mail changed successfully.')
+        message = _('E-mail address validated successfully.')
         successful = True
     else:
-        message = _('The key you received via e-mail is no longer valid. Please try the e-mail change process again.')
+        message = _('The key you received via e-mail is no longer valid. Please try the e-mail validation process again.')
         successful = False
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
@@ -260,17 +258,17 @@ def email_validation_with_key(request, key, template):
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
-def email_change(request, template, section):
+def email_validation(request, template, section):
     """
     Change the e-mail page
     """
     if request.method == 'POST':
-        form = EmailChangeForm(request.POST)
+        form = EmailValidationForm(request.POST)
         if form.is_valid():
-            Validation.objects.add(user=request.user, email=form.cleaned_data.get('email'), type="email")
+            Validation.objects.add(user=request.user, email=form.cleaned_data.get('email'), type="validation")
             return HttpResponseRedirect('%sprocessed/' % request.path)
     else:
-        form = EmailChangeForm()
+        form = EmailValidationForm()
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -284,7 +282,7 @@ def register(request, template):
 
             if form.cleaned_data.get('email'):
                 newuser.email = form.cleaned_data.get('email')
-                Validation.objects.add(user=newuser, email=newuser.email, type="email")
+                Validation.objects.add(user=newuser, email=newuser.email, type="validation")
 
             newuser.save()
             return HttpResponseRedirect('%scomplete/' % request.path)
@@ -301,7 +299,7 @@ def reset_password(request, template):
             user = User.objects.get(email=email)
 
             if email and user:
-                Validation.objects.add(user=user, email=email, type="passwd")
+                Validation.objects.add(user=user, email=email, type="password")
                 return HttpResponseRedirect('%sdone/' % request.path)
 
     else:
@@ -309,7 +307,11 @@ def reset_password(request, template):
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
-def validation_reset(request, template):
+def email_validation_reset(request, template):
+    """
+    Resend the validation email for the authenticated user.
+    Email validation reset form for the anonymous user.
+    """
     if request.user.is_authenticated():
         try:
             resend = Validation.objects.get(user=request.user).resend()
@@ -334,15 +336,15 @@ def change_password_with_key(request, key, template):
     Change a user password with the key sended by e-mail
     """
 
-    if not Validation.objects.verify(key=key):
-        return render_to_response('userprofile/password_expired.html', context_instance=RequestContext(request))
-
     user = Validation.objects.getuser(key=key)
     if request.method == "POST":
         form = changePasswordKeyForm(request.POST)
         if form.is_valid():
-            form.save(key)
-            return HttpResponseRedirect('/accounts/password/change/done/')
+            if not Validation.objects.verify(key=key):
+                return render_to_response('userprofile/account/password_expired.html', context_instance=RequestContext(request))
+            else:
+                form.save(key)
+                return HttpResponseRedirect('/accounts/password/change/done/')
     else:
         form = changePasswordKeyForm()
 
@@ -364,6 +366,7 @@ def change_password_authenticated(request, template, section):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 def logout(request, template):
+    from django.contrib.auth import logout
     logout(request)
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 

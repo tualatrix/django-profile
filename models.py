@@ -1,8 +1,8 @@
 from django.db import models
+from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
-from django.contrib.sites.models import Site
 from django.template import loader, Context
 from django.core.mail import send_mail
 from django.conf import settings
@@ -146,15 +146,15 @@ class ValidationManager(models.Manager):
         try:
             verify = self.get(key=key)
             if not verify.is_expired():
-                if verify.get_type_display() == "email":
+                if verify.get_type_display() == "password":
+                    return True
+                elif verify.get_type_display() == "validation":
                     verify.user.email = verify.email
                     verify.user.save()
                     verify.delete()
-                elif verify.get_type_display() == "user":
-                    verify.user.is_active = True
-                    verify.user.save()
-                    verify.delete()
-                return True
+                    return True
+                else:
+                    return False
             else:
                 verify.delete()
                 return False
@@ -179,18 +179,19 @@ class ValidationManager(models.Manager):
                 self.key = key
                 break
 
-        template = "userprofile/email/%s.txt" % type
+        template_body = "userprofile/email/%s.txt" % type
         template_subject = "userprofile/email/%s_subject.txt" % type
-        t = loader.get_template(template)
-        ts = loader.get_template(template_subject)
-        send_mail(ts.render(Context(locals())), t.render(Context(locals())), None, [email])
+        site_name, domain = Site.objects.get_current().name, Site.objects.get_current().domain
+        body = loader.get_template(template_body).render(Context(locals()))
+        subject = loader.get_template(template_subject).render(Context(locals())).strip()
+        send_mail(subject=subject, message=body, from_email=None, recipient_list=[email])
         user = User.objects.get(username=str(user))
-        type_choices = { "email": 1, "password": 2, "user": 3}
+        type_choices = { "validation": 1, "password": 2 }
         self.filter(user=user, type=type_choices[type]).delete()
         return self.create(user=user, key=key, type=type_choices[type], email=email)
 
 class Validation(models.Model):
-    type = models.PositiveSmallIntegerField(choices=( (1, 'email'), (2, 'password'),))
+    type = models.PositiveSmallIntegerField(choices=( (1, 'validation'), (2, 'password'),))
     user = models.ForeignKey(User)
     email = models.EmailField(blank=True)
     key = models.CharField(max_length=70, unique=True, db_index=True)
@@ -214,19 +215,14 @@ class Validation(models.Model):
         """
         Resend validation email
         """
-        site = Site.objects.get_current()
         type = self.get_type_display()
-        template = "userprofile/%s_email.html" % type
-        if type == "email":
-            message = 'http://%s/accounts/email/change/%s/' % (site.domain, self.key)
-            title = _("Email change confirmation on %s") % site.name
-        elif type == "password":
-            message = 'http://%s/accounts/password/change/%s/' % (site.domain, self.key)
-            title = _("Password reset on %s") % site.name
-
-        t = loader.get_template(template)
-        site_name = site.name
-        send_mail(title, t.render(Context(locals())), None, [self.email])
+        template_body = "userprofile/email/%s.txt" % type
+        template_subject = "userprofile/email/%s_subject.txt" % type
+        site_name, domain = Site.objects.get_current().name, Site.objects.get_current().domain
+        key = self.key
+        body = loader.get_template(template_body).render(Context(locals()))
+        subject = loader.get_template(template_subject).render(Context(locals())).strip()
+        send_mail(subject=subject, message=body, from_email=None, recipient_list=[self.email])
         self.created = datetime.datetime.now()
         self.save()
         return True

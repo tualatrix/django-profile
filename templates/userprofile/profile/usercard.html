@@ -5,12 +5,10 @@
 	</div>
 	<div class="span-5">
 		<ul>
-			{% if profile.gender and profile.visible.gender %}<li><img class="gender" style="clear: right;" src="{{ profile.get_genderimage_url }}" /> {{ profile.get_gender_display }}</li>{% endif %}
   		<li class="fn username"><strong>{% trans "Username" %}:</strong> {{ profile.user }}</li>
-			{% if profile.country and profile.visible.country_id %}<li><strong>{% trans "Country" %}:</strong> {{ profile.country }}</li>{% endif %}
+			{% if profile.firstname and profile.visible.firstname %}<li><strong>{% trans "Name" %}:</strong> {{ profile.firstname }} {{ profile.surname }}</li>{% endif %}
 			{% if profile.yearsold and profile.visible.birthdate %}<li><strong>{% trans "Age" %}:</strong> {{ profile.yearsold }}</li>{% endif %}
-			{% if profile.url and profile.visible.url %}<li><a class="url" href="{{ profile.url }}"> {% trans "My Website" %}</a></li>{% endif %}
-			<li><a href="{{ profile.get_absolute_url }}">{% trans "All public profile information" %}</a></li>
+			<li><a href="{{ profile.get_absolute_url }}">{% trans "Public profile information" %}</a></li>
 		</ul>
 	</div>
 </div>

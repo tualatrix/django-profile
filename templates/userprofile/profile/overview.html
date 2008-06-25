@@ -20,15 +20,14 @@
    		<label for="id_user">{% trans "Username:" %}</label>
    		<p class="large">{{ profile.user }}</p>
    		<label for="id_email">{% trans "E-mail:" %}</label>
-			<p class="large">
-				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% endif %}
-				{% if not validated and email %}<span class="small">({% trans "Not validated" %})</span>{% endif %}{% if validated and email %}<span class="small">({% trans "Validated" %})</span>{% endif %}
+			<p class="large {% if not email %}notice{% else %}{% if not validated %}error{% else %}success{% endif %}{% endif %}">
+				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% if not validated %}{% trans " (Not validated)" %}{% endif %}{% endif %}
 			</p>
    		<label>{% trans "Management:" %}</label>
      	<p>
    			<a href="/accounts/password/change/">{% trans "Change password" %}</a>, 
-				<a href="/accounts/email/change/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
-				{% if not validated and email %} - <a href="/accounts/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+				<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
+				{% if not validated and email %} - <a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
 			</p>
 		</div>
   </fieldset>

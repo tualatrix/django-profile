@@ -2,9 +2,9 @@
 {% load i18n %}
 	{% block title %}{% trans "User registration" %}{% endblock %}
 {% block customjs %}
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.registration.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			$("input#id_username").focus();
 			$("input[type='text'], input[type='password']").addClass("text");
 		});
 	</script>

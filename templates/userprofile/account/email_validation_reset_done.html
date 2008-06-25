@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% ifequal params.action "success" %}{% trans 'Validation e-mail sent' %}{% else %}{% trans 'Your user account was already active' %}{% endifequal %}{% endblock %}
+
+{% block content %}
+{% include "userprofile/menu.html" %}
+{% ifequal params.action "success" %}
+<h4>{% trans "We've e-mailed you the e-mail validation link. You are going to receive it shortly." %}</h4>
+{% else %}
+<h4>{% trans 'Your user account was already active' %}. {% trans "If you have lost your password you can change it with this utility" %}:</h4>
+<p><a href="/accounts/password/reset/">{% trans "Lost password utility" %}</a></p>
+{% endifequal %}
+{% endblock %}
