@@ -2,6 +2,6 @@
 {% load i18n %}
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
 {% block content %}
-{% include "userprofile/menu.html" %}
-<h2>{% trans "Your profile information has been updated successfully." %}</h2>
+{% include "userprofile/profile/menu.html" %}
+<h4>{% trans "Your profile information has been updated successfully." %}</h4>
 {% endblock %}

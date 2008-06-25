@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Registration complete" %}{% endblock %}
+{% block content %}
+<h4>{% blocktrans %}You have successfully registered a new account. Go to the <a href="/accounts/profile/">login page</a> to authenticate and start using this site.</h4>{% endblocktrans %}
+{% endblock %}
