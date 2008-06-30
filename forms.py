@@ -20,7 +20,6 @@ class ProfileForm(forms.ModelForm):
     """
     Profile Form. Composed by all the Profile model fields.
     """
-
     class Meta:
         model = Profile
         fields = ('firstname', 'surname', 'birthdate', 'gender', 'url', 'about')

@@ -41,7 +41,7 @@
 		<div class="span-9 last">
 			<p><label for="id_user">{% trans "Username:" %}</label> {{ profile.user }}</p>
 			<label for="id_email">{% trans "E-mail:" %}</label>
-			<p class="large {% if not email %}notice{% else %}{% if not validated %}error{% else %}success{% endif %}{% endif %}">
+			<p class="{% if not email %}notice{% else %}{% if not validated %}error{% else %}success{% endif %}{% endif %}">
 					{%if not email %}{% trans "Not set yet" %} (<a href="/accounts/email/validation/">{% trans "Add your e-mail address" %}</a>){% else %}{{ email }}{% if not validated %}{% trans " (Not validated)" %}{% endif %}{% endif %}
 			</p>
 		</div>

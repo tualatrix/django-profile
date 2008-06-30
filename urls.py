@@ -10,8 +10,8 @@ WEBSEARCH = hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH or None
 urlpatterns = patterns('',
     # Private profile
     (r'^profile/$', overview, { 'section': 'overview', 'APIKEY': APIKEY, 'template': 'userprofile/profile/overview.html'}),
-    (r'^profile/edit/(?P<section>location)/$', profile, {'APIKEY': APIKEY, 'template': 'userprofile/profile/location.html'}),
-    (r'^profile/edit/(?P<section>personal)/$', profile, {'template': 'userprofile/profile/personal.html'}),
+    (r'^profile/edit/(?P<section>location)/$', location, {'APIKEY': APIKEY, 'template': 'userprofile/profile/location.html'}),
+    (r'^profile/edit/(?P<section>personal)/$', personal, {'template': 'userprofile/profile/personal.html'}),
     (r'^profile/edit/location/done/$', direct_to_template, { 'extra_context': { 'section': 'location' }, 'template': 'userprofile/profile/location_done.html'}),
     (r'^profile/edit/personal/done/$', direct_to_template, { 'extra_context': { 'section': 'personal' }, 'template': 'userprofile/profile/personal_done.html'}),
     (r'^profile/edit/public/done/$', direct_to_template, { 'extra_context': { 'section': 'public' }, 'template': 'userprofile/profile/makepublic_done.html'}),

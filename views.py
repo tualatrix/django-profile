@@ -89,20 +89,44 @@ def overview(request, template, section, APIKEY=None):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def profile(request, template, section, APIKEY=None):
+def personal(request, template, section):
     """
-    Private part of the user profile
+    Personal data of the user profile
     """
-    forms = { 'location': LocationForm, 'personal': ProfileForm }
     profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
-        form = forms[section](request.POST, instance=profile)
+        form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("%sdone/" % request.path)
     else:
-        form = forms[section](instance=profile)
+        form = ProfileForm(instance=profile)
+
+    lat = profile.latitude
+    lng = profile.longitude
+
+    continents = Continent.objects.all()
+    country_data = dict()
+    for continent in continents:
+        country_data[continent] = Country.objects.filter(continent=continent)
+
+    return render_to_response(template, locals(), context_instance=RequestContext(request))
+
+@login_required
+def location(request, template, section, APIKEY):
+    """
+    Location selection of the user profile
+    """
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = LocationForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("%sdone/" % request.path)
+    else:
+        form = LocationForm(instance=profile)
 
     lat = profile.latitude
     lng = profile.longitude
