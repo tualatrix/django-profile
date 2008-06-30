@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
-{% block title %}{% trans "User login" %}{% endblock %}
 
-{% block customjs %}
+{% block title %}{% trans "User login" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
 <script type="text/javascript">
 	$(function() {
 		$("input[type='text'], input[type='password']").addClass("text");
@@ -12,26 +14,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="span-10 colborder">
-	<form method="post" action="{% if next %}?next={{ next }}{% endif %}">
-		<fieldset>
-			<legend>{% trans "User login" %}</legend>
-   		<label for="id_username">{% trans "Username:" %}</label>
-   		<p>{{ form.username }}</p>
-   		<label for="id_password">{% trans "Password:" %}</label>
-   		<p>{{ form.password }}</p>
-   		<p><input type="submit" value="{% trans 'Login' %}" /></p>
- 		</fieldset>
- 		{% if form.has_errors %}
- 		<p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
-		{% endif %}
+	<form action="{% if next %}?next={{ next }}{% endif %}" method="post" accept-charset="utf-8">
+	<fieldset>
+		<legend>{% trans "User login" %}</legend>
+		<label for="id_username">{% trans "Username" %}</label>
+		<p>{{ form.username }}
+			{% if form.username.errors %}
+				<span class="quiet">{{ form.username.html_error_list }}</span>
+			{% endif %}
+		</p>
+		<label for="id_password">{% trans "Password" %}</label>
+		<p>{{ form.password }}
+			{% if form.password.errors %}
+				<span class="quiet">{{ form.password.html_error_list }}</span>
+			{% endif %}
+		</p>
+		<input type="submit" value="{% trans 'Login' %}" />
+	</fieldset>
 	</form>
-</div>
-<div class="span-13 last">
-	<ul class="large cleanul">
-  	<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="/accounts/password/reset/">click here</a>.{% endblocktrans %}</li>
-		<li>{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>.{% endblocktrans %}</li>
-	</ul>
-</div>
 {% endblock %}
 
+{% block content-related %}
+	<br />
+	<ul class="small loud">
+		<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="/accounts/password/reset/">click here</a>{% endblocktrans %}.</li>
+		<li>{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>{% endblocktrans %}.</li>
+	</ul>
+{% endblock %}

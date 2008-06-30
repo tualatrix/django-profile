@@ -307,29 +307,16 @@ def reset_password(request, template):
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
+@login_required
 def email_validation_reset(request, template):
     """
     Resend the validation email for the authenticated user.
-    Email validation reset form for the anonymous user.
     """
-    if request.user.is_authenticated():
-        try:
-            resend = Validation.objects.get(user=request.user).resend()
-        except Validation.DoesNotExist:
-            resend = False
-        return HttpResponseRedirect('%sdone/%s' % (request.path, resend and 'success' or 'failed'))
-
-    if request.method == 'POST':
-        form = ValidationResetForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            resend = Validation.objects.get(email=email).resend()
-            return HttpResponseRedirect('%sdone/%s' % (request.path, resend and 'success' or 'failed'))
-
-    else:
-        form = ValidationForm()
-
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    try:
+        resend = Validation.objects.get(user=request.user).resend()
+    except Validation.DoesNotExist:
+        resend = False
+    return HttpResponseRedirect('%sdone/%s' % (request.path, resend and 'success' or 'failed'))
 
 def change_password_with_key(request, key, template):
     """

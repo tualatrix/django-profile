@@ -1,32 +1,46 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block title %}{% trans "Search for an image on Picasa Web" %}{% endblock %}
-{% block customjs %}
-  <script type="text/javascript">
-    $(function() {
-			$("input[type='text']").focus();
-      $("div.photos a").click(function() {
-        $("form#avatar input[name='url']").val($(this).attr("href"));
-        $("form#avatar").submit();
-        return false;   
-			});
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+	$(function() {
+		$("input[type='text']").focus();
+		$("input[type='text']").addClass("text");
+		$("div.photos a").click(function() {
+			$("form#avatar input[name='url']").val($(this).attr("href"));
+			$("form#avatar").submit();
+			return false;
 		});
-	</script>
+	});
+</script>
 {% endblock %}
-{% block content %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<form action="" method="post">
+{% endblock %}
+
+{% block content %}
+	<form action="" method="post" accept-charset="utf-8">
 	<fieldset>
 		<legend>{% trans "Search for an image on Picasa Web" %}</legend>
-		<p>{% trans "Search on Picasa Web:" %} <input type="text" name="keyword" value="{{ keyword }}" /> <input type="submit" value="{% trans "Search" %}"/></p>
+		<label for="id_search">{% trans "Search on Picasa Web" %}</label>
+		<p>
+			<input type="text" name="keyword" value="{{ keyword }}" />
+			<input type="submit" value="{% trans "Search" %}"/>
+		</p>
+
 		<div class="photos">
 			{% for thumb,url in data.items %}
-				<a href="{{ url }}"><img src="{{ thumb }}" /></a>
+			<a href="{{ url }}"><img src="{{ thumb }}" /></a>
 			{% endfor %}
 		</div>
 	</fieldset>
-</form>
-<form class="hide" id="avatar" action="/accounts/profile/edit/avatar/" method="POST">
-	<input type="hidden" name="url" value="" />
-</form>
+	</form>
+
+	<form class="hide" id="avatar" action="/accounts/profile/edit/avatar/" method="post" accept-charset="utf-8">
+		<input type="hidden" name="url" value="" />
+	</form>
 {% endblock %}

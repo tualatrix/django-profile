@@ -2,6 +2,10 @@
 {% load i18n %}
 
 {% block title %}{% trans "Registration complete" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
 {% block content %}
-<h4>{% blocktrans %}You have successfully registered a new account. Go to the <a href="/accounts/profile/">login page</a> to authenticate and start using this site.</h4>{% endblocktrans %}
+	<p class="success large">
+		{% blocktrans %}You have successfully registered a new account. Go to the <a href="/accounts/profile/">login page</a> to authenticate and start using this site{% endblocktrans %}.
+	</p>
 {% endblock %}

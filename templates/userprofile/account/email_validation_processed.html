@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block title %}{% trans 'E-mail change processed' %}{% endblock %}
-{% block content %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body." %}</h4>
+{% endblock %}
+
+{% block content %}
+	<p class="success large">
+		{% trans "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body" %}.
+	</p>
 {% endblock %}

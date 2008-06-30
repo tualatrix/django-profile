@@ -1,112 +1,111 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
+
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
-{% block customjs %}
-{% if profile.latitude %}
-<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
-<script type="text/javascript">
-	$(function() {
-  	if (GBrowserIsCompatible()) {
-    	this.map = new GMap2(document.getElementById("map"));
-    	this.map.addControl(new GLargeMapControl());
-    	this.map.addControl(new GOverviewMapControl())
-    	this.map.addControl(new GMapTypeControl())
-    	this.map.enableContinuousZoom();
-    	this.map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
-    	this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, bouncy: true, draggable: false});
-    	this.map.addOverlay(this.marker);
-		}
-  });
-</script>
-{% endif %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
+	{% if profile.latitude and profile.longitude %}
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function() {
+			if (GBrowserIsCompatible()) {
+				this.map = new GMap2(document.getElementById("map"));
+				this.map.disableDragging();
+				this.map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 2);
+				this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, draggable: false});
+				this.map.addOverlay(this.marker);
+			}
+		});
+	</script>
+	{% endif %}
 {% endblock %}
-{% block content %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<form action="" method="post">
-  <fieldset>
-		<legend>{% trans "Click on the information you want to make public" %}</legend>
-		<div class="span-11 prepend-1">
-   		<label for="id_name">{% trans "Name:" %}</label>
-			<p>
-				{% if profile.firstname %}
-				<input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.firstname }} {{ profile.surname }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-   		<label for="id_gender">{% trans "Gender:" %}</label>
-			<p style="overflow: hidden;">
-				{% if profile.gender %}
-				<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
-				<span class="large">{{ profile.get_gender_display }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-   		<label for="id_url">{% trans "Url:" %}</label>
-			<p>
-				{% if profile.url %}
-				<input type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
-    		<a class="large" href="{{ profile.url }}">{{ profile.url }}</a>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-    	<label for="id_country">{% trans "Country:" %}</label>
-			<p>
-				{% if profile.country %}
-				<input type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.country }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-		</div>
-		<div class="span-11 last">
-   		<label for="id_birthdate">{% trans "Birth date:" %}</label>
-			<p>
-				{% if profile.yearsold %}
-				<input type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/>
-				<span class="large">{{ profile.yearsold }} {% trans "years old." %}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-   		<label for="id_about">{% trans "About:" %}</label>
-			<p>
-				{% if profile.about %}
-				<input type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.about }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-			{% if APIKEY %}
-   		<label for="id_location">{% trans "Location:" %}</label>
-			<p>
-				{% if profile.location %}
-				<input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
-    		<span class="large">{{ profile.location }}</span>
-				{% else %}
-				<span class="large">{% trans "Not set" %}</span>
-				{% endif %}
-			</p>
-			{% endif %}
-		</div>
-		{% if APIKEY %}
-		<hr />
-    <label for="map">{% trans "Position:" %}</label>
-    <p>
-			{% if profile.latitude %}
-			<input type="checkbox" name="latitude_public" {% if profile.visible.latitude %}checked="on"{% endif %}/>
-      <div id="map"></div>
-			{% else %}
-			<span class="large">{% trans "Not set" %}</span>
-			{% endif %}
-    </p>
+{% endblock %}
+
+{% block content %}
+	<form action="" method="post">
+		<legend>{% trans "Public information" %}</legend>
+
+		<fieldset>
+			<legend>{% trans "Name:" %}</legend>
+		{% if profile.firstname %}
+			<input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
+			{{ profile.firstname }} {{ profile.surname }}
+		{% else %}
+			{% trans "Not set" %}
 		{% endif %}
-  	<p><input type="submit" value="{% trans 'Save' %}" /></p>
-  </fieldset>
-</form>
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "Gender:" %}</legend>
+		{% if profile.gender %}
+			<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
+			{{ profile.get_gender_display }}
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "Url:" %}</legend>
+		{% if profile.url %}
+			<input type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
+			<a href="{{ profile.url }}">{{ profile.url }}</a>
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "Country:" %}</legend>
+		{% if profile.country %}
+			<input type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
+			{{ profile.country }}
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "Years old:" %}</legend>
+		{% if profile.yearsold %}
+			<input type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/>
+			{{ profile.yearsold }} {% trans "years old." %}
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "About:" %}</legend>
+		{% if profile.about %}
+			<input type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %}/>
+			{{ profile.about }}
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+
+	{% if APIKEY %}
+		<fieldset>
+			<legend>{% trans "Location:" %}</legend>
+		{% if profile.latitude %}
+			<input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
+			{{ profile.location }}
+			<div id="map" style="width: 440px; height: 240px;"></div>
+		{% else %}
+			{% trans "Not set" %}
+		{% endif %}
+		</fieldset>
+	{% endif %}
+
+		<input type="submit" value="{% trans 'Save' %}" />
+	</form>
+{% endblock %}
+
+{% block content-related %}
+	<h4>{% trans "Select the information you want to make public" %}.</h4>
 {% endblock %}

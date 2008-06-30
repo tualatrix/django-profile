@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Resend the activation e-mail" %}{% endblock %}
-{% block customjs %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
 <script type="text/javascript">
 	$(function() {
 		$("#id_email").focus();
@@ -10,21 +12,27 @@
 	});
 </script>
 {% endblock %}
-{% block content %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "Enter your e-mail address below and we'll resend the user activation e-mail to you." %}</h4>
-<div class="span-12">
-	<form action="" method="post">
-  	<fieldset>
-  		<legend>{% trans "Resend the activation e-mail" %}</legend>
-      <label for="id_email" style="width: 240px;">{% trans 'E-mail address:' %}</label>
-      <p>{{ form.email }}</p>
-    	<p><input type="submit" value="{% trans 'Resend validation' %}" /></p>
-  	</fieldset>
-    {% if form.errors %}
-    <p style="margin-left: 250px; font-size: .8em; color: red;">{{form.email.errors|join:","}}</p>
-    {% endif %}
-	</form>
-</div>
 {% endblock %}
 
+{% block content %}
+	<form action="" method="post" accept-charset="utf-8">
+	<fieldset>
+		<legend>{% trans "Resend the activation e-mail" %}</legend>
+		<label for="id_email">{% trans 'E-mail address' %}</label>
+		<p>{{ form.email }}
+		{% if form.email.errors %}
+			<span class="quiet"><br />* {{ form.email.errors|join:"; " }}</span>
+		{% endif %}
+		</p>
+		<input type="submit" value="{% trans 'Resend validation' %}" />
+	</fieldset>
+	</form>
+{% endblock %}
+
+{% block content-related %}
+	<br />
+	<h4>{% trans "Enter your e-mail address and we'll resend the user activation e-mail to you" %}.</h4>
+{% endblock %}

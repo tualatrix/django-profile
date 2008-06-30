@@ -1,45 +1,55 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
+
 {% block title %}{% trans "Edit your personal information" %}{% endblock %}
-{% block customjs %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extracss %}
+	<link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
+{% endblock %}
+
+{% block extrajs %}
 <script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
-<link rel="stylesheet" href="{{ MEDIA_URL }}css/ui.datepicker.css" type="text/css" />
 <script type="text/javascript">
 	function updateInline(dateStr) {
-  	var arrdate = dateStr.split("/");
-  	$("#id_birthdate").val(arrdate[2] + "-" + arrdate[0] + "-" + arrdate[1]);
+		var arrdate = dateStr.split("/");
+		$("#id_birthdate").val(arrdate[2] + "-" + arrdate[0] + "-" + arrdate[1]);
 	}
-
 	$(function() {
 		$("input[type='text']").addClass("text");
-  	$("#id_firstname").focus();
-  });
+		$("#id_firstname").focus();
+	});
 </script>
 {% endblock %}
 
-{% block content %}
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
-  <fieldset>
+{% endblock %}
+
+{% block content %}
+	<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+	<fieldset>
 		<legend>{% trans "Edit your personal information" %}</legend>
-   	<label for="id_firstname">{% trans "First Name:" %}</label>
-   	<p>{{ form.firstname }}</p>
-   	<label for="id_surname">{% trans "Surname:" %}</label>
-   	<p>{{ form.surname }}</p>
-   	<label for="id_gender">{% trans "Gender:" %}</label>
+	
+		<label for="id_firstname">{% trans "First Name:" %}</label>
+		<p>{{ form.firstname }}</p>
+		<label for="id_surname">{% trans "Surname:" %}</label>
+		<p>{{ form.surname }}</p>
+		<label for="id_gender">{% trans "Gender:" %}</label>
 		<p style="overflow: hidden;">
 			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
 			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
 		</p>
-   	<label for="id_birthdate">{% trans "Birth date:" %}</label>
+	
+		<label for="id_birthdate">{% trans "Birth date:" %}</label>
 		<div class="calendar"></div>
-   	<label for="id_url">{% trans "Url:" %}</label>
-   	<p>{{ form.url }}</p>
-   	<label for="id_about">{% trans "About:" %}</label>
-   	<p>{{ form.about }}</p>
-  	<p><input type="submit" value="{% trans 'Save' %}" /></p>
-    <div class="hide">{{ form.birthdate }}{{ form.gender }}</div>
-  </fieldset>
-</form>
+		<label for="id_url">{% trans "Url:" %}</label>
+		<p>{{ form.url }}</p>
+		<label for="id_about">{% trans "About:" %}</label>
+		<p>{{ form.about }}</p>
+		<input type="submit" value="{% trans 'Save' %}" />
+		<div class="hide">{{ form.birthdate }}{{ form.gender }}</div>
+	</fieldset>
+	</form>
 {% endblock %}

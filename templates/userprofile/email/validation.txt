@@ -1,5 +1,5 @@
 {% load i18n %}
-{% blocktrans %}You're receiving this e-mail because you requested an e-mail validation at {{ site_name }}.{% endblocktrans %}
+{% blocktrans %}You're receiving this e-mail because you requested an e-mail validation at {{ site_name }}{% endblocktrans %}.
 
 {% trans "Following this link, you will validate your e-mail address:" %}
 

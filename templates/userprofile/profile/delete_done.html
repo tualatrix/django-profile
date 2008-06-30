@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Delete all your personal information" %}{% endblock %}
-{% block content %}
+
+{% block title %}{% trans "Profile removed" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "Your profile information has been removed successfully." %}</h4>
+{% endblock %}
+
+{% block content %}
+	<p class="success large">
+		{% trans "Your profile information has been removed successfully" %}.
+	</p>
 {% endblock %}

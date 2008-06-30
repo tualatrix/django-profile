@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Avatar selection finished" %}<{% endblock %}
-{% block content %}
+
+{% block title %}{% trans "Avatar selection finished" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "Your new avatar has been saved successfully." %}</h4>
+{% endblock %}
+
+{% block content %}
+	<p class="success large">
+		{% trans "Your new avatar has been saved successfully" %}.
+	</p>
 {% endblock %}

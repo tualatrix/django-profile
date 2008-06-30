@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
+
 {% block title %}{% blocktrans %}{{ user }}'s Dashboard{% endblocktrans %}{% endblock %}
-{% block content %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "Your profile information has been updated successfully." %}</h4>
+{% endblock %}
+
+{% block content %}
+	<p class="success large">
+		{% trans "Your profile information has been updated successfully" %}.
+	</p>
 {% endblock %}

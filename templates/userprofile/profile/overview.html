@@ -1,35 +1,67 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
+
 {% block title %}{% trans "Overview of your profile" %}{% endblock %}
-{% block content %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
+  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function() {
+      if (GBrowserIsCompatible()) {
+        this.map = new GMap2(document.getElementById("location"));
+        this.map.disableDragging();
+        this.map.setCenter(new GLatLng({{ profile.latitude|default:"30" }}, {{ profile.longitude|default:"0" }}), 2);
+        this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, draggable: false});
+        this.map.addOverlay(this.marker);
+      }
+    });
+  </script>
+{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<form action="" method="post">
-  <fieldset>
+{% endblock %}
+
+{% block content %}
+	<form action="" method="post">
+	<fieldset>
 		<legend>{% trans "Overview of your profile" %}</legend>
-		<div class="span-3 center">
+		<div id="avatar" class="span-3 center">
 			<a href="{{ request.path }}edit/avatar/">
 			{% if profile.avatar %}
-			<img src="{{ profile.get_avatar96_url }}" />
+			<img class="border" src="{{ profile.get_avatar96_url }}" />
 			{% else %}
-			<img src="{{ MEDIA_URL }}images/default.96.png" />
+			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
 			{% endif %}
-			<p>{% trans "Click to change" %}</p>
 			</a>
+			<p><a href="{{ request.path }}edit/avatar/">{% trans "Change" %}</a></p>
 		</div>
-		<div class="span-17 last">
-   		<label for="id_user">{% trans "Username:" %}</label>
-   		<p class="large">{{ profile.user }}</p>
-   		<label for="id_email">{% trans "E-mail:" %}</label>
+	
+		<div class="span-9 last">
+			<p><label for="id_user">{% trans "Username:" %}</label> {{ profile.user }}</p>
+			<label for="id_email">{% trans "E-mail:" %}</label>
 			<p class="large {% if not email %}notice{% else %}{% if not validated %}error{% else %}success{% endif %}{% endif %}">
-				{%if not email %}{% trans "Not set yet" %}{% else %}{{ email }}{% if not validated %}{% trans " (Not validated)" %}{% endif %}{% endif %}
-			</p>
-   		<label>{% trans "Management:" %}</label>
-     	<p>
-   			<a href="/accounts/password/change/">{% trans "Change password" %}</a>, 
-				<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
-				{% if not validated and email %} - <a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+					{%if not email %}{% trans "Not set yet" %} (<a href="/accounts/email/validation/">{% trans "Add your e-mail address" %}</a>){% else %}{{ email }}{% if not validated %}{% trans " (Not validated)" %}{% endif %}{% endif %}
 			</p>
 		</div>
-  </fieldset>
-</form>
+
+		<hr class="space" />
+		<p>
+			<label for="location">{% trans "Location" %}:</label>
+			{% if profile.location %}{{ profile.location }}{% else %}{% trans "Not set" %}.{% endif %} (<a href="/accounts/profile/edit/location/">{% trans "Change" %}</a>)
+		</p>
+		<div class="span-12 last">
+    	<div id="location" style="width: 480px; height: 240px;"></div>
+		</div>
+	</fieldset>
+	</form>
+{% endblock %}
+
+{% block content-related %}
+	<h4>{% trans "Management:" %}</h4>
+	<a href="/accounts/password/change/">{% trans "Change password" %}</a>
+	<br />
+	<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
+	{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
 {% endblock %}

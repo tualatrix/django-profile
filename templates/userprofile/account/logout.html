@@ -2,8 +2,11 @@
 {% load i18n %}
 
 {% block title %}{% trans "Logged out" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
 
 {% block content %}
-<h1>{% trans "Logged out" %}</h1>
-<p class="intro">{% trans "You've been logged out." %}</p>
+	<div id="notice" class="prepend-4 append-4">
+		<h1>{% trans "Logged out" %}</h1>
+		<p>{% trans "You've been logged out" %}.</p>
+	</div>
 {% endblock %}

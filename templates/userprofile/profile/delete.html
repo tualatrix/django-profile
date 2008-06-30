@@ -1,14 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
+
 {% block title %}{% trans "Delete all your personal information" %}{% endblock %}
-{% block content %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{% trans "Deleting all your personal information will erase all your private data, except your username. You can refill the information later if you want to." %}</h4>
-<form action="" method="post" enctype="multipart/form-data">
-  <fieldset>
+{% endblock %}
+
+{% block content %}
+	<form action="" method="post" enctype="multipart/form-data">
+	<fieldset>
 		<legend>{% trans "Delete all your personal information" %}</legend>
-		<label for="remove">{% trans "Are you sure?" %}</legend>
-		<p><input id="remove" type="submit" value="Yes" /></p>
-  </fieldset>
-</form>
+		<p><label for="remove">{% trans "Are you sure?" %}</label> <input id="remove" type="submit" value="{% trans "Yes" %}" /></p>
+	</fieldset>
+	</form>
+{% endblock %}
+
+{% block content-related %}
+	<h4>{% trans "Deleting all your personal information will erase all your private data, except your username. You can refill the information later if you want to" %}.</h4>
 {% endblock %}

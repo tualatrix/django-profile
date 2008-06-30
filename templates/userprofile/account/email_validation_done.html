@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}
-{% if successfull %}
-{% trans 'E-mail validation successful' %}
-{% else %}
-{% trans 'E-mail change unsuccessful' %}
-{% endif %}
-{% endblock %}
-{% block content %}
+
+{% block title %}{% if successfull %}{% trans 'E-mail validation successful' %}{% else %}{% trans 'E-mail change unsuccessful' %}{% endif %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block nav-main %}
 {% include "userprofile/menu.html" %}
-<h4>{{ message }}</h4>
+{% endblock %}
+
+{% block content %}
+	<div id="notice" class="prepend-4 append-4">
+		<h4>{{ message }}</h4>
+	</div>
 {% endblock %}
