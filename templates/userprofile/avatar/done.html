@@ -20,11 +20,11 @@
     <p>{% trans "You have several options to select the image you want as avatar on your profile" %}.</p>
   </div>
 
+	<div class="center">
   {% if user.get_profile.avatar %}
-	<div class="span-3">
     <img class="border" id="avatarimg" src="{{ user.get_profile.get_avatar96_url }}" />
-	</div>
   {% else %}
     <img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
   {% endif %}
+	</div>
 {% endblock %}
