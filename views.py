@@ -138,8 +138,7 @@ def delete(request, template, section):
     user = User.objects.get(username=str(request.user))
     if request.method == "POST":
         # Remove the profile
-        Profile.objects.get(user=user).delete()
-
+        Profile.objects.filter(user=user).delete()
         Validation.objects.filter(user=user).delete()
 
         # Remove the e-mail of the account too

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans 'E-mail change processed' %}{% endblock %}
@@ -9,7 +9,15 @@
 {% endblock %}
 
 {% block content %}
-	<p class="success large">
-		{% trans "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body" %}.
-	</p>
+	<div class="notice">
+		<h3>{% trans 'E-mail change processed' %}</h3>
+		<p>{% trans "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body" %}.</p>
+	</div>
+{% endblock %}
+
+{% block content-related %}
+  <div class="box">
+    <h3>{% trans "Add e-mail" %}</h3>
+    <p>{% trans "Insert the new e-mail address. An e-mail will be send to it for testing and confirmation" %}.</p>
+  </div>
 {% endblock %}

@@ -35,7 +35,7 @@
 			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
 			{% endif %}
 			</a>
-			<p><a href="{{ request.path }}edit/avatar/">{% trans "Change" %}</a></p>
+			<p><a href="{{ request.path }}edit/avatar/">{% trans "Change avatar" %}</a></p>
 		</div>
 	
 		<div class="span-9 last">
@@ -59,9 +59,11 @@
 {% endblock %}
 
 {% block content-related %}
-	<h4>{% trans "Management:" %}</h4>
-	<a href="/accounts/password/change/">{% trans "Change password" %}</a>
-	<br />
-	<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
-	{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+	<div class="box">
+		<h3>{% trans "Management:" %}</h3>
+		<a href="/accounts/password/change/">{% trans "Change password" %}</a>
+		<br />
+		<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
+		{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+	</div>
 {% endblock %}

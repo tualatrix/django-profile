@@ -53,3 +53,11 @@
 	</fieldset>
 	</form>
 {% endblock %}
+
+{% block content-related %}
+  <div class="box">
+    <h3>{% trans "Personal information" %}</h3>
+    <p>{% trans "Insert some information about you. Once inserted, you can make it public going to the" %} <a href="/accounts/profile/edit/public/">{% trans "public information page" %}</a>.</p>
+  </div>
+{% endblock %}
+

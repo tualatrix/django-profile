@@ -27,8 +27,6 @@
 
 {% block content %}
 	<form action="" method="post">
-		<legend>{% trans "Public information" %}</legend>
-
 		<fieldset>
 			<legend>{% trans "Name:" %}</legend>
 		{% if profile.firstname %}
@@ -107,5 +105,8 @@
 {% endblock %}
 
 {% block content-related %}
-	<h4>{% trans "Select the information you want to make public" %}.</h4>
+	<div class="box">
+		<h3>{% trans "Public information" %}</h3>
+		<p>{% trans "Select the information you have inserted on your profile that you want to make public" %}.</p>
+	</div>
 {% endblock %}
