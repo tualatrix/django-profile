@@ -10,13 +10,17 @@
 
 {% block content %}
 	<div class="{% if successful %}success{% else %}error{% endif %}">
-		<p>{{ message }}</p>
+	{% if successful %}
+  <p>{% trans "E-mail address validated successfully" %}.</p>
+	{% else %}
+	<p>{% trans "The key you received via e-mail is no longer valid. Please try the e-mail validation process again" %}.</p>
+	{% endif %}
 	</div>
 {% endblock %}
 
 {% block content-related %}
   <div class="box">
-    <h3>{% trans "E-mail validation confirmation" %}</h3>
+    <h3>{% trans "E-mail validation process" %}</h3>
     <p>{% trans "You can manage the e-mail validation process from the" %} <a href="/accounts/profile/">{% trans "overview page" %}.</p>
   </div>
 {% endblock %}

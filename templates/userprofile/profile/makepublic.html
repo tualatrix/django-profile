@@ -28,7 +28,7 @@
 {% block content %}
 	<form action="" method="post">
 		<fieldset>
-			<legend>{% trans "Name:" %}</legend>
+			<legend>{% trans "Name" %}</legend>
 		{% if profile.firstname %}
 			<input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
 			{{ profile.firstname }} {{ profile.surname }}
@@ -38,7 +38,7 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>{% trans "Gender:" %}</legend>
+			<legend>{% trans "Gender" %}</legend>
 		{% if profile.gender %}
 			<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
 			{{ profile.get_gender_display }}
@@ -48,7 +48,7 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>{% trans "Url:" %}</legend>
+			<legend>{% trans "Url" %}</legend>
 		{% if profile.url %}
 			<input type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
 			<a href="{{ profile.url }}">{{ profile.url }}</a>
@@ -58,17 +58,7 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>{% trans "Country:" %}</legend>
-		{% if profile.country %}
-			<input type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
-			{{ profile.country }}
-		{% else %}
-			{% trans "Not set" %}
-		{% endif %}
-		</fieldset>
-
-		<fieldset>
-			<legend>{% trans "Years old:" %}</legend>
+			<legend>{% trans "Years old" %}</legend>
 		{% if profile.yearsold %}
 			<input type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/>
 			{{ profile.yearsold }} {% trans "years old." %}
@@ -78,10 +68,10 @@
 		</fieldset>
 
 		<fieldset>
-			<legend>{% trans "About:" %}</legend>
+			<legend>{% trans "About" %}</legend>
 		{% if profile.about %}
 			<input type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %}/>
-			{{ profile.about }}
+			{{ profile.about|linebreaksbr }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -89,14 +79,24 @@
 
 	{% if APIKEY %}
 		<fieldset>
-			<legend>{% trans "Location:" %}</legend>
-		{% if profile.latitude %}
-			<input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
-			{{ profile.location }}
-			<div id="map" style="width: 440px; height: 240px;"></div>
+			<legend>{% trans "Country" %}</legend>
+		{% if profile.country %}
+			<input type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
+			{{ profile.country }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
+		</fieldset>
+
+		<fieldset>
+			<legend>{% trans "Location" %}</legend>
+			{% if profile.location %}
+			<input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
+			{{ profile.location }}
+			<div id="map" style="width: 440px; height: 240px;"></div>
+			{% else %}
+			{% trans "Not set" %}
+			{% endif %}
 		</fieldset>
 	{% endif %}
 

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Search for an image on Picasa Web" %}{% endblock %}
@@ -43,4 +43,19 @@
 	<form class="hide" id="avatar" action="/accounts/profile/edit/avatar/" method="post" accept-charset="utf-8">
 		<input type="hidden" name="url" value="" />
 	</form>
+{% endblock %}
+
+{% block content-related %}
+  <div class="box">
+    <h3>{% trans "Avatar selection page" %}</h3>
+    <p>{% trans "You have several options to select the image you want as avatar on your profile" %}.</p>
+  </div>
+
+  {% if user.get_profile.avatar %}
+  <div class="span-3">
+    <img class="border" id="avatarimg" src="{{ user.get_profile.get_avatar96_url }}" />
+	</div>
+  {% else %}
+    <img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
+  {% endif %}
 {% endblock %}

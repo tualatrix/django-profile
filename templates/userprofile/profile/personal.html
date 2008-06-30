@@ -48,9 +48,9 @@
 		<p>{{ form.url }}</p>
 		<label for="id_about">{% trans "About:" %}</label>
 		<p>{{ form.about }}</p>
-		<input type="submit" value="{% trans 'Save' %}" />
 		<div class="hide">{{ form.birthdate }}{{ form.gender }}</div>
 	</fieldset>
+	<input type="submit" value="{% trans 'Save' %}" />
 	</form>
 {% endblock %}
 

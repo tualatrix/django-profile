@@ -42,7 +42,6 @@ urlpatterns = patterns('',
     (r'^email/validation/(?P<key>.{70})/$', email_validation_process, { 'section': 'overview', 'template': 'userprofile/account/email_validation_done.html'}),
     (r'^login/$', views.login, {'template_name': 'userprofile/account/login.html'}),
     (r'^logout/$', logout, {'template': 'userprofile/account/logout.html'}),
-    (r'^validate/(?P<key>.{70})/$', email_validation_with_key, {'template': 'userprofile/account/email_validation.html'}),
 
     # Registration
     (r'^register/$', register, {'template' : 'userprofile/account/registration.html'}),

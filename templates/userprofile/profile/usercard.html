@@ -8,15 +8,6 @@
 	<div class="span-5">
 		<ul>
 		<li class="fn username"><strong>{% trans "Username" %}:</strong> {{ profile.user }}</li>
-
-	{% if profile.firstname and profile.visible.firstname %}
-		<li><strong>{% trans "Name" %}:</strong> {{ profile.firstname }} {{ profile.surname }}</li>
-	{% endif %}
-
-	{% if profile.yearsold and profile.visible.birthdate %}
-		<li><strong>{% trans "Age" %}:</strong> {{ profile.yearsold }}</li>
-	{% endif %}
-
 		<li><a href="{{ profile.get_absolute_url }}">{% trans "Public profile information" %}</a></li>
 		</ul>
 	</div>

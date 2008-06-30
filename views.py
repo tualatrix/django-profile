@@ -170,7 +170,7 @@ def avatarchoose(request, template, section, websearch=False):
                 photo = photo.content
             profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
             image = Image.open(profile.get_avatartemp_filename())
-            image.thumbnail((800, 800), Image.ANTIALIAS)
+            image.thumbnail((480, 480), Image.ANTIALIAS)
             image.save(profile.get_avatartemp_filename(), "JPEG")
             profile.save()
             return HttpResponseRedirect('%scrop/' % request.path)
@@ -236,23 +236,8 @@ def email_validation_process(request, key, template, section):
     Verify key and change email
     """
     if Validation.objects.verify(key=key):
-        message = _('E-mail address validated successfully.')
         successful = True
     else:
-        message = _('The key you received via e-mail is no longer valid. Please try the e-mail validation process again.')
-        successful = False
-
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
-
-def email_validation_with_key(request, key, template):
-    """
-    Validate the e-mail of an account and activate it
-    """
-    if Validation.objects.verify(key=key):
-        message = _('Account validated successfully. Now you can access to the login page with your username and password and start using this site.')
-        successful = True
-    else:
-        message = _('The key you received via e-mail is no longer valid. Please try the e-mail validation process again.')
         successful = False
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
