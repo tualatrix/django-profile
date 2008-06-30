@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Choose the source location of your avatar" %}{% endblock %}
@@ -25,20 +25,14 @@
 {% endblock %}
 
 {% block content %}
-	<div id="avatar" class="span-3 prepend-1">
-	{% if profile.avatar %}
-		<img class="border" id="avatarimg" src="{{ profile.get_avatar96_url }}" />
-		<p style="text-align: center;"><a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
-	{% else %}
-		<img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
-	{% endif %}
-	</div>
-
-	<div class="span-17">
-		<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+		{% if form.errors %}
+			{% for error,desc in form.errors.items %}
+				<p class="error">{{desc|join:"; "}}</p>
+			{% endfor %}
+		{% endif %}
 		<fieldset>
-			<legend>{% trans "Choose the source location of your avatar" %}</legend>
-			<h4>{% trans "You have several options to select the image you want as avatar in your profile" %}:</h4>
+			<legend>{% trans "Location of your avatar" %}</legend>
 			<ul>
 			<li>
 				<label for="id_photo">{% trans "Select an image from disk" %}:</label>
@@ -60,10 +54,18 @@
 			</ul>
 		</fieldset>
 		</form>
-		{% if form.errors %}
-			{% for error,desc in form.errors.items %}
-				<p class="error">{{desc|join:"; "}}</p>
-			{% endfor %}
-		{% endif %}
-	</div>
+{% endblock %}
+
+{% block content-related %}
+  <div class="box">
+    <h3>{% trans "Avatar selection page" %}</h3>
+		<p>{% trans "You have several options to select the image you want as avatar in your profile" %}.</p>
+  </div>
+
+  {% if profile.avatar %}
+    <img class="border" id="avatarimg" src="{{ profile.get_avatar96_url }}" />
+    <p style="text-align: center;"><a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
+  {% else %}
+    <img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
+  {% endif %}
 {% endblock %}

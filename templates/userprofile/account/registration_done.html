@@ -1,11 +1,17 @@
-{% extends "base.html" %}
+{% extends "base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Registration complete" %}{% endblock %}
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block content %}
-	<p class="success large">
-		{% blocktrans %}You have successfully registered a new account. Go to the <a href="/accounts/profile/">login page</a> to authenticate and start using this site{% endblocktrans %}.
-	</p>
+	<div class="success">
+		<p>{% blocktrans %}You have successfully registered a new account. Go to the <a href="/accounts/profile/">login page</a> to authenticate and start using this site{% endblocktrans %}.</p>
+	</div>
+{% endblock %}
+{% block content-related %}
+  <div class="box">
+    <h3>{% trans "Register a new account" %}</h3>
+    <p>{% trans "Joining this community is quick and easy. You only need to fill the form to get access to all the private content" %}.</p>
+  </div>
 {% endblock %}

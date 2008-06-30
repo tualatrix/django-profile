@@ -35,9 +35,10 @@
 {% endblock %}
 
 {% block content-related %}
-	<br />
-	<ul class="small loud">
-		<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="/accounts/password/reset/">click here</a>{% endblocktrans %}.</li>
-		<li>{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>{% endblocktrans %}.</li>
-	</ul>
+	<div class="box">
+		<ul class="loud">
+			<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="/accounts/password/reset/">click here</a>{% endblocktrans %}.</li>
+			<li>{% blocktrans %}If you don't have an account, you can <a href="/accounts/register/">sign up</a>{% endblocktrans %}.</li>
+		</ul>
+	</div>
 {% endblock %}
