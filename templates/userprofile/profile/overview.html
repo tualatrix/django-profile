@@ -5,6 +5,7 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
+{% if APIKEY and profile.location %}
   <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
   <script type="text/javascript">
     $(function() {
@@ -17,6 +18,7 @@
       }
     });
   </script>
+{% endif %}
 {% endblock %}
 
 {% block nav-main %}
@@ -35,25 +37,35 @@
 			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
 			{% endif %}
 			</a>
-			<p><a href="{{ request.path }}edit/avatar/">{% trans "Change avatar" %}</a></p>
+			<p><a href="{{ request.path }}edit/avatar/">{% if profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>
 	
 		<div class="span-9 last">
 			<p><label for="id_user">{% trans "Username:" %}</label> {{ profile.user }}</p>
-			<label for="id_email">{% trans "E-mail:" %}</label>
-			<p class="{% if not email %}notice{% else %}{% if not validated %}error{% else %}success{% endif %}{% endif %}">
-					{%if not email %}{% trans "Not set yet" %} (<a href="/accounts/email/validation/">{% trans "Add your e-mail address" %}</a>){% else %}{{ email }}{% if not validated %}{% trans " (Not validated)" %}{% endif %}{% endif %}
+			<p><label for="id_email">{% trans "E-mail:" %}</label>
+				<span class="{% if not email or not validated %}quiet{% endif %}">
+				{%if not email %}{% trans "Not set yet" %}
+				{% else %}{{ email }}
+				{% if not validated %}{% trans " (Not validated)" %}
+				{% endif %}{% endif %}
+				</span>
+			</p>
+			<p>
+			<label for="location">{% trans "Location" %}:</label>
+			{% if profile.location %}
+				{{ profile.location }}
+			{% else %}
+				<span class="quiet">{% trans "Not set" %}</span>
+			{% endif %}
 			</p>
 		</div>
 
 		<hr class="space" />
-		<p>
-			<label for="location">{% trans "Location" %}:</label>
-			{% if profile.location %}{{ profile.location }}{% else %}{% trans "Not set" %}.{% endif %} (<a href="/accounts/profile/edit/location/">{% trans "Change" %}</a>)
-		</p>
+		{% if profile.location %}
 		<div class="span-12 last">
-    	<div id="location" style="width: 480px; height: 240px;"></div>
+			<div id="location" style="width: 480px; height: 240px;"></div>
 		</div>
+		{% endif %}
 	</fieldset>
 	</form>
 {% endblock %}
@@ -64,6 +76,13 @@
 		<a href="/accounts/password/change/">{% trans "Change password" %}</a>
 		<br />
 		<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
-		{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>{% endif %}
+		{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>
+		{% endif %}
+		<br />
+		{% if not profile.location %}
+			<a href="/accounts/profile/edit/location/">{% trans "Add location" %}</a>
+		{% else %}
+			<a href="/accounts/profile/edit/location/">{% trans "Change location" %}</a>
+		{% endif %}
 	</div>
 {% endblock %}

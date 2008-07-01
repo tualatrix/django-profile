@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-30 19:40+0200\n"
+"POT-Creation-Date: 2008-07-01 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:37
+#: forms.py:36
 msgid "You must enter one of the options"
 msgstr "Debes introducir una de las opciones"
 
-#: forms.py:52
+#: forms.py:51
 msgid "You must select a portion of the image with a minimum of 96x96 pixels."
 msgstr ""
 "Debes seleccionar una porción de la imagen con un mínimo de 96x96 píxels."
@@ -30,7 +30,7 @@ msgstr ""
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: forms.py:69
+#: forms.py:68
 msgid ""
 "That username has invalid characters. The valid values are letters, numbers "
 "and underscore."
@@ -38,23 +38,23 @@ msgstr ""
 "Ese usuario tiene carácteres no permitidos. Se permiten letras, números y "
 "subrayado."
 
-#: forms.py:74
+#: forms.py:73
 msgid "The username is already registered."
 msgstr "Ese nombre de usuario ya está registrado."
 
-#: forms.py:83 forms.py:143 forms.py:165
+#: forms.py:82 forms.py:142 forms.py:164
 msgid "The passwords inserted are different."
 msgstr "Las contraseñas introducidas no coinciden."
 
-#: forms.py:95 forms.py:114
+#: forms.py:94 forms.py:113
 msgid "That e-mail is already used."
 msgstr "Ese e-mail ya está utilizado."
 
-#: forms.py:99
+#: forms.py:98
 msgid "That e-mail is already being confirmed."
 msgstr "Ese e-mail ya está siendo confirmado."
 
-#: forms.py:127
+#: forms.py:126
 msgid "There's no user with that e-mail"
 msgstr "No existe ningún usuario con ese e-mail"
 
@@ -76,7 +76,7 @@ msgstr "Continentes"
 
 #: models.py:66 templates/userprofile/profile/location.html:21
 #: templates/userprofile/profile/makepublic.html:82
-#: templates/userprofile/profile/public.html:65
+#: templates/userprofile/profile/public.html:57
 msgid "Country"
 msgstr "País"
 
@@ -94,33 +94,33 @@ msgstr "Perfil de %s"
 msgid "Email validation process for %(user)s of type %(type)s"
 msgstr "Proceso de validación por e-mail para %(user)s del tipo %(type)s"
 
-#: templates/userprofile/menu.html:4
+#: templates/userprofile/menu.html:5
 msgid "Overview"
 msgstr "Resumen"
 
-#: templates/userprofile/menu.html:5
+#: templates/userprofile/menu.html:6
 #: templates/userprofile/profile/personal.html:59
 #: templates/userprofile/profile/personal_done.html:19
 msgid "Personal information"
 msgstr "Información personal"
 
-#: templates/userprofile/menu.html:6
+#: templates/userprofile/menu.html:7
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/userprofile/menu.html:7
+#: templates/userprofile/menu.html:8
 #: templates/userprofile/profile/location.html:38
 #: templates/userprofile/profile/makepublic.html:92
-#: templates/userprofile/profile/overview.html:51
-#: templates/userprofile/profile/public.html:69
+#: templates/userprofile/profile/overview.html:54
+#: templates/userprofile/profile/public.html:61
 msgid "Location"
 msgstr "Localización"
 
-#: templates/userprofile/menu.html:8
+#: templates/userprofile/menu.html:9
 msgid "Public info"
 msgstr "Información pública"
 
-#: templates/userprofile/menu.html:9
+#: templates/userprofile/menu.html:10
 msgid "Remove profile"
 msgstr "Borrar perfil"
 
@@ -179,7 +179,8 @@ msgstr "Proceso de validación de la dirección de correo"
 
 #: templates/userprofile/account/email_validation_done.html:24
 msgid "You can manage the e-mail validation process from the"
-msgstr "Puedes gestionar el proceso de validación de la dirección de correo desde la"
+msgstr ""
+"Puedes gestionar el proceso de validación de la dirección de correo desde la"
 
 #: templates/userprofile/account/email_validation_done.html:24
 msgid "overview page"
@@ -247,7 +248,7 @@ msgstr "Entrada de usuario"
 
 #: templates/userprofile/account/login.html:20
 #: templates/userprofile/account/registration.html:20
-#: templates/userprofile/profile/public.html:39
+#: templates/userprofile/profile/public.html:36
 #: templates/userprofile/profile/usercard.html:10
 msgid "Username"
 msgstr "Usuario"
@@ -299,7 +300,6 @@ msgid "Confirm password"
 msgstr "Confirmar contraseña"
 
 #: templates/userprofile/account/password_change.html:37
-#: templates/userprofile/profile/overview.html:52
 msgid "Change"
 msgstr "Cambiar"
 
@@ -314,8 +314,8 @@ msgid ""
 "Password change utility page. Please enter your new password twice so we can "
 "verify you typed it in correctly"
 msgstr ""
-"Página de cambio de contraseña. Por favor introduce tu nueva contraseña dos veces para que podamos verificar "
-"que la has tecleado correctamente"
+"Página de cambio de contraseña. Por favor introduce tu nueva contraseña dos "
+"veces para que podamos verificar que la has tecleado correctamente"
 
 #: templates/userprofile/account/password_change_done.html:4
 msgid "Password change successful"
@@ -416,22 +416,22 @@ msgstr ""
 "accounts/profile/\">página de entrada</a> para autenticarte y empezar a "
 "utilizar este sitio"
 
-#: templates/userprofile/avatar/avatar_choose.html:4
-#: templates/userprofile/avatar/avatar_choose.html:35
+#: templates/userprofile/avatar/choose.html:4
+#: templates/userprofile/avatar/choose.html:35
 msgid "Choose the location of your avatar"
 msgstr "Elige la localización de tu avatar"
 
-#: templates/userprofile/avatar/avatar_choose.html:38
+#: templates/userprofile/avatar/choose.html:38
 msgid "Select an image from disk"
 msgstr "Selecciona una imagen del disco duro"
 
-#: templates/userprofile/avatar/avatar_choose.html:40
-#: templates/userprofile/avatar/avatar_choose.html:46
-#: templates/userprofile/avatar/avatar_crop.html:47
+#: templates/userprofile/avatar/choose.html:40
+#: templates/userprofile/avatar/choose.html:46
+#: templates/userprofile/avatar/crop.html:47
 msgid "Done"
 msgstr "Hecho"
 
-#: templates/userprofile/avatar/avatar_choose.html:44
+#: templates/userprofile/avatar/choose.html:44
 msgid ""
 "Select an image from a remote URL. Put the URL on the input below and we'll "
 "retrieve the image for you"
@@ -439,23 +439,23 @@ msgstr ""
 "Selecciona una imagen de una URL remota. Pon la dirección remota en el campo "
 "de abajo y obtendremos la imagen para ti"
 
-#: templates/userprofile/avatar/avatar_choose.html:51
-#: templates/userprofile/avatar/avatar_search.html:4
-#: templates/userprofile/avatar/avatar_search.html:28
+#: templates/userprofile/avatar/choose.html:51
+#: templates/userprofile/avatar/search.html:4
+#: templates/userprofile/avatar/search.html:28
 msgid "Search for an image on Picasa Web"
 msgstr "Busca una imagen en Picasa Web"
 
-#: templates/userprofile/avatar/avatar_choose.html:61
-#: templates/userprofile/avatar/avatar_crop.html:53
-#: templates/userprofile/avatar/avatar_done.html:19
-#: templates/userprofile/avatar/avatar_search.html:50
+#: templates/userprofile/avatar/choose.html:61
+#: templates/userprofile/avatar/crop.html:53
+#: templates/userprofile/avatar/done.html:19
+#: templates/userprofile/avatar/search.html:50
 msgid "Avatar selection page"
 msgstr "Página de selección de avatar"
 
-#: templates/userprofile/avatar/avatar_choose.html:62
-#: templates/userprofile/avatar/avatar_crop.html:54
-#: templates/userprofile/avatar/avatar_done.html:20
-#: templates/userprofile/avatar/avatar_search.html:51
+#: templates/userprofile/avatar/choose.html:62
+#: templates/userprofile/avatar/crop.html:54
+#: templates/userprofile/avatar/done.html:20
+#: templates/userprofile/avatar/search.html:51
 msgid ""
 "You have several options to select the image you want as avatar on your "
 "profile"
@@ -463,58 +463,55 @@ msgstr ""
 "Tienes varias opciones para seleccionar la imagen que quieres utilizar como "
 "avatar en tu perfil"
 
-#: templates/userprofile/avatar/avatar_choose.html:68
+#: templates/userprofile/avatar/choose.html:68
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/userprofile/avatar/avatar_crop.html:4
-#: templates/userprofile/avatar/avatar_crop.html:31
+#: templates/userprofile/avatar/crop.html:4
+#: templates/userprofile/avatar/crop.html:31
 msgid "Crop &amp; resize the area you want"
 msgstr "Recorta y redimensiona el area que quieras"
 
-#: templates/userprofile/avatar/avatar_done.html:4
+#: templates/userprofile/avatar/done.html:4
 msgid "Avatar selection finished"
 msgstr "Selección de avatar terminada"
 
-#: templates/userprofile/avatar/avatar_done.html:13
+#: templates/userprofile/avatar/done.html:13
 msgid "Your new avatar has been saved successfully"
 msgstr "Tu nuevo avatar ha sido guardado satisfactoriamente"
 
-#: templates/userprofile/avatar/avatar_search.html:29
+#: templates/userprofile/avatar/search.html:29
 msgid "Search on Picasa Web"
 msgstr "Buscar en Picasa Web"
 
-#: templates/userprofile/avatar/avatar_search.html:32
+#: templates/userprofile/avatar/search.html:32
 msgid "Search"
 msgstr "Búsqueda"
 
 #: templates/userprofile/profile/delete.html:4
-#: templates/userprofile/profile/delete.html:14
-msgid "Delete all your personal information"
+msgid "Delete personal information"
 msgstr "Borrar la información de tu perfil"
 
-#: templates/userprofile/profile/delete.html:15
-msgid "Are you sure?"
-msgstr "¿Estás seguro?"
-
-#: templates/userprofile/profile/delete.html:15
-msgid "Yes, delete all"
-msgstr "Sí, bórralo todo"
-
-#: templates/userprofile/profile/delete.html:21
+#: templates/userprofile/profile/delete.html:13
 #: templates/userprofile/profile/delete_done.html:18
 msgid "Delete your personal information"
 msgstr "Borrar la información de tu perfil"
 
-#: templates/userprofile/profile/delete.html:22
-#: templates/userprofile/profile/delete_done.html:19
+#: templates/userprofile/profile/delete.html:14
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+#: templates/userprofile/profile/delete.html:14
+msgid "Yes"
+msgstr "Sí"
+
+#: templates/userprofile/profile/delete.html:20
 msgid ""
-"Deleting all your personal information will erase all your private data, "
-"except your username. You can refill the information later if you want to"
+"It erases all your private data except your username. You can refill the "
+"information later if you want to"
 msgstr ""
-"Esto eliminará todos tus datos personales, "
-"excepto tu nombre de usuario. Puedes volver a rellenar toda la información "
-"posteriormente si quieres"
+"Esto eliminará todos tus datos personales, excepto tu nombre de usuario. "
+"Puedes volver a rellenar toda la información posteriormente si quieres"
 
 #: templates/userprofile/profile/delete_done.html:4
 msgid "Profile removed"
@@ -523,6 +520,14 @@ msgstr "Información de perfil borrada"
 #: templates/userprofile/profile/delete_done.html:13
 msgid "Your profile information has been removed successfully"
 msgstr "La información de tu perfil ha sido borrada satisfactoriamente"
+
+#: templates/userprofile/profile/delete_done.html:19
+msgid ""
+"Deleting all your personal information will erase all your private data, "
+"except your username. You can refill the information later if you want to"
+msgstr ""
+"Esto eliminará todos tus datos personales, excepto tu nombre de usuario. "
+"Puedes volver a rellenar toda la información posteriormente si quieres"
 
 #: templates/userprofile/profile/location.html:4
 #: templates/userprofile/profile/location_done.html:4
@@ -545,7 +550,7 @@ msgstr "Define tu localización"
 #: templates/userprofile/profile/makepublic.html:76
 #: templates/userprofile/profile/makepublic.html:87
 #: templates/userprofile/profile/makepublic.html:98
-#: templates/userprofile/profile/overview.html:52
+#: templates/userprofile/profile/overview.html:58
 msgid "Not set"
 msgstr "No establecido"
 
@@ -577,8 +582,9 @@ msgstr "Información de localización"
 msgid ""
 "Define your location information. Once inserted, you can make it public "
 "going to the"
-msgstr "Define la información sobre tu localización. Una vez insertada, podrás hacerla pública"
-" desde la"
+msgstr ""
+"Define la información sobre tu localización. Una vez insertada, podrás "
+"hacerla pública desde la"
 
 #: templates/userprofile/profile/location.html:53
 #: templates/userprofile/profile/location_done.html:20
@@ -588,22 +594,22 @@ msgid "public information page"
 msgstr "página de Información pública del perfil"
 
 #: templates/userprofile/profile/location_done.html:13
-msgid "Your profile location information has been updated successfully"
-msgstr "La información de localización de tu perfil ha sido actualizada satisfactoriamente"
+#: templates/userprofile/profile/personal_done.html:13
+msgid "Your profile information has been updated successfully"
+msgstr "La información de tu perfil ha sido actualizada satisfactoriamente"
 
 #: templates/userprofile/profile/makepublic.html:31
-#: templates/userprofile/profile/public.html:46
-#: templates/userprofile/profile/usercard.html:13
+#: templates/userprofile/profile/public.html:39
 msgid "Name"
 msgstr "Nombre"
 
 #: templates/userprofile/profile/makepublic.html:41
-#: templates/userprofile/profile/public.html:61
+#: templates/userprofile/profile/public.html:53
 msgid "Gender"
 msgstr "Sexo"
 
 #: templates/userprofile/profile/makepublic.html:51
-#: templates/userprofile/profile/public.html:53
+#: templates/userprofile/profile/public.html:43
 msgid "Url"
 msgstr "Web"
 
@@ -616,7 +622,7 @@ msgid "years old."
 msgstr "años."
 
 #: templates/userprofile/profile/makepublic.html:71
-#: templates/userprofile/profile/public.html:57
+#: templates/userprofile/profile/public.html:47
 msgid "About"
 msgstr "Acerca de tí"
 
@@ -630,57 +636,71 @@ msgstr "Información pública"
 msgid ""
 "Select the information you have inserted on your profile that you want to "
 "make public"
-msgstr "Seleccion la información que quieres hacer pública de todos los datos que has insertado"
+msgstr ""
+"Seleccion la información que quieres hacer pública de todos los datos que "
+"has insertado"
 
 #: templates/userprofile/profile/makepublic_done.html:13
 msgid "Your public profile information has been updated successfully"
-msgstr "La información pública de tu perfil ha sido actualizada satisfactoriamente."
+msgstr ""
+"La información pública de tu perfil ha sido actualizada satisfactoriamente."
 
 #: templates/userprofile/profile/overview.html:4
-#: templates/userprofile/profile/overview.html:29
+#: templates/userprofile/profile/overview.html:31
 msgid "Overview of your profile"
 msgstr "Resumen de tu perfil"
 
-#: templates/userprofile/profile/overview.html:38
+#: templates/userprofile/profile/overview.html:40
 msgid "Change avatar"
 msgstr "Cambiar avatar"
 
-#: templates/userprofile/profile/overview.html:42
+#: templates/userprofile/profile/overview.html:40
+msgid "Add avatar"
+msgstr "Añadir avatar"
+
+#: templates/userprofile/profile/overview.html:44
 msgid "Username:"
 msgstr "Usuario:"
 
-#: templates/userprofile/profile/overview.html:43
+#: templates/userprofile/profile/overview.html:45
 msgid "E-mail:"
 msgstr "Dirección de correo:"
 
-#: templates/userprofile/profile/overview.html:45
+#: templates/userprofile/profile/overview.html:47
 msgid "Not set yet"
 msgstr "No establecida"
 
-#: templates/userprofile/profile/overview.html:45
-#: templates/userprofile/profile/overview.html:66
-msgid "Add your e-mail address"
-msgstr "Añadir dirección de correo"
-
-#: templates/userprofile/profile/overview.html:45
+#: templates/userprofile/profile/overview.html:49
 msgid " (Not validated)"
 msgstr "(No validada)"
 
-#: templates/userprofile/profile/overview.html:63
+#: templates/userprofile/profile/overview.html:75
 msgid "Management:"
 msgstr "Gestión:"
 
-#: templates/userprofile/profile/overview.html:64
+#: templates/userprofile/profile/overview.html:76
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: templates/userprofile/profile/overview.html:66
+#: templates/userprofile/profile/overview.html:78
 msgid "Change your e-mail address"
 msgstr "Cambiar tu dirección de correo"
 
-#: templates/userprofile/profile/overview.html:67
+#: templates/userprofile/profile/overview.html:78
+msgid "Add your e-mail address"
+msgstr "Añadir dirección de correo"
+
+#: templates/userprofile/profile/overview.html:79
 msgid "Resend validation e-mail"
 msgstr "Reenviar e-mail de validación"
+
+#: templates/userprofile/profile/overview.html:83
+msgid "Add location"
+msgstr "Añadir localización"
+
+#: templates/userprofile/profile/overview.html:85
+msgid "Change location"
+msgstr "Cambiar localización"
 
 #: templates/userprofile/profile/personal.html:4
 #: templates/userprofile/profile/personal.html:33
@@ -716,28 +736,35 @@ msgstr "Acerca de tí:"
 msgid ""
 "Insert some information about you. Once inserted, you can make it public "
 "going to the"
-msgstr "Añade algo de información sobre ti. Una vez insertada, puedes hacerla pública desde la"
+msgstr ""
+"Añade algo de información sobre ti. Una vez insertada, puedes hacerla "
+"pública desde la"
 
-#: templates/userprofile/profile/personal_done.html:13
-msgid "Your profile information has been updated successfully"
-msgstr "La información de tu perfil ha sido actualizada satisfactoriamente"
-
-#: templates/userprofile/profile/public.html:29
+#: templates/userprofile/profile/public.html:26
 #, python-format
 msgid "Public profile of %(user)s"
 msgstr "Perfil público de %(user)s"
 
-#: templates/userprofile/profile/public.html:42
-msgid "E-mail"
-msgstr "Dirección de correo"
-
-#: templates/userprofile/profile/usercard.html:17
-msgid "Age"
-msgstr "Edad"
-
-#: templates/userprofile/profile/usercard.html:20
+#: templates/userprofile/profile/usercard.html:11
 msgid "Public profile information"
 msgstr "Información pública del perfil"
+
+#~ msgid "Delete all your personal information"
+#~ msgstr "Borrar la información de tu perfil"
+
+#~ msgid "Yes, delete all"
+#~ msgstr "Sí, bórralo todo"
+
+#~ msgid "Your profile location information has been updated successfully"
+#~ msgstr ""
+#~ "La información de localización de tu perfil ha sido actualizada "
+#~ "satisfactoriamente"
+
+#~ msgid "E-mail"
+#~ msgstr "Dirección de correo"
+
+#~ msgid "Age"
+#~ msgstr "Edad"
 
 #~ msgid ""
 #~ "Account validated successfully. Now you can access to the login page with "
@@ -841,12 +868,6 @@ msgstr "Información pública del perfil"
 #~ msgid "Have you lost your password?"
 #~ msgstr "¿Has perdido tu contraseña?"
 
-#~ msgid "Edit avatar"
-#~ msgstr "Editar avatar"
-
-#~ msgid "Edit location"
-#~ msgstr "Editar localización"
-
 #~ msgid "Validated"
 #~ msgstr "Validada"
 
@@ -925,9 +946,6 @@ msgstr "Información pública del perfil"
 #~ "Esta cuenta no ha sido activada todavía. Debes haber recibido un correo "
 #~ "con instrucciones sobre como activarla. Si quieres que te reenviemos el e-"
 #~ "mail, por favor, pincha"
-
-#~ msgid "Change email"
-#~ msgstr "Cambiar dirección de correo"
 
 #~ msgid "Add email"
 #~ msgstr "Añadir una dirección de correo"

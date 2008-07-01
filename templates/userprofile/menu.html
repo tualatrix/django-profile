@@ -1,5 +1,6 @@
 {% load i18n %}
 {% if user.is_authenticated %}
+<div id="nav" class="span-24 last">
 	<ul class="hmenu">
 		<li{% ifequal section "overview" %} class="active"{% endifequal %}><a href="/accounts/profile/">{% trans "Overview" %}</a></li>
 		<li{% ifequal section "personal" %} class="active"{% endifequal %}><a href="/accounts/profile/edit/personal/">{% trans "Personal information" %}</a></li>
@@ -9,4 +10,5 @@
 		<li{% ifequal section "delete" %} class="active"{% endifequal %}><a href="/accounts/profile/delete/">{% trans "Remove profile" %}</a></li>
 	</ul>
 	<hr class="space" />
+</div>
 {% endif %}

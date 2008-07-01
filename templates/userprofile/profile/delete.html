@@ -1,7 +1,7 @@
 {% extends "base_2col.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Delete all your personal information" %}{% endblock %}
+{% block title %}{% trans "Delete personal information" %}{% endblock %}
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block nav-main %}
@@ -10,15 +10,14 @@
 
 {% block content %}
 	<form action="" method="post" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{% trans "Delete all your personal information" %}</legend>
-		<p><label for="remove">{% trans "Are you sure?" %}</label> <input id="remove" type="submit" value="{% trans "Yes, delete all" %}." /></p>
-	</fieldset>
+		<h3>{% trans "Delete your personal information" %}</h3>
+		<p><label for="remove">{% trans "Are you sure?" %}</label> <input id="remove" type="submit" value="{% trans "Yes" %}" /></p>
 	</form>
 {% endblock %}
+
 {% block content-related %}
 	<div class="box">
-		<h3>{% trans "Delete your personal information" %}</h3>
-		<p>{% trans "Deleting all your personal information will erase all your private data, except your username. You can refill the information later if you want to" %}.</p>
+		<p>{% trans "It erases all your private data except your username. You can refill the information later if you want to" %}.</p>
 	</div>
 {% endblock %}
+
