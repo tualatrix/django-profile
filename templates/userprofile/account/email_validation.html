@@ -24,9 +24,12 @@
 		<label for="id_email">{% trans 'New e-mail address' %}</label>
 		<p>{{ form.email }}
 		{% if form.email.errors %}
-			<span class="quiet"><br />* {{ form.email.errors|join:"; " }}</span>
+			<span class="quiet red"><br />* {{ form.email.errors|join:"; " }}</span>
 		{% endif %}
 		</p>
+		{% if form.non_field_errors %}
+			<ul class="quiet red">{{ form.non_field_errors.as_ul }}</ul>
+		{% endif %}
 	</fieldset>
 	<input type="submit" value="{% trans 'Send confirmation' %}" />
 	</form>

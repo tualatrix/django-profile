@@ -20,27 +20,30 @@
 		<label for="id_username">{% trans "Username" %}</label>
 		<p>{{ form.username }}
 			{% if form.username.errors %}
-				<span class="quiet"><br />* {{ form.username.errors|join:"; " }}</span>
+				<span class="quiet red"><br />* {{ form.username.errors|join:"; " }}</span>
 			{% endif %}
 		</p>
 		<label for="id_email">{% trans "E-mail (optional)" %}</label>
 		<p>{{ form.email }}
 			{% if form.email.errors %}
-				<span class="quiet"><br />* {{ form.email.errors|join:"; " }}</span>
+				<span class="quiet red"><br />* {{ form.email.errors|join:"; " }}</span>
 			{% endif %}
 		</p>
 		<label for="id_password1">{% trans "Password" %}</label>
 		<p>{{ form.password1 }}
 			{% if form.password1.errors %}
-				<span class="quiet"><br />* {{ form.password1.errors|join:"; " }}</span>
+				<span class="quiet red"><br />* {{ form.password1.errors|join:"; " }}</span>
 			{% endif %}
 		</p>
 		<label for="id_password2">{% trans "Password (again)" %}</label>
 		<p>{{ form.password2 }}
 			{% if form.password2.errors %}
-				<span class="quiet"><br />* {{ form.password2.errors|join:"; " }}</span>
+				<span class="quiet red"><br />* {{ form.password2.errors|join:"; " }}</span>
 			{% endif %}
 		</p>
+		{% if form.non_field_errors %}
+			<ul class="quiet red">{{ form.non_field_errors.as_ul }}</ul>
+		{% endif %}
 	</fieldset>
 	<input type="submit" value="{% trans 'Register' %}" />
 	</form>

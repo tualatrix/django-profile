@@ -43,7 +43,7 @@
 		<div class="span-9 last">
 			<p><label for="id_user">{% trans "Username:" %}</label> {{ profile.user }}</p>
 			<p><label for="id_email">{% trans "E-mail:" %}</label>
-				<span class="{% if not email or not validated %}quiet{% endif %}">
+				<span class="{% if not email or not validated %}quiet red{% endif %}">
 				{%if not email %}{% trans "Not set yet" %}
 				{% else %}{{ email }}
 				{% if not validated %}{% trans " (Not validated)" %}
@@ -55,7 +55,7 @@
 			{% if profile.location %}
 				{{ profile.location }}
 			{% else %}
-				<span class="quiet">{% trans "Not set" %}</span>
+				<span class="quiet red">{% trans "Not set" %}</span>
 			{% endif %}
 			</p>
 		</div>

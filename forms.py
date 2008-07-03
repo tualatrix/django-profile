@@ -54,10 +54,10 @@ class AvatarCropForm(forms.Form):
 
 class RegistrationForm(forms.Form):
 
-    username = forms.CharField(max_length=255, min_length = 3)
-    email = forms.EmailField(required=False)
-    password1 = forms.CharField(min_length=6, widget=forms.PasswordInput)
-    password2 = forms.CharField(min_length=6, widget=forms.PasswordInput)
+    username = forms.CharField(max_length=255, min_length = 3, label=_("Username"))
+    email = forms.EmailField(required=False, label=_("E-mail address"))
+    password1 = forms.CharField(min_length=6, widget=forms.PasswordInput(render_value=False), label=_("Password"))
+    password2 = forms.CharField(min_length=6, widget=forms.PasswordInput(render_value=False), label=_("Password (again)"))
 
     def clean_username(self):
         """
