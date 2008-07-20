@@ -17,12 +17,8 @@ GENDER_IMAGES = { "M": "%simages/male.png" % settings.MEDIA_URL, "F": "%simages/
 class Continent(models.Model):
     """
     Continent class. Simple class with the information about continents.
-    It can be filled up with calling the "importdata" method:
-
-    >>> Continent().importdata()
-
     """
-    slug = models.SlugField(prepopulate_from=('name',), unique=True)
+    slug = models.SlugField(unique=True)
     code = models.CharField(max_length=2, primary_key=True)
     name = models.CharField(max_length=255, unique=True)
 
@@ -39,15 +35,19 @@ class Continent(models.Model):
         verbose_name = _('Continent')
         verbose_name_plural = _('Continents')
 
+   def save(self):
+       if not self.slug:
+           from django.template.defaultfilters import slugify
+           self.slug = slugify(self.name)
+       super(Continent, self).save()
+
 class Country(models.Model):
     """
     Country class with the countries data needed in the Profile class. Dependent
     of the Continent class.
-    To fill it with data, the file "countries.txt" is needed:
-    >>> Country().importdata()
     """
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(prepopulate_from=('name',), unique=True)
+    slug = models.SlugField(unique=True)
     code = models.CharField(max_length=2, primary_key=True)
     continent = models.ForeignKey(Continent)
 
@@ -65,6 +65,12 @@ class Country(models.Model):
         ordering = ['name']
         verbose_name = _('Country')
         verbose_name_plural = _('Countries')
+
+   def save(self):
+       if not self.slug:
+           from django.template.defaultfilters import slugify
+           self.slug = slugify(self.name)
+       super(Country, self).save()
 
 class Profile(models.Model):
     """
