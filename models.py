@@ -35,7 +35,7 @@ class Continent(models.Model):
         verbose_name = _('Continent')
         verbose_name_plural = _('Continents')
 
-   def save(self):
+    def save(self):
        if not self.slug:
            from django.template.defaultfilters import slugify
            self.slug = slugify(self.name)
@@ -66,7 +66,7 @@ class Country(models.Model):
         verbose_name = _('Country')
         verbose_name_plural = _('Countries')
 
-   def save(self):
+    def save(self):
        if not self.slug:
            from django.template.defaultfilters import slugify
            self.slug = slugify(self.name)
