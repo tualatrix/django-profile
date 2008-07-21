@@ -28,9 +28,6 @@ class Continent(models.Model):
     def get_absolute_url(self):
         return "/continent/%s/" % self.slug
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = _('Continent')
         verbose_name_plural = _('Continents')
@@ -56,10 +53,6 @@ class Country(models.Model):
 
     def get_absolute_url(self):
         return "/country/%s/" % self.slug
-
-    class Admin:
-        list_display = ('name', 'continent')
-        list_filter = ['continent']
 
     class Meta:
         ordering = ['name']
@@ -98,9 +91,6 @@ class Profile(models.Model):
     avatar32 = models.ImageField(upload_to="avatars/%Y/%b/%d")
     avatar64 = models.ImageField(upload_to="avatars/%Y/%b/%d")
     avatar96 = models.ImageField(upload_to="avatars/%Y/%b/%d")
-
-    class Admin:
-        pass
 
     def get_genderimage_url(self):
         return GENDER_IMAGES[self.gender]
@@ -206,10 +196,6 @@ class Validation(models.Model):
 
     class Meta:
         unique_together = ('type', 'user')
-
-    class Admin:
-        list_display = ('__unicode__',)
-        search_fields = ('user__username', 'user__first_name')
 
     def __unicode__(self):
         return _("Email validation process for %(user)s of type %(type)s") % { 'user': self.user, 'type': self.get_type_display() }

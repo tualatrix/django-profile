@@ -4,8 +4,8 @@ from userprofile.models import Profile, GENDER_CHOICES
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from userprofile.models import Country, Validation
-
-IMAGE_TYPES = { 'JPEG image data': '.jpg', 'PNG image data': '.png', 'GIF image data': '.gif' }
+from django.core.files.uploadedfile import SimpleUploadedFile
+import mimetypes, urllib
 
 class LocationForm(forms.ModelForm):
     """
@@ -31,11 +31,18 @@ class AvatarForm(forms.Form):
     photo = forms.ImageField(required=False)
     url = forms.URLField(required=False)
 
+    def clean_url(self):
+        url = self.cleaned_data.get('url')
+        if not url: return ''
+        filename, headers = urllib.urlretrieve(url)
+        if not mimetypes.guess_all_extensions(headers.get('Content-Type')):
+            raise forms.ValidationError(_('The file type is invalid: %s' % type))
+        return SimpleUploadedFile(filename, open(filename).read(), content_type=headers.get('Content-Type'))
+
     def clean(self):
         if not (self.cleaned_data.get('photo') or self.cleaned_data.get('url')):
             raise forms.ValidationError(_('You must enter one of the options'))
-        else:
-            return self.cleaned_data
+        return self.cleaned_data
 
 class AvatarCropForm(forms.Form):
     """

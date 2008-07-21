@@ -186,12 +186,7 @@ def avatarchoose(request, template, section, websearch=False):
     else:
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.cleaned_data.get('photo')
-            url = form.cleaned_data.get('url')
-            if url:
-                photo = urllib2.urlopen(url).read()
-            else:
-                photo = photo.read()
+            photo = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
             profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
             image = Image.open(profile.get_avatartemp_filename())
             image.thumbnail((480, 480), Image.ANTIALIAS)
