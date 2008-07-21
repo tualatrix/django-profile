@@ -1,4 +1,4 @@
-from django import newforms as forms
+from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from userprofile.models import Profile, GENDER_CHOICES
 from django.utils.translation import ugettext as _

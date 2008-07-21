@@ -191,7 +191,7 @@ def avatarchoose(request, template, section, websearch=False):
             if url:
                 photo = urllib2.urlopen(url).read()
             else:
-                photo = photo.content
+                photo = photo.read()
             profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
             image = Image.open(profile.get_avatartemp_filename())
             image.thumbnail((480, 480), Image.ANTIALIAS)
