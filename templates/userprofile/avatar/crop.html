@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block content %}
-	<form action="{{ request.path }}" method="post" accept-charset="utf-8">
+	<form action="{{ request.path_info }}" method="post" accept-charset="utf-8">
 	<fieldset>
 		<legend>{% trans "Crop &amp; resize the area you want" %}</legend>
 

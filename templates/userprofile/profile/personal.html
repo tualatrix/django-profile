@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block content %}
-	<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+	<form action="{{ request.path_info }}" method="post" enctype="multipart/form-data">
 	<fieldset>
 		<legend>{% trans "Edit your personal information" %}</legend>
 	
@@ -38,8 +38,8 @@
 		<p>{{ form.surname }}</p>
 		<label for="id_gender">{% trans "Gender:" %}</label>
 		<p style="overflow: hidden;">
-			<a class="male" href="{{ request.path }}">{% trans "Male" %}</a>
-			<a class="female" href="{{ request.path }}">{% trans "Female" %}</a>
+			<a class="male" href="{{ request.path_info }}">{% trans "Male" %}</a>
+			<a class="female" href="{{ request.path_info }}">{% trans "Female" %}</a>
 		</p>
 	
 		<label for="id_birthdate">{% trans "Birth date:" %}</label>

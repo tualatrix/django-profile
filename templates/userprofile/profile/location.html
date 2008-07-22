@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-	<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+	<form action="{{ request.path_info }}" method="post" enctype="multipart/form-data">
 	<fieldset>
 		<legend>{% trans "Define your location" %}</legend>
 		<label for="id_country">{% trans "Country" %}<img class="hide" src="{{ MEDIA_URL }}images/loading.gif" /></label>

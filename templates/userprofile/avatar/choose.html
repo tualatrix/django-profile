@@ -48,7 +48,7 @@
 			</li>
 			{% if websearch %}
 			<li>
-				<a class="large" href="{{ request.path }}search/">{% trans "Search for an image on Picasa Web" %}</a>
+				<a class="large" href="{{ request.path_info }}search/">{% trans "Search for an image on Picasa Web" %}</a>
 			</li>
 			{% endif %}
 			</ul>
@@ -65,7 +65,7 @@
   <div class="center">
   {% if profile.avatar %}
     <img class="border" id="avatarimg" src="{{ profile.get_avatar96_url }}" />
-    <p style="text-align: center;"><a href="{{ request.path }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
+    <p style="text-align: center;"><a href="{{ request.path_info }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
   {% else %}
     <img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
   {% endif %}

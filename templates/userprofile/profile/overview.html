@@ -30,14 +30,14 @@
 	<fieldset>
 		<legend>{% trans "Overview of your profile" %}</legend>
 		<div id="avatar" class="span-3 center">
-			<a href="{{ request.path }}edit/avatar/">
+			<a href="{{ request.path_info }}edit/avatar/">
 			{% if profile.avatar %}
 			<img class="border" src="{{ profile.get_avatar96_url }}" />
 			{% else %}
 			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
 			{% endif %}
 			</a>
-			<p><a href="{{ request.path }}edit/avatar/">{% if profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
+			<p><a href="{{ request.path_info }}edit/avatar/">{% if profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>
 	
 		<div class="span-9 last">
