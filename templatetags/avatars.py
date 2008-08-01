@@ -77,8 +77,7 @@ class ResizedThumbnailNode(Node):
         orig_root = path.join(avatars_root, 
                               str(_settings.DEFAULT_AVATAR_WIDTH))
         # The OS path to the image file.
-        orig_path = path.join(orig_root, str(_settings.DEFAULT_AVATAR_WIDTH),
-                              filename)
+        orig_path = path.join(file_root, filename)
         # Look for the original avatar in the standard directory, if found,
         # save the location for later use.
         if not path.exists(orig_path):
