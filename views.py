@@ -60,7 +60,7 @@ def makepublic(request, template, section, APIKEY=None):
             if request.POST.has_key("%s_public" % item):
                 public[item] = request.POST.get("%s_public" % item)
         profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
-        return HttpResponseRedirect("%sdone/" % request.path_info)
+        return HttpResponseRedirect(reverse("profile_edit_public_done"))
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -100,7 +100,7 @@ def personal(request, template, section):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("%sdone/" % request.path_info)
+            return HttpResponseRedirect(reverse("profile_edit_personal_done"))
     else:
         form = ProfileForm(instance=profile)
 
@@ -125,7 +125,7 @@ def location(request, template, section, APIKEY):
         form = LocationForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("%sdone/" % request.path_info)
+            return HttpResponseRedirect(reverse("profile_edit_location_done"))
     else:
         form = LocationForm(instance=profile)
 
@@ -172,7 +172,7 @@ def delete(request, template, section):
         user.last_name = ''
         user.save()
 
-        return HttpResponseRedirect('%sdone/' % request.path_info)
+        return HttpResponseRedirect(reverse("profile_delete_done"))
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -227,7 +227,7 @@ def avatarcrop(request, template, section):
                 image.save(os.path.join(base, "%s.%s.jpg" % (profile.user.username, size)))
                 setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (profile.user.username, size)))
             profile.save()
-            return HttpResponseRedirect("%sdone/" % request.path_info)
+            return HttpResponseRedirect(reverse("profile_avatar_crop_done"))
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
@@ -304,7 +304,7 @@ def reset_password(request, template):
 
             if email and user:
                 Validation.objects.add(user=user, email=email, type="password")
-                return HttpResponseRedirect('%sdone/' % request.path_info)
+                return HttpResponseRedirect(reverse("password_reset_done"))
 
     else:
         form = ValidationForm()
@@ -320,7 +320,7 @@ def email_validation_reset(request, template):
         resend = Validation.objects.get(user=request.user).resend()
     except Validation.DoesNotExist:
         resend = False
-    return HttpResponseRedirect('%sdone/%s' % (request.path_info, resend and 'success' or 'failed'))
+    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[resend and 'success' or 'failed']))
 
 def change_password_with_key(request, key, template):
     """
@@ -350,7 +350,7 @@ def change_password_authenticated(request, template, section):
         form = changePasswordAuthForm(request.POST)
         if form.is_valid():
             form.save(request.user)
-            return HttpResponseRedirect('%sdone/' % request.path_info)
+            return HttpResponseRedirect(reverse("password_change_done"))
     else:
         form = changePasswordAuthForm()
 

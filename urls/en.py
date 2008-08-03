@@ -25,7 +25,7 @@ urlpatterns = patterns('',
 
     url(r'^profile/edit/(?P<section>personal)/$', personal,
         {'template': 'userprofile/profile/personal.html'},
-        name='profile_edit_section'),
+        name='profile_edit_personal'),
 
     url(r'^profile/edit/location/done/$', direct_to_template,
         {'extra_context': {'section': 'location'},
