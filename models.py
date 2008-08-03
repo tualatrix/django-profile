@@ -72,7 +72,7 @@ class Profile(models.Model):
 
     firstname = models.CharField(max_length=255, blank=True)
     surname = models.CharField(max_length=255, blank=True)
-    user = models.OneToOneField(User, primary_key=True)
+    user = models.ForeignKey(User, unique=True)
     birthdate = models.DateField(default=datetime.date.today(), blank=True)
     date = models.DateTimeField(default=datetime.datetime.now)
     url = models.URLField(blank=True, core=True)
