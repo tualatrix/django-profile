@@ -73,16 +73,16 @@
 {% block content-related %}
 	<div class="box">
 		<h3>{% trans "Management:" %}</h3>
-		<a href="/accounts/password/change/">{% trans "Change password" %}</a>
+		<a href="{% url password_change %}">{% trans "Change password" %}</a>
 		<br />
-		<a href="/accounts/email/validation/">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
-		{% if not validated and email %}<br /><a href="/accounts/email/validation/reset/">{% trans "Resend validation e-mail" %}</a>
+		<a href="{% url email_validation %}">{% if email %}{% trans "Change your e-mail address" %}{% else %}{% trans "Add your e-mail address" %}{% endif %}</a>
+		{% if not validated and email %}<br /><a href="{% url email_validation_reset %}">{% trans "Resend validation e-mail" %}</a>
 		{% endif %}
 		<br />
 		{% if not profile.location %}
-			<a href="/accounts/profile/edit/location/">{% trans "Add location" %}</a>
+			<a href="{% url profile_edit_location %}">{% trans "Add location" %}</a>
 		{% else %}
-			<a href="/accounts/profile/edit/location/">{% trans "Change location" %}</a>
+			<a href="{% url profile_edit_location %}">{% trans "Change location" %}</a>
 		{% endif %}
 	</div>
 {% endblock %}

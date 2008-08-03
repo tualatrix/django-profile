@@ -17,6 +17,6 @@
 {% block content-related %}
 <div class="box">
   <h3>{% trans "Location information" %}</h3>
-    <p>{% trans "Define your location information. Once inserted, you can make it public going to the" %} <a href="/accounts/profile/edit/public/">{% trans "public information page" %}</a>.</p>
+    <p>{% trans "Define your location information. Once inserted, you can make it public going to the" %} <a href="{% url profile_edit_public %}">{% trans "public information page" %}</a>.</p>
 </div>
 {% endblock %}

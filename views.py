@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailValidationForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from userprofile.models import Profile, Continent, Country, Validation
@@ -334,7 +335,7 @@ def change_password_with_key(request, key, template):
                 return render_to_response('userprofile/account/password_expired.html', context_instance=RequestContext(request))
             else:
                 form.save(key)
-                return HttpResponseRedirect('/accounts/password/change/done/')
+                return HttpResponseRedirect(reverse("password_change_done"))
     else:
         form = changePasswordKeyForm()
 
