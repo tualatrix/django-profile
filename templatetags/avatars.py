@@ -50,7 +50,7 @@ class ResizedThumbnailNode(Node):
             profile = Profile.objects.get(user=self.user)
         return profile
 
-    def get_filename(self, profile=None):
+    def get_file(self, profile=None):
         # For compatibility with the official django-profile model I check
         # whether it's a path or just a filename.
         # In my opinion in the database should only be saved the file name,
@@ -58,14 +58,18 @@ class ResizedThumbnailNode(Node):
         # settings.AVATAR_DIRS[int]/str(User)/settings_DEFAULT_AVATAR_WIDTH/
         default = False
         try:
+            file_root = path.join(settings.MEDIA_ROOT,
+                profile.avatar[:profile.avatar.rindex('/')+1])
             file_name = profile.avatar[profile.avatar.rindex('/')+1:]
         except:
-            if not profile is None and profile.avatar:
+            file_root = _settings.AVATARS_DIR
+            if profile is not None and profile.avatar:
+                file_root = path.join(file_root, self.size)
                 file_name = profile.avatar
             else:
                 file_name = _settings.DEFAULT_AVATAR
                 default = True
-        return (file_name, default)
+        return (file_root, file_name, default)
 
     def as_url(self, path):
         try:
@@ -88,20 +92,16 @@ class ResizedThumbnailNode(Node):
         # Avatar's heaven, where all the avatars go.
         avatars_root = path.join(_settings.AVATARS_DIR,
                                  slugify(self.user.username))
-        file_root = path.join(avatars_root, str(self.size))
-        file_name, defaulting = self.get_filename(profile)
+        file_root, file_name, defaulting = self.get_file(profile)
         if defaulting:
             file_root = _settings.AVATARS_DIR
             if self.size_equals():
                 return self.as_url(path.join(file_root, file_name))
-        if not path.exists(file_root):
-            makedirs(file_root)
         file_path = path.join(file_root, file_name)
-        # I can't return an absolute path... can I?
+        # I don't return the default because I have to resize it.
         if not defaulting:
-            if path.exists(file_path):
-                file_url = self.as_url(file_path)
-                return file_url
+            if path.exists(file_path) and self.size_equals(file_path):
+                return self.as_url(file_path)
             else:
                 if not profile.avatar:
                     file_root = _settings.AVATARS_DIR
