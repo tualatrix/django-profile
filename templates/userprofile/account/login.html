@@ -40,8 +40,9 @@
 {% block content-related %}
 	<div class="box">
 		<ul class="loud">
-			<li>{% blocktrans %}If you already have an account, but have lost your password, <a href="{% url password_reset %}">click here</a>{% endblocktrans %}.</li>
-			<li>{% blocktrans %}If you don't have an account, you can <a href="{% url signup %}">sign up</a>{% endblocktrans %}.</li>
+            {# http://code.djangoproject.com/ticket/7239 #}
+			<li><a href="{% url password_reset %}">{% trans "Lost your password?" %}</a></li>
+			<li> <a href="{% url signup %}">Sign up!</a>{% endblocktrans %}</li>
 		</ul>
 	</div>
 {% endblock %}
