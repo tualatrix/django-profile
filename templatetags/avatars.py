@@ -130,6 +130,7 @@ class ResizedThumbnailNode(Node):
             print '=== ERROR ==='
             return '' # damn! Close but no cigar...
 
+@register.tag('avatar')
 def Thumbnail(parser, token):
     bits = token.contents.split()
     username = None
@@ -142,5 +143,3 @@ def Thumbnail(parser, token):
     elif len(bits) < 2:
         bits.append(_settings.DEFAULT_AVATAR_WIDTH)
     return ResizedThumbnailNode(bits[1], username)
-
-register.tag('avatar', Thumbnail)

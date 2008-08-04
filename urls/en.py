@@ -19,12 +19,12 @@ urlpatterns = patterns('',
          'template': 'userprofile/profile/overview.html'},
         name='profile_overview'),
 
-    url(r'^profile/edit/(?P<section>location)/$', location,
-        {'APIKEY': APIKEY, 'template': 'userprofile/profile/location.html'},
+    url(r'^profile/edit/location/$', location,
+        {'section': 'location', 'APIKEY': APIKEY, 'template': 'userprofile/profile/location.html'},
         name='profile_edit_location'),
 
-    url(r'^profile/edit/(?P<section>personal)/$', personal,
-        {'template': 'userprofile/profile/personal.html'},
+    url(r'^profile/edit/personal/$', personal,
+        {'section': 'personal', 'template': 'userprofile/profile/personal.html'},
         name='profile_edit_personal'),
 
     url(r'^profile/edit/location/done/$', direct_to_template,
