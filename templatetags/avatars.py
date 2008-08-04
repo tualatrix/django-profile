@@ -47,7 +47,11 @@ class ResizedThumbnailNode(Node):
             profile = self.user.get_profile()
         except Exception, e:
             print e
-            profile = Profile.objects.get(user=self.user)
+            if self.user.is_authenticated():
+                profile = Profile.objects.get(user=self.user)
+            else:
+                print "There is no user to get it's avatars for."
+                return ''
         return profile
 
     def get_file(self, profile=None):
