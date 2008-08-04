@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^profile/for/(?P<username>.+)/$', overview,
         {'section': 'overview', 'APIKEY': APIKEY,
          'template': 'userprofile/profile/overview.html'},
-        name='profile_overview'),
+        name='profile_public'),
 
     url(r'^profile/edit/location/$', location,
         {'section': 'location', 'APIKEY': APIKEY, 'template': 'userprofile/profile/location.html'},
