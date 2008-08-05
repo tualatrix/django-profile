@@ -30,7 +30,7 @@
 	<fieldset>
 		<legend>{% trans "Overview of your profile" %}</legend>
 		<div id="avatar" class="span-3 center">
-			<a href="{{ request.path_info }}edit/avatar/">
+			<a href="{% url profile_edit_avatar %}">
 			{% if profile.avatar %}
 			<img class="border" src="{{ profile.get_avatar96_url }}" />
 			{% else %}
