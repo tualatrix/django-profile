@@ -2,6 +2,10 @@
 
 # Countries list - ISO 3166-1993 (E)
 # http://xml.coverpages.org/country3166.html
+
+from django.db.models.fields import CharField
+from django.utils.translation import ugettext as _
+
 COUNTRIES = (
     ('AD', _('Andorra')),
     ('AE', _('United Arab Emirates')),
@@ -244,23 +248,9 @@ COUNTRIES = (
     ('ZZ', _('Unknown or unspecified country')),
 )
 
-def isValidLanguage(field_data, all_data):
-    if not field_data in [lang[0] for lang in settings.LANGUAGES]:
-        raise ValidationError, _("This value must be in LANGUAGES setting in settings.py module.")
-
 def isValidCountry(field_data, all_data):
     if not field_data in [lang[0] for lang in COUNTRIES]:
         raise ValidationError, _("This value must be in COUNTRIES setting in localflavor.generic package.")
-
-class LanguageField(CharField):
-    def __init__(self, *args, **kwargs):
-        from django.contrib.localflavor.generic import isValidLanguage
-
-        kwargs.setdefault('max_length', 5)
-        kwargs.setdefault('validator_list', []).append(isValidLanguage)
-        super(CharField, self).__init__(*args, **kwargs)
-    def get_internal_type(self):
-        return "CharField"
 
 class CountryField(CharField):
     def __init__(self, *args, **kwargs):

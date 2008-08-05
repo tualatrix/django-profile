@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from userprofile.models import Profile, GENDER_CHOICES
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
-from userprofile.models import Country, Validation
+from userprofile.models import Validation
 from django.core.files.uploadedfile import SimpleUploadedFile
 import mimetypes, urllib
 

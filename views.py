@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from userprofile.models import Profile, Continent, Country, Validation
+from userprofile.models import Profile, Validation
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
@@ -107,11 +107,6 @@ def personal(request, template, section):
     lat = profile.latitude
     lng = profile.longitude
 
-    continents = Continent.objects.all()
-    country_data = dict()
-    for continent in continents:
-        country_data[continent] = Country.objects.filter(continent=continent)
-
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
@@ -131,11 +126,6 @@ def location(request, template, section, APIKEY):
 
     lat = profile.latitude
     lng = profile.longitude
-
-    continents = Continent.objects.all()
-    country_data = dict()
-    for continent in continents:
-        country_data[continent] = Country.objects.filter(continent=continent)
 
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 

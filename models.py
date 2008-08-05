@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 from django.template import loader, Context
 from django.core.mail import send_mail
 from django.conf import settings
+from userprofile.countries import CountryField
 import datetime
 import pickle
 import Image, ImageFilter
@@ -14,57 +15,6 @@ import os.path
 
 GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
 GENDER_IMAGES = { "M": "%simages/male.png" % settings.MEDIA_URL, "F": "%simages/female.png" % settings.MEDIA_URL }
-
-class Continent(models.Model):
-    """
-    Continent class. Simple class with the information about continents.
-    """
-    slug = models.SlugField(unique=True)
-    code = models.CharField(max_length=2, primary_key=True)
-    name = models.CharField(max_length=255, unique=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return "/continent/%s/" % self.slug
-
-    class Meta:
-        verbose_name = _('Continent')
-        verbose_name_plural = _('Continents')
-
-    def save(self):
-       if not self.slug:
-           from django.template.defaultfilters import slugify
-           self.slug = slugify(self.name)
-       super(Continent, self).save()
-
-class Country(models.Model):
-    """
-    Country class with the countries data needed in the Profile class. Dependent
-    of the Continent class.
-    """
-    name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(unique=True)
-    code = models.CharField(max_length=2, primary_key=True)
-    continent = models.ForeignKey(Continent)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return "/country/%s/" % self.slug
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = _('Country')
-        verbose_name_plural = _('Countries')
-
-    def save(self):
-       if not self.slug:
-           from django.template.defaultfilters import slugify
-           self.slug = slugify(self.name)
-       super(Country, self).save()
 
 class Profile(models.Model):
     """
@@ -81,7 +31,7 @@ class Profile(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    country = models.ForeignKey(Country, null=True, blank=True)
+    country = CountryField()
     location = models.CharField(max_length=255, blank=True)
     public = models.FileField(upload_to="avatars/%Y/%b/%d")
 

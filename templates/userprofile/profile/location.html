@@ -19,20 +19,7 @@
 	<fieldset>
 		<legend>{% trans "Define your location" %}</legend>
 		<label for="id_country">{% trans "Country" %}<img class="hide" src="{{ MEDIA_URL }}images/loading.gif" /></label>
-		<p>
-			<select name="country" id="id_country">
-				<option value="">{% trans "Not set" %}</option>
-				<option value="" disabled="disabled">{% trans "More common..." %}</option>
-				<option value="ES">{% trans "Spain" %}</option>
-				{% for continent,countries in country_data.items %}
-					<option value="" disabled="disabled">{{ continent }}</option>
-					{% for country in countries %}
-					<option value="{{ country.code }}" {% ifequal profile.country.name country.name %}selected="selected"{% endifequal %}>{{ country }}</option>
-					{% endfor %}
-				{% endfor %}
-			</select>
-		</p>
-
+		<p>{{ form.country }}</p>
 		{% if APIKEY %}
 			<div class="mapinfo">
 				<label>{% trans "Location" %}</label>
