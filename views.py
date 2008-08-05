@@ -140,25 +140,6 @@ def location(request, template, section, APIKEY):
     return render_to_response(template, locals(), context_instance=RequestContext(request))
 
 @login_required
-def save(request, section):
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method=="POST":
-        profile = Profile.objects.get(user=request.user)
-        form = forms[section](request.POST, instance=profile)
-        if form.is_valid():
-            profile = form.save()
-
-            public = dict()
-            for item in profile.__dict__.keys():
-                if request.POST.has_key("%s_public" % item):
-                    public[item] = request.POST.get("%s_public" % item)
-            profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
-            return HttpResponse(simplejson.dumps({'success': True}))
-        else:
-            return HttpResponse(simplejson.dumps({'success': False }))
-    else:
-        raise Http404()
-
-@login_required
 def delete(request, template, section):
     user = User.objects.get(username=str(request.user))
     if request.method == "POST":
