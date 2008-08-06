@@ -1,0 +1,9 @@
+from django.conf import settings
+from os.path import join
+
+AVATARS_DIR = join(settings.MEDIA_ROOT, 'avatars')
+
+DEFAULT_AVATAR = 'generic.jpg'
+DEFAULT_AVATAR_WIDTH = 96
+
+APIKEY = ''
