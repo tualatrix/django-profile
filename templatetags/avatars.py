@@ -93,6 +93,8 @@ class ResizedThumbnailNode(Node):
         if self.size > _settings.DEFAULT_AVATAR_WIDTH:
             return '' # unacceptable
         profile = self.get_profile()
+        if not profile:
+            return ''
         # Avatar's heaven, where all the avatars go.
         avatars_root = path.join(_settings.AVATARS_DIR,
                                  slugify(self.user.username))
