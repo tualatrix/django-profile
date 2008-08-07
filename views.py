@@ -25,6 +25,9 @@ if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
     import gdata.service
     import gdata.photos.service
 
+GOOGLE_MAPS_API_KEY = hasattr(settings, "GOOGLE_MAPS_API_KEY") and settings.GOOGLE_MAPS_API_KEY or None
+WEBSEARCH = hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH or None
+
 def get_profiles():
     return Profile.objects.order_by("-date")
 
@@ -43,16 +46,21 @@ def fetch_geodata(request, lat, lng):
     else:
         raise Http404()
 
-def public(request, current_user, template, APIKEY=None):
+def public(request, username):
     try:
-        profile = User.objects.get(username=current_user).get_profile()
+        profile = User.objects.get(username=username).get_profile()
     except:
         raise Http404
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/profile/public.html"
+    data = {
+             'section': 'makepublic',
+             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+    }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def makepublic(request, template, section, APIKEY=None):
+def makepublic(request):
     profile, created = Profile.objects.get_or_create(user = request.user)
     if request.method == "POST":
         public = dict()
@@ -62,23 +70,36 @@ def makepublic(request, template, section, APIKEY=None):
         profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
         return HttpResponseRedirect(reverse("profile_edit_public_done"))
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/profile/makepublic.html"
+    data = {
+             'section': 'makepublic',
+             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def searchimages(request, template, section):
-    if request.method=="POST" and request.POST.get('keyword'): 
+def searchimages(request):
+    if request.method=="POST" and request.POST.get('keyword'):
         keyword = request.POST.get('keyword')
         gd_client = gdata.photos.service.PhotosService()
         feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
-        data = dict()
+        images = dict()
         for entry in feed.entry:
-            data[entry.media.thumbnail[0].url] = entry.content.src
+            images[entry.media.thumbnail[0].url] = entry.content.src
 
+    template = "userprofile/avatar/search.html"
+    data = {
+             'section': 'avatar',
+             'images': images,
+           }
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def overview(request, template, section, APIKEY=None):
+def overview(request):
+    """
+    Main profile page
+    """
     profile, created = Profile.objects.get_or_create(user=request.user)
     validated = False
     try:
@@ -87,10 +108,18 @@ def overview(request, template, section, APIKEY=None):
         email = request.user.email
         if email: validated = True
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/profile/overview.html"
+    data = {
+             'section': 'overview',
+             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'email': email,
+             'validated': validated
+           }
+
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def personal(request, template, section):
+def personal(request):
     """
     Personal data of the user profile
     """
@@ -104,13 +133,16 @@ def personal(request, template, section):
     else:
         form = ProfileForm(instance=profile)
 
-    lat = profile.latitude
-    lng = profile.longitude
-
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/profile/personal.html"
+    data = {
+             'section': 'personal',
+             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def location(request, template, section, APIKEY):
+def location(request):
     """
     Location selection of the user profile
     """
@@ -124,13 +156,17 @@ def location(request, template, section, APIKEY):
     else:
         form = LocationForm(instance=profile)
 
-    lat = profile.latitude
-    lng = profile.longitude
+    template = "userprofile/profile/location.html"
+    data = {
+             'section': 'location',
+             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'form': form,
+           }
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, template, section):
+def delete(request):
     user = User.objects.get(username=str(request.user))
     if request.method == "POST":
         # Remove the profile
@@ -145,10 +181,14 @@ def delete(request, template, section):
 
         return HttpResponseRedirect(reverse("profile_delete_done"))
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/profile/delete.html"
+    data = {
+             'section': 'delete',
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def avatarchoose(request, template, section, websearch=False):
+def avatarchoose(request):
     """
     Avatar choose
     """
@@ -166,10 +206,15 @@ def avatarchoose(request, template, section, websearch=False):
             profile.save()
             return HttpResponseRedirect('%scrop/' % request.path_info)
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/avatar/choose.html"
+    data = {
+             'section': 'avatar',
+             'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def avatarcrop(request, template, section):
+def avatarcrop(request):
     """
     Avatar management
     """
@@ -200,7 +245,12 @@ def avatarcrop(request, template, section):
             profile.save()
             return HttpResponseRedirect(reverse("profile_avatar_crop_done"))
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/avatar/crop.html"
+    data = {
+             'section': 'avatar',
+             'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
 def avatardelete(request, avatar_id=False):
@@ -222,7 +272,7 @@ def json_error_response(error_message, *args, **kwargs):
                                               error_message=error_message), ensure_ascii=False))
 
 @login_required
-def email_validation_process(request, key, template, section):
+def email_validation_process(request, key):
     """
     Verify key and change email
     """
@@ -231,9 +281,14 @@ def email_validation_process(request, key, template, section):
     else:
         successful = False
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/email_validation_done.html"
+    data = {
+             'section': overview,
+             'successful': successful,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
-def email_validation(request, template, section):
+def email_validation(request):
     """
     Change the e-mail page
     """
@@ -245,9 +300,13 @@ def email_validation(request, template, section):
     else:
         form = EmailValidationForm()
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/email_validation.html"
+    data = {
+             'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
-def register(request, template):
+def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -264,9 +323,13 @@ def register(request, template):
     else:
         form = RegistrationForm()
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/registration.html"
+    data = {
+             'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
-def reset_password(request, template):
+def reset_password(request):
     if request.method == 'POST':
         form = ValidationForm(request.POST)
         if form.is_valid():
@@ -280,10 +343,14 @@ def reset_password(request, template):
     else:
         form = ValidationForm()
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/password_reset.html"
+    data = {
+            'form': form,
+           }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def email_validation_reset(request, template):
+def email_validation_reset(request):
     """
     Resend the validation email for the authenticated user.
     """
@@ -291,9 +358,10 @@ def email_validation_reset(request, template):
         resend = Validation.objects.get(user=request.user).resend()
     except Validation.DoesNotExist:
         resend = False
-    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[resend and 'success' or 'failed']))
 
-def change_password_with_key(request, key, template):
+    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[resend and 'done' or 'failed']))
+
+def change_password_with_key(request, key):
     """
     Change a user password with the key sended by e-mail
     """
@@ -310,10 +378,14 @@ def change_password_with_key(request, key, template):
     else:
         form = changePasswordKeyForm()
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/password_change.html"
+    data = {
+            'form': form,
+            }
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def change_password_authenticated(request, template, section):
+def change_password_authenticated(request):
     """
     Change the password of the authenticated user
     """
@@ -325,7 +397,13 @@ def change_password_authenticated(request, template, section):
     else:
         form = changePasswordAuthForm()
 
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
+    template = "userprofile/account/password_change.html"
+    data = {
+            'section': 'overview',
+            'form': form,
+           }
+
+    return render_to_response(template, data, context_instance=RequestContext(request))
 
 def logout(request, template):
     from django.contrib.auth import logout

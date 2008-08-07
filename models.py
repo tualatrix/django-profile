@@ -59,7 +59,7 @@ class Profile(models.Model):
             return dict()
 
     def get_absolute_url(self):
-        return "%s%s/" % (settings.LOGIN_REDIRECT_URL, self.user)
+        return "%sfor/%s/" % (settings.LOGIN_REDIRECT_URL, self.user)
 
     def yearsold(self):
         return (datetime.date.today().toordinal() - self.birthdate.toordinal()) / 365

@@ -5,15 +5,15 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-	{% if profile.latitude and profile.longitude %}
-	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
+	{% if user.get_profile.latitude and profile.longitude %}
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ GOOGLE_MAPS_API_KEY }}" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(function() {
 			if (GBrowserIsCompatible()) {
 				this.map = new GMap2(document.getElementById("map"));
 				this.map.disableDragging();
-				this.map.setCenter(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), 2);
-				this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, draggable: false});
+				this.map.setCenter(new GLatLng({{ user.get_profile.latitude }}, {{ user.get_profile.longitude }}), 2);
+				this.marker = new GMarker(new GLatLng({{ user.get_profile.latitude }}, {{ user.get_profile.longitude }}), {clickable: false, draggable: false});
 				this.map.addOverlay(this.marker);
 			}
 		});
@@ -29,9 +29,9 @@
 	<form action="" method="post">
 		<fieldset>
 			<legend>{% trans "Name" %}</legend>
-		{% if profile.firstname %}
-			<input type="checkbox" name="firstname_public" {% if profile.visible.firstname %}checked="on"{% endif %}/>
-			{{ profile.firstname }} {{ profile.surname }}
+		{% if user.get_profile.firstname %}
+			<input type="checkbox" name="firstname_public" {% if user.get_profile.visible.firstname %}checked="on"{% endif %}/>
+			{{ user.get_profile.firstname }} {{ user.get_profile.surname }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -39,9 +39,9 @@
 
 		<fieldset>
 			<legend>{% trans "Gender" %}</legend>
-		{% if profile.gender %}
-			<input type="checkbox" name="gender_public" {% if profile.visible.gender %}checked="on"{% endif %} />
-			{{ profile.get_gender_display }}
+		{% if user.get_profile.gender %}
+			<input type="checkbox" name="gender_public" {% if user.get_profile.visible.gender %}checked="on"{% endif %} />
+			{{ user.get_profile.get_gender_display }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -49,9 +49,9 @@
 
 		<fieldset>
 			<legend>{% trans "Url" %}</legend>
-		{% if profile.url %}
-			<input type="checkbox" name="url_public" {% if profile.visible.url %}checked="on"{% endif %} />
-			<a href="{{ profile.url }}">{{ profile.url }}</a>
+		{% if user.get_profile.url %}
+			<input type="checkbox" name="url_public" {% if user.get_profile.visible.url %}checked="on"{% endif %} />
+			<a href="{{ user.get_profile.url }}">{{ user.get_profile.url }}</a>
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -59,9 +59,9 @@
 
 		<fieldset>
 			<legend>{% trans "Years old" %}</legend>
-		{% if profile.yearsold %}
-			<input type="checkbox" name="birthdate_public" {% if profile.visible.birthdate %}checked="on"{% endif %}/>
-			{{ profile.yearsold }} {% trans "years old." %}
+		{% if user.get_profile.yearsold %}
+			<input type="checkbox" name="birthdate_public" {% if user.get_profile.visible.birthdate %}checked="on"{% endif %}/>
+			{{ user.get_profile.yearsold }} {% trans "years old." %}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -69,20 +69,20 @@
 
 		<fieldset>
 			<legend>{% trans "About" %}</legend>
-		{% if profile.about %}
-			<input type="checkbox" name="about_public" {% if profile.visible.about %}checked="on"{% endif %}/>
-			{{ profile.about|linebreaksbr }}
+		{% if user.get_profile.about %}
+			<input type="checkbox" name="about_public" {% if user.get_profile.visible.about %}checked="on"{% endif %}/>
+			{{ user.get_profile.about|linebreaksbr }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
 		</fieldset>
 
-	{% if APIKEY %}
+	{% if GOOGLE_MAPS_API_KEY %}
 		<fieldset>
 			<legend>{% trans "Country" %}</legend>
-		{% if profile.country %}
-			<input type="checkbox" name="country_id_public" {% if profile.visible.country_id %}checked="on"{% endif %}/>
-			{{ profile.country }}
+		{% if user.get_profile.country %}
+			<input type="checkbox" name="country_id_public" {% if user.get_profile.visible.country_id %}checked="on"{% endif %}/>
+			{{ user.get_profile.get_country_display }}
 		{% else %}
 			{% trans "Not set" %}
 		{% endif %}
@@ -90,17 +90,16 @@
 
 		<fieldset>
 			<legend>{% trans "Location" %}</legend>
-			{% if profile.location %}
-			<input type="checkbox" name="location_public" {% if profile.visible.location %}checked="on"{% endif %}/>
-			{{ profile.location }}
+			{% if user.get_profile.location %}
+			<input type="checkbox" name="location_public" {% if user.get_profile.visible.location %}checked="on"{% endif %}/>
+			{{ user.get_profile.location }}
 			<div id="map" style="width: 440px; height: 240px;"></div>
 			{% else %}
 			{% trans "Not set" %}
 			{% endif %}
 		</fieldset>
 	{% endif %}
-
-		<input type="submit" value="{% trans 'Save' %}" />
+	<p><input type="submit" value="{% trans 'Save' %}" /></p>
 	</form>
 {% endblock %}
 

@@ -5,15 +5,15 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-{% if APIKEY and profile.location %}
-  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ APIKEY }}" type="text/javascript"></script>
+{% if GOOGLE_MAPS_API_KEY and user.get_profile.location %}
+  <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key={{ GOOGLE_MAPS_API_KEY }}" type="text/javascript"></script>
   <script type="text/javascript">
     $(function() {
       if (GBrowserIsCompatible()) {
         this.map = new GMap2(document.getElementById("location"));
         this.map.disableDragging();
-        this.map.setCenter(new GLatLng({{ profile.latitude|default:"30" }}, {{ profile.longitude|default:"0" }}), 2);
-        this.marker = new GMarker(new GLatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false, draggable: false});
+        this.map.setCenter(new GLatLng({{ user.get_profile.latitude|default:"30" }}, {{ user.get_profile.longitude|default:"0" }}), 2);
+        this.marker = new GMarker(new GLatLng({{ user.get_profile.latitude }}, {{ user.get_profile.longitude }}), {clickable: false, draggable: false});
         this.map.addOverlay(this.marker);
       }
     });
@@ -31,17 +31,17 @@
 		<legend>{% trans "Overview of your profile" %}</legend>
 		<div id="avatar" class="span-3 center">
 			<a href="{% url profile_edit_avatar %}">
-			{% if profile.avatar %}
-			<img class="border" src="{{ profile.get_avatar96_url }}" />
+			{% if user.get_profile.avatar %}
+			<img class="border" src="{{ user.get_profile.get_avatar96_url }}" />
 			{% else %}
 			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
 			{% endif %}
 			</a>
-			<p><a href="{{ request.path_info }}edit/avatar/">{% if profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
+			<p><a href="{{ request.path_info }}edit/avatar/">{% if user.get_profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>
 	
 		<div class="span-9 last">
-			<p><label for="id_user">{% trans "Username:" %}</label> {{ profile.user }}</p>
+			<p><label for="id_user">{% trans "Username:" %}</label> {{ user }}</p>
 			<p><label for="id_email">{% trans "E-mail:" %}</label>
 				<span class="{% if not email or not validated %}quiet red{% endif %}">
 				{%if not email %}{% trans "Not set yet" %}
@@ -52,8 +52,8 @@
 			</p>
 			<p>
 			<label for="location">{% trans "Location" %}:</label>
-			{% if profile.location %}
-				{{ profile.location }}
+			{% if user.get_profile.location %}
+				{{ user.get_profile.location }}
 			{% else %}
 				<span class="quiet red">{% trans "Not set" %}</span>
 			{% endif %}
@@ -61,7 +61,7 @@
 		</div>
 
 		<hr class="space" />
-		{% if profile.location %}
+		{% if user.get_profile.location %}
 		<div class="span-12 last">
 			<div id="location" style="width: 480px; height: 240px;"></div>
 		</div>
@@ -79,7 +79,7 @@
 		{% if not validated and email %}<br /><a href="{% url email_validation_reset %}">{% trans "Resend validation e-mail" %}</a>
 		{% endif %}
 		<br />
-		{% if not profile.location %}
+		{% if not user.get_profile.location %}
 			<a href="{% url profile_edit_location %}">{% trans "Add location" %}</a>
 		{% else %}
 			<a href="{% url profile_edit_location %}">{% trans "Change location" %}</a>

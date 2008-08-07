@@ -5,7 +5,7 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-	{% if APIKEY %}
+	{% if GOOGLE_MAPS_API_KEY %}
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
 	{% endif %}
 {% endblock %}
@@ -20,7 +20,7 @@
 		<legend>{% trans "Define your location" %}</legend>
 		<label for="id_country">{% trans "Country" %}<img class="hide" src="{{ MEDIA_URL }}images/loading.gif" /></label>
 		<p>{{ form.country }}</p>
-		{% if APIKEY %}
+		{% if GOOGLE_MAPS_API_KEY %}
 			<div class="mapinfo">
 				<label>{% trans "Location" %}</label>
 				<p id="location_info">{{ profile.location }}</p>
@@ -28,7 +28,7 @@
 				<div id="map"></div>
 			</div>
 			<div class="hide">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
-			<div style="display: none;" id="apikey">{{ APIKEY }}</div>
+			<div style="display: none;" id="apikey">{{ GOOGLE_MAPS_API_KEY }}</div>
 		{% endif %}
 	</fieldset>
 	<input type="submit" value="{% trans 'Save' %}" />
