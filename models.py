@@ -87,6 +87,12 @@ class Profile(models.Model):
             self.save_public_file("%s.public" % self.user, pickle.dumps(public))
         super(Profile, self).save()
 
+class Avatar(models.Model):
+    image = models.ImageField(upload_to="avatars")
+    user = models.ForeignKey(User)
+    date = models.DateTimeField(auto_now_add=True)
+    valid = models.BooleanField()
+
 class ValidationManager(models.Manager):
 
     def verify(self, key):

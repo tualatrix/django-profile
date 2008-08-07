@@ -12,14 +12,9 @@ from userprofile.models import Profile, Validation
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
-import urllib2
-import random
-import pickle
-import os.path
+import urllib2, random, pickle
 import Image, ImageFilter
-import urllib
-from xml.dom import minidom
-import os
+import urllib, os
 
 if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
     import gdata.service
@@ -31,8 +26,22 @@ WEBSEARCH = hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH or None
 def get_profiles():
     return Profile.objects.order_by("-date")
 
+def getip_geodata(request):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        try:
+            from django.contrib.gis.utils.geoip import GeoIP
+            g = GeoIP()
+            info = g.city(request.META.get("REMOTE_ADDR"))
+            print info
+            country = info.get("country_name")
+            region = info.get("city")
+            return HttpResponse(simplejson.dumps({'success': True, 'country': country, 'region': region}))
+        except:
+            return HttpResponse(simplejson.dumps({'success': Failed}))
+
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        from xml.dom import minidom
         url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % (lat, lng)
         dom = minidom.parse(urllib.urlopen(url))
         country = dom.getElementsByTagName('countryCode')
