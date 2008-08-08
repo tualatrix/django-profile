@@ -6,7 +6,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     # Private profile
-    url(r'^perfil/$', overview, name='profile_overview'),
+    (r'^perfil/$', overview, name='profile_overview'),
 
     url(r'^perfil/de/(?P<username>.+)/$', public, name='profile_public'),
 
@@ -57,10 +57,12 @@ urlpatterns = patterns('',
         name='profile_avatar_crop_done'),
 
     # Account utilities
-    url(r'^password/reestablecer/$', reset_password, name='password_reset'),
+    url(r'^password/reestablecer/$', 'django.contrib.auth.views.password_reset',
+        {'template_name': 'userprofile/account/password_reset.html'},
+        name='password_reset'),
 
-    url(r'^password/reestablecer/listo/$', direct_to_template,
-        {'template': 'userprofile/account/password_reset_done.html'},
+    url(r'^password/reestablecer/hecho/$', 'django.contrib.auth.views.password_reset_done',
+        {'template_name': 'userprofile/account/password_reset_done.html'},
         name='password_reset_done'),
 
     url(r'^email/validar/$', email_validation, name='email_validation'),
@@ -92,13 +94,14 @@ urlpatterns = patterns('',
     url(r'^password/cambiar/(?P<key>.{70})/$', change_password_with_key,
         name='password_change_with_key'),
 
-    url(r'^entrar/$', views.login,
+    url(r'^entrar/$', 'django.contrib.auth.views.login',
         {'template_name': 'userprofile/account/login.html'},
         name='login'),
 
-    url(r'^salir/$', logout,
-        {'template': 'userprofile/account/logout.html'},
+    url(r'^salir/$', 'django.contrib.auth.views.logout',
+        {'template_name': 'userprofile/account/logout.html'},
         name='logout'),
+
 
 
     # Registration

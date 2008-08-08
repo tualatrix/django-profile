@@ -2,13 +2,13 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.translation import ugettext as _
-from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, changePasswordAuthForm, ValidationForm, changePasswordKeyForm, EmailValidationForm
+from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, EmailValidationForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from userprofile.models import Profile, Validation
+from userprofile.models import Profile, EmailValidation
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
@@ -112,8 +112,8 @@ def overview(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     validated = False
     try:
-        email = Validation.objects.get(user=request.user).email
-    except Validation.DoesNotExist:
+        email = EmailValidation.objects.get(user=request.user).email
+    except EmailValidation.DoesNotExist:
         email = request.user.email
         if email: validated = True
 
@@ -180,7 +180,7 @@ def delete(request):
     if request.method == "POST":
         # Remove the profile
         Profile.objects.filter(user=user).delete()
-        Validation.objects.filter(user=user).delete()
+        EmailValidation.objects.filter(user=user).delete()
 
         # Remove the e-mail of the account too
         user.email = ''
@@ -285,7 +285,7 @@ def email_validation_process(request, key):
     """
     Verify key and change email
     """
-    if Validation.objects.verify(key=key):
+    if EmailValidation.objects.verify(key=key):
         successful = True
     else:
         successful = False
@@ -304,7 +304,7 @@ def email_validation(request):
     if request.method == 'POST':
         form = EmailValidationForm(request.POST)
         if form.is_valid():
-            Validation.objects.add(user=request.user, email=form.cleaned_data.get('email'), type="validation")
+            EmailValidation.objects.add(user=request.user, email=form.cleaned_data.get('email'))
             return HttpResponseRedirect('%sprocessed/' % request.path_info)
     else:
         form = EmailValidationForm()
@@ -325,7 +325,7 @@ def register(request):
 
             if form.cleaned_data.get('email'):
                 newuser.email = form.cleaned_data.get('email')
-                Validation.objects.add(user=newuser, email=newuser.email, type="validation")
+                EmailValidation.objects.add(user=newuser, email=newuser.email)
 
             newuser.save()
             return HttpResponseRedirect('%scomplete/' % request.path_info)
@@ -338,84 +338,14 @@ def register(request):
            }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
-def reset_password(request):
-    if request.method == 'POST':
-        form = ValidationForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            user = User.objects.get(email=email)
-
-            if email and user:
-                Validation.objects.add(user=user, email=email, type="password")
-                return HttpResponseRedirect(reverse("password_reset_done"))
-
-    else:
-        form = ValidationForm()
-
-    template = "userprofile/account/password_reset.html"
-    data = {
-            'form': form,
-           }
-    return render_to_response(template, data, context_instance=RequestContext(request))
-
 @login_required
 def email_validation_reset(request):
     """
     Resend the validation email for the authenticated user.
     """
     try:
-        resend = Validation.objects.get(user=request.user).resend()
-    except Validation.DoesNotExist:
+        resend = EmailValidation.objects.get(user=request.user).resend()
+    except EmailValidation.DoesNotExist:
         resend = False
 
     return HttpResponseRedirect(reverse("email_validation_reset_done", args=[resend and 'done' or 'failed']))
-
-def change_password_with_key(request, key):
-    """
-    Change a user password with the key sended by e-mail
-    """
-
-    user = Validation.objects.getuser(key=key)
-    if request.method == "POST":
-        form = changePasswordKeyForm(request.POST)
-        if form.is_valid():
-            if not Validation.objects.verify(key=key):
-                return render_to_response('userprofile/account/password_expired.html', context_instance=RequestContext(request))
-            else:
-                form.save(key)
-                return HttpResponseRedirect(reverse("password_change_done"))
-    else:
-        form = changePasswordKeyForm()
-
-    template = "userprofile/account/password_change.html"
-    data = {
-            'form': form,
-            }
-    return render_to_response(template, data, context_instance=RequestContext(request))
-
-@login_required
-def change_password_authenticated(request):
-    """
-    Change the password of the authenticated user
-    """
-    if request.method == "POST":
-        form = changePasswordAuthForm(request.POST)
-        if form.is_valid():
-            form.save(request.user)
-            return HttpResponseRedirect(reverse("password_change_done"))
-    else:
-        form = changePasswordAuthForm()
-
-    template = "userprofile/account/password_change.html"
-    data = {
-            'section': 'overview',
-            'form': form,
-           }
-
-    return render_to_response(template, data, context_instance=RequestContext(request))
-
-def logout(request, template):
-    from django.contrib.auth import logout
-    logout(request)
-    return render_to_response(template, locals(), context_instance=RequestContext(request))
-

@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
-from django.contrib.auth import views
 from userprofile.views import *
 from django.conf import settings
 
@@ -57,12 +56,6 @@ urlpatterns = patterns('',
         name='profile_avatar_crop_done'),
 
     # Account utilities
-    url(r'^password/reset/$', reset_password, name='password_reset'),
-
-    url(r'^password/reset/done/$', direct_to_template,
-        {'template': 'userprofile/account/password_reset_done.html'},
-        name='password_reset_done'),
-
     url(r'^email/validation/$', email_validation, name='email_validation'),
 
     url(r'^email/validation/processed/$', direct_to_template,
@@ -81,23 +74,36 @@ urlpatterns = patterns('',
         'template' : 'userprofile/account/email_validation_reset_done.html'},
         name='email_validation_reset_done'),
 
-    url(r'^password/change/$', change_password_authenticated, 
-        name='password_change'),
+    url(r'^password/reset/$', 'django.contrib.auth.views.password_reset',
+        name='password_reset'),
 
-    url(r'^password/change/done/$', direct_to_template,
-        {'extra_context': {'section': 'overview'},
-         'template': 'userprofile/account/password_change_done.html'},
+    url(r'^password/reset/done/$', 'django.contrib.auth.views.password_reset_done',
+        {'template_name': 'userprofile/account/password_reset_done.html'},
+        name='password_reset_done'),
+
+    url(r'^password/change/$', 'django.contrib.auth.views.password_change',
+        {'template_name': 'userprofile/account/password_change.html'},
+        name='password_change'),
+    url(r'^password/change/done/$', 'django.contrib.auth.views.password_change_done',
+        {'template_name': 'userprofile/account/password_change_done.html'},
         name='password_change_done'),
 
-    url(r'^password/change/(?P<key>.{70})/$', change_password_with_key,
-        name='password_change_with_key'),
+    url(r'^password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        'django.contrib.auth.views.password_reset_confirm',
+        {'template_name': 'userprofile/account/password_reset_confirm.html'},
+        name="password_reset_confirm"),
 
-    url(r'^login/$', views.login,
+    url(r'^password/reset/complete/$',
+        'django.contrib.auth.views.password_reset_complete',
+        {'template_name': 'userprofile/account/password_reset_complete.html'},
+        name="password_reset_complete"),
+
+    url(r'^login/$', 'django.contrib.auth.views.login',
         {'template_name': 'userprofile/account/login.html'},
         name='login'),
 
-    url(r'^logout/$', logout,
-        {'template': 'userprofile/account/logout.html'},
+    url(r'^logout/$', 'django.contrib.auth.views.logout',
+        {'template_name': 'userprofile/account/logout.html'},
         name='logout'),
 
 

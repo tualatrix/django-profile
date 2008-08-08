@@ -10,13 +10,16 @@
 
 {% block content %}
 	<form action="" method="post" enctype="multipart/form-data">
-		<h3>{% trans "Delete your personal information" %}</h3>
-		<p><label for="remove">{% trans "Are you sure?" %}</label> <input id="remove" type="submit" value="{% trans "Yes" %}" /></p>
+		<fieldset>
+			<legend>{% trans "Delete your personal information" %}</legend>
+			<p><label for="remove">{% trans "Are you sure?" %}</label> <input id="remove" type="submit" value="{% trans "Yes" %}" /></p>
+		</fieldset>
 	</form>
 {% endblock %}
 
 {% block content-related %}
 	<div class="box">
+		<h3>{% trans "Remove profile" %}</h3>
 		<p>{% trans "It erases all your private data except your username. You can refill the information later if you want to" %}.</p>
 	</div>
 {% endblock %}

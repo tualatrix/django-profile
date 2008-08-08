@@ -93,21 +93,15 @@ class Avatar(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField()
 
-class ValidationManager(models.Manager):
+class EmailValidationManager(models.Manager):
 
     def verify(self, key):
         try:
             verify = self.get(key=key)
             if not verify.is_expired():
-                if verify.get_type_display() == "password":
-                    return True
-                elif verify.get_type_display() == "validation":
-                    verify.user.email = verify.email
-                    verify.user.save()
-                    verify.delete()
-                    return True
-                else:
-                    return False
+                verify.user.email = verify.email
+                verify.user.save()
+                verify.delete()
             else:
                 verify.delete()
                 return False
@@ -120,42 +114,37 @@ class ValidationManager(models.Manager):
         except:
             return False
 
-    def add(self, user, type, email):
+    def add(self, user, email):
         """
         Add a new validation process entry
         """
         while True:
             key = User.objects.make_random_password(70)
             try:
-                Validation.objects.get(key=key)
-            except Validation.DoesNotExist:
+                EmailValidation.objects.get(key=key)
+            except EmailValidation.DoesNotExist:
                 self.key = key
                 break
 
-        template_body = "userprofile/email/%s.txt" % type
-        template_subject = "userprofile/email/%s_subject.txt" % type
+        template_body = "userprofile/email/validation.txt"
+        template_subject = "userprofile/email/validation_subject.txt"
         site_name, domain = Site.objects.get_current().name, Site.objects.get_current().domain
         body = loader.get_template(template_body).render(Context(locals()))
         subject = loader.get_template(template_subject).render(Context(locals())).strip()
         send_mail(subject=subject, message=body, from_email=None, recipient_list=[email])
         user = User.objects.get(username=str(user))
-        type_choices = { "validation": 1, "password": 2 }
-        self.filter(user=user, type=type_choices[type]).delete()
-        return self.create(user=user, key=key, type=type_choices[type], email=email)
+        self.filter(user=user).delete()
+        return self.create(user=user, key=key, email=email)
 
-class Validation(models.Model):
-    type = models.PositiveSmallIntegerField(choices=( (1, 'validation'), (2, 'password'),))
-    user = models.ForeignKey(User)
+class EmailValidation(models.Model):
+    user = models.ForeignKey(User, unique=True)
     email = models.EmailField(blank=True)
     key = models.CharField(max_length=70, unique=True, db_index=True)
     created = models.DateTimeField(auto_now_add=True)
-    objects = ValidationManager()
-
-    class Meta:
-        unique_together = ('type', 'user')
+    objects = EmailValidationManager()
 
     def __unicode__(self):
-        return _("Email validation process for %(user)s of type %(type)s") % { 'user': self.user, 'type': self.get_type_display() }
+        return _("Email validation process for %(user)s") % { 'user': self.user }
 
     def is_expired(self):
         return (datetime.datetime.today() - self.created).days > 0
@@ -164,9 +153,8 @@ class Validation(models.Model):
         """
         Resend validation email
         """
-        type = self.get_type_display()
-        template_body = "userprofile/email/%s.txt" % type
-        template_subject = "userprofile/email/%s_subject.txt" % type
+        template_body = "userprofile/email/validation.txt"
+        template_subject = "userprofile/email/validation_subject.txt"
         site_name, domain = Site.objects.get_current().name, Site.objects.get_current().domain
         key = self.key
         body = loader.get_template(template_body).render(Context(locals()))

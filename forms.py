@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from userprofile.models import Profile, GENDER_CHOICES
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
-from userprofile.models import Validation
+from userprofile.models import EmailValidation
 from django.core.files.uploadedfile import SimpleUploadedFile
 import mimetypes, urllib
 
@@ -101,9 +101,9 @@ class RegistrationForm(forms.Form):
             raise forms.ValidationError(_("That e-mail is already used."))
         except User.DoesNotExist:
             try:
-                Validation.objects.get(email=email)
+                EmailValidation.objects.get(email=email)
                 raise forms.ValidationError(_("That e-mail is already being confirmed."))
-            except Validation.DoesNotExist:
+            except EmailValidation.DoesNotExist:
                 return email
 
 class EmailValidationForm(forms.Form):
@@ -114,63 +114,7 @@ class EmailValidationForm(forms.Form):
         Verify that the email exists
         """
         email = self.cleaned_data.get("email")
-        if not (User.objects.filter(email=email) or Validation.objects.filter(email=email)):
+        if not (User.objects.filter(email=email) or EmailValidation.objects.filter(email=email)):
             return email
 
         raise forms.ValidationError(_("That e-mail is already used."))
-
-class ValidationForm(forms.Form):
-    email = forms.EmailField()
-
-    def clean_email(self):
-        """
-        Verify that the email or the user exists
-        """
-        email = self.cleaned_data.get("email")
-        try:
-            User.objects.get(email=email)
-        except:
-            raise forms.ValidationError(_("There's no user with that e-mail"))
-
-        return email
-
-class changePasswordKeyForm(forms.Form):
-    newpass1 = forms.CharField(min_length=6, widget=forms.PasswordInput)
-    newpass2 = forms.CharField(min_length=6, widget=forms.PasswordInput)
-
-    def clean(self):
-        """
-        Verify the equality of the two passwords
-        """
-
-        if self.cleaned_data.get("newpass1") and self.cleaned_data.get("newpass1") == self.cleaned_data.get("newpass2"):
-            return self.cleaned_data
-        else:
-            raise forms.ValidationError(_("The passwords inserted are different."))
-
-    def save(self, key):
-        "Saves the new password."
-        lostpassword = Validation.objects.get(key=key)
-        user = lostpassword.user
-        user.set_password(self.cleaned_data.get('newpass1'))
-        user.save()
-        lostpassword.delete()
-
-class changePasswordAuthForm(forms.Form):
-    newpass1 = forms.CharField( min_length = 6, widget = forms.PasswordInput )
-    newpass2 = forms.CharField( min_length = 6, widget = forms.PasswordInput )
-
-    def clean(self):
-        """
-        Verify the equality of the two passwords
-        """
-
-        if self.cleaned_data.get("newpass1") and self.cleaned_data.get("newpass1") == self.cleaned_data.get("newpass2"):
-            return self.cleaned_data
-        else:
-            raise forms.ValidationError(_("The passwords inserted are different."))
-
-    def save(self, user):
-        "Saves the new password."
-        user.set_password(self.cleaned_data.get('newpass1'))
-        user.save()
