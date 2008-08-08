@@ -276,10 +276,6 @@ def avatardelete(request, avatar_id=False):
     else:
         raise Http404()
 
-def json_error_response(error_message, *args, **kwargs):
-    return HttpResponse(simplejson.dumps(dict(success=False,
-                                              error_message=error_message), ensure_ascii=False))
-
 @login_required
 def email_validation_process(request, key):
     """
@@ -292,14 +288,13 @@ def email_validation_process(request, key):
 
     template = "userprofile/account/email_validation_done.html"
     data = {
-             'section': overview,
              'successful': successful,
            }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def email_validation(request):
     """
-    Change the e-mail page
+    E-mail Change form
     """
     if request.method == 'POST':
         form = EmailValidationForm(request.POST)
@@ -345,7 +340,8 @@ def email_validation_reset(request):
     """
     try:
         resend = EmailValidation.objects.get(user=request.user).resend()
+        response = "done"
     except EmailValidation.DoesNotExist:
-        resend = False
+        response = "failed"
 
-    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[resend and 'done' or 'failed']))
+    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[response]))

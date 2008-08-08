@@ -71,10 +71,12 @@ urlpatterns = patterns('',
 
     url(r'^email/validation/reset/(?P<action>done|failed)/$',
         direct_to_template, {'extra_context': {'section': 'overview'},
-        'template' : 'userprofile/account/email_validation_reset_done.html'},
+        'template' : 'userprofile/account/email_validation_reset_response.html'},
         name='email_validation_reset_done'),
 
     url(r'^password/reset/$', 'django.contrib.auth.views.password_reset',
+        {'template_name': 'userprofile/account/password_reset.html',
+         'email_template_name': 'userprofile/email/password_reset_email.txt' },
         name='password_reset'),
 
     url(r'^password/reset/done/$', 'django.contrib.auth.views.password_reset_done',
@@ -88,12 +90,12 @@ urlpatterns = patterns('',
         {'template_name': 'userprofile/account/password_change_done.html'},
         name='password_change_done'),
 
-    url(r'^password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+    url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
         'django.contrib.auth.views.password_reset_confirm',
         {'template_name': 'userprofile/account/password_reset_confirm.html'},
         name="password_reset_confirm"),
 
-    url(r'^password/reset/complete/$',
+    url(r'^reset/done/$',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'userprofile/account/password_reset_complete.html'},
         name="password_reset_complete"),

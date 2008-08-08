@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
+from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.template import loader, Context
@@ -28,8 +29,8 @@ class Profile(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now)
     url = models.URLField(blank=True, core=True)
     about = models.TextField(blank=True)
-    latitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
+    point = models.PointField(blank=True, null=True)
+    objects = models.GeoManager()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
     country = CountryField()
     location = models.CharField(max_length=255, blank=True)
@@ -102,6 +103,7 @@ class EmailValidationManager(models.Manager):
                 verify.user.email = verify.email
                 verify.user.save()
                 verify.delete()
+                return True
             else:
                 verify.delete()
                 return False
