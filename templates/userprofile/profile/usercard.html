@@ -1,8 +1,9 @@
 {% load i18n %}
+{% load avatars %}
 <div class="vcard span-6">
 	<div class="span-2">
 		<a href="{{ profile.get_absolute_url }}">
-			<img class="border" src="{{ profile.get_avatar64_url|default:"/site_media/images/default.64.png" }}" alt="{{ profile.user }}"/>
+			<img class="border" src="{% avatar 64 profile.user %}" alt="{{ profile.user }}"/>
 		</a>
 	</div>
 	<div class="span-5">

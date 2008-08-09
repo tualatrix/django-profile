@@ -26,16 +26,13 @@
 {% endblock %}
 
 {% block content %}
+	{% load avatars %}
 	<form action="" method="post">
 	<fieldset>
 		<legend>{% trans "Overview of your profile" %}</legend>
 		<div id="avatar" class="span-3 center">
 			<a href="{% url profile_edit_avatar %}">
-			{% if user.get_profile.avatar %}
-			<img class="border" src="{{ user.get_profile.get_avatar96_url }}" />
-			{% else %}
-			<img class="border" src="{{ MEDIA_URL }}images/default.96.png" />
-			{% endif %}
+				<img class="border" src="{% avatar 96 %}" />
 			</a>
 			<p><a href="{{ request.path_info }}edit/avatar/">{% if user.get_profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>

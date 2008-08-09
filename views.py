@@ -1,22 +1,24 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import ugettext as _
-from userprofile.forms import AvatarForm, AvatarCropForm, LocationForm, ProfileForm, RegistrationForm, EmailValidationForm
+from userprofile.forms import AvatarForm, AvatarCropForm, EmailValidationForm, \
+                              ProfileForm, RegistrationForm, LocationForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.contrib.auth.models import User
-from userprofile.models import Profile, EmailValidation
+from userprofile.models import Profile, EmailValidation, Avatar
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
 import urllib2
 import random
-import pickle
+import cPickle as pickle
+import base64
 import Image
-import ImageFilter
 import urllib
 import os
 
@@ -67,7 +69,7 @@ def public(request, username):
 
     template = "userprofile/profile/public.html"
     data = {
-             'section': 'makepublic',
+             'profile': profile,
              'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
     }
     return render_to_response(template, data, context_instance=RequestContext(request))
@@ -80,7 +82,8 @@ def makepublic(request):
         for item in profile.__dict__.keys():
             if request.POST.has_key("%s_public" % item):
                 public[item] = request.POST.get("%s_public" % item)
-        profile.save_public_file("%s.public" % profile.user, pickle.dumps(public))
+        profile.public = base64.encodestring(pickle.dumps(public, 2)).strip()
+        profile.save()
         return HttpResponseRedirect(reverse("profile_edit_public_done"))
 
     template = "userprofile/profile/makepublic.html"
@@ -92,11 +95,15 @@ def makepublic(request):
 
 @login_required
 def searchimages(request):
+    """
+    Web search for images Form
+    """
+
+    images = dict()
     if request.method=="POST" and request.POST.get('keyword'):
         keyword = request.POST.get('keyword')
         gd_client = gdata.photos.service.PhotosService()
         feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
-        images = dict()
         for entry in feed.entry:
             images[entry.media.thumbnail[0].url] = entry.content.src
 
@@ -180,17 +187,17 @@ def location(request):
 
 @login_required
 def delete(request):
-    user = User.objects.get(username=str(request.user))
     if request.method == "POST":
-        # Remove the profile
-        Profile.objects.filter(user=user).delete()
-        EmailValidation.objects.filter(user=user).delete()
+        # Remove the profile and all the information
+        Profile.objects.filter(user=request.user).delete()
+        EmailValidation.objects.filter(user=request.user).delete()
+        Avatar.objects.filter(user=request.user).delete()
 
         # Remove the e-mail of the account too
-        user.email = ''
-        user.first_name = ''
-        user.last_name = ''
-        user.save()
+        request.user.email = ''
+        request.user.first_name = ''
+        request.user.last_name = ''
+        request.user.save()
 
         return HttpResponseRedirect(reverse("profile_delete_done"))
 
@@ -211,16 +218,27 @@ def avatarchoose(request):
     else:
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
-            profile.save_avatartemp_file("%s_temp.jpg" % request.user.username, photo)
-            image = Image.open(profile.get_avatartemp_filename())
+            image = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
+            Avatar.objects.filter(user=request.user, valid=False).delete()
+            avatar = Avatar(user=request.user, image=image, valid=False)
+            avatar.image.save("%s.jpg" % request.user.username, image)
+            image = Image.open(avatar.image.path)
             image.thumbnail((480, 480), Image.ANTIALIAS)
-            image.save(profile.get_avatartemp_filename(), "JPEG")
-            profile.save()
+            image.save(avatar.image.path, "JPEG")
+            avatar.save()
             return HttpResponseRedirect('%scrop/' % request.path_info)
 
+            base, filename = os.path.split(avatar_path)
+            generic, extension = os.path.splitext(filename)
+
+    base, filename = os.path.split(settings.DEFAULT_AVATAR)
+    filename, extension = os.path.splitext(filename)
+    generic96 = "%s/%s.96%s" % (base, filename, extension)
+    generic96 = generic96.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
     template = "userprofile/avatar/choose.html"
     data = {
+             'DEFAULT_AVATAR96': generic96,
+             'WEBSEARCH': WEBSEARCH,
              'section': 'avatar',
              'form': form,
            }
@@ -231,36 +249,33 @@ def avatarcrop(request):
     """
     Avatar management
     """
-    profile = Profile.objects.get(user = request.user)
+    avatar = get_object_or_404(Avatar, user=request.user, valid=False)
     if not request.method == "POST":
         form = AvatarCropForm()
     else:
         form = AvatarCropForm(request.POST)
         if form.is_valid():
+            Avatar.objects.filter(user=request.user, valid=True).delete()
             top = int(form.cleaned_data.get('top'))
             left = int(form.cleaned_data.get('left'))
             right = int(form.cleaned_data.get('right'))
             bottom = int(form.cleaned_data.get('bottom'))
 
-            image = Image.open(profile.get_avatartemp_filename())
+            image = Image.open(avatar.image.path)
             box = [ left, top, right, bottom ]
             image = image.crop(box)
             if image.mode not in ('L', 'RGB'):
                 image = image.convert('RGB')
 
-            base, temp = os.path.split(profile.get_avatartemp_filename())
-            image.save(os.path.join(base, "%s.jpg" % profile.user.username))
-            profile.avatar = os.path.join(os.path.split(profile.avatartemp)[0], "%s.jpg" % profile.user.username)
-            for size in [ 96, 64, 32, 16 ]:
-                image.thumbnail((size, size), Image.ANTIALIAS)
-                image.save(os.path.join(base, "%s.%s.jpg" % (profile.user.username, size)))
-                setattr(profile, "avatar%s" % size, os.path.join(os.path.split(profile.avatartemp)[0], "%s.%s.jpg" % (profile.user.username, size)))
-            profile.save()
+            image.save(avatar.image.path)
+            avatar.valid = True
+            avatar.save()
             return HttpResponseRedirect(reverse("profile_avatar_crop_done"))
 
     template = "userprofile/avatar/crop.html"
     data = {
              'section': 'avatar',
+             'avatar': avatar,
              'form': form,
            }
     return render_to_response(template, data, context_instance=RequestContext(request))
@@ -268,15 +283,11 @@ def avatarcrop(request):
 @login_required
 def avatardelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        profile = Profile.objects.get(user = request.user)
-        for key in [ '', 'temp', '16', '32', '64', '96' ]:
-            try:
-                os.remove("%s" % getattr(profile, "get_avatar%s_filename" % key)())
-            except:
-                pass
-            setattr(profile, "avatar%s" % key, '')
-        profile.save()
-        return HttpResponse(simplejson.dumps({'success': True}))
+        try:
+            Avatar.objects.get(user=request.user, valid=True).delete()
+            return HttpResponse(simplejson.dumps({'success': True}))
+        except:
+            return HttpResponse(simplejson.dumps({'success': False}))
     else:
         raise Http404()
 

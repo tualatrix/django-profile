@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load avatars %}
 
-{% block title %}{{ user.get_profile.user }}'s public profile{% endblock %}
+{% block title %}{{ profile.user }}'s public profile{% endblock %}
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-	{% if user.get_profile.latitude and user.get_profile.longitude and user.get_profile.visible.location %}
+	{% if profile.latitude and profile.longitude and profile.visible.location %}
 	<script type="text/javascript" src="http://www.google.com/jsapi?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 	<script type="text/javascript">google.load("maps", "2");</script>
 	<script type="text/javascript">
@@ -13,8 +14,8 @@
 		if (google.maps.BrowserIsCompatible()) {
 			var map = new google.maps.Map2(document.getElementById("map"));
       map.disableDragging();
-			map.setCenter(new google.maps.LatLng({{ user.get_profile.latitude }}, {{ user.get_profile.longitude }}), 4);
-			var marker = new google.maps.Marker(new google.maps.LatLng({{ user.get_profile.latitude }}, {{ user.get_profile.longitude }}), {clickable: false });
+			map.setCenter(new google.maps.LatLng({{ profile.latitude }}, {{ profile.longitude }}), 4);
+			var marker = new google.maps.Marker(new google.maps.LatLng({{ profile.latitude }}, {{ profile.longitude }}), {clickable: false });
 			map.addOverlay(marker);
 		}
 		});
@@ -23,42 +24,37 @@
 {% endblock %}
 
 {% block content %}
-	<h2>{% blocktrans with user.get_profile.user as user %}Public profile of {{ user }}{% endblocktrans %}</h2>
+	<h2>{% blocktrans with profile.user as user %}Public profile of {{ user }}{% endblocktrans %}</h2>
 
 	<div class="vcard">
 		<div class="span-10">
-		{% if user.get_profile.avatar %}
-			<img class="border top" src="{{ user.get_profile.get_avatar96_url }}" />
-		{% else %}
-			<img class="photo" src="{{ MEDIA_URL }}images/default.96.png" />
+			<img class="border top" src="{% avatar 96 profile.user %}" />
+			<p>{% trans "Username" %}: <strong>{{ profile.user }}</strong></p>
+
+		{% if profile.firstname and profile.visible.firstname %}
+		<p>{% trans "Name" %}: <strong>{{ profile.firstname }} {{ profile.surname }}</strong></p>
 		{% endif %}
 
-		<p>{% trans "Username" %}: <strong>{{ user.get_profile.user }}</strong></p>
-
-		{% if user.get_profile.firstname and user.get_profile.visible.firstname %}
-		<p>{% trans "Name" %}: <strong>{{ user.get_profile.firstname }} {{ user.get_profile.surname }}</strong></p>
+		{% if profile.url and profile.visible.url %}
+			<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>
 		{% endif %}
 
-		{% if user.get_profile.url and user.get_profile.visible.url %}
-			<li>{% trans "Url" %}: <a href="{{ user.get_profile.url }}">{{ user.get_profile.url }}</a></li>
-		{% endif %}
-
-		{% if user.get_profile.about and user.get_profile.visible.about %}
-			<li>{% trans "About" %}: {{ user.get_profile.about }}</li>
+		{% if profile.about and profile.visible.about %}
+			<li>{% trans "About" %}: {{ profile.about }}</li>
 		{% endif %}
 		</ul>
 		</div>
 		<div class="span-10 last">
-		{% if user.get_profile.gender and user.get_profile.visible.gender %}
-			<li>{% trans "Gender" %}: <img src="{{ user.get_profile.get_genderimage_url }}" /></li>
+		{% if profile.gender and profile.visible.gender %}
+			<li>{% trans "Gender" %}: <img src="{{ profile.get_genderimage_url }}" /></li>
 		{% endif %}
 
-		{% if user.get_profile.country and user.get_profile.visible.country_id %}
-			<li>{% trans "Country" %}: {{ user.get_profile.country }}</li>
+		{% if profile.country and profile.visible.country_id %}
+			<li>{% trans "Country" %}: {{ profile.country }}</li>
 		{% endif %}
 
-		{% if user.get_profile.location and user.get_profile.visible.location %}
-			<li>{% trans "Location" %}: {{ user.get_profile.location }}</li>
+		{% if profile.location and profile.visible.location %}
+			<li>{% trans "Location" %}: {{ profile.location }}</li>
 		{% endif %}
 		</div>
 	</div>

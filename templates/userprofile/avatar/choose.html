@@ -11,7 +11,7 @@
 		$("a.delavatar").click(function() {
 			$.getJSON($(this).attr("href"), function(data) {
 				if (data.success) {
-					$("img#avatarimg").attr("src", "{{ MEDIA_URL }}images/default.png");
+					$("img#avatarimg").attr("src", "{{ DEFAULT_AVATAR96 }}");
 				}
 			});
 			return false;
@@ -46,7 +46,7 @@
 				<input type="submit" value="{% trans 'Done' %}" />
 				</p>
 			</li>
-			{% if websearch %}
+			{% if WEBSEARCH %}
 			<li>
 				<a class="large" href="{{ request.path_info }}search/">{% trans "Search for an image on Picasa Web" %}</a>
 			</li>
@@ -62,12 +62,9 @@
 		<p>{% trans "You have several options to select the image you want as avatar on your profile" %}.</p>
   </div>
 
+	{% load avatars %}
   <div class="center">
-  {% if profile.avatar %}
-    <img class="border" id="avatarimg" src="{{ profile.get_avatar96_url }}" />
+		<img class="border" id="avatarimg" src="{% avatar 96 %}" />
     <p style="text-align: center;"><a href="{{ request.path_info }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
-  {% else %}
-    <img id="avatarimg" src="{{ MEDIA_URL }}images/default.96.png" /><br />
-  {% endif %}
 	</div>
 {% endblock %}

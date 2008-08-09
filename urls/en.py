@@ -62,8 +62,8 @@ urlpatterns = patterns('',
     url(r'^email/validation/$', email_validation, name='email_validation'),
 
     url(r'^email/validation/processed/$', direct_to_template,
-         'template': 'userprofile/account/email_validation_processed.html'},
-         name='email_validation_processed'),
+        {'template': 'userprofile/account/email_validation_processed.html'},
+        name='email_validation_processed'),
 
     url(r'^email/validation/(?P<key>.{70})/$', email_validation_process,
         name='email_validation_process'),
@@ -73,7 +73,7 @@ urlpatterns = patterns('',
 
     url(r'^email/validation/reset/(?P<action>done|failed)/$',
         direct_to_template,
-        'template' : 'userprofile/account/email_validation_reset_response.html'},
+        {'template' : 'userprofile/account/email_validation_reset_response.html'},
         name='email_validation_reset_response'),
 
     url(r'^password/reset/$', 'django.contrib.auth.views.password_reset',
