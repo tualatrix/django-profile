@@ -1,12 +1,11 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
-from django.contrib.auth import views
 from userprofile.views import *
 from django.conf import settings
 
 urlpatterns = patterns('',
     # Private profile
-    (r'^perfil/$', overview, name='profile_overview'),
+    url(r'^perfil/$', overview, name='profile_overview'),
 
     url(r'^perfil/de/(?P<username>.+)/$', public, name='profile_public'),
 
@@ -24,9 +23,9 @@ urlpatterns = patterns('',
         'template': 'userprofile/profile/personal_done.html'},
         name='profile_edit_personal_done'),
 
-    url(r'^perfil/edit/publico/$', makepublic, name='profile_edit_public'),
+    url(r'^perfil/editar/publico/$', makepublic, name='profile_edit_public'),
 
-    url(r'^perfil/edit/publico/listo/$', direct_to_template,
+    url(r'^perfil/editar/publico/listo/$', direct_to_template,
         {'extra_context': {'section': 'public'},
         'template': 'userprofile/profile/makepublic_done.html'},
         name='profile_edit_public_done'),
@@ -43,28 +42,23 @@ urlpatterns = patterns('',
         name='profile_geocountry_info'),
 
     # Avatars
-    url(r'^perfil/editar/avatar/eliminar/$', avatardelete, name='profile_avatar_delete'),
+    url(r'^perfil/editar/avatar/eliminar/$', avatardelete,
+        name='profile_avatar_delete'),
 
     url(r'^perfil/editar/avatar/$', avatarchoose, name='profile_edit_avatar'),
 
-    url(r'^perfil/editar/avatar/buscar/$', searchimages, name='profile_avatar_search'),
+    url(r'^perfil/editar/avatar/buscar/$', searchimages,
+        name='profile_avatar_search'),
 
-    url(r'^perfil/editar/avatar/recortar/$', avatarcrop, name='profile_avatar_crop'),
+    url(r'^perfil/editar/avatar/recortar/$', avatarcrop,
+        name='profile_avatar_crop'),
 
-    url(r'^perfil/editar/avatar/recortar/listo/$', direct_to_template,
+    url(r'^perfil/edit/avatar/recortar/listo/$', direct_to_template,
         { 'extra_context': {'section': 'avatar'},
         'template': 'userprofile/avatar/done.html'},
         name='profile_avatar_crop_done'),
 
     # Account utilities
-    url(r'^password/reestablecer/$', 'django.contrib.auth.views.password_reset',
-        {'template_name': 'userprofile/account/password_reset.html'},
-        name='password_reset'),
-
-    url(r'^password/reestablecer/hecho/$', 'django.contrib.auth.views.password_reset_done',
-        {'template_name': 'userprofile/account/password_reset_done.html'},
-        name='password_reset_done'),
-
     url(r'^email/validar/$', email_validation, name='email_validation'),
 
     url(r'^email/validar/procesado/$', direct_to_template,
@@ -79,20 +73,39 @@ urlpatterns = patterns('',
         name='email_validation_reset'),
 
     url(r'^email/validar/reestablecer/(?P<action>listo|fallo)/$',
-        direct_to_template, {'extra_context': {'section': 'overview'},
-        'template' : 'userprofile/account/email_validation_reset_done.html'},
-        name='email_validation_reset_done'),
+        direct_to_template,
+        'template' : 'userprofile/account/email_validation_reset_response.html'},
+        name='email_validation_reset_response'),
 
-    url(r'^password/cambiar/$', change_password_authenticated, 
+    url(r'^password/reestablecer/$', 
+        'django.contrib.auth.views.password_reset',
+        {'template_name': 'userprofile/account/password_reset.html',
+         'email_template_name': 'userprofile/email/password_reset_email.txt' },
+        name='password_reset'),
+
+    url(r'^password/reestablecer/listo/$',
+        'django.contrib.auth.views.password_reset_done',
+        {'template_name': 'userprofile/account/password_reset_done.html'},
+        name='password_reset_done'),
+
+    url(r'^password/cambiar/$', 'django.contrib.auth.views.password_change',
+        {'template_name': 'userprofile/account/password_change.html'},
         name='password_change'),
 
-    url(r'^password/cambiar/listo/$', direct_to_template,
-        {'extra_context': {'section': 'overview'},
-         'template': 'userprofile/account/password_change_done.html'},
+    url(r'^password/cambiar/listo/$',
+        'django.contrib.auth.views.password_change_done',
+        {'template_name': 'userprofile/account/password_change_done.html'},
         name='password_change_done'),
 
-    url(r'^password/cambiar/(?P<key>.{70})/$', change_password_with_key,
-        name='password_change_with_key'),
+    url(r'^reestablecer/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        'django.contrib.auth.views.password_reset_confirm',
+        {'template_name': 'userprofile/account/password_reset_confirm.html'},
+        name="password_reset_confirm"),
+
+    url(r'^reestablecer/listo/$',
+        'django.contrib.auth.views.password_reset_complete',
+        {'template_name': 'userprofile/account/password_reset_complete.html'},
+        name="password_reset_complete"),
 
     url(r'^entrar/$', 'django.contrib.auth.views.login',
         {'template_name': 'userprofile/account/login.html'},
@@ -102,10 +115,7 @@ urlpatterns = patterns('',
         {'template_name': 'userprofile/account/logout.html'},
         name='logout'),
 
-
-
     # Registration
-
     url(r'^registro/$', register, name='signup'),
 
     url(r'^registro/validar/$', direct_to_template,

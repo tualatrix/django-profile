@@ -12,9 +12,13 @@ from userprofile.models import Profile, EmailValidation
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
-import urllib2, random, pickle
-import Image, ImageFilter
-import urllib, os
+import urllib2
+import random
+import pickle
+import Image
+import ImageFilter
+import urllib
+import os
 
 if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
     import gdata.service
@@ -344,4 +348,5 @@ def email_validation_reset(request):
     except EmailValidation.DoesNotExist:
         response = "failed"
 
-    return HttpResponseRedirect(reverse("email_validation_reset_done", args=[response]))
+    return HttpResponseRedirect(reverse("email_validation_reset_response", 
+            args=[response]))

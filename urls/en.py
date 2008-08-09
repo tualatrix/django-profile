@@ -42,13 +42,16 @@ urlpatterns = patterns('',
         name='profile_geocountry_info'),
 
     # Avatars
-    url(r'^profile/edit/avatar/delete/$', avatardelete, name='profile_avatar_delete'),
+    url(r'^profile/edit/avatar/delete/$', avatardelete,
+        name='profile_avatar_delete'),
 
     url(r'^profile/edit/avatar/$', avatarchoose, name='profile_edit_avatar'),
 
-    url(r'^profile/edit/avatar/search/$', searchimages, name='profile_avatar_search'),
+    url(r'^profile/edit/avatar/search/$', searchimages,
+        name='profile_avatar_search'),
 
-    url(r'^profile/edit/avatar/crop/$', avatarcrop, name='profile_avatar_crop'),
+    url(r'^profile/edit/avatar/crop/$', avatarcrop,
+        name='profile_avatar_crop'),
 
     url(r'^profile/edit/avatar/crop/done/$', direct_to_template,
         { 'extra_context': {'section': 'avatar'},
@@ -59,7 +62,6 @@ urlpatterns = patterns('',
     url(r'^email/validation/$', email_validation, name='email_validation'),
 
     url(r'^email/validation/processed/$', direct_to_template,
-        {'extra_context': {'section': 'overview'},
          'template': 'userprofile/account/email_validation_processed.html'},
          name='email_validation_processed'),
 
@@ -70,23 +72,26 @@ urlpatterns = patterns('',
         name='email_validation_reset'),
 
     url(r'^email/validation/reset/(?P<action>done|failed)/$',
-        direct_to_template, {'extra_context': {'section': 'overview'},
+        direct_to_template,
         'template' : 'userprofile/account/email_validation_reset_response.html'},
-        name='email_validation_reset_done'),
+        name='email_validation_reset_response'),
 
     url(r'^password/reset/$', 'django.contrib.auth.views.password_reset',
         {'template_name': 'userprofile/account/password_reset.html',
          'email_template_name': 'userprofile/email/password_reset_email.txt' },
         name='password_reset'),
 
-    url(r'^password/reset/done/$', 'django.contrib.auth.views.password_reset_done',
+    url(r'^password/reset/done/$',
+        'django.contrib.auth.views.password_reset_done',
         {'template_name': 'userprofile/account/password_reset_done.html'},
         name='password_reset_done'),
 
     url(r'^password/change/$', 'django.contrib.auth.views.password_change',
         {'template_name': 'userprofile/account/password_change.html'},
         name='password_change'),
-    url(r'^password/change/done/$', 'django.contrib.auth.views.password_change_done',
+
+    url(r'^password/change/done/$', 
+        'django.contrib.auth.views.password_change_done',
         {'template_name': 'userprofile/account/password_change_done.html'},
         name='password_change_done'),
 
@@ -108,9 +113,7 @@ urlpatterns = patterns('',
         {'template_name': 'userprofile/account/logout.html'},
         name='logout'),
 
-
     # Registration
-
     url(r'^register/$', register, name='signup'),
 
     url(r'^register/validate/$', direct_to_template,
