@@ -23,13 +23,6 @@ urlpatterns = patterns('',
         'template': 'userprofile/profile/personal_done.html'},
         name='profile_edit_personal_done'),
 
-    url(r'^perfil/editar/publico/$', makepublic, name='profile_edit_public'),
-
-    url(r'^perfil/editar/publico/listo/$', direct_to_template,
-        {'extra_context': {'section': 'public'},
-        'template': 'userprofile/profile/makepublic_done.html'},
-        name='profile_edit_public_done'),
-
     url(r'^perfil/eliminar/$', delete, name='profile_delete'),
 
     url(r'^perfil/eliminar/listo/$', direct_to_template,

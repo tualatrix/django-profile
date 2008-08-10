@@ -4,7 +4,6 @@ from django.template import Library, Node, Template, TemplateSyntaxError, \
 from django.utils.translation import ugettext as _
 from userprofile.models import Avatar, AVATAR_SIZES
 from django.contrib.auth.models import User
-from django.core.files import File
 from django.conf import settings
 import Image
 # from PythonMagick import Image
@@ -47,7 +46,7 @@ class ResizedThumbnailNode(Node):
             base, filename = os.path.split(avatar_path)
             generic, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (generic, self.size, extension))
-            url = avatar_path.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
+            url = filename.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
 
         if not os.path.isfile(filename):
             image = Image.open(avatar_path)

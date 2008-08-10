@@ -34,7 +34,7 @@
 			<a href="{% url profile_edit_avatar %}">
 				<img class="border" src="{% avatar 96 %}" />
 			</a>
-			<p><a href="{{ request.path_info }}edit/avatar/">{% if user.get_profile.avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
+			<p><a href="{{ request.path_info }}edit/avatar/">{% if user.get_profile.has_avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>
 	
 		<div class="span-9 last">

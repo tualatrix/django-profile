@@ -9,16 +9,10 @@
 {% endblock %}
 
 {% block extrajs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/ui.datepicker.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.profile.js"></script>
 <script type="text/javascript">
-	function updateInline(dateStr) {
-		var arrdate = dateStr.split("/");
-		$("#id_birthdate").val(arrdate[2] + "-" + arrdate[0] + "-" + arrdate[1]);
-	}
 	$(function() {
 		$("input[type='text']").addClass("text");
-		$("#id_firstname").focus();
+		$("form input")[0].focus();
 	});
 </script>
 {% endblock %}
@@ -28,36 +22,17 @@
 {% endblock %}
 
 {% block content %}
-	<form action="{{ request.path_info }}" method="post" enctype="multipart/form-data">
+	<form class="personal" action="{{ request.path_info }}" method="post" enctype="multipart/form-data">
 	<fieldset>
 		<legend>{% trans "Edit your personal information" %}</legend>
-	
-		<label for="id_firstname">{% trans "First Name:" %}</label>
-		<p>{{ form.firstname }}</p>
-		<label for="id_surname">{% trans "Surname:" %}</label>
-		<p>{{ form.surname }}</p>
-		<label for="id_gender">{% trans "Gender:" %}</label>
-		<p style="overflow: hidden;">
-			<a class="male" href="{{ request.path_info }}">{% trans "Male" %}</a>
-			<a class="female" href="{{ request.path_info }}">{% trans "Female" %}</a>
-		</p>
-	
-		<label for="id_birthdate">{% trans "Birth date:" %}</label>
-		<div class="calendar"></div>
-		<label for="id_url">{% trans "Url:" %}</label>
-		<p>{{ form.url }}</p>
-		<label for="id_about">{% trans "About:" %}</label>
-		<p>{{ form.about }}</p>
-		<div class="hide">{{ form.birthdate }}{{ form.gender }}</div>
-	</fieldset>
-	<input type="submit" value="{% trans 'Save' %}" />
+		{{ form.as_p }}
 	</form>
 {% endblock %}
 
 {% block content-related %}
   <div class="box">
     <h3>{% trans "Personal information" %}</h3>
-    <p>{% trans "Insert some information about you. Once inserted, you can make it public going to the" %} <a href="{% url profile_edit_public %}">{% trans "public information page" %}</a>.</p>
+    <p>{% trans "Insert some information about you" %}.</p>
   </div>
 {% endblock %}
 

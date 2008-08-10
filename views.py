@@ -4,16 +4,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import ugettext as _
 from userprofile.forms import AvatarForm, AvatarCropForm, EmailValidationForm, \
-                              ProfileForm, RegistrationForm, LocationForm
+                              ProfileForm, RegistrationForm, LocationForm, \
+                              PublicFieldsForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
+from django.db import models
 from django.contrib.auth.models import User
-from userprofile.models import Profile, EmailValidation, Avatar
+from userprofile.models import EmailValidation, Avatar
 from django.template import RequestContext
 from django.core.validators import email_re
 from django.conf import settings
+from xml.dom import minidom
 import urllib2
 import random
 import cPickle as pickle
@@ -21,6 +25,14 @@ import base64
 import Image
 import urllib
 import os
+
+if not settings.AUTH_PROFILE_MODULE:
+    raise SiteProfileNotAvailable
+try:
+    app_label, model_name = settings.AUTH_PROFILE_MODULE.split('.')
+    Profile = models.get_model(app_label, model_name)
+except (ImportError, ImproperlyConfigured):
+    raise SiteProfileNotAvailable
 
 if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
     import gdata.service
@@ -32,22 +44,8 @@ WEBSEARCH = hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH or None
 def get_profiles():
     return Profile.objects.order_by("-date")
 
-def getip_geodata(request):
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        try:
-            from django.contrib.gis.utils.geoip import GeoIP
-            g = GeoIP()
-            info = g.city(request.META.get("REMOTE_ADDR"))
-            print info
-            country = info.get("country_name")
-            region = info.get("city")
-            return HttpResponse(simplejson.dumps({'success': True, 'country': country, 'region': region}))
-        except:
-            return HttpResponse(simplejson.dumps({'success': Failed}))
-
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        from xml.dom import minidom
         url = "http://ws.geonames.org/countrySubdivision?lat=%s&lng=%s" % (lat, lng)
         dom = minidom.parse(urllib.urlopen(url))
         country = dom.getElementsByTagName('countryCode')
@@ -72,25 +70,6 @@ def public(request, username):
              'profile': profile,
              'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
     }
-    return render_to_response(template, data, context_instance=RequestContext(request))
-
-@login_required
-def makepublic(request):
-    profile, created = Profile.objects.get_or_create(user = request.user)
-    if request.method == "POST":
-        public = dict()
-        for item in profile.__dict__.keys():
-            if request.POST.has_key("%s_public" % item):
-                public[item] = request.POST.get("%s_public" % item)
-        profile.public = base64.encodestring(pickle.dumps(public, 2)).strip()
-        profile.save()
-        return HttpResponseRedirect(reverse("profile_edit_public_done"))
-
-    template = "userprofile/profile/makepublic.html"
-    data = {
-             'section': 'makepublic',
-             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-           }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -219,7 +198,6 @@ def avatarchoose(request):
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
-            Avatar.objects.filter(user=request.user, valid=False).delete()
             avatar = Avatar(user=request.user, image=image, valid=False)
             avatar.image.save("%s.jpg" % request.user.username, image)
             image = Image.open(avatar.image.path)
@@ -255,7 +233,6 @@ def avatarcrop(request):
     else:
         form = AvatarCropForm(request.POST)
         if form.is_valid():
-            Avatar.objects.filter(user=request.user, valid=True).delete()
             top = int(form.cleaned_data.get('top'))
             left = int(form.cleaned_data.get('left'))
             right = int(form.cleaned_data.get('right'))

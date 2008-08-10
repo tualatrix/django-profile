@@ -1,15 +1,25 @@
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
-from userprofile.models import Profile, GENDER_CHOICES
+from django.core.exceptions import ImproperlyConfigured
+from django.db import models
 from django.utils.translation import ugettext as _
+from django.conf import settings
 from django.contrib.auth.models import User
 from userprofile.models import EmailValidation
 from django.core.files.uploadedfile import SimpleUploadedFile
 import mimetypes, urllib
 
+if not settings.AUTH_PROFILE_MODULE:
+    raise SiteProfileNotAvailable
+try:
+    app_label, model_name = settings.AUTH_PROFILE_MODULE.split('.')
+    Profile = models.get_model(app_label, model_name)
+except (ImportError, ImproperlyConfigured):
+    raise SiteProfileNotAvailable
+
 class LocationForm(forms.ModelForm):
     """
-    Profile Form. Composed by all the Profile model fields.
+    Profile location form
     """
 
     class Meta:
@@ -22,7 +32,16 @@ class ProfileForm(forms.ModelForm):
     """
     class Meta:
         model = Profile
-        fields = ('firstname', 'surname', 'birthdate', 'gender', 'url', 'about')
+        exclude = ('date', 'location', 'latitude', 'longitude', 'country',
+                   'user', 'public')
+
+class PublicFieldsForm(forms.ModelForm):
+    """
+    Public Fields of the Profile Form. Composed by all the Profile model fields.
+    """
+    class Meta:
+        model = Profile
+        exclude = ('date', 'user', 'public')
 
 class AvatarForm(forms.Form):
     """

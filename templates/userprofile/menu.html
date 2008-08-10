@@ -6,7 +6,6 @@
 		<li{% ifequal section "personal" %} class="active"{% endifequal %}><a href="{% url profile_edit_personal %}">{% trans "Personal information" %}</a></li>
 		<li{% ifequal section "avatar" %} class="active"{% endifequal %}><a href="{% url profile_edit_avatar %}">{% trans "Avatar" %}</a></li>
 		<li{% ifequal section "location" %} class="active"{% endifequal %}><a href="{% url profile_edit_location %}">{% trans "Location" %}</a></li>
-		<li{% ifequal section "makepublic" %} class="active"{% endifequal %}><a href="{% url profile_edit_public %}">{% trans "Public info" %}</a></li>
 		<li{% ifequal section "delete" %} class="active"{% endifequal %}><a href="{% url profile_delete %}">{% trans "Remove profile" %}</a></li>
 	</ul>
 	<hr class="space" />

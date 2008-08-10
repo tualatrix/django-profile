@@ -6,7 +6,7 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-	{% if profile.latitude and profile.longitude and profile.visible.location %}
+	{% if profile.latitude and profile.longitude %}
 	<script type="text/javascript" src="http://www.google.com/jsapi?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 	<script type="text/javascript">google.load("maps", "2");</script>
 	<script type="text/javascript">
@@ -28,35 +28,21 @@
 
 	<div class="vcard">
 		<div class="span-10">
-			<img class="border top" src="{% avatar 96 profile.user %}" />
-			<p>{% trans "Username" %}: <strong>{{ profile.user }}</strong></p>
-
-		{% if profile.firstname and profile.visible.firstname %}
-		<p>{% trans "Name" %}: <strong>{{ profile.firstname }} {{ profile.surname }}</strong></p>
-		{% endif %}
-
-		{% if profile.url and profile.visible.url %}
-			<li>{% trans "Url" %}: <a href="{{ profile.url }}">{{ profile.url }}</a></li>
-		{% endif %}
-
-		{% if profile.about and profile.visible.about %}
-			<li>{% trans "About" %}: {{ profile.about }}</li>
-		{% endif %}
-		</ul>
+			<img class="border top" alt="{{ profile.user }}" src="{% avatar 96 profile.user %}" />
+			<ul>
+				<li>{% trans "Username" %}: <strong>{{ profile.user }}</strong></li>
+				{% if profile.country %}
+				<li>{% trans "Country" %}: <strong>{{ profile.get_country_display }}</strong></li>
+				{% endif %}
+				{% if profile.location %}
+				<li>{% trans "Location" %}: <strong>{{ profile.location }}</strong></li>
+				{% endif %}
+			</ul>
 		</div>
-		<div class="span-10 last">
-		{% if profile.gender and profile.visible.gender %}
-			<li>{% trans "Gender" %}: <img src="{{ profile.get_genderimage_url }}" /></li>
-		{% endif %}
-
-		{% if profile.country and profile.visible.country_id %}
-			<li>{% trans "Country" %}: {{ profile.country }}</li>
-		{% endif %}
-
-		{% if profile.location and profile.visible.location %}
-			<li>{% trans "Location" %}: {{ profile.location }}</li>
-		{% endif %}
+		{% if profile.latitude and profile.longitude %}
+		<div class="span-10">
+			<div id="map"></div>
 		</div>
+		{% endif %}
 	</div>
-
 {% endblock %}

@@ -12,6 +12,7 @@
 			$.getJSON($(this).attr("href"), function(data) {
 				if (data.success) {
 					$("img#avatarimg").attr("src", "{{ DEFAULT_AVATAR96 }}");
+					$("p#avatardelete").remove();
 				}
 			});
 			return false;
@@ -65,6 +66,6 @@
 	{% load avatars %}
   <div class="center">
 		<img class="border" id="avatarimg" src="{% avatar 96 %}" />
-    <p style="text-align: center;"><a href="{{ request.path_info }}delete/" class="delavatar">{% trans "Delete" %}</a></p>
+    {% if user.get_profile.has_avatar %}<p id="avatardelete" style="text-align: center;"><a href="{{ request.path_info }}delete/" class="delavatar">{% trans "Delete" %}</a></p>{% endif %}
 	</div>
 {% endblock %}
