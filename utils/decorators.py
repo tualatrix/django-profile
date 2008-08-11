@@ -1,3 +1,6 @@
+# Obtained from: http://www.djangosnippets.org/snippets/133/
+# Author: http://www.djangosnippets.org/users/SmileyChris/
+
 from django.template import loader, Context, RequestContext, TemplateSyntaxError
 from django.http import HttpResponse
 
