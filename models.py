@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from django.template import loader, Context
+from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from userprofile.countries import CountryField
@@ -38,7 +39,7 @@ class BaseProfile(models.Model):
         return _("%s's profile") % self.user
 
     def get_absolute_url(self):
-        return "%sfor/%s/" % (settings.LOGIN_REDIRECT_URL, self.user)
+        return reverse("profile_public", args=[self.user])
 
 
 class Avatar(models.Model):
