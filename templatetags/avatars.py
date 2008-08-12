@@ -32,9 +32,9 @@ class ResizedThumbnailNode(Node):
         if not self.size in AVATAR_SIZES:
             return ''
 
-        self.user = self.user.resolve(context)
         try:
-            avatar = Avatar.objects.get(user=self.user, valid=True).image
+            user = self.user.resolve(context)
+            avatar = Avatar.objects.get(user=user, valid=True).image
             avatar_path = avatar.path
             base, filename = os.path.split(avatar_path)
             name, extension = os.path.splitext(filename)
