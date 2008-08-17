@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # Private profile
     url(r'^profile/$', overview, name='profile_overview'),
 
-    url(r'^profile/for/(?P<username>.+)/$', public, name='profile_public'),
+    url(r'^profile/(?P<username>.+)/$', public, name='profile_public'),
 
     url(r'^profile/edit/location/$', location, name='profile_edit_location'),
 

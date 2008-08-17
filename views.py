@@ -256,7 +256,6 @@ def avatardelete(request, avatar_id=False):
     else:
         raise Http404()
 
-@login_required
 def email_validation_process(request, key):
     """
     Verify key and change email
