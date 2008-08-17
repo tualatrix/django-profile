@@ -11,7 +11,7 @@
 		$("a.delavatar").click(function() {
 			$.getJSON($(this).attr("href"), function(data) {
 				if (data.success) {
-					$("img#avatarimg").attr("src", "{{ DEFAULT_AVATAR96 }}");
+					$("img#avatarimg").attr("src", "{{ generic96 }}");
 					$("p#avatardelete").remove();
 				}
 			});
@@ -47,7 +47,7 @@
 				<input type="submit" value="{% trans 'Done' %}" />
 				</p>
 			</li>
-			{% if WEBSEARCH %}
+			{% if AVATAR_WEBSEARCH %}
 			<li>
 				<a class="large" href="{{ request.path_info }}search/">{% trans "Search for an image on Picasa Web" %}</a>
 			</li>

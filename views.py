@@ -34,12 +34,21 @@ try:
 except (ImportError, ImproperlyConfigured):
     raise SiteProfileNotAvailable
 
-if hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH:
+# Required attribute
+try:
+    DEFAULT_AVATAR = settings.DEFAULT_AVATAR
+except:
+    raise AttributeError(_("DEFAULT_AVATAR setting not defined."))
+
+# Optional attributes
+GOOGLE_MAPS_API_KEY = hasattr(settings, "GOOGLE_MAPS_API_KEY") and \
+                      settings.GOOGLE_MAPS_API_KEY or None
+AVATAR_WEBSEARCH = hasattr(settings, "AVATAR_WEBSEARCH") and \
+                   settings.AVATAR_WEBSEARCH or None
+
+if AVATAR_WEBSEARCH:
     import gdata.service
     import gdata.photos.service
-
-GOOGLE_MAPS_API_KEY = hasattr(settings, "GOOGLE_MAPS_API_KEY") and settings.GOOGLE_MAPS_API_KEY or None
-WEBSEARCH = hasattr(settings, "WEBSEARCH") and settings.WEBSEARCH or None
 
 def get_profiles():
     return Profile.objects.order_by("-date")
@@ -209,17 +218,18 @@ def avatarchoose(request):
             base, filename = os.path.split(avatar_path)
             generic, extension = os.path.splitext(filename)
 
-    base, filename = os.path.split(settings.DEFAULT_AVATAR)
-    filename, extension = os.path.splitext(filename)
-    generic96 = "%s/%s.96%s" % (base, filename, extension)
-    generic96 = generic96.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
+    if DEFAULT_AVATAR:
+        base, filename = os.path.split(DEFAULT_AVATAR)
+        filename, extension = os.path.splitext(filename)
+        generic96 = "%s/%s.96%s" % (base, filename, extension)
+        generic96 = generic96.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
+    else:
+        generic96 = ""
+
     template = "userprofile/avatar/choose.html"
-    data = {
-             'DEFAULT_AVATAR96': generic96,
-             'WEBSEARCH': WEBSEARCH,
-             'section': 'avatar',
-             'form': form,
-           }
+    data = { 'generic96': generic96,
+             'AVATAR_WEBSEARCH': AVATAR_WEBSEARCH, 'section': 'avatar',
+             'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required

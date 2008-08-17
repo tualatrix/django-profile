@@ -48,6 +48,15 @@
 				</span>
 			</p>
 			<p>
+			<label for="location">{% trans "Country" %}:</label>
+			{% if user.get_profile.country %}
+				{{ user.get_profile.get_country_display }}
+			{% else %}
+				<span class="quiet red">{% trans "Not set" %}</span>
+			{% endif %}
+			</p>
+			{% if GOOGLE_MAPS_API_KEY %}
+			<p>
 			<label for="location">{% trans "Location" %}:</label>
 			{% if user.get_profile.location %}
 				{{ user.get_profile.location }}
@@ -55,6 +64,7 @@
 				<span class="quiet red">{% trans "Not set" %}</span>
 			{% endif %}
 			</p>
+			{% endif %}
 		</div>
 
 		<hr class="space" />
