@@ -79,10 +79,7 @@ def public(request, username):
         raise Http404
 
     template = "userprofile/profile/public.html"
-    data = {
-             'profile': profile,
-             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-    }
+    data = { 'profile': profile, 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -100,11 +97,7 @@ def searchimages(request):
             images[entry.media.thumbnail[0].url] = entry.content.src
 
     template = "userprofile/avatar/search.html"
-    data = {
-             'section': 'avatar',
-             'images': images,
-           }
-
+    data = { 'section': 'avatar', 'images': images, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -121,13 +114,8 @@ def overview(request):
         if email: validated = True
 
     template = "userprofile/profile/overview.html"
-    data = {
-             'section': 'overview',
-             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-             'email': email,
-             'validated': validated
-           }
-
+    data = { 'section': 'overview', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'email': email, 'validated': validated }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -146,11 +134,8 @@ def personal(request):
         form = ProfileForm(instance=profile)
 
     template = "userprofile/profile/personal.html"
-    data = {
-             'section': 'personal',
-             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-             'form': form,
-           }
+    data = { 'section': 'personal', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -169,12 +154,8 @@ def location(request):
         form = LocationForm(instance=profile)
 
     template = "userprofile/profile/location.html"
-    data = {
-             'section': 'location',
-             'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-             'form': form,
-           }
-
+    data = { 'section': 'location', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
+             'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -194,9 +175,7 @@ def delete(request):
         return HttpResponseRedirect(reverse("profile_delete_done"))
 
     template = "userprofile/profile/delete.html"
-    data = {
-             'section': 'delete',
-           }
+    data = { 'section': 'delete', }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -231,9 +210,8 @@ def avatarchoose(request):
         generic96 = ""
 
     template = "userprofile/avatar/choose.html"
-    data = { 'generic96': generic96,
-             'AVATAR_WEBSEARCH': AVATAR_WEBSEARCH, 'section': 'avatar',
-             'form': form, }
+    data = { 'generic96': generic96, 'form': form,
+             'AVATAR_WEBSEARCH': AVATAR_WEBSEARCH, 'section': 'avatar', }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -264,11 +242,7 @@ def avatarcrop(request):
             return HttpResponseRedirect(reverse("profile_avatar_crop_done"))
 
     template = "userprofile/avatar/crop.html"
-    data = {
-             'section': 'avatar',
-             'avatar': avatar,
-             'form': form,
-           }
+    data = { 'section': 'avatar', 'avatar': avatar, 'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -293,9 +267,7 @@ def email_validation_process(request, key):
         successful = False
 
     template = "userprofile/account/email_validation_done.html"
-    data = {
-             'successful': successful,
-           }
+    data = { 'successful': successful, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def email_validation(request):
@@ -311,9 +283,7 @@ def email_validation(request):
         form = EmailValidationForm()
 
     template = "userprofile/account/email_validation.html"
-    data = {
-             'form': form,
-           }
+    data = { 'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def register(request):
@@ -334,9 +304,7 @@ def register(request):
         form = RegistrationForm()
 
     template = "userprofile/account/registration.html"
-    data = {
-             'form': form,
-           }
+    data = { 'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
