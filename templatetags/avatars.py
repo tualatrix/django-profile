@@ -13,6 +13,11 @@ import time
 
 register = Library()
 
+if hasattr(settings, "DEFAULT_AVATAR") and settings.DEFAULT_AVATAR:
+    DEFAULT_AVATAR = settings.DEFAULT_AVATAR
+else:
+    DEFAULT_AVATAR = os.path.join(settings.MEDIA_ROOT, "generic.jpg")
+
 class ResizedThumbnailNode(Node):
     def __init__(self, size, username=None):
         try:
@@ -42,7 +47,7 @@ class ResizedThumbnailNode(Node):
             base, temp = os.path.split(avatar.url)
             url = os.path.join(base, "%s.%s%s" % (name, self.size, extension))
         except:
-            avatar_path = settings.DEFAULT_AVATAR
+            avatar_path = DEFAULT_AVATAR
             base, filename = os.path.split(avatar_path)
             generic, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (generic, self.size, extension))
@@ -66,5 +71,5 @@ def Thumbnail(parser, token):
     elif len(bits) == 3:
         username = bits[2]
     elif len(bits) < 2:
-        bits.append(settings.DEFAULT_AVATAR_WIDTH)
+        bits.append("96")
     return ResizedThumbnailNode(bits[1], username)

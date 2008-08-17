@@ -34,13 +34,17 @@ try:
 except (ImportError, ImproperlyConfigured):
     raise SiteProfileNotAvailable
 
-# Required attribute
-try:
+if hasattr(settings, "DEFAULT_AVATAR") and settings.DEFAULT_AVATAR:
     DEFAULT_AVATAR = settings.DEFAULT_AVATAR
-except:
-    raise AttributeError(_("DEFAULT_AVATAR setting not defined."))
+else:
+    DEFAULT_AVATAR = os.path.join(settings.MEDIA_ROOT, "generic.jpg")
 
-# Optional attributes
+if not os.path.isfile(DEFAULT_AVATAR):
+    import shutil
+    image = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                         "generic.jpg")
+    shutil.copy(image, DEFAULT_AVATAR)
+
 GOOGLE_MAPS_API_KEY = hasattr(settings, "GOOGLE_MAPS_API_KEY") and \
                       settings.GOOGLE_MAPS_API_KEY or None
 AVATAR_WEBSEARCH = hasattr(settings, "AVATAR_WEBSEARCH") and \
