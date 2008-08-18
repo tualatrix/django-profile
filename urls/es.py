@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # Private profile
     url(r'^perfil/$', overview, name='profile_overview'),
 
-    url(r'^perfil/(?P<username>.+)/$', public, name='profile_public'),
+    url(r'^perfil/de/(?P<username>.+)/$', public, name='profile_public'),
 
     url(r'^perfil/editar/ubicacion/$', location, name='profile_edit_location'),
 
