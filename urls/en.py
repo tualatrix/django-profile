@@ -7,8 +7,6 @@ urlpatterns = patterns('',
     # Private profile
     url(r'^profile/$', overview, name='profile_overview'),
 
-    url(r'^profile/for/(?P<username>.+)/$', public, name='profile_public'),
-
     url(r'^profile/edit/location/$', location, name='profile_edit_location'),
 
     url(r'^profile/edit/location/done/$', direct_to_template,
@@ -116,4 +114,8 @@ urlpatterns = patterns('',
     url(r'^register/complete/$', direct_to_template,
         {'template': 'userprofile/account/registration_done.html'},
         name='signup_complete'),
+
+    # Users public profile
+    url(r'^profile/(?P<username>.+)/$', public, name='profile_public'),
+
 )
