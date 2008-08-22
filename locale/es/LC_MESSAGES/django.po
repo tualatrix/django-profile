@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-10 19:43+0200\n"
+"POT-Creation-Date: 2008-08-22 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1038,16 +1038,18 @@ msgstr "Ese e-mail ya está utilizado."
 msgid "That e-mail is already being confirmed."
 msgstr "Ese e-mail ya está siendo confirmado."
 
-#: models.py:38
+#: models.py:39
 #, python-format
 msgid "%s's profile"
 msgstr "Perfil de %s"
 
-#: models.py:57
+#: models.py:58
+#, python-format
 msgid "%s's Avatar"
 msgstr "Avatar de %s"
 
-#: models.py:141
+#: models.py:142
+#, python-format
 msgid "Email validation process for %(user)s"
 msgstr "Proceso de validación por e-mail para %(user)s"
 
@@ -1066,8 +1068,8 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: templates/userprofile/menu.html:8
-#: templates/userprofile/profile/location.html:25
-#: templates/userprofile/profile/overview.html:51
+#: templates/userprofile/profile/location.html:26
+#: templates/userprofile/profile/overview.html:60
 #: templates/userprofile/profile/public.html:38
 msgid "Location"
 msgstr "Localización"
@@ -1167,8 +1169,7 @@ msgstr "Tu cuenta de usuario ya estaba activa"
 
 #: templates/userprofile/account/email_validation_reset_response.html:14
 msgid "We've e-mailed you the e-mail validation link"
-msgstr ""
-"Te hemos enviado el e-mail con el enlace de validación"
+msgstr "Te hemos enviado el e-mail con el enlace de validación"
 
 #: templates/userprofile/account/email_validation_reset_response.html:16
 msgid "Your e-mail was already validated"
@@ -1185,7 +1186,7 @@ msgstr "Entrar"
 
 #: templates/userprofile/account/login.html:42
 msgid "Utilities"
-msgstr ""
+msgstr "Utilidades"
 
 #: templates/userprofile/account/login.html:44
 msgid "Lost your password?"
@@ -1193,7 +1194,7 @@ msgstr "¿Has perdido tu contraseña?"
 
 #: templates/userprofile/account/login.html:46
 msgid "Sign up!"
-msgstr ""
+msgstr "Regístrate!"
 
 #: templates/userprofile/account/logout.html:4
 #: templates/userprofile/account/logout.html:9
@@ -1492,29 +1493,30 @@ msgstr ""
 msgid "%(user)s's Dashboard"
 msgstr "Escritorio de %(user)s"
 
-#: templates/userprofile/profile/location.html:20
+#: templates/userprofile/profile/location.html:21
 msgid "Define your location"
 msgstr "Define tu localización"
 
-#: templates/userprofile/profile/location.html:21
+#: templates/userprofile/profile/location.html:22
+#: templates/userprofile/profile/overview.html:51
 #: templates/userprofile/profile/public.html:35
 msgid "Country"
 msgstr "País"
 
-#: templates/userprofile/profile/location.html:27
+#: templates/userprofile/profile/location.html:28
 msgid "Position"
 msgstr "Posición"
 
-#: templates/userprofile/profile/location.html:34
+#: templates/userprofile/profile/location.html:35
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/userprofile/profile/location.html:39
+#: templates/userprofile/profile/location.html:40
 #: templates/userprofile/profile/location_done.html:19
 msgid "Location information"
 msgstr "Información de localización"
 
-#: templates/userprofile/profile/location.html:40
+#: templates/userprofile/profile/location.html:41
 #: templates/userprofile/profile/location_done.html:20
 msgid "Define your location information"
 msgstr "Define la información sobre tu localización"
@@ -1554,34 +1556,35 @@ msgid " (Not validated)"
 msgstr "(No validada)"
 
 #: templates/userprofile/profile/overview.html:55
+#: templates/userprofile/profile/overview.html:64
 msgid "Not set"
 msgstr "No establecido"
 
-#: templates/userprofile/profile/overview.html:72
+#: templates/userprofile/profile/overview.html:82
 msgid "Management:"
 msgstr "Gestión:"
 
-#: templates/userprofile/profile/overview.html:73
+#: templates/userprofile/profile/overview.html:83
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: templates/userprofile/profile/overview.html:75
+#: templates/userprofile/profile/overview.html:85
 msgid "Change your e-mail address"
 msgstr "Cambiar tu dirección de correo"
 
-#: templates/userprofile/profile/overview.html:75
+#: templates/userprofile/profile/overview.html:85
 msgid "Add your e-mail address"
 msgstr "Añadir dirección de correo"
 
-#: templates/userprofile/profile/overview.html:76
+#: templates/userprofile/profile/overview.html:86
 msgid "Resend validation e-mail"
 msgstr "Reenviar e-mail de validación"
 
-#: templates/userprofile/profile/overview.html:80
+#: templates/userprofile/profile/overview.html:90
 msgid "Add location"
 msgstr "Añadir localización"
 
-#: templates/userprofile/profile/overview.html:82
+#: templates/userprofile/profile/overview.html:92
 msgid "Change location"
 msgstr "Cambiar localización"
 
@@ -1604,7 +1607,7 @@ msgstr "Perfil público de %(user)s"
 msgid "Public profile information"
 msgstr "Información pública del perfil"
 
-#: templatetags/avatars.py:63
+#: templatetags/avatars.py:68
 msgid ""
 "You have to provide only the size as             an integer (both sides will "
 "be equal) and optionally, the             username."
