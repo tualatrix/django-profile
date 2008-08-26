@@ -194,7 +194,7 @@ def avatarchoose(request):
             avatar.image.save("%s.jpg" % request.user.username, image)
             image = Image.open(avatar.image.path)
             image.thumbnail((480, 480), Image.ANTIALIAS)
-            image.save(avatar.image.path, "JPEG")
+            image.convert("RGB").save(avatar.image.path, "JPEG")
             avatar.save()
             return HttpResponseRedirect('%scrop/' % request.path_info)
 
