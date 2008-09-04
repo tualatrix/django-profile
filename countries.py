@@ -256,7 +256,6 @@ class CountryField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('max_length', 2)
         kwargs.setdefault('choices', COUNTRIES)
-        kwargs.setdefault('validator_list', []).append(isValidCountry)
         super(CharField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
