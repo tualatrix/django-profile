@@ -12,7 +12,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, SiteProfileNotAvailable
 from userprofile.models import EmailValidation, Avatar
 from django.template import RequestContext
 from django.conf import settings
@@ -31,6 +31,9 @@ try:
     app_label, model_name = settings.AUTH_PROFILE_MODULE.split('.')
     Profile = models.get_model(app_label, model_name)
 except (ImportError, ImproperlyConfigured):
+    raise SiteProfileNotAvailable
+
+if not Profile:
     raise SiteProfileNotAvailable
 
 if hasattr(settings, "DEFAULT_AVATAR") and settings.DEFAULT_AVATAR:
