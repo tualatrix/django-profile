@@ -15,7 +15,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from userprofile.models import EmailValidation, Avatar
 from django.template import RequestContext
-from django.core.validators import email_re
 from django.conf import settings
 from xml.dom import minidom
 import urllib2
