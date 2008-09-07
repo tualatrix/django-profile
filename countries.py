@@ -48,7 +48,7 @@ COUNTRIES = (
     ('CG', _('Congo')),
     ('CH', _('Switzerland')),
     ('CI', _('Ivory Coast')),
-    ('CK', _('Cook Iislands')),
+    ('CK', _('Cook Islands')),
     ('CL', _('Chile')),
     ('CM', _('Cameroon')),
     ('CN', _('China')),
