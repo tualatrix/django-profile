@@ -82,8 +82,8 @@ class RegistrationForm(forms.Form):
 
     username = forms.CharField(max_length=255, min_length = 3, label=_("Username"))
     email = forms.EmailField(required=False, label=_("E-mail address"))
-    password1 = forms.CharField(min_length=6, widget=forms.PasswordInput(render_value=False), label=_("Password"))
-    password2 = forms.CharField(min_length=6, widget=forms.PasswordInput(render_value=False), label=_("Password (again)"))
+    password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"))
+    password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"))
 
     def clean_username(self):
         """
