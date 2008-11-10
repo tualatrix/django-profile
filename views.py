@@ -92,9 +92,9 @@ def searchimages(request):
 
     images = dict()
     if request.method=="POST" and request.POST.get('keyword'):
-        keyword = request.POST.get('keyword')
+        keyword = str(request.POST.get('keyword'))
         gd_client = gdata.photos.service.PhotosService()
-        feed = gd_client.SearchCommunityPhotos("%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
+        feed = gd_client.SearchCommunityPhotos(query = "%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
         for entry in feed.entry:
             images[entry.media.thumbnail[0].url] = entry.content.src
 
