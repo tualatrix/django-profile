@@ -12,8 +12,11 @@ from userprofile.countries import CountryField
 import datetime
 import cPickle as pickle
 import base64
-import Image, ImageFilter
 import os.path
+try:
+    from PIL import Image, ImageFilter
+except ImportError:
+    import Image, ImageFilter
 
 AVATAR_SIZES = (128, 96, 64, 48, 32, 24, 16)
 

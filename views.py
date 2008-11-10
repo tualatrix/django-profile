@@ -21,9 +21,13 @@ import urllib2
 import random
 import cPickle as pickle
 import base64
-import Image
 import urllib
 import os
+
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 
 if not settings.AUTH_PROFILE_MODULE:
     raise SiteProfileNotAvailable
