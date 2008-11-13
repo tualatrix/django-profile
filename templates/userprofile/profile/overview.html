@@ -1,4 +1,4 @@
-{% extends "base_2col.html" %}
+{% extends "userprofile/base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% trans "Overview of your profile" %}{% endblock %}
@@ -21,11 +21,11 @@
 {% endif %}
 {% endblock %}
 
-{% block nav-main %}
+{% block userprofile_navigation %}
 {% include "userprofile/menu.html" %}
 {% endblock %}
 
-{% block content %}
+{% block userprofile_content %}
 	{% load avatars %}
 	<form action="" method="post">
 	<fieldset>
@@ -77,7 +77,7 @@
 	</form>
 {% endblock %}
 
-{% block content-related %}
+{% block userprofile_content_related %}
 	<div class="box">
 		<h3>{% trans "Management:" %}</h3>
 		<a href="{% url password_change %}">{% trans "Change password" %}</a>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+	{% block userprofile_navigation %}{% endblock %}
+	<div id="content-main" class="span-13 prepend-1 colborder">
+		{% block userprofile_content %}{% endblock %}
+	</div><!-- END content-main -->
+	<div id="content_related" class="span-8 last">
+		{% block userprofile_content_related %}{% endblock %}
+	</div><!-- END content-related -->
+{% endblock %}

@@ -1,14 +1,14 @@
-{% extends "base_2col.html" %}
+{% extends "userprofile/base_2col.html" %}
 {% load i18n %}
 
 {% block title %}{% ifequal params.action "done" %}{% trans 'Validation e-mail sent' %}{% else %}{% trans 'Your user account was already active' %}{% endifequal %}{% endblock %}
 {% block robots %}noindex,nofollow{% endblock %}
 
-{% block nav-main %}
+{% block userprofile_navigation %}
 {% include "userprofile/menu.html" %}
 {% endblock %}
 
-{% block content %}
+{% block userprofile_content %}
 	<p class="{% ifequal params.action "done" %}success{% else %}notice{% endifequal %} large">
 	{% ifequal params.action "done" %}
 		{% trans "We've e-mailed you the e-mail validation link" %}.
@@ -17,7 +17,7 @@
 	{% endifequal %}
 	</div>
 {% endblock %}
-{% block content-related %}
+{% block userprofile_content_related %}
   <div class="box">
     <h3>{% trans "E-mail validation process" %}</h3>
     <p>{% trans "You can manage the e-mail validation process from the" %} <a href="{% url profile_overview %}">{% trans "overview page" %}.</p>

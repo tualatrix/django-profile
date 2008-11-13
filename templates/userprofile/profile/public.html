@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "userprofile/base.html" %}
 {% load i18n %}
 {% load avatars %}
 
@@ -23,7 +23,7 @@
 	{% endif %}
 {% endblock %}
 
-{% block content %}
+{% block userprofile_content %}
 	<h2>{% blocktrans with profile.user as user %}Public profile of {{ user }}{% endblocktrans %}</h2>
 
 	<div class="vcard">

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %} 
+		{% block userprofile_navigation %}{% endblock %}
+		<div id="columnwrap">
+			<div id="content-main" class="span-22 prepend-1 append-1">
+			{% block userprofile_content %}{% endblock %}
+			</div>
+		</div>
+{% endblock %}
