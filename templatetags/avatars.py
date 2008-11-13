@@ -45,6 +45,8 @@ class ResizedThumbnailNode(Node):
             user = self.user.resolve(context)
             avatar = Avatar.objects.get(user=user, valid=True).image
             avatar_path = avatar.path
+            if not os.path.isfile(avatar_path):
+                raise
             base, filename = os.path.split(avatar_path)
             name, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (name, self.size, extension))

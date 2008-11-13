@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.db import models
 from django.contrib.auth.models import User, SiteProfileNotAvailable
-from userprofile.models import EmailValidation, Avatar
+from userprofile.models import EmailValidation, Avatar, UserProfileMediaNotFound
 from django.template import RequestContext
 from django.conf import settings
 from xml.dom import minidom
@@ -40,10 +40,13 @@ except (ImportError, ImproperlyConfigured):
 if not Profile:
     raise SiteProfileNotAvailable
 
+if not os.path.isdir(os.path.join(settings.MEDIA_ROOT, "userprofile")):
+    raise UserProfileMediaNotFound
+
 if hasattr(settings, "DEFAULT_AVATAR") and settings.DEFAULT_AVATAR:
     DEFAULT_AVATAR = settings.DEFAULT_AVATAR
 else:
-    DEFAULT_AVATAR = os.path.join(settings.MEDIA_ROOT, "generic.jpg")
+    DEFAULT_AVATAR = os.path.join(settings.MEDIA_ROOT, "userprofile/generic.jpg")
 
 if not os.path.isfile(DEFAULT_AVATAR):
     import shutil
