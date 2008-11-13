@@ -6,7 +6,7 @@
 
 {% block extrajs %}
 	{% if GOOGLE_MAPS_API_KEY %}
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.location.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}userprofile/js/jquery.location.js"></script>
 	{% endif %}
 {% endblock %}
 
@@ -19,7 +19,7 @@
 	{{ form.errors }}
 	<fieldset>
 		<legend>{% trans "Define your location" %}</legend>
-		<label for="id_country">{% trans "Country" %}<img class="hide" src="{{ MEDIA_URL }}images/loading.gif" /></label>
+		<label for="id_country">{% trans "Country" %}<img class="hide" src="{{ MEDIA_URL }}userprofile/images/loading.gif" /></label>
 		<p>{{ form.country }}</p>
 		{% if GOOGLE_MAPS_API_KEY %}
 			<div class="mapinfo">
