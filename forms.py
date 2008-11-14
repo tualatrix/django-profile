@@ -81,7 +81,7 @@ class AvatarCropForm(forms.Form):
 class RegistrationForm(forms.Form):
 
     username = forms.CharField(max_length=255, min_length = 3, label=_("Username"))
-    email = forms.EmailField(required=False, label=_("E-mail address"))
+    email = forms.EmailField(required=hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") and settings.REQUIRE_EMAIL_CONFIRMATION or False, label=_("E-mail address"))
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"))
     password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"))
 

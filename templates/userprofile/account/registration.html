@@ -23,7 +23,7 @@
 				<span class="quiet red"><br />* {{ form.username.errors|join:"; " }}</span>
 			{% endif %}
 		</p>
-		<label for="id_email">{% trans "E-mail (optional)" %}</label>
+		<label for="id_email">{% trans "E-mail" %}{% if not form.email.field.required %} {% trans "(optional)" %}{% endif %}</label>
 		<p>{{ form.email }}
 			{% if form.email.errors %}
 				<span class="quiet red"><br />* {{ form.email.errors|join:"; " }}</span>
