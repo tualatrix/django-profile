@@ -137,3 +137,16 @@ class EmailValidationForm(forms.Form):
             return email
 
         raise forms.ValidationError(_("That e-mail is already used."))
+
+class ResendEmailValidationForm(forms.Form):
+    email = forms.EmailField()
+
+    def clean_email(self):
+        """
+        Verify that the email exists
+        """
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email) or EmailValidation.objects.filter(email=email):
+            return email
+
+        raise forms.ValidationError(_("That e-mail isn't registered."))

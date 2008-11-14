@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.utils.translation import ugettext as _
 from userprofile.forms import AvatarForm, AvatarCropForm, EmailValidationForm, \
                               ProfileForm, RegistrationForm, LocationForm, \
-                              PublicFieldsForm
+                              ResendEmailValidationForm, PublicFieldsForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ImproperlyConfigured
@@ -301,6 +301,7 @@ def register(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             newuser = User.objects.create_user(username=username, email='', password=password)
+            newuser.is_active = not hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") or not settings.REQUIRE_EMAIL_CONFIRMATION
 
             if form.cleaned_data.get('email'):
                 newuser.email = form.cleaned_data.get('email')
@@ -315,16 +316,34 @@ def register(request):
     data = { 'form': form, }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
-@login_required
 def email_validation_reset(request):
     """
-    Resend the validation email for the authenticated user.
+    Resend the validation email
     """
-    try:
-        resend = EmailValidation.objects.get(user=request.user).resend()
-        response = "done"
-    except EmailValidation.DoesNotExist:
-        response = "failed"
 
-    return HttpResponseRedirect(reverse("email_validation_reset_response", 
-            args=[response]))
+    if request.user.is_authenticated():
+        try:
+            resend = EmailValidation.objects.get(user=request.user).resend()
+            response = "done"
+        except EmailValidation.DoesNotExist:
+            response = "failed"
+
+        return HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
+    else:
+        if request.method == 'POST':
+            form = ResendEmailValidationForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data.get('email')
+                try:
+                    resend = EmailValidation.objects.get(email=email).resend()
+                    response = "done"
+                except EmailValidation.DoesNotExist:
+                    response = "failed"
+                return HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
+
+        else:
+            form = ResendEmailValidationForm()
+
+        template = "userprofile/account/email_validation_reset.html"
+        data = { 'form': form, }
+        return render_to_response(template, data, context_instance=RequestContext(request))

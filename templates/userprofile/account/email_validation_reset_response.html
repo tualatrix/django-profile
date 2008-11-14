@@ -15,11 +15,11 @@
 	{% else %}
 		{% trans 'Your e-mail was already validated' %}. 
 	{% endifequal %}
-	</div>
+	</p>
 {% endblock %}
 {% block userprofile_content_related %}
   <div class="box">
     <h3>{% trans "E-mail validation process" %}</h3>
-    <p>{% trans "You can manage the e-mail validation process from the" %} <a href="{% url profile_overview %}">{% trans "overview page" %}.</p>
+    <p>{% trans "You can manage the e-mail validation process from the" %} <a href="{% url profile_overview %}">{% trans "overview page" %}</a>.</p>
   </div>
 {% endblock %}

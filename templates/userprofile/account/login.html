@@ -43,6 +43,8 @@
     {# http://code.djangoproject.com/ticket/7239 #}
 		<a href="{% url password_reset %}">{% trans "Lost your password?" %}</a>
 		<br />
+		<a href="{% url email_validation_reset %}">{% trans "Resend validation e-mail" %}</a>
+    <br />
 		<a href="{% url signup %}">{% trans "Sign up!" %}</a>
 		<br />
 	</div>

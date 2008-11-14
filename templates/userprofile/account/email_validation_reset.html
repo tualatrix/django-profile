@@ -1,0 +1,39 @@
+{% extends "userprofile/base_2col.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Resend e-mail validation" %}{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+	$(function() {
+		$("input#id_email").focus();
+		$("input[type='text'], input[type='text']").addClass("text");
+	});
+</script>
+{% endblock %}
+
+{% block userprofile_content %}
+	<form action="" method="post" accept-charset="utf-8">
+	<fieldset>
+		<legend>{% trans "Resend e-mail validation" %}</legend>
+		<label for="id_email">{% trans 'Insert your e-mail address' %}</label>
+		<p>{{ form.email }}
+		{% if form.email.errors %}
+			<span class="quiet red"><br />* {{ form.email.errors|join:"; " }}</span>
+		{% endif %}
+		</p>
+		{% if form.non_field_errors %}
+			<ul class="quiet red">{{ form.non_field_errors.as_ul }}</ul>
+		{% endif %}
+	</fieldset>
+	<p><input type="submit" value="{% trans 'Resend confirmation' %}" /></p>
+	</form>
+{% endblock %}
+
+{% block userprofile_content_related %}
+	<div class="box">
+		<h3>{% trans "Resend e-mail validation" %}</h3>
+		<p>{% trans "If you haven't validated your e-mail address yet you couldn't get into the site. Insert the e-mail address yu have registered with so we can resend the validation e-mail to you again" %}.</p>
+	</div>
+{% endblock %}
