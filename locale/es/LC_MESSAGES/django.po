@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-07 16:20+0200\n"
+"POT-Creation-Date: 2008-11-14 09:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,7 +301,7 @@ msgstr "Francia"
 
 #: countries.py:81
 msgid "France, Metropolitan"
-msgstr ""
+msgstr "Francia"
 
 #: countries.py:82
 msgid "Gabon"
@@ -973,7 +973,9 @@ msgstr "País desconocido o no especificado"
 
 #: countries.py:253
 msgid "This value must be in COUNTRIES setting in localflavor.generic package."
-msgstr "Este valor debe estar en la prefencia COUNTRIES del paquete localflavor.generic"
+msgstr ""
+"Este valor debe estar en la prefencia COUNTRIES del paquete localflavor."
+"generic"
 
 #: forms.py:58
 #, python-format
@@ -1038,17 +1040,17 @@ msgstr "Ese e-mail ya está utilizado."
 msgid "That e-mail is already being confirmed."
 msgstr "Ese e-mail ya está siendo confirmado."
 
-#: models.py:39
+#: models.py:42
 #, python-format
 msgid "%s's profile"
 msgstr "Perfil de %s"
 
-#: models.py:58
+#: models.py:61
 #, python-format
 msgid "%s's Avatar"
 msgstr "Avatar de %s"
 
-#: models.py:142
+#: models.py:145
 #, python-format
 msgid "Email validation process for %(user)s"
 msgstr "Proceso de validación por e-mail para %(user)s"
@@ -1058,7 +1060,7 @@ msgid "Overview"
 msgstr "Resumen"
 
 #: templates/userprofile/menu.html:6
-#: templates/userprofile/profile/personal.html:34
+#: templates/userprofile/profile/personal.html:36
 #: templates/userprofile/profile/personal_done.html:19
 msgid "Personal information"
 msgstr "Información personal"
@@ -1339,8 +1341,12 @@ msgid "User registration"
 msgstr "Registro de usuario"
 
 #: templates/userprofile/account/registration.html:26
-msgid "E-mail (optional)"
-msgstr "E-mail (opcional)"
+msgid "E-mail"
+msgstr "Dirección de correo"
+
+#: templates/userprofile/account/registration.html:26
+msgid "optional"
+msgstr "opcional"
 
 #: templates/userprofile/account/registration.html:48
 msgid "Register"
@@ -1506,11 +1512,16 @@ msgstr "Define tu localización"
 msgid "Country"
 msgstr "País"
 
+#: templates/userprofile/profile/location.html:22
+msgid "Loading..."
+msgstr "Cargando..."
+
 #: templates/userprofile/profile/location.html:28
 msgid "Position"
 msgstr "Posición"
 
 #: templates/userprofile/profile/location.html:35
+#: templates/userprofile/profile/personal.html:30
 msgid "Save"
 msgstr "Guardar"
 
@@ -1596,7 +1607,7 @@ msgstr "Cambiar localización"
 msgid "Edit your personal information"
 msgstr "Editar tu información personal"
 
-#: templates/userprofile/profile/personal.html:35
+#: templates/userprofile/profile/personal.html:37
 #: templates/userprofile/profile/personal_done.html:20
 msgid "Insert some information about you"
 msgstr "Introduce algo de información sobre ti"
@@ -1610,7 +1621,7 @@ msgstr "Perfil público de %(user)s"
 msgid "Public profile information"
 msgstr "Información pública del perfil"
 
-#: templatetags/avatars.py:68
+#: templatetags/avatars.py:74
 msgid ""
 "You have to provide only the size as             an integer (both sides will "
 "be equal) and optionally, the             username."
@@ -1756,9 +1767,6 @@ msgstr ""
 #~ msgstr ""
 #~ "La información de localización de tu perfil ha sido actualizada "
 #~ "satisfactoriamente"
-
-#~ msgid "E-mail"
-#~ msgstr "Dirección de correo"
 
 #~ msgid ""
 #~ "Account validated successfully. Now you can access to the login page with "
