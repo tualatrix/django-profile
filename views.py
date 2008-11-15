@@ -153,6 +153,14 @@ def location(request):
     Location selection of the user profile
     """
     profile, created = Profile.objects.get_or_create(user=request.user)
+    geoip = hasattr(settings, "GEOIP_PATH")
+    if geoip and request.method == "GET":
+        from django.contrib.gis.utils import GeoIP
+        g = GeoIP()
+        c = g.city(request.META.get("REMOTE_ADDR"))
+        if c and c.get("latitude") and c.get("longitude"):
+            profile.latitude = c.get("latitude")
+            profile.longitude = c.get("longitude")
 
     if request.method == "POST":
         form = LocationForm(request.POST, instance=profile)
@@ -164,7 +172,7 @@ def location(request):
 
     template = "userprofile/profile/location.html"
     data = { 'section': 'location', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-             'form': form, }
+             'form': form, 'geoip': geoip }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
