@@ -154,13 +154,15 @@ def location(request):
     """
     profile, created = Profile.objects.get_or_create(user=request.user)
     geoip = hasattr(settings, "GEOIP_PATH")
-    if geoip and request.method == "GET":
+    if geoip and request.method == "GET" and request.GET.get('ip') == "1":
         from django.contrib.gis.utils import GeoIP
         g = GeoIP()
         c = g.city(request.META.get("REMOTE_ADDR"))
         if c and c.get("latitude") and c.get("longitude"):
-            profile.latitude = c.get("latitude")
-            profile.longitude = c.get("longitude")
+            profile.latitude = "%.6f" % c.get("latitude")
+            profile.longitude = "%.6f" % c.get("longitude")
+            profile.country = c.get("country_code")
+            profile.location = unicode(c.get("city"), "latin1")
 
     if request.method == "POST":
         form = LocationForm(request.POST, instance=profile)
