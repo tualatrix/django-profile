@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-27 18:43+0100\n"
+"POT-Creation-Date: 2008-11-27 20:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -992,7 +992,7 @@ msgstr ""
 "Debes seleccionar una porción de la imagen con un mínimo de 96x96 píxels."
 
 #: forms.py:83 templates/userprofile/account/login.html:20
-#: templates/userprofile/account/registration.html:20
+#: templates/userprofile/account/includes/registration_form.html:5
 #: templates/userprofile/profile/public.html:33
 #: templates/userprofile/profile/usercard.html:11
 msgid "Username"
@@ -1003,11 +1003,12 @@ msgid "E-mail address"
 msgstr "Dirección de correo"
 
 #: forms.py:85 templates/userprofile/account/login.html:26
-#: templates/userprofile/account/registration.html:32
+#: templates/userprofile/account/includes/registration_form.html:17
 msgid "Password"
 msgstr "Contraseña"
 
-#: forms.py:86 templates/userprofile/account/registration.html:38
+#: forms.py:86
+#: templates/userprofile/account/includes/registration_form.html:23
 msgid "Password (again)"
 msgstr "Contraseña de nuevo"
 
@@ -1369,28 +1370,16 @@ msgstr ""
 "contraseña. La recibirás en breve"
 
 #: templates/userprofile/account/registration.html:4
-#: templates/userprofile/account/registration.html:19
+#: templates/userprofile/account/includes/registration_form.html:4
 msgid "User registration"
 msgstr "Registro de usuario"
 
-#: templates/userprofile/account/registration.html:26
-msgid "E-mail"
-msgstr "Dirección de correo"
-
-#: templates/userprofile/account/registration.html:26
-msgid "optional"
-msgstr "opcional"
-
-#: templates/userprofile/account/registration.html:48
-msgid "Register"
-msgstr "Registrar"
-
-#: templates/userprofile/account/registration.html:54
+#: templates/userprofile/account/registration.html:22
 #: templates/userprofile/account/registration_done.html:14
 msgid "Register a new account"
 msgstr "Registrar una nueva cuenta"
 
-#: templates/userprofile/account/registration.html:55
+#: templates/userprofile/account/registration.html:23
 #: templates/userprofile/account/registration_done.html:15
 msgid ""
 "Joining this community is quick and easy. You only need to fill the form to "
@@ -1414,6 +1403,18 @@ msgstr "página de entrada de usuario"
 #: templates/userprofile/account/registration_done.html:9
 msgid "to authenticate and start using this site"
 msgstr "para autenticarte y empezar a utilizar este sitio"
+
+#: templates/userprofile/account/includes/registration_form.html:11
+msgid "E-mail"
+msgstr "Dirección de correo"
+
+#: templates/userprofile/account/includes/registration_form.html:11
+msgid "optional"
+msgstr "opcional"
+
+#: templates/userprofile/account/includes/registration_form.html:33
+msgid "Register"
+msgstr "Registrar"
 
 #: templates/userprofile/avatar/choose.html:4
 #: templates/userprofile/avatar/choose.html:36
@@ -1540,8 +1541,8 @@ msgid "Define your location"
 msgstr "Define tu localización"
 
 #: templates/userprofile/profile/location.html:21
-msgid "Try location auto-discover by IP"
-msgstr "Intentar el descubrimiento automático de la localización a partir de la IP"
+msgid "Auto-discover location"
+msgstr "Descubrir mi localización"
 
 #: templates/userprofile/profile/location.html:22
 #: templates/userprofile/profile/overview.html:51
@@ -1661,6 +1662,10 @@ msgid ""
 msgstr ""
 "Tienes que proporcionar únicamente el tamaño como un entero (ambos lados "
 "iguales) y opcionalmente, el usuario."
+
+#~ msgid "Try location auto-discover by IP"
+#~ msgstr ""
+#~ "Intentar el descubrimiento automático de la localización a partir de la IP"
 
 #~ msgid "Try IP localization"
 #~ msgstr "Intentar averiguar la localización por la IP"
