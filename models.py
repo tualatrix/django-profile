@@ -49,7 +49,7 @@ class Avatar(models.Model):
     """
     Avatar model
     """
-    image = models.ImageField(upload_to="userprofile/avatars/%Y/%b/%d")
+    image = models.ImageField(upload_to="avatars/%Y/%b/%d")
     user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField()
