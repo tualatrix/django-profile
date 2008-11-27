@@ -13,7 +13,8 @@ from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.db import models
 from django.contrib.auth.models import User, SiteProfileNotAvailable
-from userprofile.models import EmailValidation, Avatar, UserProfileMediaNotFound
+from userprofile.models import EmailValidation, Avatar, UserProfileMediaNotFound, \
+                               GoogleDataAPINotFound
 from django.template import RequestContext
 from django.conf import settings
 from xml.dom import minidom
@@ -60,8 +61,11 @@ AVATAR_WEBSEARCH = hasattr(settings, "AVATAR_WEBSEARCH") and \
                    settings.AVATAR_WEBSEARCH or None
 
 if AVATAR_WEBSEARCH:
-    import gdata.service
-    import gdata.photos.service
+    try:
+        import gdata.service
+        import gdata.photos.service
+    except:
+        raise GoogleDataAPINotFound
 
 def get_profiles():
     return Profile.objects.order_by("-date")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-14 09:17+0100\n"
+"POT-Creation-Date: 2008-11-27 18:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1040,6 +1040,10 @@ msgstr "Ese e-mail ya está utilizado."
 msgid "That e-mail is already being confirmed."
 msgstr "Ese e-mail ya está siendo confirmado."
 
+#: forms.py:152
+msgid "That e-mail isn't registered."
+msgstr "Esa dirección de e-mail no está registrada."
+
 #: models.py:42
 #, python-format
 msgid "%s's profile"
@@ -1161,6 +1165,30 @@ msgstr ""
 "activarla. Por favor, accede a tu correo y completa este proceso siguiendo "
 "las instrucciones descritas en él"
 
+#: templates/userprofile/account/email_validation_reset.html:4
+#: templates/userprofile/account/email_validation_reset.html:19
+#: templates/userprofile/account/email_validation_reset.html:36
+msgid "Resend e-mail validation"
+msgstr "Reenviar e-mail de validación"
+
+#: templates/userprofile/account/email_validation_reset.html:20
+msgid "Insert your e-mail address"
+msgstr "Introduce tu dirección de correo"
+
+#: templates/userprofile/account/email_validation_reset.html:30
+msgid "Resend confirmation"
+msgstr "Reenviar confirmación"
+
+#: templates/userprofile/account/email_validation_reset.html:37
+msgid ""
+"If you haven't validated your e-mail address yet you couldn't get into the "
+"site. Insert the e-mail address yu have registered with so we can resend the "
+"validation e-mail to you again"
+msgstr ""
+"Si no has validado tu dirección de correo todavía no podrás acceder a este "
+"sitio. Introduce la dirección de correo con la que te registraste para que "
+"podamos reenviarte el e-mail de validación de nuevo"
+
 #: templates/userprofile/account/email_validation_reset_response.html:4
 msgid "Validation e-mail sent"
 msgstr "E-mail de validación enviado"
@@ -1195,6 +1223,11 @@ msgid "Lost your password?"
 msgstr "¿Has perdido tu contraseña?"
 
 #: templates/userprofile/account/login.html:46
+#: templates/userprofile/profile/overview.html:86
+msgid "Resend validation e-mail"
+msgstr "Reenviar e-mail de validación"
+
+#: templates/userprofile/account/login.html:48
 msgid "Sign up!"
 msgstr "¡Regístrate!"
 
@@ -1506,6 +1539,10 @@ msgstr "Escritorio de %(user)s"
 msgid "Define your location"
 msgstr "Define tu localización"
 
+#: templates/userprofile/profile/location.html:21
+msgid "Try location auto-discover by IP"
+msgstr "Intentar el descubrimiento automático de la localización a partir de la IP"
+
 #: templates/userprofile/profile/location.html:22
 #: templates/userprofile/profile/overview.html:51
 #: templates/userprofile/profile/public.html:35
@@ -1516,21 +1553,21 @@ msgstr "País"
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: templates/userprofile/profile/location.html:28
+#: templates/userprofile/profile/location.html:29
 msgid "Position"
 msgstr "Posición"
 
-#: templates/userprofile/profile/location.html:35
+#: templates/userprofile/profile/location.html:36
 #: templates/userprofile/profile/personal.html:30
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/userprofile/profile/location.html:40
+#: templates/userprofile/profile/location.html:41
 #: templates/userprofile/profile/location_done.html:19
 msgid "Location information"
 msgstr "Información de localización"
 
-#: templates/userprofile/profile/location.html:41
+#: templates/userprofile/profile/location.html:42
 #: templates/userprofile/profile/location_done.html:20
 msgid "Define your location information"
 msgstr "Define la información sobre tu localización"
@@ -1590,10 +1627,6 @@ msgstr "Cambiar tu dirección de correo"
 msgid "Add your e-mail address"
 msgstr "Añadir dirección de correo"
 
-#: templates/userprofile/profile/overview.html:86
-msgid "Resend validation e-mail"
-msgstr "Reenviar e-mail de validación"
-
 #: templates/userprofile/profile/overview.html:90
 msgid "Add location"
 msgstr "Añadir localización"
@@ -1629,6 +1662,9 @@ msgstr ""
 "Tienes que proporcionar únicamente el tamaño como un entero (ambos lados "
 "iguales) y opcionalmente, el usuario."
 
+#~ msgid "Try IP localization"
+#~ msgstr "Intentar averiguar la localización por la IP"
+
 #~ msgid "There's no user with that e-mail"
 #~ msgstr "No existe ningún usuario con ese e-mail"
 
@@ -1643,9 +1679,6 @@ msgstr ""
 
 #~ msgid "Resend the activation e-mail"
 #~ msgstr "Reenviar el e-mail de activación de cuenta"
-
-#~ msgid "Resend validation"
-#~ msgstr "Reenviar validación"
 
 #~ msgid ""
 #~ "Enter your e-mail address and we'll resend the user activation e-mail to "
@@ -1831,9 +1864,6 @@ msgstr ""
 
 #~ msgid "Invalid e-mail"
 #~ msgstr "Dirección de correo incorrecta"
-
-#~ msgid "E-mail not registered"
-#~ msgstr "E-mail no registrado"
 
 #~ msgid "Select an image from a remote URL:"
 #~ msgstr "Selecciona una imagen de una URL remota:"

@@ -164,3 +164,6 @@ class EmailValidation(models.Model):
 
 class UserProfileMediaNotFound(Exception):
     pass
+
+class GoogleDataAPINotFound(Exception):
+    pass
