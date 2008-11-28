@@ -23,9 +23,7 @@
 		<p>{{ form.country }}</p>
 		{% if GOOGLE_MAPS_API_KEY %}
 			<div class="mapinfo">
-				<label>{% trans "Location" %}</label>
-				{{ form.instance.location }}
-				<p id="location_info">{{ profile.location }}</p>
+				<p><label>{% trans "Location:" %}</label> <span id="location_info">{{ form.instance.location }}</span></p>
 				<label for="map">{% trans "Position" %}</label>
 				<div id="map"></div>
 			</div>
