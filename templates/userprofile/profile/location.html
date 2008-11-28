@@ -18,7 +18,7 @@
 	<form action="{{ request.path_info }}" method="post" enctype="multipart/form-data">
 	{{ form.errors }}
 	<fieldset>
-		<legend>{% trans "Define your location" %}{% if geoip %} (<a href="?ip=1">{% trans "Auto-discover location" %})</a>{% endif %}</legend>
+		<legend>{% trans "Define your location" %}{% if geoip %} (<a href="?ip=1">{% trans "Auto-discover location" %}</a>){% endif %}</legend>
 		<label for="id_country">{% trans "Country" %}<img class="hide" alt="{% trans "Loading..." %}" src="{{ MEDIA_URL }}userprofile/images/loading.gif" /></label>
 		<p>{{ form.country }}</p>
 		{% if GOOGLE_MAPS_API_KEY %}
