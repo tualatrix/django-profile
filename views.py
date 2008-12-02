@@ -294,7 +294,7 @@ def email_validation(request):
         form = EmailValidationForm(request.POST)
         if form.is_valid():
             EmailValidation.objects.add(user=request.user, email=form.cleaned_data.get('email'))
-            return HttpResponseRedirect('%sprocessed/' % request.path_info)
+            return HttpResponseRedirect(reverse("email_validation_processed"))
     else:
         form = EmailValidationForm()
 
@@ -316,7 +316,7 @@ def register(request):
                 EmailValidation.objects.add(user=newuser, email=newuser.email)
 
             newuser.save()
-            return HttpResponseRedirect('%scomplete/' % request.path_info)
+            return HttpResponseRedirect(reverse('signup_complete'))
     else:
         form = RegistrationForm()
 
