@@ -213,7 +213,7 @@ def avatarchoose(request):
             image.thumbnail((480, 480), Image.ANTIALIAS)
             image.convert("RGB").save(avatar.image.path, "JPEG")
             avatar.save()
-            return HttpResponseRedirect('%scrop/' % request.path_info)
+            return HttpResponseRedirect(reverse("profile_avatar_crop"))
 
             base, filename = os.path.split(avatar_path)
             generic, extension = os.path.splitext(filename)
