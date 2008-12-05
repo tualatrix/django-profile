@@ -65,6 +65,15 @@
 			{% endif %}
 			</p>
 			{% endif %}
+			{% for field in fields %}
+				<p><label for="id_{{ field.name }}">{{ field.verbose_name|title }}:</label>
+			{% if field.value %}
+				{{ field.value }}
+			{% else %}
+				<span class="quiet red">{% trans "Not set" %}</span>
+			{% endif %}
+			</p>
+			{% endfor %}
 		</div>
 
 		<hr class="space" />

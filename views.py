@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 from userprofile.forms import AvatarForm, AvatarCropForm, EmailValidationForm, \
                               ProfileForm, RegistrationForm, LocationForm, \
                               ResendEmailValidationForm, PublicFieldsForm
+from userprofile.models import BaseProfile
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ImproperlyConfigured
@@ -120,9 +121,15 @@ def overview(request):
         email = request.user.email
         if email: validated = True
 
+    fields = [{ 
+        'name': f.name, 
+        'verbose_name': f.verbose_name, 
+        'value': getattr(profile, f.name)
+    } for f in Profile._meta.fields if not (f in BaseProfile._meta.fields or f.name=='id')]
+
     template = "userprofile/profile/overview.html"
     data = { 'section': 'overview', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
-             'email': email, 'validated': validated }
+            'email': email, 'validated': validated, 'fields' : fields }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
