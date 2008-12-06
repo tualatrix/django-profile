@@ -17,6 +17,13 @@
 			});
 			return false;
 		});
+
+    $("div.photos a").click(function() {
+      $("form input[name='url']").val($(this).attr("href"));
+      $("form").submit();
+      return false;
+    });
+
 	});
 </script>
 {% endblock %}
@@ -26,12 +33,7 @@
 {% endblock %}
 
 {% block userprofile_content %}
-	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-		{% if form.errors %}
-			{% for error,desc in form.errors.items %}
-				<p class="error">{{desc|join:"; "}}</p>
-			{% endfor %}
-		{% endif %}
+	<form action="{% url profile_edit_avatar %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<fieldset>
 			<legend>{% trans "Choose the location of your avatar" %}</legend>
 			<ul>
@@ -48,13 +50,28 @@
 				</p>
 			</li>
 			{% if AVATAR_WEBSEARCH %}
-			<li>
-				<a class="large" href="{{ request.path_info }}search/">{% trans "Search for an image on Picasa Web" %}</a>
+  		<li>
+    		<label for="id_search">{% trans "Search on Picasa Web" %}</label>
+    		<p>
+      		<input type="text" name="keyword" id="id_search" value="{{ keyword }}" />
+      		<input type="submit" value="{% trans "Search" %}"/>
+    		</p>
+
+    		<div class="photos">
+      		{% for thumb,url in images.items %}
+      		<a href="{{ url }}"><img alt="photo{{ forloop.counter }}" src="{{ thumb }}" /></a>
+      		{% endfor %}
+    		</div>
 			</li>
 			{% endif %}
 			</ul>
+			{% if form.errors %}
+			{% for error,desc in form.errors.items %}
+			<p class="small quiet red">* {{desc|join:"; "}}</p>
+			{% endfor %}
+			{% endif %}
 		</fieldset>
-		</form>
+</form>
 {% endblock %}
 
 {% block userprofile_content_related %}
@@ -65,7 +82,7 @@
 
 	{% load avatars %}
   <div class="center">
-		<img class="border" id="avatarimg" src="{% avatar 96 %}" />
+		<img class="border" alt="{{ request.user }}" id="avatarimg" src="{% avatar 96 %}" />
     {% if user.get_profile.has_avatar %}<p id="avatardelete" style="text-align: center;"><a href="{{ request.path_info }}delete/" class="delavatar">{% trans "Delete" %}</a></p>{% endif %}
 	</div>
 {% endblock %}

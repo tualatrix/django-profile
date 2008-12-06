@@ -38,9 +38,6 @@ urlpatterns = patterns('',
 
     url(r'^perfil/editar/avatar/$', avatarchoose, name='profile_edit_avatar'),
 
-    url(r'^perfil/editar/avatar/buscar/$', searchimages,
-        name='profile_avatar_search'),
-
     url(r'^perfil/editar/avatar/recortar/$', avatarcrop,
         name='profile_avatar_crop'),
 

@@ -91,24 +91,6 @@ def public(request, username):
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
-def searchimages(request):
-    """
-    Web search for images Form
-    """
-
-    images = dict()
-    if request.method=="POST" and request.POST.get('keyword'):
-        keyword = str(request.POST.get('keyword'))
-        gd_client = gdata.photos.service.PhotosService()
-        feed = gd_client.SearchCommunityPhotos(query = "%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
-        for entry in feed.entry:
-            images[entry.media.thumbnail[0].url] = entry.content.src
-
-    template = "userprofile/avatar/search.html"
-    data = { 'section': 'avatar', 'images': images, }
-    return render_to_response(template, data, context_instance=RequestContext(request))
-
-@login_required
 def overview(request):
     """
     Main profile page
@@ -208,22 +190,33 @@ def avatarchoose(request):
     Avatar choose
     """
     profile, created = Profile.objects.get_or_create(user = request.user)
-    if not request.method == "POST":
-        form = AvatarForm()
-    else:
-        form = AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            image = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
-            avatar = Avatar(user=request.user, image=image, valid=False)
-            avatar.image.save("%s.jpg" % request.user.username, image)
-            image = Image.open(avatar.image.path)
-            image.thumbnail((480, 480), Image.ANTIALIAS)
-            image.convert("RGB").save(avatar.image.path, "JPEG")
-            avatar.save()
-            return HttpResponseRedirect(reverse("profile_avatar_crop"))
+    images = dict()
 
-            base, filename = os.path.split(avatar_path)
-            generic, extension = os.path.splitext(filename)
+    if request.method == "POST":
+        form = AvatarForm()
+        if request.POST.get('keyword'):
+            keyword = str(request.POST.get('keyword'))
+            gd_client = gdata.photos.service.PhotosService()
+            feed = gd_client.SearchCommunityPhotos(query = "%s&thumbsize=72c" % keyword.split(" ")[0], limit='48')
+            for entry in feed.entry:
+                images[entry.media.thumbnail[0].url] = entry.content.src
+
+        else:
+            form = AvatarForm(request.POST, request.FILES)
+            if form.is_valid():
+                image = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
+                avatar = Avatar(user=request.user, image=image, valid=False)
+                avatar.image.save("%s.jpg" % request.user.username, image)
+                image = Image.open(avatar.image.path)
+                image.thumbnail((480, 480), Image.ANTIALIAS)
+                image.convert("RGB").save(avatar.image.path, "JPEG")
+                avatar.save()
+                return HttpResponseRedirect(reverse("profile_avatar_crop"))
+
+                base, filename = os.path.split(avatar_path)
+                generic, extension = os.path.splitext(filename)
+    else:
+        form = AvatarForm()
 
     if DEFAULT_AVATAR:
         base, filename = os.path.split(DEFAULT_AVATAR)
@@ -234,7 +227,7 @@ def avatarchoose(request):
         generic96 = ""
 
     template = "userprofile/avatar/choose.html"
-    data = { 'generic96': generic96, 'form': form,
+    data = { 'generic96': generic96, 'form': form, "images": images,
              'AVATAR_WEBSEARCH': AVATAR_WEBSEARCH, 'section': 'avatar', }
     return render_to_response(template, data, context_instance=RequestContext(request))
 
