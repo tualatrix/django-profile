@@ -109,7 +109,8 @@ urlpatterns = patterns('',
         name='signup_validate'),
 
     url(r'^register/complete/$', direct_to_template,
-        {'template': 'userprofile/account/registration_done.html'},
+        {'extra_context': { 'email_validation_required': hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") and settings.REQUIRE_EMAIL_CONFIRMATION },
+         'template': 'userprofile/account/registration_done.html'},
         name='signup_complete'),
 
     # Users public profile

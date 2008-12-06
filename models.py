@@ -94,6 +94,8 @@ class EmailValidationManager(models.Manager):
             verify = self.get(key=key)
             if not verify.is_expired():
                 verify.user.email = verify.email
+                if hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") and settings.REQUIRE_EMAIL_CONFIRMATION:
+                    verify.user.is_active = True
                 verify.user.save()
                 verify.delete()
                 return True

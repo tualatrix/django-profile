@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-27 20:35+0100\n"
+"POT-Creation-Date: 2008-12-06 22:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1055,7 +1055,7 @@ msgstr "Perfil de %s"
 msgid "%s's Avatar"
 msgstr "Avatar de %s"
 
-#: models.py:145
+#: models.py:147
 #, python-format
 msgid "Email validation process for %(user)s"
 msgstr "Proceso de validación por e-mail para %(user)s"
@@ -1075,7 +1075,6 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: templates/userprofile/menu.html:8
-#: templates/userprofile/profile/location.html:26
 #: templates/userprofile/profile/overview.html:60
 #: templates/userprofile/profile/public.html:38
 msgid "Location"
@@ -1224,7 +1223,7 @@ msgid "Lost your password?"
 msgstr "¿Has perdido tu contraseña?"
 
 #: templates/userprofile/account/login.html:46
-#: templates/userprofile/profile/overview.html:86
+#: templates/userprofile/profile/overview.html:95
 msgid "Resend validation e-mail"
 msgstr "Reenviar e-mail de validación"
 
@@ -1375,12 +1374,12 @@ msgid "User registration"
 msgstr "Registro de usuario"
 
 #: templates/userprofile/account/registration.html:22
-#: templates/userprofile/account/registration_done.html:14
+#: templates/userprofile/account/registration_done.html:19
 msgid "Register a new account"
 msgstr "Registrar una nueva cuenta"
 
 #: templates/userprofile/account/registration.html:23
-#: templates/userprofile/account/registration_done.html:15
+#: templates/userprofile/account/registration_done.html:20
 msgid ""
 "Joining this community is quick and easy. You only need to fill the form to "
 "get access to all the private content"
@@ -1392,17 +1391,25 @@ msgstr ""
 msgid "Registration complete"
 msgstr "Registro de usuario completado"
 
-#: templates/userprofile/account/registration_done.html:9
-msgid "You have successfully registered a new account. Go to the"
-msgstr "Has registrado una nueva cuenta satisfactoriamente. Accede al"
+#: templates/userprofile/account/registration_done.html:10
+msgid ""
+"You have successfully registered a new account, and an account activation "
+"url has been sent to your e-mail address. You must access this message on "
+"your e-mail account to finish the registration process."
+msgstr ""
+"Has registrado satisfactoriamente una nueva cuenta, y te hemos mandado un "
+"email con las instrucciones de activación a tu dirección de correo. Deberás "
+"acceder a este mensaje desde tu cuenta de correo para finalizar el proceso "
+"de registro."
 
-#: templates/userprofile/account/registration_done.html:9
-msgid "login page"
-msgstr "página de entrada de usuario"
-
-#: templates/userprofile/account/registration_done.html:9
-msgid "to authenticate and start using this site"
-msgstr "para autenticarte y empezar a utilizar este sitio"
+#: templates/userprofile/account/registration_done.html:13
+msgid ""
+"You have successfully registered a new account. Go to the <a href=\"%"
+"(overview_url)s\">login page</a> to authenticate and start using this site."
+msgstr ""
+"Has registrado satisfactoriamente una nueva cuenta. Ves a la <a href=\"%"
+"(overview_url)s\">página de entrada</a> para autenticarte y empezar a "
+"utilizar este sitio"
 
 #: templates/userprofile/account/includes/registration_form.html:11
 msgid "E-mail"
@@ -1417,21 +1424,21 @@ msgid "Register"
 msgstr "Registrar"
 
 #: templates/userprofile/avatar/choose.html:4
-#: templates/userprofile/avatar/choose.html:36
+#: templates/userprofile/avatar/choose.html:38
 msgid "Choose the location of your avatar"
 msgstr "Elige la localización de tu avatar"
 
-#: templates/userprofile/avatar/choose.html:39
+#: templates/userprofile/avatar/choose.html:41
 msgid "Select an image from disk"
 msgstr "Selecciona una imagen del disco duro"
 
-#: templates/userprofile/avatar/choose.html:41
-#: templates/userprofile/avatar/choose.html:47
+#: templates/userprofile/avatar/choose.html:43
+#: templates/userprofile/avatar/choose.html:49
 #: templates/userprofile/avatar/crop.html:47
 msgid "Done"
 msgstr "Hecho"
 
-#: templates/userprofile/avatar/choose.html:45
+#: templates/userprofile/avatar/choose.html:47
 msgid ""
 "Select an image from a remote URL. Put the URL on the input below and we'll "
 "retrieve the image for you"
@@ -1439,23 +1446,23 @@ msgstr ""
 "Selecciona una imagen de una URL remota. Pon la dirección remota en el campo "
 "de abajo y obtendremos la imagen para ti"
 
-#: templates/userprofile/avatar/choose.html:52
-#: templates/userprofile/avatar/search.html:4
-#: templates/userprofile/avatar/search.html:28
-msgid "Search for an image on Picasa Web"
-msgstr "Busca una imagen en Picasa Web"
+#: templates/userprofile/avatar/choose.html:54
+msgid "Search on Picasa Web"
+msgstr "Buscar en Picasa Web"
 
-#: templates/userprofile/avatar/choose.html:62
+#: templates/userprofile/avatar/choose.html:57
+msgid "Search"
+msgstr "Búsqueda"
+
+#: templates/userprofile/avatar/choose.html:79
 #: templates/userprofile/avatar/crop.html:53
 #: templates/userprofile/avatar/done.html:19
-#: templates/userprofile/avatar/search.html:50
 msgid "Avatar selection page"
 msgstr "Página de selección de avatar"
 
-#: templates/userprofile/avatar/choose.html:63
+#: templates/userprofile/avatar/choose.html:80
 #: templates/userprofile/avatar/crop.html:54
 #: templates/userprofile/avatar/done.html:20
-#: templates/userprofile/avatar/search.html:51
 msgid ""
 "You have several options to select the image you want as avatar on your "
 "profile"
@@ -1463,7 +1470,7 @@ msgstr ""
 "Tienes varias opciones para seleccionar la imagen que quieres utilizar como "
 "avatar en tu perfil"
 
-#: templates/userprofile/avatar/choose.html:69
+#: templates/userprofile/avatar/choose.html:86
 msgid "Delete"
 msgstr "Borrar"
 
@@ -1479,14 +1486,6 @@ msgstr "Selección de avatar terminada"
 #: templates/userprofile/avatar/done.html:13
 msgid "Your new avatar has been saved successfully"
 msgstr "Tu nuevo avatar ha sido guardado satisfactoriamente"
-
-#: templates/userprofile/avatar/search.html:29
-msgid "Search on Picasa Web"
-msgstr "Buscar en Picasa Web"
-
-#: templates/userprofile/avatar/search.html:32
-msgid "Search"
-msgstr "Búsqueda"
 
 #: templates/userprofile/profile/delete.html:4
 msgid "Delete personal information"
@@ -1554,21 +1553,25 @@ msgstr "País"
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: templates/userprofile/profile/location.html:29
+#: templates/userprofile/profile/location.html:26
+msgid "Location:"
+msgstr "Localización:"
+
+#: templates/userprofile/profile/location.html:27
 msgid "Position"
 msgstr "Posición"
 
-#: templates/userprofile/profile/location.html:36
+#: templates/userprofile/profile/location.html:34
 #: templates/userprofile/profile/personal.html:30
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/userprofile/profile/location.html:41
+#: templates/userprofile/profile/location.html:39
 #: templates/userprofile/profile/location_done.html:19
 msgid "Location information"
 msgstr "Información de localización"
 
-#: templates/userprofile/profile/location.html:42
+#: templates/userprofile/profile/location.html:40
 #: templates/userprofile/profile/location_done.html:20
 msgid "Define your location information"
 msgstr "Define la información sobre tu localización"
@@ -1609,30 +1612,31 @@ msgstr "(No validada)"
 
 #: templates/userprofile/profile/overview.html:55
 #: templates/userprofile/profile/overview.html:64
+#: templates/userprofile/profile/overview.html:73
 msgid "Not set"
 msgstr "No establecido"
 
-#: templates/userprofile/profile/overview.html:82
+#: templates/userprofile/profile/overview.html:91
 msgid "Management:"
 msgstr "Gestión:"
 
-#: templates/userprofile/profile/overview.html:83
+#: templates/userprofile/profile/overview.html:92
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: templates/userprofile/profile/overview.html:85
+#: templates/userprofile/profile/overview.html:94
 msgid "Change your e-mail address"
 msgstr "Cambiar tu dirección de correo"
 
-#: templates/userprofile/profile/overview.html:85
+#: templates/userprofile/profile/overview.html:94
 msgid "Add your e-mail address"
 msgstr "Añadir dirección de correo"
 
-#: templates/userprofile/profile/overview.html:90
+#: templates/userprofile/profile/overview.html:99
 msgid "Add location"
 msgstr "Añadir localización"
 
-#: templates/userprofile/profile/overview.html:92
+#: templates/userprofile/profile/overview.html:101
 msgid "Change location"
 msgstr "Cambiar localización"
 
@@ -1662,6 +1666,18 @@ msgid ""
 msgstr ""
 "Tienes que proporcionar únicamente el tamaño como un entero (ambos lados "
 "iguales) y opcionalmente, el usuario."
+
+#~ msgid "You have successfully registered a new account. Go to the"
+#~ msgstr "Has registrado una nueva cuenta satisfactoriamente. Accede al"
+
+#~ msgid "login page"
+#~ msgstr "página de entrada de usuario"
+
+#~ msgid "to authenticate and start using this site"
+#~ msgstr "para autenticarte y empezar a utilizar este sitio"
+
+#~ msgid "Search for an image on Picasa Web"
+#~ msgstr "Busca una imagen en Picasa Web"
 
 #~ msgid "Try location auto-discover by IP"
 #~ msgstr ""
@@ -1783,15 +1799,6 @@ msgstr ""
 #~ "Si no tienes cuenta, puedes <a href=\"/accounts/register/\">registrarte</"
 #~ "a>"
 
-#~ msgid ""
-#~ "You have successfully registered a new account. Go to the <a href=\"/"
-#~ "accounts/profile/\">login page</a> to authenticate and start using this "
-#~ "site"
-#~ msgstr ""
-#~ "Has registrado satisfactoriamente una nueva cuenta. Ves a la <a href=\"/"
-#~ "accounts/profile/\">página de entrada</a> para autenticarte y empezar a "
-#~ "utilizar este sitio"
-
 #~ msgid "More common..."
 #~ msgstr "Más comunes..."
 
@@ -1821,9 +1828,6 @@ msgstr ""
 
 #~ msgid "Country:"
 #~ msgstr "País:"
-
-#~ msgid "Location:"
-#~ msgstr "Localización:"
 
 #~ msgid "If you have lost your password you can change it with this utility"
 #~ msgstr "Si has perdido tu contraseña, puedes cambiarla con esta utilidad"

@@ -6,7 +6,12 @@
 
 {% block userprofile_content %}
 	<div class="success">
-		<p>{% trans "You have successfully registered a new account. Go to the" %} <a href="{% url profile_overview %}">{% trans "login page" %}</a> {% trans "to authenticate and start using this site" %}.</p>
+		{% if email_validation_required %}
+		<p>{% blocktrans %}You have successfully registered a new account, and an account activation url has been sent to your e-mail address. You must access this message on your e-mail account to finish the registration process.{% endblocktrans %}</p>
+		{% else %}
+		{% url profile_overview as overview_url %}
+		<p>{% blocktrans %}You have successfully registered a new account. Go to the <a href="{{ overview_url }}">login page</a> to authenticate and start using this site.{% endblocktrans %}</p>
+		{% endif %}
 	</div>
 {% endblock %}
 {% block userprofile_content_related %}
