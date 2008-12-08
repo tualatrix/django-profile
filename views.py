@@ -257,7 +257,8 @@ def avatarcrop(request):
             image.save(avatar.image.path)
             avatar.valid = True
             avatar.save()
-            return HttpResponseRedirect(reverse("profile_avatar_crop_done"))
+            request.user.message_set.create(message=_("Your new avatar has been saved successfully."))
+            return HttpResponseRedirect(reverse("profile_edit_avatar"))
 
     template = "userprofile/avatar/crop.html"
     data = { 'section': 'avatar', 'avatar': avatar, 'form': form, }
