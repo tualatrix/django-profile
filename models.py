@@ -26,7 +26,7 @@ class BaseProfile(models.Model):
     """
 
     user = models.ForeignKey(User, unique=True)
-    date = models.DateTimeField(default=datetime.datetime.now)
+    creation_date = models.DateTimeField(default=datetime.datetime.now)
     country = CountryField(null=True, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6, blank=True, null=True)
