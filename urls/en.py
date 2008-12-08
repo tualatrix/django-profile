@@ -63,9 +63,9 @@ urlpatterns = patterns('',
         {'template_name': 'userprofile/account/password_change.html'},
         name='password_change'),
 
-    url(r'^password/change/done/$', 
+    url(r'^password/change/done/$',
         'django.contrib.auth.views.password_change_done',
-        {'template_name': 'userprofile/account/password_change.html'},
+        {'template_name': 'userprofile/account/password_change_done.html'},
         name='password_change_done'),
 
     url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
