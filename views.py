@@ -125,7 +125,7 @@ def personal(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("profile_edit_personal_done"))
+            request.user.message_set.create(message=_("Your profile information has been updated successfully."))
     else:
         form = ProfileForm(instance=profile)
 
@@ -155,7 +155,7 @@ def location(request):
         form = LocationForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("profile_edit_location_done"))
+            request.user.message_set.create(message=_("Your profile information has been updated successfully."))
     else:
         form = LocationForm(instance=profile)
 
@@ -178,7 +178,8 @@ def delete(request):
         request.user.last_name = ''
         request.user.save()
 
-        return HttpResponseRedirect(reverse("profile_delete_done"))
+        request.user.message_set.create(message=_("Your profile information has been removed successfully."))
+        return HttpResponseRedirect(reverse("profile_overview"))
 
     template = "userprofile/profile/delete.html"
     data = { 'section': 'delete', }

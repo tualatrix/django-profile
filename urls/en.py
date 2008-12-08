@@ -9,24 +9,9 @@ urlpatterns = patterns('',
 
     url(r'^profile/edit/location/$', location, name='profile_edit_location'),
 
-    url(r'^profile/edit/location/done/$', direct_to_template,
-        {'extra_context': {'section': 'location'},
-        'template': 'userprofile/profile/location_done.html'},
-        name='profile_edit_location_done'),
-
     url(r'^profile/edit/personal/$', personal, name='profile_edit_personal'),
 
-    url(r'^profile/edit/personal/done/$', direct_to_template,
-        {'extra_context': {'section': 'personal'},
-        'template': 'userprofile/profile/personal_done.html'},
-        name='profile_edit_personal_done'),
-
     url(r'^profile/delete/$', delete, name='profile_delete'),
-
-    url(r'^profile/delete/done/$', direct_to_template,
-        {'extra_context': {'section': 'delete'},
-        'template': 'userprofile/profile/delete_done.html'},
-        name='profile_delete_done'),
 
     url(r'^profile/getcountry_info/(?P<lat>[0-9\.\-]+)/(?P<lng>[0-9\.\-]+)/$',
         fetch_geodata,
@@ -80,7 +65,7 @@ urlpatterns = patterns('',
 
     url(r'^password/change/done/$', 
         'django.contrib.auth.views.password_change_done',
-        {'template_name': 'userprofile/account/password_change_done.html'},
+        {'template_name': 'userprofile/account/password_change.html'},
         name='password_change_done'),
 
     url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
