@@ -63,7 +63,7 @@ if AVATAR_WEBSEARCH:
         raise GoogleDataAPINotFound
 
 def get_profiles():
-    return Profile.objects.order_by("-date")
+    return Profile.objects.order_by("-creation_date")
 
 def fetch_geodata(request, lat, lng):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
