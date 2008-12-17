@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-15 15:51+0500\n"
-"PO-Revision-Date: 2008-12-17 12:47+0500\n"
+"PO-Revision-Date: 2008-12-17 14:36+0500\n"
 "Last-Translator: Ivan Markeyev <ivan.markeyev@concepter.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: .\countries.py:10
 msgid "Andorra"
-msgstr "Индия"
+msgstr "Андорра"
 
 #: .\countries.py:11
 msgid "United Arab Emirates"
@@ -29,11 +29,11 @@ msgstr "Афганистан"
 
 #: .\countries.py:13
 msgid "Antigua & Barbuda"
-msgstr ""
+msgstr "Антигуа и Барбуда"
 
 #: .\countries.py:14
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангилья"
 
 #: .\countries.py:15
 msgid "Albania"
@@ -45,11 +45,11 @@ msgstr "Армения"
 
 #: .\countries.py:17
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Нидерландские Антилы"
 
 #: .\countries.py:18
 msgid "Angola"
-msgstr ""
+msgstr "Ангола"
 
 #: .\countries.py:19
 msgid "Antarctica"
@@ -61,7 +61,7 @@ msgstr "Аргентина"
 
 #: .\countries.py:21
 msgid "American Samoa"
-msgstr ""
+msgstr "Американское Самоа"
 
 #: .\countries.py:22
 msgid "Austria"
@@ -73,7 +73,7 @@ msgstr "Австралия"
 
 #: .\countries.py:24
 msgid "Aruba"
-msgstr ""
+msgstr "Аруба"
 
 #: .\countries.py:25
 msgid "Azerbaijan"
@@ -81,7 +81,7 @@ msgstr "Азербайджан"
 
 #: .\countries.py:26
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Босния и Герцеговина"
 
 #: .\countries.py:27
 msgid "Barbados"
@@ -89,7 +89,7 @@ msgstr "Барбадос"
 
 #: .\countries.py:28
 msgid "Bangladesh"
-msgstr ""
+msgstr "Бангладеш"
 
 #: .\countries.py:29
 msgid "Belgium"
@@ -97,7 +97,7 @@ msgstr "Бельгия"
 
 #: .\countries.py:30
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина-Фасо"
 
 #: .\countries.py:31
 msgid "Bulgaria"
@@ -109,19 +109,19 @@ msgstr "Бухрейн"
 
 #: .\countries.py:33
 msgid "Burundi"
-msgstr ""
+msgstr "Бурунди"
 
 #: .\countries.py:34
 msgid "Benin"
-msgstr ""
+msgstr "Бенин"
 
 #: .\countries.py:35
 msgid "Bermuda"
-msgstr ""
+msgstr "Бермуды"
 
 #: .\countries.py:36
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Бруней-Даруссалам"
 
 #: .\countries.py:37
 msgid "Bolivia"
@@ -141,7 +141,7 @@ msgstr "Бутан"
 
 #: .\countries.py:41
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Остров Буве"
 
 #: .\countries.py:42
 msgid "Botswana"
@@ -153,7 +153,7 @@ msgstr "Белоруссия"
 
 #: .\countries.py:44
 msgid "Belize"
-msgstr ""
+msgstr "Белиз"
 
 #: .\countries.py:45
 msgid "Canada"
@@ -161,11 +161,11 @@ msgstr "Канада"
 
 #: .\countries.py:46
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Кокосовые острова"
 
 #: .\countries.py:47
 msgid "Central African Republic"
-msgstr ""
+msgstr "Центральноафриканская Республика"
 
 #: .\countries.py:48
 msgid "Congo"
@@ -173,7 +173,7 @@ msgstr "Конго"
 
 #: .\countries.py:49
 msgid "Switzerland"
-msgstr ""
+msgstr "Швейцария"
 
 #: .\countries.py:50
 msgid "Ivory Coast"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: .\countries.py:51
 msgid "Cook Islands"
-msgstr ""
+msgstr "Острова Кука"
 
 #: .\countries.py:52
 msgid "Chile"
@@ -209,11 +209,11 @@ msgstr "Куба"
 
 #: .\countries.py:58
 msgid "Cape Verde"
-msgstr ""
+msgstr "Кабо-Верде"
 
 #: .\countries.py:59
 msgid "Christmas Island"
-msgstr ""
+msgstr "Остров Рождества"
 
 #: .\countries.py:60
 msgid "Cyprus"
@@ -229,23 +229,23 @@ msgstr "Германия"
 
 #: .\countries.py:63
 msgid "Djibouti"
-msgstr ""
+msgstr "Джибути"
 
 #: .\countries.py:64
 msgid "Denmark"
-msgstr ""
+msgstr "Дания"
 
 #: .\countries.py:65
 msgid "Dominica"
-msgstr ""
+msgstr "Доминика"
 
 #: .\countries.py:66
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Доминиканская Республика"
 
 #: .\countries.py:67
 msgid "Algeria"
-msgstr ""
+msgstr "Алжир"
 
 #: .\countries.py:68
 msgid "Ecuador"
@@ -257,19 +257,19 @@ msgstr "Эстония"
 
 #: .\countries.py:70
 msgid "Egypt"
-msgstr ""
+msgstr "Египет"
 
 #: .\countries.py:71
 msgid "Western Sahara"
-msgstr ""
+msgstr "Западная Сахара"
 
 #: .\countries.py:72
 msgid "Eritrea"
-msgstr ""
+msgstr "Эритрея"
 
 #: .\countries.py:73
 msgid "Spain"
-msgstr ""
+msgstr "Испания"
 
 #: .\countries.py:74
 msgid "Ethiopia"
@@ -285,99 +285,99 @@ msgstr "Фиджи"
 
 #: .\countries.py:77
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Фолклендские острова (Мальвинские острова)"
 
 #: .\countries.py:78
 msgid "Micronesia"
-msgstr ""
+msgstr "Микронезия"
 
 #: .\countries.py:79
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Фарерские острова"
 
 #: .\countries.py:80
 msgid "France"
-msgstr ""
+msgstr "Франция"
 
 #: .\countries.py:81
 msgid "France, Metropolitan"
-msgstr ""
+msgstr "Франция, Метрополитэн"
 
 #: .\countries.py:82
 msgid "Gabon"
-msgstr ""
+msgstr "Габон"
 
 #: .\countries.py:83
 msgid "United Kingdom (Great Britain)"
-msgstr ""
+msgstr "Соединенное Королевство Великобритании"
 
 #: .\countries.py:84
 msgid "Grenada"
-msgstr ""
+msgstr "Гренада"
 
 #: .\countries.py:85
 msgid "Georgia"
-msgstr ""
+msgstr "Грузия"
 
 #: .\countries.py:86
 msgid "French Guiana"
-msgstr ""
+msgstr "Французская Гвиана"
 
 #: .\countries.py:87
 msgid "Ghana"
-msgstr ""
+msgstr "Гана"
 
 #: .\countries.py:88
 msgid "Gibraltar"
-msgstr ""
+msgstr "Гибралтар"
 
 #: .\countries.py:89
 msgid "Greenland"
-msgstr ""
+msgstr "Гренландия"
 
 #: .\countries.py:90
 msgid "Gambia"
-msgstr ""
+msgstr "Гамбия"
 
 #: .\countries.py:91
 msgid "Guinea"
-msgstr ""
+msgstr "Гвинея"
 
 #: .\countries.py:92
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Гваделупа"
 
 #: .\countries.py:93
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Экваториальная Гвинея"
 
 #: .\countries.py:94
 msgid "Greece"
-msgstr ""
+msgstr "Греция"
 
 #: .\countries.py:95
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Южная Джорджия и Южные Сандвичевы о-ва"
 
 #: .\countries.py:96
 msgid "Guatemala"
-msgstr ""
+msgstr "Гватемала"
 
 #: .\countries.py:97
 msgid "Guam"
-msgstr ""
+msgstr "Гуам"
 
 #: .\countries.py:98
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Гвинея-Бисау"
 
 #: .\countries.py:99
 msgid "Guyana"
-msgstr ""
+msgstr "Гайана"
 
 #: .\countries.py:100
 msgid "Hong Kong"
-msgstr ""
+msgstr "Гонконг"
 
 #: .\countries.py:101
 msgid "Heard & McDonald Islands"
@@ -385,27 +385,27 @@ msgstr ""
 
 #: .\countries.py:102
 msgid "Honduras"
-msgstr ""
+msgstr "Гондурас"
 
 #: .\countries.py:103
 msgid "Croatia"
-msgstr ""
+msgstr "Хорватия"
 
 #: .\countries.py:104
 msgid "Haiti"
-msgstr ""
+msgstr "Гаити"
 
 #: .\countries.py:105
 msgid "Hungary"
-msgstr ""
+msgstr "Венгрия"
 
 #: .\countries.py:106
 msgid "Indonesia"
-msgstr ""
+msgstr "Индонезия"
 
 #: .\countries.py:107
 msgid "Ireland"
-msgstr ""
+msgstr "Ирландия"
 
 #: .\countries.py:108
 msgid "Israel"
@@ -417,7 +417,7 @@ msgstr "Индия"
 
 #: .\countries.py:110
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Британская территория в Индийском океане"
 
 #: .\countries.py:111
 msgid "Iraq"
@@ -425,7 +425,7 @@ msgstr "Ирак"
 
 #: .\countries.py:112
 msgid "Islamic Republic of Iran"
-msgstr ""
+msgstr "Исламская Республика Ирана"
 
 #: .\countries.py:113
 msgid "Iceland"
@@ -465,7 +465,7 @@ msgstr "Кирибати"
 
 #: .\countries.py:122
 msgid "Comoros"
-msgstr ""
+msgstr "Коморос"
 
 #: .\countries.py:123
 msgid "St. Kitts and Nevis"
@@ -473,7 +473,7 @@ msgstr ""
 
 #: .\countries.py:124
 msgid "Korea, Democratic People's Republic of"
-msgstr ""
+msgstr "Корея, Республика Демократичного Народа"
 
 #: .\countries.py:125
 msgid "Korea, Republic of"
@@ -489,7 +489,7 @@ msgstr "Каймановы острова"
 
 #: .\countries.py:128
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Казахстан"
 
 #: .\countries.py:129
 msgid "Lao People's Democratic Republic"
@@ -497,15 +497,15 @@ msgstr ""
 
 #: .\countries.py:130
 msgid "Lebanon"
-msgstr ""
+msgstr "Ливан"
 
 #: .\countries.py:131
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Сент-Люсия"
 
 #: .\countries.py:132
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Лихтенштейн"
 
 #: .\countries.py:133
 msgid "Sri Lanka"
@@ -517,11 +517,11 @@ msgstr "Либерия"
 
 #: .\countries.py:135
 msgid "Lesotho"
-msgstr ""
+msgstr "Лесото"
 
 #: .\countries.py:136
 msgid "Lithuania"
-msgstr ""
+msgstr "Литва"
 
 #: .\countries.py:137
 msgid "Luxembourg"
@@ -533,7 +533,7 @@ msgstr "Латвия"
 
 #: .\countries.py:139
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Ливия"
 
 #: .\countries.py:140
 msgid "Morocco"
@@ -565,27 +565,27 @@ msgstr "Монголия"
 
 #: .\countries.py:147
 msgid "Myanmar"
-msgstr ""
+msgstr "Мьянма"
 
 #: .\countries.py:148
 msgid "Macau"
-msgstr ""
+msgstr "Макао"
 
 #: .\countries.py:149
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Северные Марианские о-ва"
 
 #: .\countries.py:150
 msgid "Martinique"
-msgstr ""
+msgstr "Мартиника"
 
 #: .\countries.py:151
 msgid "Mauritania"
-msgstr ""
+msgstr "Мавритания"
 
 #: .\countries.py:152
 msgid "Monserrat"
-msgstr ""
+msgstr "Монсеррат"
 
 #: .\countries.py:153
 msgid "Malta"
@@ -593,7 +593,7 @@ msgstr "Мальта"
 
 #: .\countries.py:154
 msgid "Mauritius"
-msgstr ""
+msgstr "Маврикий"
 
 #: .\countries.py:155
 msgid "Maldives"
@@ -601,7 +601,7 @@ msgstr "Мальдивы"
 
 #: .\countries.py:156
 msgid "Malawi"
-msgstr ""
+msgstr "Малави"
 
 #: .\countries.py:157
 msgid "Mexico"
@@ -617,11 +617,11 @@ msgstr "Мазамбик"
 
 #: .\countries.py:160
 msgid "Namibia"
-msgstr ""
+msgstr "Намибия"
 
 #: .\countries.py:161
 msgid "New Caledonia"
-msgstr ""
+msgstr "Новая Каледония"
 
 #: .\countries.py:162
 msgid "Niger"
@@ -629,7 +629,7 @@ msgstr "Нигер"
 
 #: .\countries.py:163
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Остров Норфолк"
 
 #: .\countries.py:164
 msgid "Nigeria"
@@ -641,11 +641,11 @@ msgstr "Никарагуа"
 
 #: .\countries.py:166
 msgid "Netherlands"
-msgstr ""
+msgstr "Нидерланды"
 
 #: .\countries.py:167
 msgid "Norway"
-msgstr ""
+msgstr "Норвегия"
 
 #: .\countries.py:168
 msgid "Nepal"
@@ -653,19 +653,19 @@ msgstr "Непал"
 
 #: .\countries.py:169
 msgid "Nauru"
-msgstr ""
+msgstr "Науру"
 
 #: .\countries.py:170
 msgid "Niue"
-msgstr ""
+msgstr "Ниуэ"
 
 #: .\countries.py:171
 msgid "New Zealand"
-msgstr ""
+msgstr "Новая Зеландия"
 
 #: .\countries.py:172
 msgid "Oman"
-msgstr ""
+msgstr "Оман"
 
 #: .\countries.py:173
 msgid "Panama"
@@ -681,7 +681,7 @@ msgstr ""
 
 #: .\countries.py:176
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Папуа-Новая Гвинея"
 
 #: .\countries.py:177
 msgid "Philippines"
@@ -693,7 +693,7 @@ msgstr "Пакистан"
 
 #: .\countries.py:179
 msgid "Poland"
-msgstr ""
+msgstr "Польша"
 
 #: .\countries.py:180
 msgid "St. Pierre & Miquelon"
@@ -705,7 +705,7 @@ msgstr ""
 
 #: .\countries.py:182
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Пуэрто-Рико"
 
 #: .\countries.py:183
 msgid "Portugal"
@@ -713,7 +713,7 @@ msgstr "Португалия"
 
 #: .\countries.py:184
 msgid "Palau"
-msgstr ""
+msgstr "Палау"
 
 #: .\countries.py:185
 msgid "Paraguay"
@@ -725,7 +725,7 @@ msgstr "Катар"
 
 #: .\countries.py:187
 msgid "Reunion"
-msgstr ""
+msgstr "Реюньон"
 
 #: .\countries.py:188
 msgid "Romania"
@@ -737,19 +737,19 @@ msgstr "Россия"
 
 #: .\countries.py:190
 msgid "Rwanda"
-msgstr ""
+msgstr "Руанда"
 
 #: .\countries.py:191
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Саудовская Аравия"
 
 #: .\countries.py:192
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Соломоновы о-ва"
 
 #: .\countries.py:193
 msgid "Seychelles"
-msgstr ""
+msgstr "Сейшелы"
 
 #: .\countries.py:194
 msgid "Sudan"
@@ -757,7 +757,7 @@ msgstr "Судан"
 
 #: .\countries.py:195
 msgid "Sweden"
-msgstr ""
+msgstr "Швеция"
 
 #: .\countries.py:196
 msgid "Singapore"
@@ -765,11 +765,11 @@ msgstr "Сингапур"
 
 #: .\countries.py:197
 msgid "St. Helena"
-msgstr ""
+msgstr "Святая Елена"
 
 #: .\countries.py:198
 msgid "Slovenia"
-msgstr ""
+msgstr "Словения"
 
 #: .\countries.py:199
 msgid "Svalbard & Jan Mayen Islands"
@@ -777,19 +777,19 @@ msgstr ""
 
 #: .\countries.py:200
 msgid "Slovakia"
-msgstr ""
+msgstr "Словакия"
 
 #: .\countries.py:201
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Сьерра-Леоне"
 
 #: .\countries.py:202
 msgid "San Marino"
-msgstr ""
+msgstr "Сан-Марино"
 
 #: .\countries.py:203
 msgid "Senegal"
-msgstr ""
+msgstr "Сенегал"
 
 #: .\countries.py:204
 msgid "Somalia"
@@ -797,7 +797,7 @@ msgstr "Самали"
 
 #: .\countries.py:205
 msgid "Suriname"
-msgstr ""
+msgstr "Суринам"
 
 #: .\countries.py:206
 msgid "Sao Tome & Principe"
@@ -805,7 +805,7 @@ msgstr ""
 
 #: .\countries.py:207
 msgid "El Salvador"
-msgstr ""
+msgstr "Сальвадор"
 
 #: .\countries.py:208
 msgid "Syrian Arab Republic"
@@ -813,7 +813,7 @@ msgstr ""
 
 #: .\countries.py:209
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиленд"
 
 #: .\countries.py:210
 msgid "Turks & Caicos Islands"
@@ -829,7 +829,7 @@ msgstr ""
 
 #: .\countries.py:213
 msgid "Togo"
-msgstr ""
+msgstr "Того"
 
 #: .\countries.py:214
 msgid "Thailand"
@@ -837,27 +837,27 @@ msgstr "Тайланд"
 
 #: .\countries.py:215
 msgid "Tajikistan"
-msgstr ""
+msgstr "Таджикистан"
 
 #: .\countries.py:216
 msgid "Tokelau"
-msgstr ""
+msgstr "Токелау"
 
 #: .\countries.py:217
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Туркменистан"
 
 #: .\countries.py:218
 msgid "Tunisia"
-msgstr ""
+msgstr "Тунис"
 
 #: .\countries.py:219
 msgid "Tonga"
-msgstr ""
+msgstr "Тонга"
 
 #: .\countries.py:220
 msgid "East Timor"
-msgstr ""
+msgstr "Восточный Тимор"
 
 #: .\countries.py:221
 msgid "Turkey"
@@ -865,19 +865,19 @@ msgstr "Турция"
 
 #: .\countries.py:222
 msgid "Trinidad & Tobago"
-msgstr ""
+msgstr "Тринидад и Тобаго"
 
 #: .\countries.py:223
 msgid "Tuvalu"
-msgstr ""
+msgstr "Тувалу"
 
 #: .\countries.py:224
 msgid "Taiwan, Province of China"
-msgstr ""
+msgstr "Тайвань, провинция Китая"
 
 #: .\countries.py:225
 msgid "Tanzania, United Republic of"
-msgstr ""
+msgstr "Танзания (Объединенная Республика)"
 
 #: .\countries.py:226
 msgid "Ukraine"
@@ -885,7 +885,7 @@ msgstr "Украина"
 
 #: .\countries.py:227
 msgid "Uganda"
-msgstr ""
+msgstr "Уганда"
 
 #: .\countries.py:228
 msgid "United States Minor Outlying Islands"
@@ -893,11 +893,11 @@ msgstr ""
 
 #: .\countries.py:229
 msgid "United States of America"
-msgstr ""
+msgstr "Соединенные Штаты Америки"
 
 #: .\countries.py:230
 msgid "Uruguay"
-msgstr ""
+msgstr "Уругвай"
 
 #: .\countries.py:231
 msgid "Uzbekistan"
@@ -905,7 +905,7 @@ msgstr "Узбекистан"
 
 #: .\countries.py:232
 msgid "Vatican City State (Holy See)"
-msgstr ""
+msgstr "Ватикан"
 
 #: .\countries.py:233
 msgid "St. Vincent & the Grenadines"
@@ -917,11 +917,11 @@ msgstr "Венисуэлла"
 
 #: .\countries.py:235
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Британские Виргинские острова"
 
 #: .\countries.py:236
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Виргинские Острова США"
 
 #: .\countries.py:237
 msgid "Viet Nam"
@@ -929,15 +929,15 @@ msgstr "Вьетнам"
 
 #: .\countries.py:238
 msgid "Vanuatu"
-msgstr ""
+msgstr "Вануату"
 
 #: .\countries.py:239
 msgid "Wallis & Futuna Islands"
-msgstr ""
+msgstr "Уоллис и Футуна"
 
 #: .\countries.py:240
 msgid "Samoa"
-msgstr ""
+msgstr "Самоа"
 
 #: .\countries.py:241
 msgid "Yemen"
@@ -945,7 +945,7 @@ msgstr "Йамен"
 
 #: .\countries.py:242
 msgid "Mayotte"
-msgstr ""
+msgstr "Майотта"
 
 #: .\countries.py:243
 msgid "Yugoslavia"
@@ -1128,7 +1128,7 @@ msgstr "Проверка e-mail адреса прошла успешно"
 
 #: .\templates\userprofile\account\email_validation_done.html.py:16
 msgid "The key you received via e-mail is no longer valid. Please try the e-mail validation process again"
-msgstr ""
+msgstr "Ключ проверки, который вы получили, уже не действителен. Пожалуйста, запросите подтверждение почты ещё раз."
 
 #: .\templates\userprofile\account\email_validation_done.html.py:23
 #: .\templates\userprofile\account\email_validation_reset_response.html.py:22
@@ -1152,7 +1152,7 @@ msgstr "Смена e-mail"
 
 #: .\templates\userprofile\account\email_validation_processed.html.py:14
 msgid "An e-mail has been sent to the new e-mail address to verify and activate it. Please access to your e-mail and complete this process following the instructions specified in the e-mail body"
-msgstr ""
+msgstr "На электронную почту был направлен код проверки.Пожалуйста, подтвердите доступ к вашей электронной почте, следуя инструкциям, указанным в электронном письме"
 
 #: .\templates\userprofile\account\email_validation_reset.html.py:4
 #: .\templates\userprofile\account\email_validation_reset.html.py:19
@@ -1170,7 +1170,7 @@ msgstr "Ещё раз послать подтверждение"
 
 #: .\templates\userprofile\account\email_validation_reset.html.py:37
 msgid "If you haven't validated your e-mail address yet you couldn't get into the site. Insert the e-mail address yu have registered with so we can resend the validation e-mail to you again"
-msgstr ""
+msgstr "Вы ещё не подтвердили ваш e-mail адрес и не сможете войти на сайт. Введите ваш e-mail адрес, что бы мы вновь отправили вам письмо для подтверждения"
 
 #: .\templates\userprofile\account\email_validation_reset_response.html.py:4
 msgid "Validation e-mail sent"
@@ -1273,11 +1273,11 @@ msgstr "Пароль успешно изменен"
 
 #: .\templates\userprofile\account\password_expired.html.py:4
 msgid "Password key expired"
-msgstr ""
+msgstr "Пароль просрочен"
 
 #: .\templates\userprofile\account\password_expired.html.py:9
 msgid "The password key you're trying to use is expired. Please, request a new one"
-msgstr ""
+msgstr "Пароль, который вы пытаетесь использовать просрочен. Пожалуйста, запросите новый"
 
 #: .\templates\userprofile\account\password_reset.html.py:4
 #: .\templates\userprofile\account\password_reset.html.py:20
@@ -1298,16 +1298,16 @@ msgstr "Форма сброса пароля"
 #: .\templates\userprofile\account\password_reset.html.py:38
 #: .\templates\userprofile\account\password_reset_done.html.py:17
 msgid "Forgotten your password? Enter your e-mail address, and we'll reset your password and e-mail the new one to you"
-msgstr ""
+msgstr "Забыли ваш пароль? Введите адрес электронной почты (указанный при регистрации) и мы вышлем вам новый пароль"
 
 #: .\templates\userprofile\account\password_reset_complete.html.py:13
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Пароль успешно создан. Теперь вы можете войти и продолжить работу."
 
 #: .\templates\userprofile\account\password_reset_complete.html.py:20
 #: .\templates\userprofile\account\password_reset_confirm.html.py:56
 msgid "Password reset utility page. Please enter your new password twice so we can verify you typed it in correctly"
-msgstr ""
+msgstr "Страница смены пароля. Пожалуйста введите новый пароль дважды (для проверки корректности ввода)"
 
 #: .\templates\userprofile\account\password_reset_confirm.html.py:47
 msgid "Password reset unsuccessful"
@@ -1315,7 +1315,7 @@ msgstr "Сброс пароля не удался"
 
 #: .\templates\userprofile\account\password_reset_confirm.html.py:48
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
-msgstr ""
+msgstr "Ссылка для сброса пароля не верна, возможно она уже была использована. Пожалуйста, запросите смену пароля ещё раз."
 
 #: .\templates\userprofile\account\password_reset_done.html.py:4
 #: .\templates\userprofile\account\password_reset_done.html.py:9
@@ -1324,7 +1324,7 @@ msgstr "Сброс пароля успешно завершен"
 
 #: .\templates\userprofile\account\password_reset_done.html.py:10
 msgid "We've e-mailed you the instructions to obtain a new password. You should be receiving it shortly"
-msgstr ""
+msgstr "Мы отправили вам на email адрес инструкции по получению нового пароля. Вы получите письмо в ближайшее время"
 
 #: .\templates\userprofile\account\registration.html.py:4
 #: .\templates\userprofile\account\includes\registration_form.html.py:4
@@ -1339,7 +1339,7 @@ msgstr "Регистрация нового аккаунта"
 #: .\templates\userprofile\account\registration.html.py:23
 #: .\templates\userprofile\account\registration_done.html.py:20
 msgid "Joining this community is quick and easy. You only need to fill the form to get access to all the private content"
-msgstr ""
+msgstr "Вы можете зарегистрироваться быстро и просто. Все что нужно - заполнить форму, для получния доступа к защищенной части сайта"
 
 #: .\templates\userprofile\account\registration_done.html.py:4
 msgid "Registration complete"
@@ -1347,12 +1347,12 @@ msgstr "Регистрация завершена"
 
 #: .\templates\userprofile\account\registration_done.html.py:10
 msgid "You have successfully registered a new account, and an account activation url has been sent to your e-mail address. You must access this message on your e-mail account to finish the registration process."
-msgstr ""
+msgstr "Вы успешно зарегистрировали новый аккоунт. Ссылка для активации аккоунта направлена на указанный адрес e-mail. Вы должны получить письмо в вашей почтовой программе и закончить регистрацию."
 
 #: .\templates\userprofile\account\registration_done.html.py:13
 #, python-format
 msgid "You have successfully registered a new account. Go to the <a href=\"%(overview_url)s\">login page</a> to authenticate and start using this site."
-msgstr ""
+msgstr "Вы успешно зарегистрировалиь. Перейдите на <a href=\"%(overview_url)s\">страницу аутентификации</a> для входа и продолжения работы с сайтом."
 
 #: .\templates\userprofile\account\includes\registration_form.html.py:11
 msgid "E-mail"
@@ -1383,7 +1383,7 @@ msgstr "Готово"
 
 #: .\templates\userprofile\avatar\choose.html.py:47
 msgid "Select an image from a remote URL. Put the URL on the input below and we'll retrieve the image for you"
-msgstr ""
+msgstr "Выбрать изображение по его URL адресу."
 
 #: .\templates\userprofile\avatar\choose.html.py:54
 msgid "Search on Picasa Web"
@@ -1401,7 +1401,7 @@ msgstr "Страница выбора аватара"
 #: .\templates\userprofile\avatar\choose.html.py:80
 #: .\templates\userprofile\avatar\crop.html.py:54
 msgid "You have several options to select the image you want as avatar on your profile"
-msgstr ""
+msgstr "У вас есть несколько вариантов выбрать изображение для аватара в вашем профиле"
 
 #: .\templates\userprofile\avatar\choose.html.py:86
 msgid "Delete"
@@ -1414,12 +1414,12 @@ msgstr "Вырежте и растяните желаемую область"
 
 #: .\templates\userprofile\email\password_reset_email.txt.py:2
 msgid "You're receiving this e-mail because you requested a password reset"
-msgstr ""
+msgstr "Вы получили это письмо, так как запросили смену пароля"
 
 #: .\templates\userprofile\email\password_reset_email.txt.py:3
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr ""
+msgstr "вашего аккоунта на сайте %(site_name)s"
 
 #: .\templates\userprofile\email\password_reset_email.txt.py:5
 msgid "Please go to the following page and choose a new password:"
@@ -1428,7 +1428,7 @@ msgstr "Пожалуйста перейдите на следующую стра
 #: .\templates\userprofile\email\password_reset_email.txt.py:9
 #: .\templates\userprofile\email\validation.txt.py:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Ваше имя пользователя (если забили):"
 
 #: .\templates\userprofile\email\password_reset_email.txt.py:11
 #: .\templates\userprofile\email\validation.txt.py:10
@@ -1443,7 +1443,7 @@ msgstr "Команда сайта %(site_name)s "
 #: .\templates\userprofile\email\validation.txt.py:2
 #, python-format
 msgid "You're receiving this e-mail because you requested an e-mail validation at %(site_name)s"
-msgstr ""
+msgstr "Вы получили это письмо, так как запросили подтверждение e-mail адрес на сайте %(site_name)s"
 
 #: .\templates\userprofile\email\validation.txt.py:4
 msgid "Following this link, you will validate your e-mail address:"
@@ -1472,7 +1472,7 @@ msgstr "Да"
 
 #: .\templates\userprofile\profile\delete.html.py:23
 msgid "It erases all your private data except your username. You can refill the information later if you want to"
-msgstr ""
+msgstr "Это сотрет все личную информацию, кроме имени пользователя. Вы сможете заполнить профиль ещё раз поздней"
 
 #: .\templates\userprofile\profile\location.html.py:4
 #, python-format
