@@ -28,6 +28,7 @@ class ResizedThumbnailNode(Node):
             self.size = int(size)
         except:
             self.size = Variable(size)
+
         if username:
             self.user = Variable(username)
         else:
@@ -69,7 +70,7 @@ class ResizedThumbnailNode(Node):
 @register.tag('avatar')
 def Thumbnail(parser, token):
     bits = token.contents.split()
-    username = "request.user"
+    username = None
     if len(bits) > 3:
         raise TemplateSyntaxError, _(u"You have to provide only the size as \
             an integer (both sides will be equal) and optionally, the \
