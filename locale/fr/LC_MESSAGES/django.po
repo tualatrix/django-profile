@@ -1,15 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# French version for django-profile .
+# Copyright (C) 2009 django-profile
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Twidi <twidi@twidi.com>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-05 17:29+0200\n"
-"PO-Revision-Date: 2008-12-17 14:36+0500\n"
-"Last-Translator: Ivan Markeyev <ivan.markeyev@concepter.ru>\n"
+"POT-Creation-Date: 2008-12-06 22:31+0100\n"
+"PO-Revision-Date: 2009-04-03 20:49+GMT+1\n"
+"Last-Translator: Twidi <twidi@twidi.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,1099 +17,1088 @@ msgstr ""
 
 #: countries.py:10
 msgid "Andorra"
-msgstr "Андорра"
+msgstr "Andorre"
 
 #: countries.py:11
 msgid "United Arab Emirates"
-msgstr "Объединенные Арабские Эмираты"
+msgstr "Émirats Arabes Unis"
 
 #: countries.py:12
 msgid "Afghanistan"
-msgstr "Афганистан"
+msgstr "Afghanistan"
 
 #: countries.py:13
 msgid "Antigua & Barbuda"
-msgstr "Антигуа и Барбуда"
+msgstr "Antigua-et-Barbuda"
 
 #: countries.py:14
 msgid "Anguilla"
-msgstr "Ангилья"
+msgstr "Anguilla"
 
 #: countries.py:15
 msgid "Albania"
-msgstr "Албания"
+msgstr "Albanie"
 
 #: countries.py:16
 msgid "Armenia"
-msgstr "Армения"
+msgstr "Armenie"
 
 #: countries.py:17
 msgid "Netherlands Antilles"
-msgstr "Нидерландские Антилы"
+msgstr "Antilles Néerlandaises"
 
 #: countries.py:18
 msgid "Angola"
-msgstr "Ангола"
+msgstr "Angola"
 
 #: countries.py:19
 msgid "Antarctica"
-msgstr "Антарктика"
+msgstr "Antartique"
 
 #: countries.py:20
 msgid "Argentina"
-msgstr "Аргентина"
+msgstr "Argentine"
 
 #: countries.py:21
 msgid "American Samoa"
-msgstr "Американское Самоа"
+msgstr "Samoa Américaines"
 
 #: countries.py:22
 msgid "Austria"
-msgstr "Австрия"
+msgstr "Autriche"
 
 #: countries.py:23
 msgid "Australia"
-msgstr "Австралия"
+msgstr "Australie"
 
 #: countries.py:24
 msgid "Aruba"
-msgstr "Аруба"
+msgstr "Aruba"
 
 #: countries.py:25
 msgid "Azerbaijan"
-msgstr "Азербайджан"
+msgstr "Azerbaïdjan"
 
 #: countries.py:26
 msgid "Bosnia and Herzegovina"
-msgstr "Босния и Герцеговина"
+msgstr "Bosnie Herzégovine"
 
 #: countries.py:27
 msgid "Barbados"
-msgstr "Барбадос"
+msgstr "Barbade"
 
 #: countries.py:28
 msgid "Bangladesh"
-msgstr "Бангладеш"
+msgstr "Bangladesh"
 
 #: countries.py:29
 msgid "Belgium"
-msgstr "Бельгия"
+msgstr "Bélgique"
 
 #: countries.py:30
 msgid "Burkina Faso"
-msgstr "Буркина-Фасо"
+msgstr "Burkina Faso"
 
 #: countries.py:31
 msgid "Bulgaria"
-msgstr "Болгария"
+msgstr "Bulgarie"
 
 #: countries.py:32
 msgid "Bahrain"
-msgstr "Бухрейн"
+msgstr "Bahreïn"
 
 #: countries.py:33
 msgid "Burundi"
-msgstr "Бурунди"
+msgstr "Burundi"
 
 #: countries.py:34
 msgid "Benin"
-msgstr "Бенин"
+msgstr "Bénín"
 
 #: countries.py:35
 msgid "Bermuda"
-msgstr "Бермуды"
+msgstr "Bermudes"
 
 #: countries.py:36
 msgid "Brunei Darussalam"
-msgstr "Бруней-Даруссалам"
+msgstr "Brunéi Darussalam"
 
 #: countries.py:37
 msgid "Bolivia"
-msgstr "Боливия"
+msgstr "Bolivie"
 
 #: countries.py:38
 msgid "Brazil"
-msgstr "Бразилия"
+msgstr "Brésil"
 
 #: countries.py:39
 msgid "Bahama"
-msgstr "Багамы"
+msgstr "Bahamas"
 
 #: countries.py:40
 msgid "Bhutan"
-msgstr "Бутан"
+msgstr "Bhoutan"
 
 #: countries.py:41
 msgid "Bouvet Island"
-msgstr "Остров Буве"
+msgstr "Bouvet, Île"
 
 #: countries.py:42
 msgid "Botswana"
-msgstr "Боцвана"
+msgstr "Botswana"
 
 #: countries.py:43
 msgid "Belarus"
-msgstr "Белоруссия"
+msgstr "Bielorussie"
 
 #: countries.py:44
 msgid "Belize"
-msgstr "Белиз"
+msgstr "Bélize"
 
 #: countries.py:45
 msgid "Canada"
-msgstr "Канада"
+msgstr "Canadá"
 
 #: countries.py:46
 msgid "Cocos (Keeling) Islands"
-msgstr "Кокосовые острова"
+msgstr "Cocos, Îles"
 
 #: countries.py:47
 msgid "Central African Republic"
-msgstr "Центральноафриканская Республика"
+msgstr "Centrafrique"
 
 #: countries.py:48
 msgid "Congo"
-msgstr "Конго"
+msgstr "Congo"
 
 #: countries.py:49
 msgid "Switzerland"
-msgstr "Швейцария"
+msgstr "Suisse"
 
 #: countries.py:50
 msgid "Ivory Coast"
-msgstr ""
+msgstr "Côte d'Ivoire"
 
 #: countries.py:51
 msgid "Cook Islands"
-msgstr "Острова Кука"
+msgstr "Cook, Îles"
 
 #: countries.py:52
 msgid "Chile"
-msgstr "Чили"
+msgstr "Chili"
 
 #: countries.py:53
 msgid "Cameroon"
-msgstr "Камерун"
+msgstr "Cameroun"
 
 #: countries.py:54
 msgid "China"
-msgstr "Китай"
+msgstr "Chine"
 
 #: countries.py:55
 msgid "Colombia"
-msgstr "Колумбия"
+msgstr "Colombie"
 
 #: countries.py:56
 msgid "Costa Rica"
-msgstr "Коста рика"
+msgstr "Costa Rica"
 
 #: countries.py:57
 msgid "Cuba"
-msgstr "Куба"
+msgstr "Cuba"
 
 #: countries.py:58
 msgid "Cape Verde"
-msgstr "Кабо-Верде"
+msgstr "Cap-Vert"
 
 #: countries.py:59
 msgid "Christmas Island"
-msgstr "Остров Рождества"
+msgstr "Christmas, Île"
 
 #: countries.py:60
 msgid "Cyprus"
-msgstr "Кипр"
+msgstr "Chypre"
 
 #: countries.py:61
 msgid "Czech Republic"
-msgstr "Чешская Республика"
+msgstr "Tchèque, Republique"
 
 #: countries.py:62
 msgid "Germany"
-msgstr "Германия"
+msgstr "Allemagne"
 
 #: countries.py:63
 msgid "Djibouti"
-msgstr "Джибути"
+msgstr "Djibouti"
 
 #: countries.py:64
 msgid "Denmark"
-msgstr "Дания"
+msgstr "Danemark"
 
 #: countries.py:65
 msgid "Dominica"
-msgstr "Доминика"
+msgstr "Dominique"
 
 #: countries.py:66
 msgid "Dominican Republic"
-msgstr "Доминиканская Республика"
+msgstr "Republique Dominicaine"
 
 #: countries.py:67
 msgid "Algeria"
-msgstr "Алжир"
+msgstr "Algerie"
 
 #: countries.py:68
 msgid "Ecuador"
-msgstr "Эквадор"
+msgstr "Equateur"
 
 #: countries.py:69
 msgid "Estonia"
-msgstr "Эстония"
+msgstr "Estonie"
 
 #: countries.py:70
 msgid "Egypt"
-msgstr "Египет"
+msgstr "Egypte"
 
 #: countries.py:71
 msgid "Western Sahara"
-msgstr "Западная Сахара"
+msgstr "Sahara Occidental"
 
 #: countries.py:72
 msgid "Eritrea"
-msgstr "Эритрея"
+msgstr "Érythrée"
 
 #: countries.py:73
 msgid "Spain"
-msgstr "Испания"
+msgstr "Espagne"
 
 #: countries.py:74
 msgid "Ethiopia"
-msgstr "Эфиопия"
+msgstr "Ethiopíe"
 
 #: countries.py:75
 msgid "Finland"
-msgstr "Финляндия"
+msgstr "Finlande"
 
 #: countries.py:76
 msgid "Fiji"
-msgstr "Фиджи"
+msgstr "Fidji"
 
 #: countries.py:77
 msgid "Falkland Islands (Malvinas)"
-msgstr "Фолклендские острова (Мальвинские острова)"
+msgstr "Malouines, Îles"
 
 #: countries.py:78
 msgid "Micronesia"
-msgstr "Микронезия"
+msgstr "Micronésie"
 
 #: countries.py:79
 msgid "Faroe Islands"
-msgstr "Фарерские острова"
+msgstr "Féroé, Îles"
 
 #: countries.py:80
 msgid "France"
-msgstr "Франция"
+msgstr "France"
 
 #: countries.py:81
 msgid "France, Metropolitan"
-msgstr "Франция, Метрополитэн"
+msgstr "France Métropolitaine"
 
 #: countries.py:82
 msgid "Gabon"
-msgstr "Габон"
+msgstr "Gabon"
 
 #: countries.py:83
 msgid "United Kingdom (Great Britain)"
-msgstr "Соединенное Королевство Великобритании"
+msgstr "Grande-Bretagne"
 
 #: countries.py:84
 msgid "Grenada"
-msgstr "Гренада"
+msgstr "Granade"
 
 #: countries.py:85
 msgid "Georgia"
-msgstr "Грузия"
+msgstr "Géorgie"
 
 #: countries.py:86
 msgid "French Guiana"
-msgstr "Французская Гвиана"
+msgstr "Guyanne Française"
 
 #: countries.py:87
 msgid "Ghana"
-msgstr "Гана"
+msgstr "Ghana"
 
 #: countries.py:88
 msgid "Gibraltar"
-msgstr "Гибралтар"
+msgstr "Gibraltar"
 
 #: countries.py:89
 msgid "Greenland"
-msgstr "Гренландия"
+msgstr "Groenland"
 
 #: countries.py:90
 msgid "Gambia"
-msgstr "Гамбия"
+msgstr "Gambie"
 
 #: countries.py:91
 msgid "Guinea"
-msgstr "Гвинея"
+msgstr "Guinée"
 
 #: countries.py:92
 msgid "Guadeloupe"
-msgstr "Гваделупа"
+msgstr "Guadeloupe"
 
 #: countries.py:93
 msgid "Equatorial Guinea"
-msgstr "Экваториальная Гвинея"
+msgstr "Guinée Équatoriale"
 
 #: countries.py:94
 msgid "Greece"
-msgstr "Греция"
+msgstr "Grèce"
 
 #: countries.py:95
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Южная Джорджия и Южные Сандвичевы о-ва"
+msgstr "Géorgie du Sud et les Îles Sandwich du Sud"
 
 #: countries.py:96
 msgid "Guatemala"
-msgstr "Гватемала"
+msgstr "Guatémala"
 
 #: countries.py:97
 msgid "Guam"
-msgstr "Гуам"
+msgstr "Guam"
 
 #: countries.py:98
 msgid "Guinea-Bissau"
-msgstr "Гвинея-Бисау"
+msgstr "Guinée-Bissau"
 
 #: countries.py:99
 msgid "Guyana"
-msgstr "Гайана"
+msgstr "Guyane"
 
 #: countries.py:100
 msgid "Hong Kong"
-msgstr "Гонконг"
+msgstr "Hong Kong"
 
 #: countries.py:101
 msgid "Heard & McDonald Islands"
-msgstr ""
+msgstr "Heard et McDonald, Îles"
 
 #: countries.py:102
 msgid "Honduras"
-msgstr "Гондурас"
+msgstr "Honduras"
 
 #: countries.py:103
 msgid "Croatia"
-msgstr "Хорватия"
+msgstr "Croatie"
 
 #: countries.py:104
 msgid "Haiti"
-msgstr "Гаити"
+msgstr "Haïti"
 
 #: countries.py:105
 msgid "Hungary"
-msgstr "Венгрия"
+msgstr "Hongríe"
 
 #: countries.py:106
 msgid "Indonesia"
-msgstr "Индонезия"
+msgstr "Indonésie"
 
 #: countries.py:107
 msgid "Ireland"
-msgstr "Ирландия"
+msgstr "Irlande"
 
 #: countries.py:108
 msgid "Israel"
-msgstr "Израиль"
+msgstr "Israël"
 
 #: countries.py:109
 msgid "India"
-msgstr "Индия"
+msgstr "Inde"
 
 #: countries.py:110
 msgid "British Indian Ocean Territory"
-msgstr "Британская территория в Индийском океане"
+msgstr "Territoire britannique de l'océan Indien"
 
 #: countries.py:111
 msgid "Iraq"
-msgstr "Ирак"
+msgstr "Irak"
 
 #: countries.py:112
 msgid "Islamic Republic of Iran"
-msgstr "Исламская Республика Ирана"
+msgstr "Iran, Republique Islamique d'"
 
 #: countries.py:113
 msgid "Iceland"
-msgstr "Исландия"
+msgstr "Islande"
 
 #: countries.py:114
 msgid "Italy"
-msgstr "Италия"
+msgstr "Italie"
 
 #: countries.py:115
 msgid "Jamaica"
-msgstr "Ямайка"
+msgstr "Jamaïque"
 
 #: countries.py:116
 msgid "Jordan"
-msgstr "Иордания"
+msgstr "Jordanie"
 
 #: countries.py:117
 msgid "Japan"
-msgstr "Япония"
+msgstr "Japon"
 
 #: countries.py:118
 msgid "Kenya"
-msgstr "Кения"
+msgstr "Kenia"
 
 #: countries.py:119
 msgid "Kyrgyzstan"
-msgstr "Кыргызстан"
+msgstr "Kirghizstan"
 
 #: countries.py:120
 msgid "Cambodia"
-msgstr "Камбоджа"
+msgstr "Cambodge"
 
 #: countries.py:121
 msgid "Kiribati"
-msgstr "Кирибати"
+msgstr "Kiribati"
 
 #: countries.py:122
 msgid "Comoros"
-msgstr "Коморос"
+msgstr "Comores"
 
 #: countries.py:123
 msgid "St. Kitts and Nevis"
-msgstr ""
+msgstr "Saint-Christophe et Niévès"
 
 #: countries.py:124
 msgid "Korea, Democratic People's Republic of"
-msgstr "Корея, Республика Демократичного Народа"
+msgstr "Corée, Republique Populaire Démocratique de"
 
 #: countries.py:125
 msgid "Korea, Republic of"
-msgstr "Корейская Республика"
+msgstr "Corée, République de"
 
 #: countries.py:126
 msgid "Kuwait"
-msgstr "Кувейт"
+msgstr "Koweït"
 
 #: countries.py:127
 msgid "Cayman Islands"
-msgstr "Каймановы острова"
+msgstr "Caïmans, Îles"
 
 #: countries.py:128
 msgid "Kazakhstan"
-msgstr "Казахстан"
+msgstr "Kazakhstan"
 
 #: countries.py:129
 msgid "Lao People's Democratic Republic"
-msgstr ""
+msgstr "Laos"
 
 #: countries.py:130
 msgid "Lebanon"
-msgstr "Ливан"
+msgstr "Liban"
 
 #: countries.py:131
 msgid "Saint Lucia"
-msgstr "Сент-Люсия"
+msgstr "Sainte-Lucie"
 
 #: countries.py:132
 msgid "Liechtenstein"
-msgstr "Лихтенштейн"
+msgstr "Liechtenstein"
 
 #: countries.py:133
 msgid "Sri Lanka"
-msgstr "Шриланка"
+msgstr "Sri Lanka"
 
 #: countries.py:134
 msgid "Liberia"
-msgstr "Либерия"
+msgstr "Libéria"
 
 #: countries.py:135
 msgid "Lesotho"
-msgstr "Лесото"
+msgstr "Lesotho"
 
 #: countries.py:136
 msgid "Lithuania"
-msgstr "Литва"
+msgstr "Lituanie"
 
 #: countries.py:137
 msgid "Luxembourg"
-msgstr "Люксембург"
+msgstr "Luxembourg"
 
 #: countries.py:138
 msgid "Latvia"
-msgstr "Латвия"
+msgstr "Letonie"
 
 #: countries.py:139
 msgid "Libyan Arab Jamahiriya"
-msgstr "Ливия"
+msgstr "Libye"
 
 #: countries.py:140
 msgid "Morocco"
-msgstr "Морокко"
+msgstr "Maroc"
 
 #: countries.py:141
 msgid "Monaco"
-msgstr "Монако"
+msgstr "Monaco"
 
 #: countries.py:142
 msgid "Moldova, Republic of"
-msgstr "Молдова (Республика)"
+msgstr "Moldavie"
 
 #: countries.py:143
 msgid "Madagascar"
-msgstr "Мадагаскар"
+msgstr "Madagascar"
 
 #: countries.py:144
 msgid "Marshall Islands"
-msgstr "Маршаловы Острова"
+msgstr "Marshall, Îles"
 
 #: countries.py:145
 msgid "Mali"
-msgstr "Мали"
+msgstr "Mali"
 
 #: countries.py:146
 msgid "Mongolia"
-msgstr "Монголия"
+msgstr "Mongolie"
 
 #: countries.py:147
 msgid "Myanmar"
-msgstr "Мьянма"
+msgstr "Birmanie"
 
 #: countries.py:148
 msgid "Macau"
-msgstr "Макао"
+msgstr "Macao"
 
 #: countries.py:149
 msgid "Northern Mariana Islands"
-msgstr "Северные Марианские о-ва"
+msgstr "Mariannes du Nord, Îles"
 
 #: countries.py:150
 msgid "Martinique"
-msgstr "Мартиника"
+msgstr "Martinique"
 
 #: countries.py:151
 msgid "Mauritania"
-msgstr "Мавритания"
+msgstr "Mauritanie"
 
 #: countries.py:152
 msgid "Monserrat"
-msgstr "Монсеррат"
+msgstr "Montserrat"
 
 #: countries.py:153
 msgid "Malta"
-msgstr "Мальта"
+msgstr "Malte"
 
 #: countries.py:154
 msgid "Mauritius"
-msgstr "Маврикий"
+msgstr "Maurice"
 
 #: countries.py:155
 msgid "Maldives"
-msgstr "Мальдивы"
+msgstr "Maldives"
 
 #: countries.py:156
 msgid "Malawi"
-msgstr "Малави"
+msgstr "Malawi"
 
 #: countries.py:157
 msgid "Mexico"
-msgstr "Мексика"
+msgstr "Mexique"
 
 #: countries.py:158
 msgid "Malaysia"
-msgstr "Малазия"
+msgstr "Malaisie"
 
 #: countries.py:159
 msgid "Mozambique"
-msgstr "Мазамбик"
+msgstr "Mozambique"
 
 #: countries.py:160
 msgid "Namibia"
-msgstr "Намибия"
+msgstr "Namibie"
 
 #: countries.py:161
 msgid "New Caledonia"
-msgstr "Новая Каледония"
+msgstr "Nouvelle Calédone"
 
 #: countries.py:162
 msgid "Niger"
-msgstr "Нигер"
+msgstr "Niger"
 
 #: countries.py:163
 msgid "Norfolk Island"
-msgstr "Остров Норфолк"
+msgstr "Norfolk, Île"
 
 #: countries.py:164
 msgid "Nigeria"
-msgstr "Нигерия"
+msgstr "Nigéria"
 
 #: countries.py:165
 msgid "Nicaragua"
-msgstr "Никарагуа"
+msgstr "Nicaragua"
 
 #: countries.py:166
 msgid "Netherlands"
-msgstr "Нидерланды"
+msgstr "Pays-Bas"
 
 #: countries.py:167
 msgid "Norway"
-msgstr "Норвегия"
+msgstr "Norvège"
 
 #: countries.py:168
 msgid "Nepal"
-msgstr "Непал"
+msgstr "Népal"
 
 #: countries.py:169
 msgid "Nauru"
-msgstr "Науру"
+msgstr "Nauru"
 
 #: countries.py:170
 msgid "Niue"
-msgstr "Ниуэ"
+msgstr "Niué"
 
 #: countries.py:171
 msgid "New Zealand"
-msgstr "Новая Зеландия"
+msgstr "Nouvelle-Zélande"
 
 #: countries.py:172
 msgid "Oman"
-msgstr "Оман"
+msgstr "Oman"
 
 #: countries.py:173
 msgid "Panama"
-msgstr "Панама"
+msgstr "Panama"
 
 #: countries.py:174
 msgid "Peru"
-msgstr "Перу"
+msgstr "Perou"
 
 #: countries.py:175
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polynésie Française"
 
 #: countries.py:176
 msgid "Papua New Guinea"
-msgstr "Папуа-Новая Гвинея"
+msgstr "Papouasie - Nouvelle-Guinée"
 
 #: countries.py:177
 msgid "Philippines"
-msgstr "Филипины"
+msgstr "Philippines"
 
 #: countries.py:178
 msgid "Pakistan"
-msgstr "Пакистан"
+msgstr "Pakistan"
 
 #: countries.py:179
 msgid "Poland"
-msgstr "Польша"
+msgstr "Pologne"
 
 #: countries.py:180
 msgid "St. Pierre & Miquelon"
-msgstr ""
+msgstr "Saint-Pierre et Miquelon"
 
 #: countries.py:181
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn, Îles"
 
 #: countries.py:182
 msgid "Puerto Rico"
-msgstr "Пуэрто-Рико"
+msgstr "Porto Rico"
 
 #: countries.py:183
 msgid "Portugal"
-msgstr "Португалия"
+msgstr "Portugal"
 
 #: countries.py:184
 msgid "Palau"
-msgstr "Палау"
+msgstr "Palaos"
 
 #: countries.py:185
 msgid "Paraguay"
-msgstr "Парагвай"
+msgstr "Paraguay"
 
 #: countries.py:186
 msgid "Qatar"
-msgstr "Катар"
+msgstr "Qatar"
 
 #: countries.py:187
 msgid "Reunion"
-msgstr "Реюньон"
+msgstr "Reunion"
 
 #: countries.py:188
 msgid "Romania"
-msgstr "Румыния"
+msgstr "Roumanie"
 
 #: countries.py:189
 msgid "Russian Federation"
-msgstr "Россия"
+msgstr "Russie, Fédération de"
 
 #: countries.py:190
 msgid "Rwanda"
-msgstr "Руанда"
+msgstr "Rwanda"
 
 #: countries.py:191
 msgid "Saudi Arabia"
-msgstr "Саудовская Аравия"
+msgstr "Arabie Saoudite"
 
 #: countries.py:192
 msgid "Solomon Islands"
-msgstr "Соломоновы о-ва"
+msgstr "Salomon, Îles"
 
 #: countries.py:193
 msgid "Seychelles"
-msgstr "Сейшелы"
+msgstr "Seychelles"
 
 #: countries.py:194
 msgid "Sudan"
-msgstr "Судан"
+msgstr "Soudan"
 
 #: countries.py:195
 msgid "Sweden"
-msgstr "Швеция"
+msgstr "Suède"
 
 #: countries.py:196
 msgid "Singapore"
-msgstr "Сингапур"
+msgstr "Singapour"
 
 #: countries.py:197
 msgid "St. Helena"
-msgstr "Святая Елена"
+msgstr "Sainte-Hélène, Île"
 
 #: countries.py:198
 msgid "Slovenia"
-msgstr "Словения"
+msgstr "Slovénie"
 
 #: countries.py:199
 msgid "Svalbard & Jan Mayen Islands"
-msgstr ""
+msgstr "Svalbard et Jan Mayen"
 
 #: countries.py:200
 msgid "Slovakia"
-msgstr "Словакия"
+msgstr "Slovaquie"
 
 #: countries.py:201
 msgid "Sierra Leone"
-msgstr "Сьерра-Леоне"
+msgstr "Sierra Leone"
 
 #: countries.py:202
 msgid "San Marino"
-msgstr "Сан-Марино"
+msgstr "Saint-Marin"
 
 #: countries.py:203
 msgid "Senegal"
-msgstr "Сенегал"
+msgstr "Sénégal"
 
 #: countries.py:204
 msgid "Somalia"
-msgstr "Самали"
+msgstr "Somalie"
 
 #: countries.py:205
 msgid "Suriname"
-msgstr "Суринам"
+msgstr "Surinam"
 
 #: countries.py:206
 msgid "Sao Tome & Principe"
-msgstr ""
+msgstr "Sao Tomé et  Principe"
 
 #: countries.py:207
 msgid "El Salvador"
-msgstr "Сальвадор"
+msgstr "Salvador"
 
 #: countries.py:208
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Syrie"
 
 #: countries.py:209
 msgid "Swaziland"
-msgstr "Свазиленд"
+msgstr "Swaziland"
 
 #: countries.py:210
 msgid "Turks & Caicos Islands"
-msgstr ""
+msgstr "Turques-et-Caïques, Îles"
 
 #: countries.py:211
 msgid "Chad"
-msgstr "Чад"
+msgstr "Tchad"
 
 #: countries.py:212
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Terres australes et antarctiques françaises"
 
 #: countries.py:213
 msgid "Togo"
-msgstr "Того"
+msgstr "Togo"
 
 #: countries.py:214
 msgid "Thailand"
-msgstr "Тайланд"
+msgstr "Thaïlande"
 
 #: countries.py:215
 msgid "Tajikistan"
-msgstr "Таджикистан"
+msgstr "Tadjikistan"
 
 #: countries.py:216
 msgid "Tokelau"
-msgstr "Токелау"
+msgstr "Tokelau, Îles"
 
 #: countries.py:217
 msgid "Turkmenistan"
-msgstr "Туркменистан"
+msgstr "Turkménistan"
 
 #: countries.py:218
 msgid "Tunisia"
-msgstr "Тунис"
+msgstr "Tunisie"
 
 #: countries.py:219
 msgid "Tonga"
-msgstr "Тонга"
+msgstr "Tonga"
 
 #: countries.py:220
 msgid "East Timor"
-msgstr "Восточный Тимор"
+msgstr "Timor Oriental"
 
 #: countries.py:221
 msgid "Turkey"
-msgstr "Турция"
+msgstr "Turquie"
 
 #: countries.py:222
 msgid "Trinidad & Tobago"
-msgstr "Тринидад и Тобаго"
+msgstr "Trinité et Tobago"
 
 #: countries.py:223
 msgid "Tuvalu"
-msgstr "Тувалу"
+msgstr "Tuvalu"
 
 #: countries.py:224
 msgid "Taiwan, Province of China"
-msgstr "Тайвань, провинция Китая"
+msgstr "Taïwan, Province de Chine"
 
 #: countries.py:225
 msgid "Tanzania, United Republic of"
-msgstr "Танзания (Объединенная Республика)"
+msgstr "Tanzanie"
 
 #: countries.py:226
 msgid "Ukraine"
-msgstr "Украина"
+msgstr "Ukraine"
 
 #: countries.py:227
 msgid "Uganda"
-msgstr "Уганда"
+msgstr "Ouganda"
 
 #: countries.py:228
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Îles mineures éloignées des États-Unis"
 
 #: countries.py:229
 msgid "United States of America"
-msgstr "Соединенные Штаты Америки"
+msgstr "États-Unis d'Amérique"
 
 #: countries.py:230
 msgid "Uruguay"
-msgstr "Уругвай"
+msgstr "Uruguay"
 
 #: countries.py:231
 msgid "Uzbekistan"
-msgstr "Узбекистан"
+msgstr "Ouzbékistan"
 
 #: countries.py:232
 msgid "Vatican City State (Holy See)"
-msgstr "Ватикан"
+msgstr "Vatican"
 
 #: countries.py:233
 msgid "St. Vincent & the Grenadines"
-msgstr ""
+msgstr "Saint-Vincent et les Grenadines"
 
 #: countries.py:234
 msgid "Venezuela"
-msgstr "Венисуэлла"
+msgstr "Vénézuela"
 
 #: countries.py:235
 msgid "British Virgin Islands"
-msgstr "Британские Виргинские острова"
+msgstr "Vierges britanniques, Îles"
 
 #: countries.py:236
 msgid "United States Virgin Islands"
-msgstr "Виргинские Острова США"
+msgstr "Vierges américaines, Îles"
 
 #: countries.py:237
 msgid "Viet Nam"
-msgstr "Вьетнам"
+msgstr "Viêtnam"
 
 #: countries.py:238
 msgid "Vanuatu"
-msgstr "Вануату"
+msgstr "Vanuatu"
 
 #: countries.py:239
 msgid "Wallis & Futuna Islands"
-msgstr "Уоллис и Футуна"
+msgstr "Wallis et-Futuna, Îles"
 
 #: countries.py:240
 msgid "Samoa"
-msgstr "Самоа"
+msgstr "Samoa"
 
 #: countries.py:241
 msgid "Yemen"
-msgstr "Йамен"
+msgstr "Yemen"
 
 #: countries.py:242
 msgid "Mayotte"
-msgstr "Майотта"
+msgstr "Mayotte"
 
 #: countries.py:243
 msgid "Yugoslavia"
-msgstr "Югославия"
+msgstr "Yougoslavie"
 
 #: countries.py:244
 msgid "South Africa"
-msgstr "Южная Африка"
+msgstr "Afrique du Sud"
 
 #: countries.py:245
 msgid "Zambia"
-msgstr "Замбия"
+msgstr "Zambie"
 
 #: countries.py:246
 msgid "Zaire"
-msgstr "Заир"
+msgstr "Comgo, République démocratique du (ex Zaïre)"
 
 #: countries.py:247
 msgid "Zimbabwe"
-msgstr "Зимбабве"
+msgstr "Zimbabwe"
 
 #: countries.py:248
 msgid "Unknown or unspecified country"
-msgstr "Неизвестная или не указанная страна"
+msgstr "Autre"
 
 #: countries.py:253
 msgid "This value must be in COUNTRIES setting in localflavor.generic package."
 msgstr ""
-"Значение должно быть в списке COUNTRIES в настройках пакета localflavor."
-"generic."
+"Cette valeur doit être dans les préférences COUNTRIES du paquet localflavor."
+"generic"
 
 #: forms.py:58
 #, python-format
 msgid "The file type is invalid: %s"
-msgstr "Неверный тип файла: %s"
+msgstr "Le type de fichier est invalide : %s"
 
 #: forms.py:63
 msgid "You must enter one of the options"
-msgstr "Вы должны выбрать один из вариантов"
+msgstr "Vous devez choisir une des options"
 
 #: forms.py:77
 msgid "You must select a portion of the image with a minimum of 96x96 pixels."
 msgstr ""
-"Вы должны выбрать часть изображения с минимальным размером 96х96 точек."
+"Vous devez choisir une portion de l'image d'au moins 96x96 píxels."
 
 #: forms.py:83 templates/userprofile/account/login.html:20
 #: templates/userprofile/account/includes/registration_form.html:5
 #: templates/userprofile/profile/public.html:33
 #: templates/userprofile/profile/usercard.html:11
 msgid "Username"
-msgstr "Имя пользователя"
+msgstr "Pseudonyme"
 
 #: forms.py:84 templates/userprofile/account/password_reset.html:21
 msgid "E-mail address"
-msgstr "E-mail адрес"
+msgstr "Adresse mail"
 
 #: forms.py:85 templates/userprofile/account/login.html:26
 #: templates/userprofile/account/includes/registration_form.html:17
 msgid "Password"
-msgstr "Пароль"
+msgstr "Mot de passe"
 
 #: forms.py:86
 #: templates/userprofile/account/includes/registration_form.html:23
 msgid "Password (again)"
-msgstr "Пароль (ещё раз)"
+msgstr "Mot de passe (confirmation)"
 
 #: forms.py:94
 msgid ""
 "That username has invalid characters. The valid values are letters, numbers "
 "and underscore."
 msgstr ""
-"В имени пользователя содержаться неправильные символы. Правильные: буквы, "
-"цифры и нижнее подчеркивание."
+"Ce pseudonyme contient des caractères invalides. Les caractères autorisés sont "
+"les lettres, les chiffres et le tiret-bas"
 
 #: forms.py:99
 msgid "The username is already registered."
-msgstr "Указанное имя пользователя уже используется."
+msgstr "Ce pseudonyme n'est pas disponible."
 
 #: forms.py:108
 msgid "The passwords inserted are different."
-msgstr "Пароли различаются."
+msgstr "Les deux mots de passe ne correspondent pas."
 
 #: forms.py:120 forms.py:139
 msgid "That e-mail is already used."
-msgstr "Указанный e-mail уже используется."
+msgstr "Cette adresse mail est déjà utilisée."
 
 #: forms.py:124
 msgid "That e-mail is already being confirmed."
-msgstr "Указанынй e-mail уже подтвержден."
+msgstr "Cette adresse mail a déjà été confirmée."
 
 #: forms.py:152
 msgid "That e-mail isn't registered."
-msgstr "Такой e-mail не зарегистрирован."
+msgstr "Cette adresse mail n'a pas été enregistrée."
 
 #: models.py:42
 #, python-format
 msgid "%s's profile"
-msgstr "Профиль: %s"
+msgstr "Profil de %s"
 
 #: models.py:61
 #, python-format
 msgid "%s's Avatar"
-msgstr "Аватар: %s"
+msgstr "Avatar de %s"
 
 #: models.py:147
 #, python-format
 msgid "Email validation process for %(user)s"
-msgstr "Процесс подтверждения e-mail адреса для пользователя %(user)s"
-
-#: views.py:128 views.py:158
-msgid "Your profile information has been updated successfully."
-msgstr "Информация в профиле пользователя успешно обновлена."
-
-#: views.py:181
-msgid "Your profile information has been removed successfully."
-msgstr "Информация из вашего профиля успешно удалена."
-
-#: views.py:260
-msgid "Your new avatar has been saved successfully."
-msgstr "Ваш новый аватар усешно сохранен."
+msgstr "Validation de l'adresse mail de %(user)s"
 
 #: templates/userprofile/menu.html:5
 msgid "Overview"
-msgstr "Просмотр"
+msgstr "Résumé"
 
 #: templates/userprofile/menu.html:6
 #: templates/userprofile/profile/personal.html:36
+#: templates/userprofile/profile/personal_done.html:19
 msgid "Personal information"
-msgstr "Личная информация"
+msgstr "Informations personnelles"
 
 #: templates/userprofile/menu.html:7
 msgid "Avatar"
-msgstr "Аватар"
+msgstr "Avatar"
 
 #: templates/userprofile/menu.html:8
 #: templates/userprofile/profile/overview.html:60
 #: templates/userprofile/profile/public.html:38
 msgid "Location"
-msgstr "Местоположение"
+msgstr "Localisation"
 
 #: templates/userprofile/menu.html:9
 #: templates/userprofile/profile/delete.html:22
 msgid "Remove profile"
-msgstr "Удалить профиль"
+msgstr "Suppression du profil"
 
 #: templates/userprofile/account/email_validation.html:4
 #: templates/userprofile/account/email_validation.html:23
 msgid "E-mail change"
-msgstr "Смена пароля"
+msgstr "Modification de l'adresse mail"
 
 #: templates/userprofile/account/email_validation.html:4
 #: templates/userprofile/account/email_validation.html:23
 #: templates/userprofile/account/email_validation.html:40
 #: templates/userprofile/account/email_validation_processed.html:20
 msgid "Add e-mail"
-msgstr "Добавить e-mail адрес"
+msgstr "Ajout d'une adresse mail"
 
 #: templates/userprofile/account/email_validation.html:24
 msgid "New e-mail address"
-msgstr "Новый e-mail адрес"
+msgstr "Nouvelle adresse mail"
 
 #: templates/userprofile/account/email_validation.html:34
 msgid "Send confirmation"
-msgstr "Выслать подтверждение"
+msgstr "Envoyer une confirmation"
 
 #: templates/userprofile/account/email_validation.html:41
 #: templates/userprofile/account/email_validation_processed.html:21
@@ -1117,47 +1106,49 @@ msgid ""
 "Insert the new e-mail address. An e-mail will be send to it for testing and "
 "confirmation"
 msgstr ""
-"Введите новый e-mail адрес. На него будет отправлено письмо для подтверждения"
+"Saisissez la nouvelle adresse mail. Un mail y sera envoyé pour validation"
 
 #: templates/userprofile/account/email_validation_done.html:4
 msgid "E-mail validation successful"
-msgstr "E-mail успешно подтвержден"
+msgstr "Validation de l'adresse mail réussie"
 
 #: templates/userprofile/account/email_validation_done.html:4
 msgid "E-mail change unsuccessful"
-msgstr "Смена e-mail не удалась"
+msgstr "Échec de la modification de l'adresse mail"
 
 #: templates/userprofile/account/email_validation_done.html:14
 msgid "E-mail address validated successfully"
-msgstr "Проверка e-mail адреса прошла успешно"
+msgstr "Adresse mail correctement validée"
 
 #: templates/userprofile/account/email_validation_done.html:16
 msgid ""
 "The key you received via e-mail is no longer valid. Please try the e-mail "
 "validation process again"
 msgstr ""
-"Ключ проверки, который вы получили, уже не действителен. Пожалуйста, "
-"запросите подтверждение почты ещё раз."
+"La clé que vous avez reçu par mail n'est plus valide. Merci de renouveller "
+"le processus de validation d'adresse mail"
 
 #: templates/userprofile/account/email_validation_done.html:23
 #: templates/userprofile/account/email_validation_reset_response.html:22
 msgid "E-mail validation process"
-msgstr "Подтверждение e-mail"
+msgstr "Processus de validation de l'adresse mail"
 
 #: templates/userprofile/account/email_validation_done.html:24
 #: templates/userprofile/account/email_validation_reset_response.html:23
 msgid "You can manage the e-mail validation process from the"
-msgstr "Вы можете управлять процессом подтверждения e-mail адреса из"
+msgstr ""
+"Vous pouvez gérer le processus de validation de l'adresse mail "
+"depuis"
 
 #: templates/userprofile/account/email_validation_done.html:24
 #: templates/userprofile/account/email_validation_reset_response.html:23
 msgid "overview page"
-msgstr "Страница просмотра"
+msgstr "page de résumé"
 
 #: templates/userprofile/account/email_validation_processed.html:4
 #: templates/userprofile/account/email_validation_processed.html:13
 msgid "E-mail change processed"
-msgstr "Смена e-mail"
+msgstr "Modification de l'adresse mail en cours"
 
 #: templates/userprofile/account/email_validation_processed.html:14
 msgid ""
@@ -1165,23 +1156,23 @@ msgid ""
 "Please access to your e-mail and complete this process following the "
 "instructions specified in the e-mail body"
 msgstr ""
-"На электронную почту был направлен код проверки.Пожалуйста, подтвердите "
-"доступ к вашей электронной почте, следуя инструкциям, указанным в "
-"электронном письме"
+"Un mail a été envoyé à la nouvelle adresse mail pour vérification. "
+"Merci de consulter vos mails et compléter le processus en suivant "
+"les instructions contenues dans le mail"
 
 #: templates/userprofile/account/email_validation_reset.html:4
 #: templates/userprofile/account/email_validation_reset.html:19
 #: templates/userprofile/account/email_validation_reset.html:36
 msgid "Resend e-mail validation"
-msgstr "Послать ещё раз e-mail подтверждения"
+msgstr "Renvoyer le mail de validation"
 
 #: templates/userprofile/account/email_validation_reset.html:20
 msgid "Insert your e-mail address"
-msgstr "Введите ваш e-mail адрес"
+msgstr "Saisissez votre adresse mail"
 
 #: templates/userprofile/account/email_validation_reset.html:30
 msgid "Resend confirmation"
-msgstr "Ещё раз послать подтверждение"
+msgstr "Renvoyer la confirmation"
 
 #: templates/userprofile/account/email_validation_reset.html:37
 msgid ""
@@ -1189,93 +1180,94 @@ msgid ""
 "site. Insert the e-mail address yu have registered with so we can resend the "
 "validation e-mail to you again"
 msgstr ""
-"Вы ещё не подтвердили ваш e-mail адрес и не сможете войти на сайт. Введите "
-"ваш e-mail адрес, что бы мы вновь отправили вам письмо для подтверждения"
+"Si vous n'avez pas encore validé votre adresse mail vous ne pouvez pas "
+"finaliser votre inscription. Saisissez l'adresse mail avec laquelle vous  "
+"vous êtes enregistré afni que nous vous renvoyons le mail de validation"
 
 #: templates/userprofile/account/email_validation_reset_response.html:4
 msgid "Validation e-mail sent"
-msgstr "Подтверждение почты отправлено"
+msgstr "Mail de validation envoyé"
 
 #: templates/userprofile/account/email_validation_reset_response.html:4
 msgid "Your user account was already active"
-msgstr "Ваш аккоунт уже активирован"
+msgstr "Votre compte est déjà actif"
 
 #: templates/userprofile/account/email_validation_reset_response.html:14
 msgid "We've e-mailed you the e-mail validation link"
-msgstr "Вы отправили вам письмо со ссылкой для подтверждения"
+msgstr "Nous vous avons envoyé le mail contenant le lien de validation"
 
 #: templates/userprofile/account/email_validation_reset_response.html:16
 msgid "Your e-mail was already validated"
-msgstr "Ваш e-mail уже подтвержден"
+msgstr "Votre adresse mail a déjà été validée"
 
 #: templates/userprofile/account/login.html:4
 #: templates/userprofile/account/login.html:19
 msgid "User login"
-msgstr "Аутентификация"
+msgstr "Pseudonyme"
 
 #: templates/userprofile/account/login.html:36
 msgid "Login"
-msgstr "Войти"
+msgstr "Pseudonyme"
 
 #: templates/userprofile/account/login.html:42
 msgid "Utilities"
-msgstr "Свойства"
+msgstr "Outils"
 
 #: templates/userprofile/account/login.html:44
 msgid "Lost your password?"
-msgstr "Потеряли пароль?"
+msgstr "Mot de passe perdu ?"
 
 #: templates/userprofile/account/login.html:46
 #: templates/userprofile/profile/overview.html:95
 msgid "Resend validation e-mail"
-msgstr "Отправить ещё раз письмо для подтверждения"
+msgstr "Renvoie du mail de validation"
 
 #: templates/userprofile/account/login.html:48
 msgid "Sign up!"
-msgstr "Регистрация"
+msgstr "Créez un compte !"
 
 #: templates/userprofile/account/logout.html:4
 #: templates/userprofile/account/logout.html:9
 msgid "Logged out"
-msgstr "Выход"
+msgstr "Déconnecté"
 
 #: templates/userprofile/account/logout.html:10
 msgid "You've been logged out"
-msgstr "Вы успешно вышли"
+msgstr "Vous avez été déconnecté"
 
 #: templates/userprofile/account/logout.html:10
 msgid "Log in again"
-msgstr "Войти снова"
+msgstr "Nouvelle identification"
 
 #: templates/userprofile/account/password_change.html:4
 #: templates/userprofile/account/password_change.html:23
 #: templates/userprofile/account/password_reset_confirm.html:4
 msgid "Password change for"
-msgstr "Смена пароля для "
+msgstr "Modification du mot de passe pour"
 
 #: templates/userprofile/account/password_change.html:24
 msgid "Old password"
-msgstr "Старый пароль"
+msgstr "Ancien mot de passe"
 
 #: templates/userprofile/account/password_change.html:30
 #: templates/userprofile/account/password_reset_confirm.html:26
 msgid "New password"
-msgstr "Новый пароль"
+msgstr "Nouveau mot de passe"
 
 #: templates/userprofile/account/password_change.html:36
 #: templates/userprofile/account/password_reset_confirm.html:32
 msgid "Confirm password"
-msgstr "Подтвердить пароль"
+msgstr "Confirmez le mot de passe"
 
 #: templates/userprofile/account/password_change.html:46
 #: templates/userprofile/account/password_reset_confirm.html:42
 msgid "Change"
-msgstr "Сменить"
+msgstr "Modifier"
 
 #: templates/userprofile/account/password_change.html:52
 #: templates/userprofile/account/password_change_done.html:19
 msgid "Password change"
-msgstr "Смена пароля"
+msgstr "Modification de mot de passe"
 
 #: templates/userprofile/account/password_change.html:53
 #: templates/userprofile/account/password_change_done.html:20
@@ -1283,44 +1275,44 @@ msgid ""
 "Password change utility page. Please enter your new password twice so we can "
 "verify you typed it in correctly"
 msgstr ""
-"Страница смены пароля. Пожалуйста введите новый пароль дважды, для "
-"исключения ошибки ввода"
+"Page de modification de mot de passe. Merci d'entrer votre nouveau mot de passe "
+"deux fois afin d'être sûr qu'il est bien saisi"
 
 #: templates/userprofile/account/password_change_done.html:4
 #: templates/userprofile/account/password_reset_complete.html:4
 msgid "Password change successful"
-msgstr "Пароль успешно изменен"
+msgstr "Mot de passe modifié"
 
 #: templates/userprofile/account/password_change_done.html:13
 msgid "The password has been changed successfully"
-msgstr "Пароль успешно изменен"
+msgstr "Le mot de passe a bien été modifié"
 
 #: templates/userprofile/account/password_expired.html:4
 msgid "Password key expired"
-msgstr "Пароль просрочен"
+msgstr "La clé de modification de mot de passe a expiré"
 
 #: templates/userprofile/account/password_expired.html:9
 msgid ""
 "The password key you're trying to use is expired. Please, request a new one"
 msgstr ""
-"Пароль, который вы пытаетесь использовать просрочен. Пожалуйста, запросите "
-"новый"
+"La clé de modification de mot de passe que vous utilisez a expiré. "
+"Merci de faire une nouvelle demande"
 
 #: templates/userprofile/account/password_reset.html:4
 #: templates/userprofile/account/password_reset.html:20
 #: templates/userprofile/account/password_reset_complete.html:19
 #: templates/userprofile/account/password_reset_confirm.html:55
 msgid "Password reset"
-msgstr "Сброс пароля"
+msgstr "Réinitilisation du mot de passe"
 
 #: templates/userprofile/account/password_reset.html:31
 msgid "Reset my password"
-msgstr "Сбросить мой пароль"
+msgstr "Réinialisation du mot de passe"
 
 #: templates/userprofile/account/password_reset.html:37
 #: templates/userprofile/account/password_reset_done.html:16
 msgid "Password reset form"
-msgstr "Форма сброса пароля"
+msgstr "Formulaire de réinitialisation du mot de passe"
 
 #: templates/userprofile/account/password_reset.html:38
 #: templates/userprofile/account/password_reset_done.html:17
@@ -1328,12 +1320,13 @@ msgid ""
 "Forgotten your password? Enter your e-mail address, and we'll reset your "
 "password and e-mail the new one to you"
 msgstr ""
-"Забыли ваш пароль? Введите адрес электронной почты (указанный при "
-"регистрации) и мы вышлем вам новый пароль"
+"Vous avez oublié votre mot de passe ? Saisissez votre adresse mail et nous "
+"vous enverrons un nouveau mot de passe"
 
 #: templates/userprofile/account/password_reset_complete.html:13
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Пароль успешно создан. Теперь вы можете войти и продолжить работу."
+msgstr "Votre nouveau mot de passe est enregistré. Vous pouvez "
+" maintenant l'utiliser pour vous identifier"
 
 #: templates/userprofile/account/password_reset_complete.html:20
 #: templates/userprofile/account/password_reset_confirm.html:56
@@ -1341,43 +1334,43 @@ msgid ""
 "Password reset utility page. Please enter your new password twice so we can "
 "verify you typed it in correctly"
 msgstr ""
-"Страница смены пароля. Пожалуйста введите новый пароль дважды (для проверки "
-"корректности ввода)"
+"Page de réinitialisation du mot de passe. Merci d'entrer votre nouveau mot de passe "
+"deux fois afin d'être sûr qu'il est bien saisi"
 
 #: templates/userprofile/account/password_reset_confirm.html:47
 msgid "Password reset unsuccessful"
-msgstr "Сброс пароля не удался"
+msgstr "Échec lors de la réinitialisation du mot de passe"
 
 #: templates/userprofile/account/password_reset_confirm.html:48
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
-"Ссылка для сброса пароля не верна, возможно она уже была использована. "
-"Пожалуйста, запросите смену пароля ещё раз."
+"Ce lien de réinitialisation de mot de passe est invalide, probablement "
+"parce qu'il a déjà été utilisé. Merci de faire une nouvelle demande."
 
 #: templates/userprofile/account/password_reset_done.html:4
 #: templates/userprofile/account/password_reset_done.html:9
 msgid "Password reset successful"
-msgstr "Сброс пароля успешно завершен"
+msgstr "Mot de passe réinitialisé"
 
 #: templates/userprofile/account/password_reset_done.html:10
 msgid ""
 "We've e-mailed you the instructions to obtain a new password. You should be "
 "receiving it shortly"
 msgstr ""
-"Мы отправили вам на email адрес инструкции по получению нового пароля. Вы "
-"получите письмо в ближайшее время"
+"Nous vous avons envoyé par mail les instructions pour obtenir un "
+"nouveau mot de passe."
 
 #: templates/userprofile/account/registration.html:4
 #: templates/userprofile/account/includes/registration_form.html:4
 msgid "User registration"
-msgstr "Регистрация пользователя"
+msgstr "Création de compte"
 
 #: templates/userprofile/account/registration.html:22
 #: templates/userprofile/account/registration_done.html:19
 msgid "Register a new account"
-msgstr "Регистрация нового аккаунта"
+msgstr "Créer un nouveau compte"
 
 #: templates/userprofile/account/registration.html:23
 #: templates/userprofile/account/registration_done.html:20
@@ -1385,12 +1378,13 @@ msgid ""
 "Joining this community is quick and easy. You only need to fill the form to "
 "get access to all the private content"
 msgstr ""
-"Вы можете зарегистрироваться быстро и просто. Все что нужно - заполнить "
-"форму, для получния доступа к защищенной части сайта"
+"Joindre cette communauté est simple et rapide. Vous devez simplement remplir "
+"le formulaire pour accéder aux parties auxquelles vous n'aviez pas accès "
+"jusqu'alors"
 
 #: templates/userprofile/account/registration_done.html:4
 msgid "Registration complete"
-msgstr "Регистрация завершена"
+msgstr "Création de compte terminée"
 
 #: templates/userprofile/account/registration_done.html:10
 msgid ""
@@ -1398,261 +1392,594 @@ msgid ""
 "url has been sent to your e-mail address. You must access this message on "
 "your e-mail account to finish the registration process."
 msgstr ""
-"Вы успешно зарегистрировали новый аккоунт. Ссылка для активации аккоунта "
-"направлена на указанный адрес e-mail. Вы должны получить письмо в вашей "
-"почтовой программе и закончить регистрацию."
+"Vous avez créé un nouveau conpte, et une adresse d'activation vient de vous "
+"être envoyée par mail. Vous devez prendre connaissance de ce message pour "
+"terminer le processus en validant votre compte"
 
 #: templates/userprofile/account/registration_done.html:13
-#, python-format
 msgid ""
 "You have successfully registered a new account. Go to the <a href=\"%"
 "(overview_url)s\">login page</a> to authenticate and start using this site."
 msgstr ""
-"Вы успешно зарегистрировалиь. Перейдите на <a href=\"%(overview_url)s"
-"\">страницу аутентификации</a> для входа и продолжения работы с сайтом."
+"Vous avez créé un nouveau compte. Rendez-vous sur la <a href=\"%"
+"(overview_url)s\">page d'identification</a> pour vous authentifier"
 
 #: templates/userprofile/account/includes/registration_form.html:11
 msgid "E-mail"
-msgstr "E-mail"
+msgstr "Adresse mail"
 
 #: templates/userprofile/account/includes/registration_form.html:11
 msgid "optional"
-msgstr "не объязательно"
+msgstr "optionnelle"
 
 #: templates/userprofile/account/includes/registration_form.html:33
 msgid "Register"
-msgstr "Регистрация"
+msgstr "Créer un compte"
 
 #: templates/userprofile/avatar/choose.html:4
 #: templates/userprofile/avatar/choose.html:38
 msgid "Choose the location of your avatar"
-msgstr "Выберите расположение вашего аватара"
+msgstr "Choisissez l'emplacement de votre avatar"
 
 #: templates/userprofile/avatar/choose.html:41
 msgid "Select an image from disk"
-msgstr "Выберите изображение с диска"
+msgstr "Sélectionnez une image sur votre disque dur"
 
 #: templates/userprofile/avatar/choose.html:43
 #: templates/userprofile/avatar/choose.html:49
 #: templates/userprofile/avatar/crop.html:47
 msgid "Done"
-msgstr "Готово"
+msgstr "Valider"
 
 #: templates/userprofile/avatar/choose.html:47
 msgid ""
 "Select an image from a remote URL. Put the URL on the input below and we'll "
 "retrieve the image for you"
-msgstr "Выбрать изображение по его URL адресу."
+msgstr ""
+"Sélectionnez une image sur internet. Indiquez ci-dessous l'URL (adresse) de "
+"l'image et nous la récupèrerons pour vous"
 
 #: templates/userprofile/avatar/choose.html:54
 msgid "Search on Picasa Web"
-msgstr "Искать в Picasa Web"
+msgstr "Rechercher sur Picasa Web"
 
 #: templates/userprofile/avatar/choose.html:57
 msgid "Search"
-msgstr "Поиск"
+msgstr "Rechercher"
 
 #: templates/userprofile/avatar/choose.html:79
 #: templates/userprofile/avatar/crop.html:53
+#: templates/userprofile/avatar/done.html:19
 msgid "Avatar selection page"
-msgstr "Страница выбора аватара"
+msgstr "Page de sélection d'avatar"
 
 #: templates/userprofile/avatar/choose.html:80
 #: templates/userprofile/avatar/crop.html:54
+#: templates/userprofile/avatar/done.html:20
 msgid ""
 "You have several options to select the image you want as avatar on your "
 "profile"
 msgstr ""
-"У вас есть несколько вариантов выбрать изображение для аватара в вашем "
-"профиле"
+"Vous avez plusieurs possibilités pour choisir une image qui sera utilisée "
+"comme avatar pour votre profil"
 
 #: templates/userprofile/avatar/choose.html:86
 msgid "Delete"
-msgstr "Стереть"
+msgstr "Supprimer"
 
 #: templates/userprofile/avatar/crop.html:4
 #: templates/userprofile/avatar/crop.html:31
 msgid "Crop &amp; resize the area you want"
-msgstr "Вырежте и растяните желаемую область"
+msgstr "Recadrez l'image selon vos souhaits"
+
+#: templates/userprofile/avatar/done.html:4
+msgid "Avatar selection finished"
+msgstr "Sélection de l'avatar terminée"
+
+#: templates/userprofile/avatar/done.html:13
+msgid "Your new avatar has been saved successfully"
+msgstr "Votre nouvel avatar a été sauvegardé"
 
 #: templates/userprofile/profile/delete.html:4
 msgid "Delete personal information"
-msgstr "Стереть персональную информацию"
+msgstr "Suppression des informations personnelles"
 
 #: templates/userprofile/profile/delete.html:14
+#: templates/userprofile/profile/delete_done.html:18
 msgid "Delete your personal information"
-msgstr "Стереть вашу персональную информацию"
+msgstr "Supprimez vos informations personnelles"
 
 #: templates/userprofile/profile/delete.html:15
 msgid "Are you sure?"
-msgstr "Вы уверены?"
+msgstr "Êtes-vous sûr ?"
 
 #: templates/userprofile/profile/delete.html:15
 msgid "Yes"
-msgstr "Да"
+msgstr "Oui"
 
 #: templates/userprofile/profile/delete.html:23
 msgid ""
 "It erases all your private data except your username. You can refill the "
 "information later if you want to"
 msgstr ""
-"Это сотрет все личную информацию, кроме имени пользователя. Вы сможете "
-"заполнить профиль ещё раз поздней"
+"Cela effacera toutes vos données à l'exception de votre pseudonyme. Vous "
+"pourrez remplir votre profil à nouveau ultérieurement"
+
+#: templates/userprofile/profile/delete_done.html:4
+msgid "Profile removed"
+msgstr "Information du profil supprimées"
+
+#: templates/userprofile/profile/delete_done.html:13
+msgid "Your profile information has been removed successfully"
+msgstr "Les informations de votre profil ont été supprimées"
+
+#: templates/userprofile/profile/delete_done.html:19
+msgid ""
+"Deleting all your personal information will erase all your private data, "
+"except your username. You can refill the information later if you want to"
+msgstr ""
+"Supprimer vos informations personnelles effacera toutes vos données "
+"à l'exception de votre pseudonyme. Vous pourrez remplir votre profil "
+"à nouveau ultérieurement"
 
 #: templates/userprofile/profile/location.html:4
+#: templates/userprofile/profile/location_done.html:4
+#: templates/userprofile/profile/personal_done.html:4
 #, python-format
 msgid "%(user)s's Dashboard"
-msgstr "Панель управления пользователя %(user)s"
+msgstr "Tableau de bord de %(user)s"
 
 #: templates/userprofile/profile/location.html:21
 msgid "Define your location"
-msgstr "Укажите ваше местоположение"
+msgstr "Indiquez votre localisation"
 
 #: templates/userprofile/profile/location.html:21
 msgid "Auto-discover location"
-msgstr "Автоматически определенное местоположение"
+msgstr "Découverte automatique de votre localisation"
 
 #: templates/userprofile/profile/location.html:22
 #: templates/userprofile/profile/overview.html:51
 #: templates/userprofile/profile/public.html:35
 msgid "Country"
-msgstr "Страна"
+msgstr "Pays"
 
 #: templates/userprofile/profile/location.html:22
 msgid "Loading..."
-msgstr "Загрузка..."
+msgstr "Chargement..."
 
 #: templates/userprofile/profile/location.html:26
 msgid "Location:"
-msgstr "Местоположение:"
+msgstr "Localisatio :"
 
 #: templates/userprofile/profile/location.html:27
 msgid "Position"
-msgstr "Позиция"
+msgstr "Position :"
 
 #: templates/userprofile/profile/location.html:34
 #: templates/userprofile/profile/personal.html:30
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Enregistrer"
 
 #: templates/userprofile/profile/location.html:39
+#: templates/userprofile/profile/location_done.html:19
 msgid "Location information"
-msgstr "Информация о местоположение"
+msgstr "Informations de localisation"
 
 #: templates/userprofile/profile/location.html:40
+#: templates/userprofile/profile/location_done.html:20
 msgid "Define your location information"
-msgstr "Укажите информацию о вашем расположении"
+msgstr "Indiquez votre localisation"
+
+#: templates/userprofile/profile/location_done.html:13
+#: templates/userprofile/profile/personal_done.html:13
+msgid "Your profile information has been updated successfully"
+msgstr "Les informations de votre profil ont été enregistrées"
 
 #: templates/userprofile/profile/overview.html:4
 #: templates/userprofile/profile/overview.html:32
 msgid "Overview of your profile"
-msgstr "Просмотр вашего профиля"
+msgstr "Résumé de votre profil"
 
 #: templates/userprofile/profile/overview.html:37
 msgid "Change avatar"
-msgstr "Измените аватар"
+msgstr "Changer d'avatar"
 
 #: templates/userprofile/profile/overview.html:37
 msgid "Add avatar"
-msgstr "Добавьте аватар"
+msgstr "Ajouter un avatar"
 
 #: templates/userprofile/profile/overview.html:41
 msgid "Username:"
-msgstr "Имя пользователя:"
+msgstr "Pseudonyme :"
 
 #: templates/userprofile/profile/overview.html:42
 msgid "E-mail:"
-msgstr "E-mail:"
+msgstr "Adresse mail :"
 
 #: templates/userprofile/profile/overview.html:44
 msgid "Not set yet"
-msgstr "Ещё не указан"
+msgstr "Pas encore renseignée"
 
 #: templates/userprofile/profile/overview.html:46
 msgid " (Not validated)"
-msgstr "(Не подтвержден)"
+msgstr "(Non validée)"
 
 #: templates/userprofile/profile/overview.html:55
 #: templates/userprofile/profile/overview.html:64
 #: templates/userprofile/profile/overview.html:73
 msgid "Not set"
-msgstr "Не указан"
+msgstr "Non renseignée"
 
 #: templates/userprofile/profile/overview.html:91
 msgid "Management:"
-msgstr "Управление:"
+msgstr "Gestion :"
 
 #: templates/userprofile/profile/overview.html:92
 msgid "Change password"
-msgstr "Измените пароль"
+msgstr "Modifier votre mot de passe"
 
 #: templates/userprofile/profile/overview.html:94
 msgid "Change your e-mail address"
-msgstr "Измените ваш e-mail адрес"
+msgstr "Modifier votre adresse mail"
 
 #: templates/userprofile/profile/overview.html:94
 msgid "Add your e-mail address"
-msgstr "Добавьте ваш e-mail адрес"
+msgstr "Renseigner votre adresse mail"
 
 #: templates/userprofile/profile/overview.html:99
 msgid "Add location"
-msgstr "Добавить местоположение"
+msgstr "Renseigner votre localisation"
 
 #: templates/userprofile/profile/overview.html:101
 msgid "Change location"
-msgstr "Изменить местоположение"
+msgstr "Modifier votre localisation"
 
 #: templates/userprofile/profile/personal.html:4
 #: templates/userprofile/profile/personal.html:27
 msgid "Edit your personal information"
-msgstr "Редактируйте вашу персональную информацию"
+msgstr "Informations personnelles"
 
 #: templates/userprofile/profile/personal.html:37
+#: templates/userprofile/profile/personal_done.html:20
 msgid "Insert some information about you"
-msgstr "Введите информация о себе"
+msgstr "Renseignez quelques informations sur vous-même"
 
 #: templates/userprofile/profile/public.html:27
 #, python-format
 msgid "Public profile of %(user)s"
-msgstr "Public profile of %(user)s"
+msgstr "Profil publique de %(user)s"
 
 #: templates/userprofile/profile/usercard.html:12
 msgid "Public profile information"
-msgstr "Открытая информация профиля"
+msgstr "Information du profil public"
 
-#: templatetags/avatars.py:75
+#: templatetags/avatars.py:74
 msgid ""
 "You have to provide only the size as             an integer (both sides will "
 "be equal) and optionally, the             username."
 msgstr ""
+"Vous devez indiquer uniquement la taille (un seul nombre, les deux côtés "
+"seront égaux) et, optionnellement, le pseudonyme"
 
-#~ msgid "You're receiving this e-mail because you requested a password reset"
-#~ msgstr "Вы получили это письмо, так как запросили смену пароля"
+#~ msgid "You have successfully registered a new account. Go to the"
+#~ msgstr "Vous avez créer un nouveau compte, rendez-vous sur la"
 
-#~ msgid "for your user account at %(site_name)s"
-#~ msgstr "вашего аккоунта на сайте %(site_name)s"
+#~ msgid "login page"
+#~ msgstr "page d'identification"
 
-#~ msgid "Please go to the following page and choose a new password:"
-#~ msgstr "Пожалуйста перейдите на следующую страницу и введите новый пароль:"
+#~ msgid "to authenticate and start using this site"
+#~ msgstr "pour vous authentifier"
 
-#~ msgid "Your username, in case you've forgotten:"
-#~ msgstr "Ваше имя пользователя (если забили):"
+#~ msgid "Search for an image on Picasa Web"
+#~ msgstr "Rechercher une image sur Picasa Web"
 
-#~ msgid "Thanks for using our site!"
-#~ msgstr "Спасибо за использование нашего сайта!"
+#~ msgid "Try location auto-discover by IP"
+#~ msgstr ""
+#~ "Tentative de découverte automatique de votre localisation par votre "
+#~ " adresse IP"
 
-#~ msgid "The %(site_name)s team"
-#~ msgstr "Команда сайта %(site_name)s "
+#~ msgid "Try IP localization"
+#~ msgstr "Tentative de localisation par adresse IP"
+
+#~ msgid "There's no user with that e-mail"
+#~ msgstr "Il n'y a aucun compte avec cette adress email"
+
+#~ msgid "Female"
+#~ msgstr "Femme"
+
+#~ msgid "Male"
+#~ msgstr "Homme"
+
+#~ msgid "Public info"
+#~ msgstr "Informations publiques"
+
+#~ msgid "Resend the activation e-mail"
+#~ msgstr "Renvoyer le mail d'activation"
 
 #~ msgid ""
-#~ "You're receiving this e-mail because you requested an e-mail validation "
-#~ "at %(site_name)s"
+#~ "Enter your e-mail address and we'll resend the user activation e-mail to "
+#~ "you"
 #~ msgstr ""
-#~ "Вы получили это письмо, так как запросили подтверждение e-mail адрес на "
-#~ "сайте %(site_name)s"
+#~ "Saisissez votre adresse mail et nous vous renverrons le mail d'activation"
+
+#~ msgid ""
+#~ "Define your location information. Once inserted, you can make it public "
+#~ "going to the"
+#~ msgstr ""
+#~ "Définissez votre localisation. Une fois cela fait, vous pourrez la rendre "
+#~ "publique via le"
+
+#~ msgid "public information page"
+#~ msgstr "page d'informations publiques"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
+
+#~ msgid "Gender"
+#~ msgstr "Sexe"
+
+#~ msgid "Url"
+#~ msgstr "Site internet / Blog"
+
+#~ msgid "Years old"
+#~ msgstr "Ans"
+
+#~ msgid "years old."
+#~ msgstr "ans."
+
+#~ msgid "About"
+#~ msgstr "À propos"
+
+#~ msgid "Public information"
+#~ msgstr "Informations publiques"
+
+#~ msgid ""
+#~ "Select the information you have inserted on your profile that you want to "
+#~ "make public"
+#~ msgstr ""
+#~ "Choisissez les informations de votre profil que vous souhaitez rendre publiques"
+
+#~ msgid "Your public profile information has been updated successfully"
+#~ msgstr ""
+#~ "Vos informations publiques ont été mises à jour"
+
+#~ msgid "First Name:"
+#~ msgstr "Prénom :"
+
+#~ msgid "Surname:"
+#~ msgstr "Surnom :"
+
+#~ msgid "Gender:"
+#~ msgstr "Sexe :"
+
+#~ msgid "Birth date:"
+#~ msgstr "Date de naissance :"
+
+#~ msgid "Url:"
+#~ msgstr "Site internet / Blog :"
+
+#~ msgid "About:"
+#~ msgstr "À propos :"
+
+#~ msgid ""
+#~ "Insert some information about you. Once inserted, you can make it public "
+#~ "going to the"
+#~ msgstr ""
+#~ "Indiquez quelques informations sur vous-même. Une fois cela fait, "
+#~ "vous pourrez la rendre publique via le"
+
+#~ msgid "Continent"
+#~ msgstr "Continent"
+
+#~ msgid "Continents"
+#~ msgstr "Continents"
+
+#~ msgid "Countries"
+#~ msgstr "Pays"
+
+#~ msgid ""
+#~ "If you already have an account, but have lost your password, <a href=\"/"
+#~ "accounts/password/reset/\">click here</a>"
+#~ msgstr ""
+#~ "Si vous avez déjà un compte mais en avez perdu le mot de passe, <a href=\"/"
+#~ "accounts/password/reset/\">cliquez ici</a>"
+
+#~ msgid ""
+#~ "If you don't have an account, you can <a href=\"/accounts/register/"
+#~ "\">sign up</a>"
+#~ msgstr ""
+#~ "Si vous n'avez pas de conpte, vous pouvez <a href=\"/accounts/register/\">"
+#~ "en créer un </a>"
+
+#~ msgid "More common..."
+#~ msgstr "Plus commun..."
+
+#~ msgid "Delete all your personal information"
+#~ msgstr "Supprimer vos informations personnelles"
+
+#~ msgid "Yes, delete all"
+#~ msgstr "Oui, supprimer tout"
+
+#~ msgid "Your profile location information has been updated successfully"
+#~ msgstr ""
+#~ "Votre localisation a été enregistrée"
+
+#~ msgid ""
+#~ "Account validated successfully. Now you can access to the login page with "
+#~ "your username and password and start using this site."
+#~ msgstr ""
+#~ "Compte validé. Vous pouvez accéder à la page d'identification avec votre "
+#~ "pseudonyme et mot de passe pour vous authentifier"
+
+#~ msgid "E-mail validation confirmation"
+#~ msgstr "Validation de l'adresse mail"
+
+#~ msgid "Name:"
+#~ msgstr "Nom :"
+
+#~ msgid "Country:"
+#~ msgstr "Pays :"
+
+#~ msgid "If you have lost your password you can change it with this utility"
+#~ msgstr "Si vous avez oublié votre mot de passe vous pouvez le modifier"
+
+#~ msgid "Position:"
+#~ msgstr "Position :"
+
+#~ msgid "Click to change"
+#~ msgstr "Cliquez ici pour la modification"
+
+#~ msgid "Lost password utility"
+#~ msgstr "Gestion d'oubli de mot de passe"
+
+#~ msgid "Your username and password didn't match. Please try again."
+#~ msgstr ""
+#~ "Le pseudonyme et le mot de passe ne correspondent pas. Merci de ré-essayer."
+
+#~ msgid ""
+#~ "If you already registered an account, but have not received the "
+#~ "validation e-mail, please, click"
+#~ msgstr ""
+#~ "Si vous averz un compte mais n'avez pas reçu le mail de validation "
+
+#~ msgid "here"
+#~ msgstr "cliquez ici"
+
+#~ msgid "Email change confirmation on %s"
+#~ msgstr "Confirmation de modification du mail sur %s"
+
+#~ msgid "Password reset on %s"
+#~ msgstr "Réinitilisation du mot de passe sur %s"
+
+#~ msgid "E-mail changed successfully."
+#~ msgstr "Adresse mail modifiée."
+
+#~ msgid ""
+#~ "The key you received via e-mail is no longer valid. Please try the e-mail "
+#~ "change process again."
+#~ msgstr ""
+#~ "La clé que vous avez reçu par mail n'est plus valide. Merci de recommencer "
+#~ "le processus de modification."
+
+#~ msgid "Invalid e-mail"
+#~ msgstr "Adresse mail invalide"
+
+#~ msgid "Select an image from a remote URL:"
+#~ msgstr "Indiquez l'adresse (URL) d'une image :"
+
+#~ msgid "Select anoter image"
+#~ msgstr "Sélectionnez une autre image"
+
+#~ msgid "E-mail change successful"
+#~ msgstr "Adresse mail modifiée"
+
+#~ msgid "You're receiving this e-mail because you requested an e-mail change"
+#~ msgstr ""
+#~ "Vous recevez ce mail suite à une requête de modification d'adresse mail"
+
+#~ msgid "for your user account at %(site_name)s"
+#~ msgstr "pour votre compte sur %(site_name)s"
+
+#~ msgid "If you want to proceed with this change, follow this link:"
+#~ msgstr "Si vous voulez valider cette modification, suivez ce lien :"
+
+#~ msgid "Your username, in case you've forgotten:"
+#~ msgstr "Pour rappel, votre pseudonyme est :"
+
+#~ msgid "Thanks for using our site!"
+#~ msgstr "Merci d'utiliser ce site !"
+
+#~ msgid "The %(site_name)s team"
+#~ msgstr "L'équipe de %(site_name)s"
+
+#~ msgid "Validated"
+#~ msgstr "Validée"
+
+#~ msgid "You're receiving this e-mail because you requested a password reset"
+#~ msgstr ""
+#~ "Vous recevez ce mail suite à une requête de réinitialisation de mot de passe"
+
+#~ msgid "Feel free to change this password going to this page:"
+#~ msgstr "Vous pouvez modifierer votre mot de passe sur cette page :"
+
+#~ msgid "Change my password"
+#~ msgstr "Modifier mon mot de passe"
+
+#~ msgid "You're receiving this e-mail because you requested an account "
+#~ msgstr "Vous recevez ce mail suite à une création de compte "
+
+#~ msgid "at %(site_name)s"
+#~ msgstr "sur %(site_name)s"
 
 #~ msgid "Following this link, you will validate your e-mail address:"
-#~ msgstr "Следуйте по ссылке для подтверждения e-mail адреса:"
+#~ msgstr "En suivant ce lien, vous validrez votre adresse mail :"
 
-#~ msgid "Email validation for %(site_name)s"
-#~ msgstr "Подтверждение почты для %(site_name)s"
+#~ msgid "No avatar"
+#~ msgstr "Pas d'avatar"
+
+#~ msgid "My Website"
+#~ msgstr "Mon site internet"
+
+#~ msgid "Not public"
+#~ msgstr "Privé"
+
+#~ msgid "your profile"
+#~ msgstr "Votre profil"
+
+#~ msgid ""
+#~ "to add more information about you (your e-mail for example), or go to the"
+#~ msgstr ""
+#~ "pour ajouter des informations à propos de vous-même (votre mail par exemple), "
+#~ "allez sur "
+
+#~ msgid "Please wait..."
+#~ msgstr "Merci de patienter..."
+
+#~ msgid "(Change password)"
+#~ msgstr "(Modification de mot de passe)"
+
+#~ msgid "Other actions:"
+#~ msgstr "Autres actions :"
+
+#~ msgid "Activate your account on %s"
+#~ msgstr "Activation de votre compte sur %s"
+
+#~ msgid "E-mail validation unsuccessful"
+#~ msgstr "Échec de la validation de l'adresse mail"
+
+#~ msgid ""
+#~ "This account has not been activated yet. You must have received an e-mail "
+#~ "with instructions to activate it. If you want to resend the e-mail, "
+#~ "please, click"
+#~ msgstr ""
+#~ "Ce compte n'a pas encore été activé. Vous avez dû recevoir un mail avec "
+#~ "les instructions pour l'activer. Nous pouvons vous renvoyer ce mail "
+#~ "si vous cliquez"
+
+#~ msgid "Add email"
+#~ msgstr "Indiquez votre adresse mail"
+
+#~ msgid "Overview of your public profile"
+#~ msgstr "Résumé de votre profil public"
+
+#~ msgid ""
+#~ "Your user has been created successfully, but you must validate your e-"
+#~ "mail address before login to this site. You're going to receive an e-mail "
+#~ "with instructions of how to finish the registration process."
+#~ msgstr ""
+#~ "Votre compte a été crée mais vous devez valider votre adresse mail avant "
+#~ "de pouvoir vous authentifier sur le site. Vous allez recevoir pour cela "
+#~ "un mail avec les instructions nécessaires"
+
+#~ msgid "Account validated successfully."
+#~ msgstr "Compte validé"
+
+#~ msgid "That username has invalid characters."
+#~ msgstr "Ce pseudonyme contient des caractères invalides"
+
+#~ msgid ""
+#~ "You only need a valid username and a password to get access to the "
+#~ "private content of this site."
+#~ msgstr ""
+#~ "Un pseudonyme et un mot de passe suffisent pour accéder aux parties "
+#~ "du site auxquelles vous n'avez pour l'instant pas accès"
