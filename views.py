@@ -241,14 +241,14 @@ def avatarcrop(request):
     if not request.method == "POST":
         form = AvatarCropForm()
     else:
-        form = AvatarCropForm(request.POST)
+        image = Image.open(avatar.image.path)
+        form = AvatarCropForm(image, request.POST)
         if form.is_valid():
             top = int(form.cleaned_data.get('top'))
             left = int(form.cleaned_data.get('left'))
             right = int(form.cleaned_data.get('right'))
             bottom = int(form.cleaned_data.get('bottom'))
 
-            image = Image.open(avatar.image.path)
             box = [ left, top, right, bottom ]
             image = image.crop(box)
             if image.mode not in ('L', 'RGB'):

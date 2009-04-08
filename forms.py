@@ -63,20 +63,43 @@ class AvatarForm(forms.Form):
             raise forms.ValidationError(_('You must enter one of the options'))
         return self.cleaned_data
 
+class AvatarCoordinateField(forms.IntegerField):
+    def clean(self, value):
+        try:
+            value = int(float(value))
+        except:
+            pass
+        return super(AvatarCoordinateField, self).clean(value)
+
 class AvatarCropForm(forms.Form):
     """
     Crop dimensions form
     """
-    top = forms.IntegerField()
-    bottom = forms.IntegerField()
-    left = forms.IntegerField()
-    right = forms.IntegerField()
+    top = AvatarCoordinateField()
+    bottom = AvatarCoordinateField()
+    left = AvatarCoordinateField()
+    right = AvatarCoordinateField()
+
+    def __init__(self, image=None, *args, **kwargs):
+        self.image = image
+        super(AvatarCropForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        if not self.cleaned_data.get('right') or not self.cleaned_data.get('left') or int(self.cleaned_data.get('right')) - int(self.cleaned_data.get('left')) < 96:
+        if not self.cleaned_data.get('top') and \
+            not self.cleaned_data.get('bottom') and \
+            not self.cleaned_data.get('left')  and \
+            not self.cleaned_data.get('right') and \
+            self.image:
+                size = self.image.size
+                self.cleaned_data['top'] = 0
+                self.cleaned_data['bottom'] = size[1]
+                self.cleaned_data['left'] = 0
+                self.cleaned_data['right'] = size[0]
+
+        elif self.cleaned_data.get('right') is None or self.cleaned_data.get('left') is None or int(self.cleaned_data.get('right')) - int(self.cleaned_data.get('left')) < 96:
             raise forms.ValidationError(_("You must select a portion of the image with a minimum of 96x96 pixels."))
-        else:
-            return self.cleaned_data
+
+        return self.cleaned_data
 
 class RegistrationForm(forms.Form):
 
