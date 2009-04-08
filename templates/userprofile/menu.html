@@ -1,6 +1,6 @@
 {% load i18n %}
 {% if user.is_authenticated %}
-<div id="nav" class="span-24 last">
+<div id="nav" class="{{ css_classes.nav }}">
 	<ul class="hmenu">
 		<li{% ifequal section "overview" %} class="active"{% endifequal %}><a href="{% url profile_overview %}">{% trans "Overview" %}</a></li>
 		<li{% ifequal section "personal" %} class="active"{% endifequal %}><a href="{% url profile_edit_personal %}">{% trans "Personal information" %}</a></li>

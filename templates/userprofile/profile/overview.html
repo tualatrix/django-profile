@@ -30,14 +30,14 @@
 	<form action="" method="post">
 	<fieldset>
 		<legend>{% trans "Overview of your profile" %}</legend>
-		<div id="avatar" class="span-3 center">
+		<div id="avatar" class="{{ css_classes.overview_avatar }} center">
 			<a href="{% url profile_edit_avatar %}">
 				<img class="border" src="{% avatar 96 %}" />
 			</a>
 			<p><a href="{% url profile_edit_avatar %}">{% if user.get_profile.has_avatar %}{% trans "Change avatar" %}{% else %}{% trans "Add avatar" %}{% endif %}</a></p>
 		</div>
 	
-		<div class="span-9 last">
+		<div class="{{ css_classes.overview_details }}">
 			<p><label for="id_user">{% trans "Username:" %}</label> {{ user }}</p>
 			<p><label for="id_email">{% trans "E-mail:" %}</label>
 				<span class="{% if not email or not validated %}quiet red{% endif %}">
@@ -78,7 +78,7 @@
 
 		<hr class="space" />
 		{% if user.get_profile.location %}
-		<div class="span-12 last">
+		<div class="{{ css_classes.overview_location }}">
 			<div id="location" style="width: 480px; height: 240px;"></div>
 		</div>
 		{% endif %}

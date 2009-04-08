@@ -27,7 +27,7 @@
 	<h2>{% blocktrans with profile.user as user %}Public profile of {{ user }}{% endblocktrans %}</h2>
 
 	<div class="vcard">
-		<div class="span-10">
+		<div class="{{ css_classes.public_vcard_content }}">
 			<img class="border top" alt="{{ profile.user }}" src="{% avatar 96 profile.user %}" />
 			<ul>
 				<li>{% trans "Username" %}: <strong>{{ profile.user }}</strong></li>
@@ -40,7 +40,7 @@
 			</ul>
 		</div>
 		{% if profile.latitude and profile.longitude %}
-		<div class="span-10">
+		<div class="{{ css_classes.public_vcard_map }}">
 			<div id="map"></div>
 		</div>
 		{% endif %}

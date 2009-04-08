@@ -1549,7 +1549,7 @@ msgstr "Chargement..."
 
 #: templates/userprofile/profile/location.html:26
 msgid "Location:"
-msgstr "Localisatio :"
+msgstr "Localisation :"
 
 #: templates/userprofile/profile/location.html:27
 msgid "Position"
