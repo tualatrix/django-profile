@@ -1203,11 +1203,11 @@ msgstr "Votre adresse mail a déjà été validée"
 #: templates/userprofile/account/login.html:4
 #: templates/userprofile/account/login.html:19
 msgid "User login"
-msgstr "Pseudonyme"
+msgstr "Identification"
 
 #: templates/userprofile/account/login.html:36
 msgid "Login"
-msgstr "Pseudonyme"
+msgstr "Identification"
 
 #: templates/userprofile/account/login.html:42
 msgid "Utilities"
