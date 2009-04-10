@@ -19,7 +19,7 @@
 	{{ form.errors }}
 	<fieldset>
 		<legend>{% trans "Define your location" %}{% if geoip %} (<a href="?ip=1">{% trans "Auto-discover location" %}</a>){% endif %}</legend>
-		<label for="id_country">{% trans "Country" %}<img class="hide" alt="{% trans "Loading..." %}" src="{{ MEDIA_URL }}userprofile/images/loading.gif" /></label>
+		<label for="id_country">{% trans "Country" %}<img class="hide loading" alt="{% trans "Loading..." %}" src="{{ MEDIA_URL }}userprofile/images/loading.gif" /></label>
 		<p>{{ form.country }}</p>
 		{% if GOOGLE_MAPS_API_KEY %}
 			<div class="mapinfo">
@@ -28,7 +28,8 @@
 				<div id="map"></div>
 			</div>
 			<div class="hide">{{ form.location }}{{ form.latitude }}{{ form.longitude }}</div>
-			<div style="display: none;" id="apikey">{{ GOOGLE_MAPS_API_KEY }}</div>
+			<input type='hidden' name='_apikey' id="google_maps_apikey" value="{{ GOOGLE_MAPS_API_KEY }}" />
+			<input type='hidden' name='_fetch_geodata_url' id="fetch_geodata_url" value="{% url profile_geocountry_info 0 0  %}" />
 		{% endif %}
 	</fieldset>
 	<p><input type="submit" value="{% trans 'Save' %}" /></p>
