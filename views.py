@@ -26,6 +26,9 @@ import base64
 import urllib
 import os
 
+if hasattr(settings, "AVATAR_QUOTA"):
+    from userprofile.uploadhandler import QuotaUploadHandler
+
 try:
     from PIL import Image
 except ImportError:
@@ -192,6 +195,9 @@ def avatarchoose(request):
     """
     profile, created = Profile.objects.get_or_create(user = request.user)
     images = dict()
+
+    if hasattr(settings, "AVATAR_QUOTA"):
+        request.upload_handlers.insert(0, QuotaUploadHandler())
 
     if request.method == "POST":
         form = AvatarForm()
