@@ -13,6 +13,7 @@ except ImportError:
 # from PythonMagick import Image
 #from utils.TuxieMagick import Image
 import os
+import urlparse
 import time
 
 register = Library()
@@ -51,8 +52,8 @@ class ResizedThumbnailNode(Node):
             base, filename = os.path.split(avatar_path)
             name, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (name, self.size, extension))
-            base, temp = os.path.split(avatar.url)
-            url = os.path.join(base, "%s.%s%s" % (name, self.size, extension))
+            url_tuple = urlparse.urlparse(avatar.url)
+            url = urlparse.urljoin(url_tuple[2], "%s.%s%s" % (name, self.size, extension))
         except:
             avatar_path = DEFAULT_AVATAR
             base, filename = os.path.split(avatar_path)
