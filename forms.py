@@ -85,18 +85,8 @@ class AvatarCropForm(forms.Form):
         super(AvatarCropForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        if not self.cleaned_data.get('top') and \
-            not self.cleaned_data.get('bottom') and \
-            not self.cleaned_data.get('left')  and \
-            not self.cleaned_data.get('right') and \
-            self.image:
-                size = self.image.size
-                self.cleaned_data['top'] = 0
-                self.cleaned_data['bottom'] = size[1]
-                self.cleaned_data['left'] = 0
-                self.cleaned_data['right'] = size[0]
-
-        elif self.cleaned_data.get('right') is None or self.cleaned_data.get('left') is None or int(self.cleaned_data.get('right')) - int(self.cleaned_data.get('left')) < 96:
+        if self.cleaned_data.get('right') and self.cleaned_data.get('left') and \
+           int(self.cleaned_data.get('right')) - int(self.cleaned_data.get('left')) < 96:
             raise forms.ValidationError(_("You must select a portion of the image with a minimum of 96x96 pixels."))
 
         return self.cleaned_data

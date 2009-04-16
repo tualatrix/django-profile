@@ -255,7 +255,22 @@ def avatarcrop(request):
             right = int(form.cleaned_data.get('right'))
             bottom = int(form.cleaned_data.get('bottom'))
 
+            print top, left, right, bottom
+            if not (top or left or right or bottom):
+                (width, height) = image.size
+                if width > height:
+                    diff = (width-height) / 2
+                    left = diff
+                    right = width-diff
+                    bottom = height
+                else:
+                    diff = (height-width) / 2
+                    top = diff
+                    right = width
+                    bottom = height-diff
+
             box = [ left, top, right, bottom ]
+            print box
             image = image.crop(box)
             if image.mode not in ('L', 'RGB'):
                 image = image.convert('RGB')
