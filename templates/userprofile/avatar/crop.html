@@ -5,7 +5,7 @@
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extrajs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}userprofile/js/jquery.imgareaselect-0.4.2.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}userprofile/js/jquery.imgareaselect-0.8.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		function updateValues(img, selection) {
@@ -15,7 +15,7 @@
 			$("input[name='bottom']").val(selection.y2);
 		}
 		$(window).load(function() {
-			$("#cropimage").imgAreaSelect({ aspectRatio: "1:1", onSelectEnd: updateValues, minHeight: "96", minWidth: "96" });
+			$("#cropimage").imgAreaSelect({ handles: 'corners', aspectRatio: "1:1", onSelectEnd: updateValues, minHeight: "96", minWidth: "96" });
 		});
 	});
 </script>
