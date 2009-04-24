@@ -25,6 +25,7 @@ import cPickle as pickle
 import base64
 import urllib
 import os
+from userprofile import signals
 
 if hasattr(settings, "AVATAR_QUOTA"):
     from userprofile.uploadhandler import QuotaUploadHandler
@@ -91,6 +92,7 @@ def public(request, username):
 
     template = "userprofile/profile/public.html"
     data = { 'profile': profile, 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY, }
+    signals.context_signal.send(sender=public, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -115,6 +117,7 @@ def overview(request):
     template = "userprofile/profile/overview.html"
     data = { 'section': 'overview', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
             'email': email, 'validated': validated, 'fields' : fields }
+    signals.context_signal.send(sender=overview, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -135,6 +138,7 @@ def personal(request):
     template = "userprofile/profile/personal.html"
     data = { 'section': 'personal', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
              'form': form, }
+    signals.context_signal.send(sender=personal, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -165,6 +169,7 @@ def location(request):
     template = "userprofile/profile/location.html"
     data = { 'section': 'location', 'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY,
              'form': form, 'geoip': geoip }
+    signals.context_signal.send(sender=location, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -186,6 +191,7 @@ def delete(request):
 
     template = "userprofile/profile/delete.html"
     data = { 'section': 'delete', }
+    signals.context_signal.send(sender=delete, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -236,6 +242,7 @@ def avatarchoose(request):
     template = "userprofile/avatar/choose.html"
     data = { 'generic96': generic96, 'form': form, "images": images,
              'AVATAR_WEBSEARCH': AVATAR_WEBSEARCH, 'section': 'avatar', }
+    signals.context_signal.send(sender=avatarchoose, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -283,6 +290,7 @@ def avatarcrop(request):
 
     template = "userprofile/avatar/crop.html"
     data = { 'section': 'avatar', 'avatar': avatar, 'form': form, }
+    signals.context_signal.send(sender=avatarcrop, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 @login_required
@@ -307,6 +315,7 @@ def email_validation_process(request, key):
 
     template = "userprofile/account/email_validation_done.html"
     data = { 'successful': successful, }
+    signals.context_signal.send(sender=pemail_validation_process, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def email_validation(request):
@@ -323,6 +332,7 @@ def email_validation(request):
 
     template = "userprofile/account/email_validation.html"
     data = { 'form': form, }
+    signals.context_signal.send(sender=email_validation, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def register(request):
@@ -345,6 +355,7 @@ def register(request):
 
     template = "userprofile/account/registration.html"
     data = { 'form': form, }
+    signals.context_signal.send(sender=register, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def email_validation_reset(request):
@@ -377,4 +388,5 @@ def email_validation_reset(request):
 
         template = "userprofile/account/email_validation_reset.html"
         data = { 'form': form, }
+        signals.context_signal.send(sender=email_validation_reset, request=request, context=data)
         return render_to_response(template, data, context_instance=RequestContext(request))
