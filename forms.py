@@ -4,7 +4,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, SiteProfileNotAvailable
 from userprofile.models import EmailValidation
 from django.core.files.uploadedfile import SimpleUploadedFile
 import mimetypes, urllib

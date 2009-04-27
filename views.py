@@ -163,6 +163,12 @@ def location(request):
         if form.is_valid():
             form.save()
             request.user.message_set.create(message=_("Your profile information has been updated successfully."))
+
+            signal_responses = signals.post_signal.send(sender=location, request=request, form=form)
+            last_reponse = signals.last_response(signal_responses)
+            if last_reponse:
+                return last_response
+
     else:
         form = LocationForm(instance=profile)
 
@@ -187,7 +193,9 @@ def delete(request):
         request.user.save()
 
         request.user.message_set.create(message=_("Your profile information has been removed successfully."))
-        return HttpResponseRedirect(reverse("profile_overview"))
+
+        signal_responses = signals.post_signal.send(sender=delete, request=request, form=form)
+        return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_overview"))
 
     template = "userprofile/profile/delete.html"
     data = { 'section': 'delete', }
@@ -224,10 +232,10 @@ def avatarchoose(request):
                 image.thumbnail((480, 480), Image.ANTIALIAS)
                 image.convert("RGB").save(avatar.image.path, "JPEG")
                 avatar.save()
-                return HttpResponseRedirect(reverse("profile_avatar_crop"))
 
-                base, filename = os.path.split(avatar_path)
-                generic, extension = os.path.splitext(filename)
+                signal_responses = signals.post_signal.send(sender=avatarchoose, request=request, form=form)
+                return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_avatar_crop"))
+
     else:
         form = AvatarForm()
 
@@ -262,7 +270,6 @@ def avatarcrop(request):
             right = int(form.cleaned_data.get('right'))
             bottom = int(form.cleaned_data.get('bottom'))
 
-            print top, left, right, bottom
             if not (top or left or right or bottom):
                 (width, height) = image.size
                 if width > height:
@@ -277,7 +284,6 @@ def avatarcrop(request):
                     bottom = height-diff
 
             box = [ left, top, right, bottom ]
-            print box
             image = image.crop(box)
             if image.mode not in ('L', 'RGB'):
                 image = image.convert('RGB')
@@ -286,7 +292,9 @@ def avatarcrop(request):
             avatar.valid = True
             avatar.save()
             request.user.message_set.create(message=_("Your new avatar has been saved successfully."))
-            return HttpResponseRedirect(reverse("profile_edit_avatar"))
+
+            signal_responses = signals.post_signal.send(sender=avatarcrop, request=request, form=form)
+            return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_edit_avatar"))
 
     template = "userprofile/avatar/crop.html"
     data = { 'section': 'avatar', 'avatar': avatar, 'form': form, }
@@ -313,9 +321,14 @@ def email_validation_process(request, key):
     else:
         successful = False
 
+    signal_responses = signals.post_signal.send(sender=email_validation_process, request=request, extra={'key': key})
+    last_reponse = signals.last_response(signal_responses)
+    if last_reponse:
+        return last_response
+
     template = "userprofile/account/email_validation_done.html"
     data = { 'successful': successful, }
-    signals.context_signal.send(sender=pemail_validation_process, request=request, context=data)
+    signals.context_signal.send(sender=email_validation_process, request=request, context=data)
     return render_to_response(template, data, context_instance=RequestContext(request))
 
 def email_validation(request):
@@ -326,7 +339,9 @@ def email_validation(request):
         form = EmailValidationForm(request.POST)
         if form.is_valid():
             EmailValidation.objects.add(user=request.user, email=form.cleaned_data.get('email'))
-            return HttpResponseRedirect(reverse("email_validation_processed"))
+
+            signal_responses = signals.post_signal.send(sender=email_validation, request=request, form=form)
+            return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("email_validation_processed"))
     else:
         form = EmailValidationForm()
 
@@ -349,7 +364,9 @@ def register(request):
                 EmailValidation.objects.add(user=newuser, email=newuser.email)
 
             newuser.save()
-            return HttpResponseRedirect(reverse('signup_complete'))
+
+            signal_responses = signals.post_signal.send(sender=register, request=request, form=form, extra={'newuser': newuser})
+            return signals.last_response(signal_responses) or HttpResponseRedirect(reverse('signup_complete'))
     else:
         form = RegistrationForm()
 
@@ -370,7 +387,9 @@ def email_validation_reset(request):
         except EmailValidation.DoesNotExist:
             response = "failed"
 
-        return HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
+        signal_responses = signals.post_signal.send(sender=email_validation_reset, request=request, extra={'response': response})
+        return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
+
     else:
         if request.method == 'POST':
             form = ResendEmailValidationForm(request.POST)
@@ -381,7 +400,9 @@ def email_validation_reset(request):
                     response = "done"
                 except EmailValidation.DoesNotExist:
                     response = "failed"
-                return HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
+
+                signal_responses = signals.post_signal.send(sender=email_validation_reset, request=request, extra={'response': response})
+                return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("email_validation_reset_response", args=[response]))
 
         else:
             form = ResendEmailValidationForm()
