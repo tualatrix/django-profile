@@ -129,7 +129,7 @@ class RegistrationForm(forms.Form):
         if not email: return  email
 
         try:
-            User.objects.get(email=email)
+            User.objects.get(email__iexact=email)
             raise forms.ValidationError(_("That e-mail is already used."))
         except User.DoesNotExist:
             try:
