@@ -9,9 +9,19 @@ from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from userprofile.countries import CountryField
+from django.core.files.storage import default_storage
+if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+    try:
+        from backends.S3Storage import S3Storage
+        storage = S3Storage()
+    except ImportError:
+        raise S3BackendNotFound
+else:
+    storage = default_storage
 import datetime
 import cPickle as pickle
 import base64
+import urllib
 import os.path
 try:
     from PIL import Image, ImageFilter
@@ -49,7 +59,7 @@ class Avatar(models.Model):
     """
     Avatar model
     """
-    image = models.ImageField(upload_to="avatars/%Y/%b/%d")
+    image = models.ImageField(upload_to="avatars/%Y/%b/%d", storage=storage)
     user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField()
@@ -61,11 +71,16 @@ class Avatar(models.Model):
         return _("%s's Avatar") % self.user
 
     def delete(self):
-        base, filename = os.path.split(self.image.path)
+        if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+            path = urllib.unquote(self.image.name)
+        else:
+            path = self.image.path
+
+        base, filename = os.path.split(path)
         name, extension = os.path.splitext(filename)
         for key in AVATAR_SIZES:
             try:
-                os.remove(os.path.join(base, "%s.%s%s" % (name, key, extension)))
+                storage.delete(os.path.join(base, "%s.%s%s" % (name, key, extension)))
             except:
                 pass
 
@@ -73,11 +88,16 @@ class Avatar(models.Model):
 
     def save(self):
         for avatar in Avatar.objects.filter(user=self.user, valid=self.valid).exclude(id=self.id):
-            base, filename = os.path.split(avatar.image.path)
+            if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+                path = urllib.unquote(self.image.name)
+            else:
+                path = avatar.image.path
+
+            base, filename = os.path.split(path)
             name, extension = os.path.splitext(filename)
             for key in AVATAR_SIZES:
                 try:
-                    os.remove(os.path.join(base, "%s.%s%s" % (name, key, extension)))
+                    storage.delete(os.path.join(base, "%s.%s%s" % (name, key, extension)))
                 except:
                     pass
             avatar.delete()
@@ -165,6 +185,9 @@ class EmailValidation(models.Model):
         return True
 
 class UserProfileMediaNotFound(Exception):
+    pass
+
+class S3BackendNotFound(Exception):
     pass
 
 class GoogleDataAPINotFound(Exception):

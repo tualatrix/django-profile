@@ -2,8 +2,11 @@
 from django.template import Library, Node, Template, TemplateSyntaxError, \
                             Variable
 from django.utils.translation import ugettext as _
-from userprofile.models import Avatar, AVATAR_SIZES
+from userprofile.models import Avatar, AVATAR_SIZES, S3BackendNotFound
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
+import urllib
+from cStringIO import StringIO
 from django.conf import settings
 try:
     from PIL import Image
@@ -15,6 +18,15 @@ except ImportError:
 import os
 import urlparse
 import time
+from django.core.files.storage import default_storage
+if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+    try:
+        from backends.S3Storage import S3Storage
+        storage = S3Storage()
+    except ImportError:
+        raise S3BackendNotFound
+else:
+    storage = default_storage
 
 register = Library()
 
@@ -46,25 +58,33 @@ class ResizedThumbnailNode(Node):
         try:
             user = self.user.resolve(context)
             avatar = Avatar.objects.get(user=user, valid=True).image
-            avatar_path = avatar.path
-            if not os.path.isfile(avatar_path):
+            if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+                avatar_path = avatar.name
+            else:
+                avatar_path = avatar.path
+
+            if not storage.exists(avatar_path):
                 raise
             base, filename = os.path.split(avatar_path)
             name, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (name, self.size, extension))
             url_tuple = urlparse.urlparse(avatar.url)
-            url = urlparse.urljoin(url_tuple[2], "%s.%s%s" % (name, self.size, extension))
+            url = urlparse.urljoin(urllib.unquote(urlparse.urlunparse(url_tuple)), "%s.%s%s" % (name, self.size, extension))
+
+            if not storage.exists(filename):
+                thumb = Image.open(ContentFile(avatar.read()))
+                thumb.thumbnail((self.size, self.size), Image.ANTIALIAS)
+                f = StringIO()
+                thumb.save(f, "JPEG")
+                f.seek(0)
+                storage.save(filename, ContentFile(f.read()))
+
         except:
             avatar_path = DEFAULT_AVATAR
             base, filename = os.path.split(avatar_path)
             generic, extension = os.path.splitext(filename)
             filename = os.path.join(base, "%s.%s%s" % (generic, self.size, extension))
             url = filename.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
-
-        if not os.path.isfile(filename):
-            image = Image.open(avatar_path)
-            image.thumbnail((self.size, self.size), Image.ANTIALIAS)
-            image.save(filename, "JPEG")
 
         return url
 

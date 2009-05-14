@@ -15,8 +15,11 @@ from django.utils import simplejson
 from django.db import models
 from django.contrib.auth.models import User, SiteProfileNotAvailable
 from userprofile.models import EmailValidation, Avatar, UserProfileMediaNotFound, \
-                               GoogleDataAPINotFound
+                               GoogleDataAPINotFound, S3BackendNotFound
 from django.template import RequestContext
+from cStringIO import StringIO
+from django.core.files.base import ContentFile
+import urlparse
 from django.conf import settings
 from xml.dom import minidom
 import urllib2
@@ -26,6 +29,9 @@ import base64
 import urllib
 import os
 from userprofile import signals
+
+if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+    from backends.S3Storage import S3Storage
 
 if hasattr(settings, "AVATAR_QUOTA"):
     from userprofile.uploadhandler import QuotaUploadHandler
@@ -226,11 +232,14 @@ def avatarchoose(request):
             form = AvatarForm(request.POST, request.FILES)
             if form.is_valid():
                 image = form.cleaned_data.get('url') or form.cleaned_data.get('photo')
-                avatar = Avatar(user=request.user, image=image, valid=False)
-                avatar.image.save("%s.jpg" % request.user.username, image)
-                image = Image.open(avatar.image.path)
-                image.thumbnail((480, 480), Image.ANTIALIAS)
-                image.convert("RGB").save(avatar.image.path, "JPEG")
+                thumb = Image.open(ContentFile(image.read()))
+                thumb.thumbnail((480, 480), Image.ANTIALIAS)
+                thumb.convert("RGB")
+                f = StringIO()
+                thumb.save(f, "JPEG")
+                f.seek(0)
+                avatar = Avatar(user=request.user, image="", valid=False)
+                avatar.image.save("%s.jpg" % request.user.username, ContentFile(f.read()))
                 avatar.save()
 
                 signal_responses = signals.post_signal.send(sender=avatarchoose, request=request, form=form)
@@ -262,7 +271,7 @@ def avatarcrop(request):
     if not request.method == "POST":
         form = AvatarCropForm()
     else:
-        image = Image.open(avatar.image.path)
+        image = Image.open(ContentFile(avatar.image.read()))
         form = AvatarCropForm(image, request.POST)
         if form.is_valid():
             top = int(form.cleaned_data.get('top'))
@@ -288,7 +297,15 @@ def avatarcrop(request):
             if image.mode not in ('L', 'RGB'):
                 image = image.convert('RGB')
 
-            image.save(avatar.image.path)
+            if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
+                f = StringIO()
+                image.save(f, "JPEG")
+                f.seek(0)
+                avatar.image.delete()
+                avatar.image.save("%s.jpg" % request.user.username, ContentFile(f.read()))
+            else:
+                image.save(avatar.image.path)
+
             avatar.valid = True
             avatar.save()
             request.user.message_set.create(message=_("Your new avatar has been saved successfully."))
@@ -305,7 +322,8 @@ def avatarcrop(request):
 def avatardelete(request, avatar_id=False):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         try:
-            Avatar.objects.get(user=request.user, valid=True).delete()
+            for avatar in Avatar.objects.filter(user=request.user):
+                avatar.delete()
             return HttpResponse(simplejson.dumps({'success': True}))
         except:
             return HttpResponse(simplejson.dumps({'success': False}))
