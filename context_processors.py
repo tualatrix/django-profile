@@ -30,10 +30,10 @@ CSS_CLASSES = {
     },
     # for "960gs" with 12 columns, full width
     '960gs-12': {
-        'content_main_2col':    'grid_8',
-        'content_related':      'grid_4',
-        'content_main':         'grid_12',
-        'nav':                  'grid_12',
+        'content_main_2col':    'grid_8 alpha',
+        'content_related':      'grid_4 omega',
+        'content_main':         'grid_12 alpha omega',
+        'nav':                  'grid_12 alpha omega',
         'public_vcard_content': 'grid_6 alpha',
         'public_vcard_map':     'grid_6 omega',
         'overview_avatar':      'grid_2 alpha',
@@ -42,10 +42,10 @@ CSS_CLASSES = {
     },
     # for "960gs" with 16 columns, full width
     '960gs-16': {
-        'content_main_2col':    'grid_12',
-        'content_related':      'grid_4',
-        'content_main':         'grid_16',
-        'nav':                  'grid_16',
+        'content_main_2col':    'grid_12 alpha',
+        'content_related':      'grid_4 omega',
+        'content_main':         'grid_16 alpha omega',
+        'nav':                  'grid_16 alpha omega',
         'public_vcard_content': 'grid_8 alpha',
         'public_vcard_map':     'grid_8 omega',
         'overview_avatar':      'grid_3 alpha',
