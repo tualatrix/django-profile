@@ -1578,7 +1578,7 @@ msgstr "Define la información sobre tu localización"
 
 #: templates/userprofile/profile/location_done.html:13
 #: templates/userprofile/profile/personal_done.html:13
-msgid "Your profile information has been updated successfully"
+msgid "Your profile information has been updated successfully."
 msgstr "La información de tu perfil ha sido actualizada satisfactoriamente"
 
 #: templates/userprofile/profile/overview.html:4

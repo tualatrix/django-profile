@@ -859,7 +859,7 @@ msgstr "定義你的地區資訊"
 #: templates/userprofile/userprofile/profile/personal_done.html:13
 #: templates/userprofile/userprofile/userprofile/profile/location_done.html:13
 #: templates/userprofile/userprofile/userprofile/profile/personal_done.html:13
-msgid "Your profile information has been updated successfully"
+msgid "Your profile information has been updated successfully."
 msgstr "你的個人資訊已經成功的被更新了"
 
 #: templates/userprofile/profile/overview.html:4
