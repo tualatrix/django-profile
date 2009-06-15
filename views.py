@@ -138,6 +138,10 @@ def personal(request):
         if form.is_valid():
             form.save()
             request.user.message_set.create(message=_("Your profile information has been updated successfully."))
+            signal_responses = signals.post_signal.send(sender=personal, request=request, form=form)
+            last_reponse = signals.last_response(signal_responses)
+            if last_reponse:
+                return last_response
     else:
         form = ProfileForm(instance=profile)
 
