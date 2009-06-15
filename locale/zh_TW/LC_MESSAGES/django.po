@@ -718,7 +718,7 @@ msgstr "完成圖像選擇"
 #: templates/userprofile/avatar/done.html:13
 #: templates/userprofile/userprofile/avatar/done.html:13
 #: templates/userprofile/userprofile/userprofile/avatar/done.html:13
-msgid "Your new avatar has been saved successfully"
+msgid "Your new avatar has been saved successfully."
 msgstr "你的新圖像已經儲存成功"
 
 #: templates/userprofile/avatar/search.html:29
@@ -779,7 +779,7 @@ msgstr "個人資訊已經被移除"
 #: templates/userprofile/profile/delete_done.html:13
 #: templates/userprofile/userprofile/profile/delete_done.html:13
 #: templates/userprofile/userprofile/userprofile/profile/delete_done.html:13
-msgid "Your profile information has been removed successfully"
+msgid "Your profile information has been removed successfully."
 msgstr "你的個人資訊已經成功的被移除了"
 
 #: templates/userprofile/profile/delete_done.html:19

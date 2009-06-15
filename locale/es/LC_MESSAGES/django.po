@@ -1484,7 +1484,7 @@ msgid "Avatar selection finished"
 msgstr "Selección de avatar terminada"
 
 #: templates/userprofile/avatar/done.html:13
-msgid "Your new avatar has been saved successfully"
+msgid "Your new avatar has been saved successfully."
 msgstr "Tu nuevo avatar ha sido guardado satisfactoriamente"
 
 #: templates/userprofile/profile/delete.html:4
@@ -1517,7 +1517,7 @@ msgid "Profile removed"
 msgstr "Información de perfil borrada"
 
 #: templates/userprofile/profile/delete_done.html:13
-msgid "Your profile information has been removed successfully"
+msgid "Your profile information has been removed successfully."
 msgstr "La información de tu perfil ha sido borrada satisfactoriamente"
 
 #: templates/userprofile/profile/delete_done.html:19
