@@ -29,6 +29,7 @@ import base64
 import urllib
 import os
 from userprofile import signals
+import copy
 
 if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
     from backends.S3Storage import S3Storage
@@ -134,11 +135,12 @@ def personal(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
+        old_profile = copy.copy(profile)
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
             request.user.message_set.create(message=_("Your profile information has been updated successfully."))
-            signal_responses = signals.post_signal.send(sender=personal, request=request, form=form)
+            signal_responses = signals.post_signal.send(sender=personal, request=request, form=form, extra={'old_profile':old_profile})
             last_reponse = signals.last_response(signal_responses)
             if last_reponse:
                 return last_response
