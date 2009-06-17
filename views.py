@@ -193,6 +193,10 @@ def location(request):
 @login_required
 def delete(request):
     if request.method == "POST":
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        old_profile = copy.copy(profile)
+        old_user    = copy.copy(request.user)
+
         # Remove the profile and all the information
         Profile.objects.filter(user=request.user).delete()
         EmailValidation.objects.filter(user=request.user).delete()
@@ -206,7 +210,7 @@ def delete(request):
 
         request.user.message_set.create(message=_("Your profile information has been removed successfully."))
 
-        signal_responses = signals.post_signal.send(sender=delete, request=request, form=form)
+        signal_responses = signals.post_signal.send(sender=delete, request=request, extra={'old_profile':old_profile, 'old_user': old_user})
         return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_overview"))
 
     template = "userprofile/profile/delete.html"
