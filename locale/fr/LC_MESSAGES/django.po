@@ -1392,9 +1392,9 @@ msgid ""
 "url has been sent to your e-mail address. You must access this message on "
 "your e-mail account to finish the registration process."
 msgstr ""
-"Vous avez créé un nouveau conpte, et une adresse d'activation vient de vous "
-"être envoyée par mail. Vous devez prendre connaissance de ce message pour "
-"terminer le processus en validant votre compte"
+"Vous avez créé un nouveau compte, et un lien d'activation vient de vous "
+"être envoyé par mail. Vous devez prendre connaissance de ce message pour "
+"terminer le processus en validant votre compte."
 
 #: templates/userprofile/account/registration_done.html:13
 msgid ""
