@@ -1,0 +1,147 @@
+========================
+django-profile Changelog
+========================
+
+Development version
+-------------------
+* If no area is selected on the avatar crop form, an auto-cropped are is selected.
+  Thanks to Tristan Brotherton.
+* Added an additional Jquery check on the avatar crop utility to ensure that the selected size of the avatar
+  has a minimum size of 96x96 pixels. Thanks to Tristan Brotherton.
+* Solved this bug:
+	http://code.google.com/p/django-profile/issues/detail?id=45
+* Added an avatar upload quota. By default, 5Mbytes, but can be
+  customized via the AVATAR_QUOTA setting (read INSTALL.txt).
+  Thanks to Tristan Brotherton. Based on this django code:
+  http://code.djangoproject.com/browser/django/trunk/tests/regressiontests/file_uploads/uploadhandler.py#L7
+* Avatar crop bug finally solved. Thanks to stephane.angel:
+	http://code.google.com/p/django-profile/issues/detail?id=52
+* Added the French translation. Thanks so much to stephane.angel:
+	http://code.google.com/p/django-profile/issues/detail?id=50
+* Added and aditional check to the code to make sure that this bug doesn't happen:
+	http://code.google.com/p/django-profile/issues/detail?id=49
+* Added a setup.py file. Thanks to Abhishek Mukher:
+	Thanks to http://code.google.com/p/django-profile/issues/detail?id=48
+* Added the possibility to auto-discover the user localization based in his IP.
+* Media directory made independent from the global media. Thanks to waifunlee for reporting:
+	http://code.google.com/p/django-profile/issues/detail?id=37
+
+  Seen on this thread discussion too:
+	https://groups.google.com/group/django-developers/browse_thread/thread/94efe43b1d1c7787?pli=1
+
+Version 0.6.0
+-------------------
+* Solved some bugs. Thanks to Fabio Varesano.
+* Added Traditional Chinese translation. Thanks to Chiu Wei Jia.
+* Renamed the setting WEBSEARCH to AVATAR_WEBSEARCH.
+* Setting AVATAR_DEFAULT is required, if it's not stablished an exception
+  will raise.
+* Lot of simplifications. Removed the public/private user selection. It was 
+  confusing.
+* Model abstraction with django model inheritance. Now the Profile class has 
+  been renamed BaseProfile. Thanks to Rob Yates and Alvaro Mouriño.
+* Better management of avatars. New templatetag to generate thumbs on the fly.
+  Thanks to Alvaro Mouriño.
+* Password managament modified to use the new django password management 
+  utilities.
+* Templates modified to do reverse URL.
+* Better management of urls/view variables. Thanks to Alvaro Mouriño.
+* Renamed APIKEY setting to GOOGLE_MAPS_API_KEY.
+* Templates modified to do reverse URL.
+* Added internacionalization of the urls. Credits to Alvaro Stevens.
+* Changed the model of userprofile to solve the problem shown on this ticket:
+	http://code.google.com/p/django-profile/issues/detail?id=25&can=1
+* Django newforms-admin has been merged into trunk on revision [7967]. Newforms
+  is now the official form management library, so this version of 
+  django-profile has been adapted to make it compatible with the new changes.
+* This revision of django-profile is only compatible with django rev. [7967] or
+  greater.
+* Solved some issues with the form upload library. Thanks to Alvaro Mouriño.
+* Make the Continent/Country models compatible with the new newforms-admin
+  interface. Thanks to Alvaro Mouriño.
+* Corrected a misspellings on the documentation. Thanks to paltman.
+
+Version 0.5.0
+-------------
+* CSS and HTML formatted with Blueprint CSS 
+  (http://code.google.com/p/blueprintcss/).
+* Lot of code optimization of Django, HTML, CSS and Javascript.
+* Great effort on application usability and template design.
+* Removed every javascript effectism not really needed.
+* Lot of this work made as team with jonas.esp 
+  (http://code.google.com/u/jonas.esp/).
+
+
+Version 0.4.2
+-------------
+* Changed the CSS structure. Now is managed with the great Blueprint CSS Framework. Thanks to Kless.
+	http://code.google.com/p/blueprintcss/
+* Some cleanup on the image directory.
+
+Version 0.4.1
+-------------
+* Solved some bugs on the optional configuration parameters APIKEY and 
+  AVATAR_WEBSEARCH. Now they are totally optional. Thanks to Kless.
+* Solved a bug on the image crop&resize. If you didn't select a portion of the image, an error
+  was raised. Thanks to David Castello for the report.
+* Some cleanup of the javascript files.
+
+Version 0.4.0.1
+---------------
+* Solved a problem with license issues. Thanks to Kless.
+* Solved a typo on the registration form. Thanks to stephan.d.walter.
+* Renamed ROOT_PATH to PROJECT_PATH and solved a bug about directory paths. Thanks to jonas.esp.
+
+Version 0.4.0
+-------------
+* Changed the license type. Now this project has a Simplified BSD license.
+* Backward incompatible with older versions.
+* Simpler, easier to integrate.
+* New interface, more usable and structured.
+* Removed the "account" module. Everything is integrated in the module "userprofile".
+* Added fixtures for the inital load of Countries and Continents. Thanks to Rob Yates.
+* Solved some bugs on the "account" module. Thanks to Rob Yates again.
+* Removed the "libmagic" dependency.
+* Updated jquery version.
+* New avatar crop&resize plugin.
+* New avatar management. You can insert an image from an URL, or make a search to Picasaweb.
+* Removed the Avatar model. It was innecesary and everything is better managed from the Profile model.
+
+
+Version 0.3.1
+-------------
+* Solved some bug issues. Thanks to evo for the report.
+* Modified the Profile model with the new syntax for the OneToOne fields after the QuerySet Refactor on Django.
+  Thanks to Arin. Read more:
+        http://code.djangoproject.com/wiki/QuerysetRefactorBranch#Backwardsincompatiblechanges
+* Added Italian translation. Thanks to the author of django-press (http://code.google.com/p/django-press/).
+
+
+Version 0.3
+-------------
+* WARNING!!! "profile" module renamed to "userprofile". The old name had a conflict with the python-profiler
+  module. If you're updating from the old version, you will have to dump and restore the old database data. 
+  Thanks to Mario Cesar for the report.
+* The allowed chars for a username are A-Z, a-z, 0-9 and _
+* Solved some mess with the importing of settings variables. Thanks to Mario Cesar.
+* We can activate an e-mail validation on the registration process.
+
+Version 0.2.1
+-------------
+* Added Portuguese Brazilian (pt-br) localization. Thanks to Pedro Valente.
+* Added Spanish (es) localization.
+* Localization framework. 
+* Better registration form. Check valid usernames.
+
+Version 0.1
+-----------
+* Save profile Ajax-like.
+* Removed the django-registration dependency.
+* Added hCard information in the UserCard.
+* Code cleaned-up and commented.
+* Use of geonames.org webservice to obtain the Country and region when clicking on the Google Map.
+* Changed to new version of ui.datepicker
+
+Version 0.001, 19 Nov 2007
+------------------------
+* First version uploaded to repository

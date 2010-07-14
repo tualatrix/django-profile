@@ -1,0 +1,7 @@
+* First and Last name is included in the User model. Date joined too:
+	http://www.djangoproject.com/documentation/authentication
+* Deal with microformats.
+* Integrate OpenID authentication.
+* Improve the country list.
+* Country/Continent list internationalized.
+* Calendar internationalized.

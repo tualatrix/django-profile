@@ -1,0 +1,266 @@
+------------------
+-- Requirements --
+------------------
+
+First of all, the requirement to run this software is:
+    * Django version 1.0 or greater.
+
+    * The Python Imaging Library:
+        * python-imaging package (on Debian or Ubuntu).
+        * Source: http://www.pythonware.com/products/pil/
+
+    * Optional: the Google Data API (allows image searching)
+      Download it from http://code.google.com/p/gdata-python-client/
+
+You can see a demo of which can be accomplished here:
+    http://profile.elementales.com
+
+
+-----------------
+-- Quick guide --
+-----------------
+
+You can run the demo application supplied on this package on your own server to
+make and idea of what can be accomplished with django-profile.
+Follow these steps to make it run:
+
+* Make django visible in your python path. You could import the last version
+from the repository executing this command:
+    $ svn co http://code.djangoproject.com/svn/django/trunk/django
+
+* Make the "userprofile" module (supplied on this package) visible on your 
+  PYTHONPATH.
+
+* You need a valid e-mail server to try the e-mail validation process
+  or password recovery utilities, and fill this information in the demo
+  project 'settings.py' file:
+
+# e-mail settings
+DEFAULT_FROM_EMAIL = ''
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+If you want to use Gmail as the SMTP server, you can use these settings:
+DEFAULT_FROM_EMAIL = '<youraccount>@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '<youraccount>@gmail.com'
+EMAIL_HOST_PASSWORD = '<yourpassword>'
+EMAIL_USE_TLS = True 
+EMAIL_PORT = "587"  #this line may not be required.
+
+* You also need a valid Google Maps API Key so your users can use the Google 
+  Maps positioning functionality. Obtain one for your site name here:
+
+    http://www.google.com/apis/maps/signup.html
+
+  Put the obtained key in the constant GOOGLE_MAPS_API_KEY located in the demo
+  project 'settings.py' file.
+
+* OPTIONAL. If you want to use the Picasa search for avatars, put this variable
+  on the demo project 'settings.py' file.
+
+    AVATAR_WEBSEARCH = True
+
+  Then, download and put on the PYTHONPATH the Google Data APIs. 
+  This will allow your users to select avatars directly from Picasaweb:
+    $ wget http://gdata-python-client.googlecode.com/files/gdata.py-1.1.0.tar.gz
+    $ tar zxvf gdata.py-1.1.0.tar.gz
+
+    Now move the gdata.py-1.1.0/src/gdata and gdata.py-1.1.0/src/atom 
+    directories to your PYTHONPATH.
+
+* Once everything has been configured, you can start the the "demo" application:
+
+	$ python manage.py syncdb (this creates a sqlite database)
+and
+	$ python manage.py runserver
+
+* You can now connect to the django web server and try the demo. 
+
+	http://127.0.0.1:8000
+
+
+--------------------------
+-- Custom install guide --
+--------------------------
+
+Once you've seen what can be done with this pluggable application, you could 
+integrate django-profile with your custom software. Basically, you need to:
+
+* Create a Profile model which inherits from BaseProfile (defined on 
+  userprofile.models). You can see an example on the demo project, named
+  "demoprofile". Look at this code:
+
+###############
+from django.db import models
+from userprofile.models import BaseProfile
+from django.utils.translation import ugettext as _
+from django.conf import settings
+import datetime
+
+GENDER_CHOICES = ( ('F', _('Female')), ('M', _('Male')),)
+
+class Profile(BaseProfile):
+    firstname = models.CharField(max_length=255, blank=True)
+    surname = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    birthdate = models.DateField(default=datetime.date.today(), blank=True)
+    url = models.URLField(blank=True, core=True)
+    about = models.TextField(blank=True)
+###############
+
+You can define any attribute of information you want to store on the user 
+profile.
+
+* Define the AUTH_PROFILE_MODULE variable of your 'settings.py' project file
+  pointing to your new profile model class (remember, everything lowercase).
+  For example, look at the 'settings.py' demo project definition:
+
+    AUTH_PROFILE_MODULE = 'demoprofile.profile'
+
+* Add the new application and the 'userprofile' application to the 
+  INSTALLED_APPS section of your 'settings.py' project file. For example:
+
+INSTALLED_APPS = (
+    ...
+    'userprofile',
+    'demoprofile',
+)
+
+* Include the urlpatterns of the 'userprofile' application to your project
+  'urls.py' file. For example:
+
+urlpatterns += patterns('',
+    (r'^accounts/', include('userprofile.urls')),
+)
+
+* Copy the data of the "media" directory to your own "media" static serve of
+  files. Look at the demo application to learn how can be accomplished this.
+
+*  You can also customize the default templates supplied with the 'userprofile'
+   application. Basically, two templates are the most propsense to customize:
+   "userprofile/profile/personal.html" and "userprofile/profile/public.html"
+
+   In "personal.html" template you could add your own widgets to make more 
+   usable the introduction of information of your users. Look at the demo
+   template customization of "personal.html" to get a tip of how to customize
+   a date introduction, or a selectable info introduction.
+
+*  Import in your html required css and js files (from your media directory) :
+   *  userprofile/js/jquery-1.2.6.min.js
+   *  userprofile/css/django-profile.css
+   *  userprofile/css/django-profile-basics.css if you don't want to use blueprint
+
+*  Add "userprofile.context_processors.css_classes" to your
+   "TEMPLATE_CONTEXT_PROCESSORS" in your "settings.py" file
+
+------------------------
+-- Settings variables --
+------------------------
+You can customize some of the behaviour of django-profile stablishing these
+variables on your own project "settings.py" file:
+
+* DEFAULT_AVATAR. It's the filesystema path to the default avatar image.  
+  Normally, you will define it as "%MEDIAROOT%/avatars/generic.jpg".  If this 
+  setting is not set, a default image will be copied to 
+  "%MEDIAROOT%/userprofile/generic.jpg".
+* I18N_URLS. If this setting is set to True, the application will try to use 
+  internationalized urls. The language will be obtained from the LANGUAGE_CODE 
+  setting variable, and must be a file named as this LANGUAGE_CODE on the 
+  "userprofile/urls" directory.
+* AVATAR_WEBSEARCH. If set to True, it will enable the Google Picasa web search
+  of avatars.
+* AVATAR_QUOTA. Max upload size (in MB) of the avatar image.
+* GOOGLE_MAPS_API_KEY. If set to True, it will enable the geopositioning 
+  utility on the user profile control panel.
+* REQUIRE_EMAIL_CONFIRMATION. If set to True, the user e-mail will be required to
+  get an account on the system.
+* USERPROFILE_CSS_CLASSES. Specify which set of classes use for html structure 
+  of django-profile. Are provided :
+  - blueprint (the default, for blueprint css framework, full width) 
+  - 960gs-12 (for 960.gs css framework, 12 columns, full width)
+  - 960-gs-16 (for 960.gs, 16 columns, full width)
+  - 960gs-12-in-9 (for 960.gs css, in a width of 9 columns, given as example)
+  You can specify one of these, or a entire dict for your own classes (see
+  context_processors.py to see all keys))
+
+Examples:
+I18N_URLS = True
+DEFAULT_AVATAR = os.path.join(MEDIA_ROOT, 'avatars', 'generic.jpg')
+DEFAULT_AVATAR_WIDTH = 96
+AVATAR_WEBSEARCH = True
+GOOGLE_MAPS_API_KEY = "ABQIAAAA06IJoYHDPFMx4u3hTtaghxTpH3CbXHjuCVmaTc5MkkU4wO1RRhST5bKY_U7dUG1ZGu1S-n-ukXGNjQ"
+REQUIRE_EMAIL_CONFIRMATION = True
+USERPROFILE_CSS_CLASSES = 'blueprint'
+
+** ADVANCED FEATURES **
+
+Activate IP Localization:
+-------------------------
+* Install the GeoIP C Library and the Python ctypes library:
+	apt-get install python-geoip
+	apt-get install python-ctypes
+
+* Download the geolitecountry and geolitecity binary databases:
+	http://www.maxmind.com/app/geolitecountry
+	http://www.maxmind.com/app/geolitecity
+* Set the GEOIP_PATH on settings.py to the directory where the databases are stored:
+	GEOIP_PATH = "%s/db/" % PROJECT_PATH
+
+Custom templates and additional context variables
+-------------------------------------------------
+If you want to use your own templates instead of the provided ones, you would
+like to have your own variables.
+Each view send a signal named "context_signal" which have three parameters :
+- "sender", the view which is sending the signal (the view, not a string)
+- "request", the request object passed to the view
+- "context", a dictionnary of context variables ready to pass to the template
+You can connect to this signal for the view you want and update the context 
+variables.
+
+Here is an example where we define a new template variable named "my_var" for
+use in our own template "userprofile/profile/public.html" (the "public" view)
+
+#--------------------------------------------------------------
+# in your application
+def public_signal(sender, **kwargs):
+    kwargs['context']['my_var'] = 'MY_VAR'
+
+from userprofile import views as userprofile_views
+from userprofile.signals import context_signal
+context_signal.connect(public_signal, sender=userprofile_views.public)
+#--------------------------------------------------------------
+
+
+Custom actions and response after user input
+--------------------------------------------
+For each view which receive an input value, a signal is sent in order to
+do what you want with request, form and other values, and to choose if you
+want to replace the response originally provided by the view
+Each of these view send a signal named "post_signal" which have four parameters :
+- "sender", the view which is sending the signal (the view, not a string)
+- "request", the request object passed to the view
+- "form", the form object if the view has one
+- "extra", an optional dictionary with values depending of the view :
+   - "key" for "email_validation_process"
+   - "newuser" for "register"
+   - "response" for "email_validation_reset"
+
+Here is an example where we do auto-login after registration and redirect to our own url
+
+#--------------------------------------------------------------
+# in your application
+def register_signal(sender, **kwargs):
+    newuser = kwargs['extra']['newuser']
+    username = newuser.username
+    password = kwargs['form'].cleaned_data.get('password1')
+    from django.contrib.auth import authenticate, login
+    user = authenticate(username=username, password=password)
+    login(request, user)
+    return HttpResponseRedirect(reverse("our_own_url_name"))
+
+from userprofile import views as userprofile_views
+from userprofile.signals import post_signal
+post_signal.connect(register_signal, sender=userprofile_views.register)
+#--------------------------------------------------------------
