@@ -1,0 +1,68 @@
+div.hidden-image {
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+}
+
+div.container {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+div.image-cropper {
+  background-color: black;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  cursor: crosshair;
+}
+div.image-cropper div.image {
+  z-index: 101;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+div.selection {
+  position: absolute;
+  border: 1px dashed white;
+  z-index: 103;
+  overflow: hidden;
+}
+div.selection img {
+  position: absolute;
+}
+div.selection div.size {
+  position: absolute;
+  font-size: 10px;
+  font-family: helvetica;
+  color: white;
+  text-align: right;
+  top: 2px;
+  right: 2px;
+}
+div.instruction {
+  position: absolute;
+  color: white;
+  font-size: 2em;
+  font-family: helvetica;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  z-index: 102;
+}
+div.warning {
+  color: red;
+}
+.crosshair { cursor: crosshair;}
+.move { cursor: move; }
+div.debug {
+  float: right;
+  background-color: #DDDDDD;
+  border: 1px solid black;
+  padding: 10px;
+}

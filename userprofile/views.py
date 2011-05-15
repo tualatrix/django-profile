@@ -59,7 +59,7 @@ if not os.path.isdir(os.path.join(settings.MEDIA_ROOT, "userprofile")):
 if hasattr(settings, "DEFAULT_AVATAR") and settings.DEFAULT_AVATAR:
     DEFAULT_AVATAR = settings.DEFAULT_AVATAR
 else:
-    DEFAULT_AVATAR = os.path.join(settings.MEDIA_ROOT, "userprofile/generic.jpg")
+    DEFAULT_AVATAR = os.path.join(settings.STATIC_ROOT, "userprofile/generic.jpg")
 
 GOOGLE_MAPS_API_KEY = hasattr(settings, "GOOGLE_MAPS_API_KEY") and \
                       settings.GOOGLE_MAPS_API_KEY or None
@@ -262,7 +262,7 @@ def avatarchoose(request):
         base, filename = os.path.split(DEFAULT_AVATAR)
         filename, extension = os.path.splitext(filename)
         generic96 = "%s/%s.96%s" % (base, filename, extension)
-        generic96 = generic96.replace(settings.MEDIA_ROOT, settings.MEDIA_URL)
+        generic96 = generic96.replace(settings.STATIC_ROOT, settings.STATIC_URL)
     else:
         generic96 = ""
 

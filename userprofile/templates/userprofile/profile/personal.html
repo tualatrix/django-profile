@@ -1,11 +1,11 @@
 {% extends "userprofile/base_2col.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Edit your personal information" %}{% endblock %}
 {% block robots %}noindex,nofollow{% endblock %}
 
 {% block extracss %}
-	<link rel="stylesheet" href="{{ MEDIA_URL }}userprofile/css/ui.datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="{% get_static_prefix %}css/ui.datepicker.css" type="text/css" />
 {% endblock %}
 
 {% block extrajs %}

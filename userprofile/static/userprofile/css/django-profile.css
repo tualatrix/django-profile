@@ -1,0 +1,133 @@
+ul.hmenu {
+	padding: 0em;
+	list-style: none;
+	text-align: center;
+	margin: 1.45em 0;
+	overflow: hidden;
+}
+
+div#nav {
+	overflow: hidden;
+}
+
+form.personal label {
+	display: block;
+}
+
+ul.hmenu > li {
+	float: left;
+	display: block;
+	width: 19.5%;
+	line-height: 2.5em;
+}
+
+ul.three > li{
+	width: 33%;
+}
+
+.red {
+	color: #8a1f11;
+}
+
+ul.hmenu > li > a {
+	text-decoration: none;
+}
+
+ul.hmenu > li.active {
+	background: #EFEFEF;
+	border: 2px solid #CCC;
+}
+
+div.container a {
+	text-decoration: none;	
+}
+
+div.container a:hover {
+	text-decoration: underline;	
+}
+
+a.male, a.female {
+  float: left;
+  border: 2px solid #CCC;
+  font-size: 1.3em;
+  padding: 0px 30px;
+  margin-right: 5px;
+}
+
+a.male {
+  background: url(/site_media/userprofile/images/male.png) no-repeat #E6E6E6;
+}
+
+a.female {
+  background: url(/site_media/userprofile/images/female.png) no-repeat #E6E6E6;
+}
+
+div#map {
+	width: 480px;
+	height: 320px;
+}
+
+div.mapinfo {
+	display: none;
+}
+
+div.vcard {
+	border: 4px dotted #CCC;
+	background: #EFEFEF;
+	padding: 5px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+div.vcard ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+div#photos > a > img {
+	float: left;
+	margin: 5px;
+	border: 4px solid black;
+}
+
+div.center {
+	text-align: center;
+}
+
+ul.cleanul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+select#id_country > option[disabled=disabled] {
+  font-weight: bold;
+  background: #ECECEC;
+}
+
+div.calendar {
+	line-height: 1em;
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 1em;
+}
+
+div.calendar a {
+	text-decoration: none;
+}
+
+div.calendar th, div.calendar td {
+	padding: 0px;
+	text-align: center;
+	padding: 3px 0px;
+}
+
+div.calendar select {
+	margin: 0px;
+}
+
+img.border {
+	padding: 1px;
+	border: 1px solid #CCC;
+}
