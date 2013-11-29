@@ -30,6 +30,7 @@ import urllib
 import os
 from userprofile import signals
 import copy
+from django.contrib import messages
 
 if hasattr(settings, "AWS_SECRET_ACCESS_KEY"):
     from backends.S3Storage import S3Storage
@@ -139,7 +140,7 @@ def personal(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            request.user.message_set.create(message=_("Your profile information has been updated successfully."))
+            messages.add_message(request, messages.INFO, _("Your profile information has been updated successfully."))
             signal_responses = signals.post_signal.send(sender=personal, request=request, form=form, extra={'old_profile':old_profile})
             last_reponse = signals.last_response(signal_responses)
             if last_reponse:
@@ -174,7 +175,7 @@ def location(request):
         form = LocationForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            request.user.message_set.create(message=_("Your profile information has been updated successfully."))
+            messages.add_message(request, messages.INFO, _("Your profile information has been updated successfully."))
 
             signal_responses = signals.post_signal.send(sender=location, request=request, form=form)
             last_reponse = signals.last_response(signal_responses)
@@ -208,7 +209,7 @@ def delete(request):
         request.user.last_name = ''
         request.user.save()
 
-        request.user.message_set.create(message=_("Your profile information has been removed successfully."))
+        messages.add_message(request, messages.INFO, _("Your profile information has been removed successfully."))
 
         signal_responses = signals.post_signal.send(sender=delete, request=request, extra={'old_profile':old_profile, 'old_user': old_user})
         return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_overview"))
@@ -318,7 +319,7 @@ def avatarcrop(request):
 
             avatar.valid = True
             avatar.save()
-            request.user.message_set.create(message=_("Your new avatar has been saved successfully."))
+            messages.add_message(request, messages.INFO, _("Your new avatar has been saved successfully."))
 
             signal_responses = signals.post_signal.send(sender=avatarcrop, request=request, form=form)
             return signals.last_response(signal_responses) or HttpResponseRedirect(reverse("profile_edit_avatar"))
