@@ -1,7 +1,19 @@
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls import *
+from django.views.generic import TemplateView
 from userprofile.views import *
 from django.conf import settings
+
+class DirectTemplateView(TemplateView):
+    extra_context = None
+    def get_context_data(self, **kwargs):
+        context = super(self.__class__, self).get_context_data(**kwargs)
+        if self.extra_context is not None:
+            for key, value in self.extra_context.items():
+                if callable(value):
+                    context[key] = value()
+                else:
+                    context[key] = value
+        return context
 
 urlpatterns = patterns('',
     # Private profile
@@ -26,16 +38,16 @@ urlpatterns = patterns('',
     url(r'^profile/edit/avatar/crop/$', avatarcrop,
         name='profile_avatar_crop'),
 
-    url(r'^profile/edit/avatar/crop/done/$', direct_to_template,
-        { 'extra_context': {'section': 'avatar'},
-        'template': 'userprofile/avatar/done.html'},
+    url(r'^profile/edit/avatar/crop/done/$',
+        DirectTemplateView.as_view(template_name='userprofile/avatar/done.html',
+        extra_context = {'section': 'avatar'}),
         name='profile_avatar_crop_done'),
 
     # Account utilities
     url(r'^email/validation/$', email_validation, name='email_validation'),
 
-    url(r'^email/validation/processed/$', direct_to_template,
-        {'template': 'userprofile/account/email_validation_processed.html'},
+    url(r'^email/validation/processed/$',
+        DirectTemplateView.as_view(template_name='userprofile/account/email_validation_processed.html'),
         name='email_validation_processed'),
 
     url(r'^email/validation/(?P<key>.{70})/$', email_validation_process,
@@ -45,8 +57,7 @@ urlpatterns = patterns('',
         name='email_validation_reset'),
 
     url(r'^email/validation/reset/(?P<action>done|failed)/$',
-        direct_to_template,
-        {'template' : 'userprofile/account/email_validation_reset_response.html'},
+        DirectTemplateView.as_view(template_name='userprofile/account/email_validation_reset_response.html'),
         name='email_validation_reset_response'),
 
     url(r'^password/reset/$', 'django.contrib.auth.views.password_reset',
@@ -89,13 +100,13 @@ urlpatterns = patterns('',
     # Registration
     url(r'^register/$', register, name='signup'),
 
-    url(r'^register/validate/$', direct_to_template,
-        {'template' : 'userprofile/account/validate.html'},
+    url(r'^register/validate/$',
+            DirectTemplateView.as_view(template_name='userprofile/account/validate.html'),
         name='signup_validate'),
 
-    url(r'^register/complete/$', direct_to_template,
-        {'extra_context': { 'email_validation_required': hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") and settings.REQUIRE_EMAIL_CONFIRMATION },
-         'template': 'userprofile/account/registration_done.html'},
+    url(r'^register/complete/$',
+            DirectTemplateView.as_view(template_name='userprofile/account/registration_done.html',
+                extra_context={ 'email_validation_required': hasattr(settings, "REQUIRE_EMAIL_CONFIRMATION") and settings.REQUIRE_EMAIL_CONFIRMATION }),
         name='signup_complete'),
 
     # Users public profile
